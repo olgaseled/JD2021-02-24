@@ -10,7 +10,7 @@ public class MathDemo {
 
         double c = Math.sqrt(3 * 3 + 4 * 4);
 
-        System.out.println(c); // выведет гипотенузу треуголника с катетами 3 и 4
+        System.out.println(c); // выведет гипотенузу треугольника с катетами 3 и 4
         double s1 = Math.cos(Math.toRadians(60));
 
         System.out.println(s1); // выведет косинус угла в 60 градусов
