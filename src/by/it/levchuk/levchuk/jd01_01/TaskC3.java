@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_01;
+package by.it.levchuk.levchuk.jd01_01;
 
 import java.util.Scanner;
 

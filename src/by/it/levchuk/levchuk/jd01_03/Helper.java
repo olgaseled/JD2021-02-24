@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_03;
+package by.it.levchuk.levchuk.jd01_03;
 
 public class Helper {
     static double[] getArray(String line) {

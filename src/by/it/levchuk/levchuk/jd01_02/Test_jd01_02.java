@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_02;
+package by.it.levchuk.levchuk.jd01_02;
 
 import org.junit.Test;
 

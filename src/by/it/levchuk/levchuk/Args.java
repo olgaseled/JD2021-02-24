@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01;
+package by.it.levchuk.levchuk;
 
 public class Args {
 
