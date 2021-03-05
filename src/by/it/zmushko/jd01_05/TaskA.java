@@ -23,16 +23,16 @@ public class TaskA {
         double a = 1.21;
         double b = 0.371;
         double y = tan(pow(a + b, 2))
-                - pow(a + 1.5, 1 / 3)
+                - cbrt(a + 1.5)
                 + a * pow(b, 5)
                 - b / log(a * a);
-        System.out.printf("answer %f.3 ", y);
+        System.out.printf("y=%f", y);
     }
 
-    private static void step3(){
+    private static void step3() {
         double x = 12.1;
-        for (double a=-5; a <=12; a+=3.75){
-            double f = exp(a*x)-3.45*a;
+        for (double a = -5; a <= 12; a += 3.75) {
+            double f = exp(a * x) - 3.45 * a;
             System.out.printf("a=%f, answer=%f", a, f);
         }
     }
