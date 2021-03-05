@@ -26,7 +26,7 @@ public class TaskA {
                 - pow(a + 1.5, 1 / 3)
                 + a * pow(b, 5)
                 - b / log(a * a);
-        System.out.printf("answer %f.3", y);
+        System.out.printf("answer %f.3 ", y);
     }
 
     private static void step3(){
