@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_04;
+package by.it.levchuk.levchuk.jd01_03;
 
 public class InOut {
     static double[] getArray(String line) {

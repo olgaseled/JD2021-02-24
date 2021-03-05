@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_01;
+package by.it.levchuk.levchuk.jd01_01;
 
 /*
 напишите тело main программы которая выводит на экран 5 строк

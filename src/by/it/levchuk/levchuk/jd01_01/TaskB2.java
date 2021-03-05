@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd01_01.jd01_01;
+package by.it.levchuk.levchuk.jd01_01;
 /*
 Подойдет только 20
 В методе main расставь правильно знаки плюс и минус, чтобы значение переменной result получилось равным 20.
