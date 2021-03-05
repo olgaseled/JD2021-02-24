@@ -7,9 +7,8 @@ public class TaskB {
 
     public static void main(String[] args) {
 
-        Scanner intScanner = new Scanner(System.in);
-        Scanner stringScanner = new Scanner(System.in);
-        int n = intScanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
         String[] lastName = new String[n];
         int sumSalary = 0;
         int quarter1 = 0;
@@ -18,7 +17,7 @@ public class TaskB {
         int quarter4 = 0;
 
         for (int i = 0; i < n; i++) {
-            lastName[i] = stringScanner.nextLine();
+            lastName[i] = scanner.next();
         }
 
         int[][] salary = new int[n][4];
@@ -28,7 +27,7 @@ public class TaskB {
             System.out.println("Введите зарплату для " + lastName[i]);
 
             for (int j = 0; j < 4; j++) {
-                salary[i][j] = intScanner.nextInt();
+                salary[i][j] = scanner.nextInt();
             }
         }
 
