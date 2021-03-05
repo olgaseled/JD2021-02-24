@@ -5,7 +5,8 @@ public class TaskA {
         step1();
         step2();
         step3();
-        
+
+
     }
 
     private static void step1() {
