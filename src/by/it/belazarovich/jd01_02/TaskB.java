@@ -1,10 +1,11 @@
 package by.it.belazarovich.jd01_02;
 
 import java.util.Scanner;
+    public class TaskB {
 
-public class TaskB {
     public static void main(String[] args) {
         step1();
+
         Scanner scanner = new Scanner(System.in);
         int month = scanner.nextInt();
         step2(month);
@@ -15,19 +16,18 @@ public class TaskB {
         step3(a, b, c);
     }
 
-    private static void step3(double a, double b, double c) {
-    }
+  //  private static void step3(double a, double b, double c) {
+  //  }
 
-    static void step1() {
-        for (int i = 0; i < 25; i++) {
-            System.out.println(i + " ");
+    private static void step1() {
+        for (int i = 0; i <= 25; i++) {
+            System.out.print(i + " ");
             if (i % 5 == 0) System.out.println();
         }
     }
 
 
-
-    static void step2(int month) {
+    private static void step2(int month) {
         switch (month) {
 
             case 1:
@@ -70,18 +70,19 @@ public class TaskB {
                 System.out.println("Нет такого месяца");
 
         }
-        }
-        static void step2(double a, double b, double c) {
-            double dis = b * b - 4 * a * c;
-            if (dis < 0)
-                System.out.println("Корней нет");
-            else if (dis == 0) {
-                double x = -b / (2 * a);
-                System.out.println(x);
-            } else {
-                double x1 = (-b + Math.sqrt(dis)) / (2 * a);
-                double x2 = (-b - Math.sqrt(dis)) / (2 * a);
-                System.out.println(x1 + " " + x2);
-            }
+    }
+
+    private static void step3(double a, double b, double c) {
+        double dis = b * b - 4 * a * c;
+        if (dis < 0)
+            System.out.println("Корней нет");
+        else if (dis == 0) {
+            double x = -b / (2 * a);
+            System.out.println(x);
+        } else {
+            double x1 = (-b + Math.sqrt(dis)) / (2 * a);
+            double x2 = (-b - Math.sqrt(dis)) / (2 * a);
+            System.out.println(x1 + " " + x2);
         }
     }
+}

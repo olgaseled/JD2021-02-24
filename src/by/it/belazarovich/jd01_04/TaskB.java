@@ -1,5 +1,5 @@
 package by.it.belazarovich.jd01_04;
-
+/*
 import java.util.Scanner;
 
 public class TaskB {
@@ -9,3 +9,4 @@ public class TaskB {
     }
 
 }
+*/
