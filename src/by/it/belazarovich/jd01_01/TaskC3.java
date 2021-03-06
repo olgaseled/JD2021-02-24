@@ -32,4 +32,6 @@ package by.it.belazarovich.jd01_01;
 */
 class TaskC3 {
 
+
+
 }

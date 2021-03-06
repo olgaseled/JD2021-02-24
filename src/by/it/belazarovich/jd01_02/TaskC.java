@@ -1,7 +1,9 @@
 package by.it.belazarovich.jd01_02;
 
-/*public class TaskC {
-    public static void main(String[] args) {
+public class TaskC{
+
+}
+ /*   public static void main(String[] args) {
         int[][] a= {
                 {1, 7, 9, 4},
                 {5, 6, 9, 2},
@@ -20,6 +22,5 @@ package by.it.belazarovich.jd01_02;
         }
     }
 
-
-}
 */
+
