@@ -1,5 +1,11 @@
-SET PROJ_PATH=c:\java-lab\JD2021-02-24
-javac -d %PROJ_PATH%\classes %PROJ_PATH%\src\by\it\dudko\jd01_05\TaskA.java
-javac -d %PROJ_PATH%\classes -cp .;lib.jar %PROJ_PATH%\src\by\it\dudko\jd01_05\Test_jd01_05.java
-java -ea -cp .;lib.jar;%PROJ_PATH%\classes by.it.dudko.jd01_05.TaskA
+SET SRC_PATH=c:\java-lab\JD2021-02-24\src
+SET OUTPUT_PATH=c:\java-lab\JD2021-02-24\classes
+SET USER_PATH=by\it\dudko
+SET USER_PACKAGE=by.it.dudko
+SET LAB_NUM=jd01_05
+SET CLASS_NAME=TaskA
+SET TEST_NAME=Test_jd01_05
+
+javac -d %OUTPUT_PATH% %SRC_PATH%\%USER_PATH%\%LAB_NUM%\%CLASS_NAME%.java
+java -cp lib.jar;%OUTPUT_PATH% %USER_PACKAGE%.%LAB_NUM%.%CLASS_NAME%
 pause
