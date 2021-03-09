@@ -22,7 +22,10 @@ int i=sc.nextInt();
 import java.util.Scanner;
 
 class TaskB1 {
-
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Введите число: ");
+        int i = sc.nextInt();
+        System.out.println((int) Math.pow(i,2));
     }
 }
