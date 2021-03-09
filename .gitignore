@@ -1,35 +1,21 @@
-.idea
-out
-*.class
-*.DS_Store
-/*.xml
-/*/*.xml
-
-*.jar
-*.war
-*.ear
+.idea/
 *.iml
-*.log
-*.ipr
-*.iws
+out/
 
-dataTaskA.bin
-dataTaskB.bin
-dataTaskC.bin
-
-resultTaskA.txt
-resultTaskB.txt
-resultTaskC.txt
-
-estimates.txt
-matrix.txt
-
-TaskA.txt
-TaskB.txt
-TaskC.txt
+# Compiled class file
+*.class
 
 # Log file
-log.txt
-logs.txt
+*.log
 
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
+# virtual machine crash logs
+hs_err_pid*
