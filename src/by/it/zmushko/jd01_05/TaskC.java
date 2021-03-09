@@ -23,10 +23,11 @@ public class TaskC {
                 indexElem++;
             }
         }
+        int countInLine = 5;
         System.out.println("Массив А[]");
         for (int i = 0; i < array.length - 1; i++) {
             System.out.printf("A[%3d] = %f    ", i, array[i]);
-            if ((i + 1) % 5 == 0) {
+            if ((i + 1) % countInLine == 0) {
                 System.out.println();
             }
         }
@@ -57,7 +58,7 @@ public class TaskC {
         System.out.println("Массив B[]");
         for (int i = 0; i < arrayB.length - 1; i++) {
             System.out.printf("A[%3d] = %f    ", i, arrayB[i]);
-            if ((i + 1) % 5 == 0) {
+            if ((i + 1) % countInLine == 0) {
                 System.out.println();
             }
         }

@@ -15,8 +15,9 @@ public class TaskB {
             for (double x = 1; x < 7; x++) {
                 sum += pow(7, a) - cos(x);
             }
-            System.out.printf("При a=%f %f\n", a, sum);
+            System.out.printf("При a=%.2f Сумма y = %f\n", a, sum);
         }
+        System.out.println();
     }
 
     private static void step2() {
