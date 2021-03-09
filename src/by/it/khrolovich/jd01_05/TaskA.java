@@ -20,8 +20,21 @@ public class TaskA {
     }
 
     private static void step2() {
+        double a = 1.21;
+        double b = 0.371;
+        double part1 = tan(pow(a + b, 2));
+        double part2 = cbrt(a + 1.5);
+        double part3 = a * pow(b, 5) - b / log(a * a);
+        double y = part1 - part2 + part3;
+        System.out.printf("For a=%f b=%f y=%f\n", a, b, y);
     }
 
     private static void step3() {
+        double x = 12.1;
+        double deltaA = 3.75;
+        for (double a = -5; a <= 12; a = a + deltaA) {
+            double y = exp(a * x) - 3.45 * a;
+            System.out.printf("For a=%f x=%f y=%f\n", a, x, y);
+        }
     }
 }
