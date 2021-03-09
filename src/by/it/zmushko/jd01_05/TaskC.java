@@ -62,5 +62,13 @@ public class TaskC {
             }
         }
 
+        double result = 1;
+        for (int i = 0; i < arrayB.length - 1; i++) {
+            result *= arrayB[i];
+        }
+        result = pow(result, 1.0/arrayB.length);
+        System.out.println("\nСреднее геометрическое чисел из массива В = " + result);
     }
 }
+
+
