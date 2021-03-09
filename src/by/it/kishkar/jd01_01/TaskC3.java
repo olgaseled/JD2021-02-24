@@ -1,4 +1,10 @@
-package by.it._tasks_.jd01_01;
+package by.it.kishkar.jd01_01;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+import static java.lang.Math.PI;
+
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -31,5 +37,15 @@ package by.it._tasks_.jd01_01;
 
 */
 class TaskC3 {
+    public static void main(String[] weight) {
+                    Scanner in = new Scanner(System.in);
+        double a=in.nextInt();
+        double mars=3.86;
+        double earth=9.81;
+        double result=(mars/earth*a);
+        double res=Math.round(result*100.00)/100.00;
+        System.out.println(res);
 
+
+        }
 }
