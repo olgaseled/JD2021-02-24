@@ -6,6 +6,7 @@ public class TaskA {
     public static void main(String[] args) {
         step1();
         step2();
+        step3();
     }
 
     private static void step1() {
@@ -26,5 +27,13 @@ public class TaskA {
                 + a * pow(b,5)
                 - b / log(a*a);
         System.out.printf("При а =%-10.3f x =%f z=%f\n",a,b,y);
+    }
+
+    private static void step3() {
+        double x = 12.1;
+        for (double a = -5; a <= 12 ; a+=3.75) {
+            double f = Math.exp(a*x) - 3.45*a;
+            System.out.printf("При a =%6.2f f =%g\n",a,f);
+        }
     }
 }

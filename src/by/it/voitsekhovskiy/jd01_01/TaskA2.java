@@ -8,10 +8,9 @@ package by.it.voitsekhovskiy.jd01_01;
 Для автоматической проверки откройте и запустите класс Test_jd01_01
 */
 
-
 class TaskA2 {
     public static void main(String[] args) {
-        for (int i = 0; i < 5 ; i++) {
+        for (int i = 0; i <5 ; i++) {
             System.out.println("Я начинаю изучать Java!");
         }
     }
