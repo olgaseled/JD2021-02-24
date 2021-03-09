@@ -11,7 +11,7 @@ public class TaskB {
         double y = 0;
         for (double a = 0; a <= 2; a += 0.2) {
             for (int x = 1; x <= 6; x++) {
-                y = y + (7 * a - cos(x));
+                y = y + (pow(7, a) - cos(x));
             }
             System.out.printf("При а=%3.2f Сумма y = %12.7f", a, y);
         }
