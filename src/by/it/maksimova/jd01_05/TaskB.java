@@ -27,9 +27,6 @@ public class TaskB {
     }
 
     private static void step2() {
-//        if (x/2<=-2)
-//            System.out.println();
-//        double a=log(abs(double b + 2.74));
         for (double x = -5.5; x < 2; x = x + 0.5) {
 
             if (x / 2 > -2 && x / 2 <= -1) {
