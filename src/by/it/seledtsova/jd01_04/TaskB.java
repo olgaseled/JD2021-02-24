@@ -14,21 +14,22 @@ public class TaskB {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
+        int n = scanner.nextInt(); // количество людей 3
 
         String[] lastNames = new String[n];
         for (int i = 0; i < lastNames.length; i++) {
-            lastNames[i] = scanner.next();
+            lastNames[i] = scanner.next(); // фамилии сотрудников
         }
-        int salaryArr[][];
+        int salaryArr[][]; // создала массив з/п сотрудников с фамилиями
         salaryArr = new int[n][4];
         for (int i = 0; i < salaryArr.length; i++) {
-            System.out.printf("Введите зарплату для %s\n", lastNames[i]);
+            System.out.printf("Введите зарплату для %s\n", lastNames[i]);//вводим з/п сотрудников
             for (int j = 0; j < salaryArr[0].length; j++) {
                 salaryArr[i][j] = scanner.nextInt();
+
             }
+            System.out.println(Arrays.deepToString(salaryArr));
         }
-        System.out.println(Arrays.deepToString(salaryArr));
 
         System.out.printf("%-10s%-10s%-10s%-10s%-10s%-10s%n", "Фамилия", "Квартал1", "Квартал2", "Квартал3", "Квартал4", "ИТОГО");
         System.out.printf("%-10s%-10s%-10s%-10s%-10s%-10s%n", "Иванов", "1", "2", "3", "4", "10");
@@ -37,18 +38,45 @@ public class TaskB {
         System.out.println();
 
 
-        int sum = 0;
+        double total = 0;
+
         for (int i = 0; i < salaryArr.length; ++i) {
-            for (int j = 0; j < salaryArr.length; j++) {
-                sum += salaryArr[i][j];
-                System.out.println(sum);
-                double a = 4.000;
-                double average = sum / a;
-                System.out.println(average);
+            double sumRow = 0;
+            for (int j = 0; j < salaryArr[0].length; j++) {
+                sumRow += salaryArr[i][j];
+                total += salaryArr[i][j];
             }
+                System.out.println("Общая сумма всех выплат=" + total);
+                System.out.println();
+
+            double allSalaryKv = 0;
+            for (int j = 0; j < salaryArr[0].length; j++) {
+                double averageSalary = 0;
+                for (int k = 0; k < n; k++) {
+                    averageSalary = averageSalary + salaryArr[i][j];
+                }
+                allSalaryKv = allSalaryKv + averageSalary / n;
+            }
+            System.out.printf("средняя: %.4f", allSalaryKv / 4);
+
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
              
