@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_01;
+package by.it.zmushko.jd01_01;
 /*
 напишите программу которая выводит на экран
 Hello world!
@@ -11,7 +11,5 @@ Hello world!
 class TaskA1 {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-
     }
-
 }
