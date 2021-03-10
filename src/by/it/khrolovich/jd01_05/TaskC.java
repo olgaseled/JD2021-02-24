@@ -6,6 +6,10 @@ public class TaskC {
     }
 
     private static void step1() {
-        int n = 20+(int)Math.random()*19;
+        int n = 20+(int)(Math.random()*19);
+        double step = (9-5.33)/(n-1);
+        for (int i = 0; i < n; i++) {
+
+        }
     }
 }
