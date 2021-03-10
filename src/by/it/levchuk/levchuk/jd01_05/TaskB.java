@@ -14,7 +14,6 @@ public class TaskB {
             System.out.printf("при а=%-10.3f x=%e \n ", a, y);
             for (int i = 0; i < 6; ++i) {
 
-
             }
         }
     }
