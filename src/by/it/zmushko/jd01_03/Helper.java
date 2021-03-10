@@ -1,0 +1,63 @@
+package by.it.zmushko.jd01_03;
+
+public class Helper {
+    static double findMin(double[] arr) {
+        double min = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+
+    static double findMax(double[] arr) {
+        double max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    public static void sort(double[] arr) {
+        boolean change;
+        int lastNumb = arr.length - 1;
+        do {
+            change = false;
+            for (int i = 0; i < lastNumb; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    double temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    change = true;
+                }
+            }
+            lastNumb--;
+        } while (change);
+    }
+
+    static double[] mul(double[][] matrix, double[] vector) {
+        double[] arrayAfterMultiplication = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
+                arrayAfterMultiplication[i] += matrix[i][j] * vector[j];
+            }
+        }
+        return arrayAfterMultiplication;
+    }
+
+    static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
+        double[][] arrayAfterMultiplication = new double[matrixLeft.length][matrixRight[0].length];
+        for (int i = 0; i < matrixLeft.length; i++) {
+            for (int j = 0; j < matrixRight[0].length; j++) {
+                for (int k = 0; k < matrixRight.length; k++) {
+                    arrayAfterMultiplication[i][j] += matrixLeft[i][k] * matrixRight[k][j];
+                }
+            }
+        }
+        return arrayAfterMultiplication;
+    }
+
+}
