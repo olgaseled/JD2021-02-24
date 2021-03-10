@@ -17,16 +17,18 @@ public class taskB {
         String[] arrayPeopleLastName = new String [peopleNumber];
         for (int i = 0; i < peopleNumber; i++) {
             arrayPeopleLastName[i] = scanner.next();
+            System.out.println("Введите зарплату для " + arrayPeopleLastName[i]);
+            int salary = scanner.nextInt();
                     }
 
-
-        int[] arraySalary = new int[10];
-        int number=peopleNumber+1;
-        for (int i = 0; i < number; i++) {
-            System.out.println("Введите зарплату для " + arrayPeopleLastName[i]);
-
-        }
-        arraySalary [peopleNumber] = scanner.nextInt();
+//        for (int i = 0; i < number; i++) {
+//            System.out.println("Введите зарплату для " + arrayPeopleLastName[i]);
+//            for (int j = 0; j < 4; j++) {
+//                int salary = scanner.nextInt();
+//            }
+//        }
+//
+//        System.out.println("-".repeat(100));
 
                   }
         }
