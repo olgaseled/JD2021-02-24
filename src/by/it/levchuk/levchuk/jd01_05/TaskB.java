@@ -11,8 +11,9 @@ public class TaskB {
     private static void task1() {
         for (double a = 0; a <= 2; a = a + 0.2) {
             double y = pow(7, a) * 6 - cos(1) - cos(2) - cos(3) - cos(4) - cos(5) - cos(6);
+            System.out.printf("при а=%-10.3f x=%e \n ", a, y);
             for (int i = 0; i < 6; ++i) {
-                System.out.printf("при а=%-10.3f x=%e \n ", a, y);
+
 
             }
         }
