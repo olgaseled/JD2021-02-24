@@ -35,10 +35,8 @@ public class TaskB {
         int result = 0;
         for (int i = 0; i <salarySumm.length; i++) {
             result += salarySumm[i];
-
-
-        }double middle =(double) result / ((double) salary.length * salary[0].length);
+        }
+        double middle =((double) result / ( salary.length * salary[0].length));
         System.out.printf("%100s%s%10s%10d%s%10s%10.4f%n" ,"-".repeat(100),'\n', "Итого",result,'\n',"Средняя",middle);
-
     }
 }

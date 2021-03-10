@@ -24,7 +24,7 @@ public class Test_jd01_01 {
 
     @Test(timeout = 1500)
     public void testTaskA2() {
-        Test_jd01_01 include = run("").include(
+        run("").include(
                 "Я начинаю изучать Java!\n" +
                         "Я начинаю изучать Java!\n" +
                         "Я начинаю изучать Java!\n" +
