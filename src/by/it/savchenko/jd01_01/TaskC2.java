@@ -1,4 +1,6 @@
-package by.it._tasks_.jd01_01;
+package by.it.savchenko.jd01_01;
+
+import java.util.Scanner;
 
 /* Нужно написать программу, которая вводит два числа с клавиатуры
 и 4 раза выводит их сумму с обозначением системы счисления на экран в
@@ -16,6 +18,15 @@ OCT:42+32=74
 Допускается свободное использование любых методов стандартной библиотеки
 */
 class TaskC2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = x + b;
+        System.out.println("DEC:" + x + "+" + b + "=" + c);
+        System.out.println("BIN:" + Integer.toBinaryString(x) + "+" + Integer.toBinaryString(b) + "=" + Integer.toBinaryString(c));
+        System.out.println("HEX:" + Integer.toHexString(x) + "+" + Integer.toHexString(b) + "=" + Integer.toHexString(c));
+        System.out.println("OCT:" + Integer.toOctalString(x) + "+" + Integer.toOctalString(b) + "=" + Integer.toOctalString(c));
 
-
+    }
 }

@@ -28,15 +28,15 @@ public class TaskB {
             double a;
             if (-2 < x / 2 && x / 2 <= -1) {
                 b = sin(pow(x, 2));
-                a = log(abs(b + 2.74));
+                a = log10(abs(b + 2.74));
                 System.out.println("При x/2=" + x + " a = " + a);
             } else if (-1 < x / 2 && x / 2 < 0.2) {
                 b = cos(pow(x, 2));
-                a = log(abs(b + 2.74));
+                a = log10(abs(b + 2.74));
                 System.out.println("При x/2=" + x +" a = " + a);
             } else if (x / 2 == 0.2) {
                 b = tan(pow(x, 2));
-                a = log(abs(b + 2.74));
+                a = log10(abs(b + 2.74));
                 System.out.println("При x/2=" + x + " a = " + a);
             } else {
                 System.out.println("При x/2=" + x + " вычисления не определены");
