@@ -17,34 +17,26 @@ public class TaskA2 {
             processOneWord(word);
         }
         for (int i = 0; i < words.length; i++) {
-            System.out.printf("%s = %d\n", words[i], counts[i]);
+            System.out.printf("%s=%d\n", words[i], counts[i]);
         }
     }
 
     private static void processOneWord(String word) {
-        int pos = pos(word);
-        for (int i = 0; i < words.length; i++) {
-            if (pos >= 0) {
-                counts[pos]++;
-            } else {
-                int newLength = words.length - 1;
-                words = Arrays.copyOf(words, newLength);
-                counts = Arrays.copyOf(counts, newLength);
-                words[words.length - 1] = word;
-                counts[counts.length - 1] = 1;
+        for (int i = 0, wordsLength = words.length; i < wordsLength; i++) {
+            String currentWord = words[i];
+            if (currentWord.equals(word)) {
+                counts[i] = counts[i] + 1;
+                return;
             }
         }
+        int newLength = words.length +1;
+        words = Arrays.copyOf(words, newLength);
+        counts = Arrays.copyOf(counts, newLength);
+        words[words.length - 1] = word;
+        counts[counts.length - 1] = 1;
     }
-
-    public static int pos(String word) {
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals(word)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
 }
+
+
 
 
