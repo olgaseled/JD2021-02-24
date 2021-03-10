@@ -1,21 +1,40 @@
-.idea/
-*.iml
-out/
-
-# Compiled class file
+#InteliJ files and dirs
+.idea
+out
 *.class
+*.DS_Store
+/*.xml
+/*/*.xml
+*.iml
 
-# Log file
-*.log
-
-# Package Files #
+#Standart .gitignore
 *.jar
 *.war
-*.nar
 *.ear
-*.zip
-*.tar.gz
-*.rar
+*.log
+*.ipr
+*.iws
 
-# virtual machine crash logs
-hs_err_pid*
+#HomeWork check
+Estimates.java
+estimates.txt
+
+# Output files
+dataTaskA.bin
+dataTaskB.bin
+dataTaskC.bin
+
+resultTaskA.txt
+resultTaskB.txt
+resultTaskC.txt
+
+matrix.txt
+
+TaskA.txt
+TaskB.txt
+TaskC.txt
+
+# Log file
+log.txt
+logs.txt
+
