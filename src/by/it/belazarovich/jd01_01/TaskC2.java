@@ -19,7 +19,6 @@ OCT:42+32=74
 */
 class TaskC2 {
 
-
     public static void main(String[] args) {
 
         Scanner a = new Scanner(System.in);
@@ -28,7 +27,6 @@ class TaskC2 {
         int j = a.nextInt();
         int i = a.nextInt();
         int sum = i + j;
-
         System.out.println("DEC:" + j + "+" + i + "=" + sum);
 
         //бинарный
@@ -37,16 +35,13 @@ class TaskC2 {
         String sumbi = ibi + jbi;
         System.out.println("BIN:" + jbi + "+" + ibi + "=" + sumbi);
 
-
         //шеснадцатиричный
-
         String jhex = Integer.toHexString(j);
         String ihex = Integer.toHexString(i);
         String sumhex = ihex + jhex;
         System.out.println("HEX:" + jhex + "+" + ihex + "=" + sumhex);
 
-//восьмиричный
-
+        //восьмиричный
         String joct = Integer.toOctalString(j);
         String ioct = Integer.toOctalString(i);
         String sumoct = ioct + joct;
