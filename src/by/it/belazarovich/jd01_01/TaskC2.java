@@ -32,19 +32,19 @@ class TaskC2 {
         //бинарный
         String jbi = Integer.toBinaryString(j);
         String ibi = Integer.toBinaryString(i);
-        String sumbi = ibi + jbi;
+        String sumbi = Integer.toBinaryString(sum);
         System.out.println("BIN:" + jbi + "+" + ibi + "=" + sumbi);
 
         //шеснадцатиричный
         String jhex = Integer.toHexString(j);
         String ihex = Integer.toHexString(i);
-        String sumhex = ihex + jhex;
+        String sumhex = Integer.toHexString(sum);
         System.out.println("HEX:" + jhex + "+" + ihex + "=" + sumhex);
 
         //восьмиричный
         String joct = Integer.toOctalString(j);
         String ioct = Integer.toOctalString(i);
-        String sumoct = ioct + joct;
+        String sumoct = Integer.toOctalString(sum);
         System.out.println("OCT:" + joct + "+" + ioct + "=" + sumoct);
 
     }
