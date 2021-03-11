@@ -8,10 +8,9 @@ public class TaskA2 {
 
     private static String[] w = {};
     private static int[] count = {0};
-    private static String word;
 
     private static int pos(String word) {
-        TaskA2.word = word;
+       
         for (int i = 0; i < w.length; i++) {
             if (w[i].equals(word))
                 return i;
@@ -42,4 +41,6 @@ public class TaskA2 {
         }
 
     }
+
+
 }
