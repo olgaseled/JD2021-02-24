@@ -41,18 +41,21 @@ class TaskC3 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double earthWeight = scanner.nextDouble();
-        System.out.print(getWeight(earthWeight));
-
+        int b = scanner.nextInt();
+        System.out.println(getWeight(b));
     }
 
-    public static double getWeight(double weight) {
-        double marsWeight = weight * mars / earth;
-        int d = (int) (marsWeight * 100);
-        double c = (double) d / 100;
-        return c;
+    public static double getWeight(int a) {
+        double weightMars = (a * mars) / earth;
+        double weight = (int)(weightMars * 100 + 0.5) / 100.0;
+        return weight;
+    }
+
+
+
+}
 //        return weight * mars / earth;
 
-    }
-}
+
+
 // 0.5 округление

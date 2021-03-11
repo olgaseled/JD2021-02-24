@@ -25,15 +25,7 @@ public class TaskB {
             }
 
         }
-//        System.out.println("3\n" +
-//                "Ivanov\n" +
-//                "Petrov\n" +
-//                "Sidorov\n" +
-//                "11 11 13 15\n" +
-//                "15 16 17 18 \n" +
-//                "19 20 11 12 \n"+
-//                "178"
-//                +"14"+"833");
+//
         }
 
     }
