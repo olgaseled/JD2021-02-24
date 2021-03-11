@@ -31,18 +31,18 @@ public class TaskB {
 
             if (x / 2 > -2 && x / 2 <= -1) {
                 double b = sin(x * x);
-                double a = log(abs(b + 2.74));
+                double a = log10(abs(b + 2.74));
                 System.out.printf("При x/2=%3.2f a=%f\n", x / 2, a);
             } else if (x / 2 > -1 && x / 2 < 0.2) {
                 double b = cos(x * x);
-                double a = log(abs(b + 2.74));
+                double a = log10 (abs(b + 2.74));
                 System.out.printf("При x/2=%3.2f a=%f\n", x / 2, a);
             } else if (x / 2 == 0.2) {
                 double b = cos(x * x) / sin(x * x);
-                double a = log(abs(b + 2.74));
+                double a = log10(abs(b + 2.74));
                 System.out.printf("При x/2=%3.2f a=%f\n", x / 2, a);
             } else if (x / 2 <= -2 || x / 2 > 0.2) {
-                System.out.printf("При x/2=%3.2f вычесления не определены\n", x / 2);
+                System.out.printf("При x/2=%3.2f вычисления не определены\n", x / 2);
             }
         }
     }
