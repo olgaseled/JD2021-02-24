@@ -1,4 +1,7 @@
-package by.it.dudko.jd01_05;
+package by.it.dudko.jd01_06;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Helper {
     /**
@@ -153,6 +156,29 @@ public class Helper {
             }
         }
         return transposedArray;
+    }
+
+
+    static void printEachStringLength(String[] sentences) {
+        for (String sentence : sentences) {
+            System.out.printf("%s...\t%d\n", sentence.substring(0, 20), sentence.length());
+        }
+    }
+
+    static void sortStringsByLength(String[] sentences) {
+        Arrays.sort(sentences, new Comparator<String>() {
+            public int compare(String one, String two) {
+                int returnValue = one.length() - two.length();
+                if (returnValue == 0) {
+                    returnValue = one.compareToIgnoreCase(two);
+                }
+                return returnValue;
+            }
+        });
+    }
+
+    static String[] splitTextByCharacter(StringBuilder text, String delimiter) {
+        return text.toString().split(delimiter);
     }
 
 }
