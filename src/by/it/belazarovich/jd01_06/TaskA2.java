@@ -22,22 +22,21 @@ public class TaskA2 {
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+}");
         Matcher matcher = pattern.matcher(Poem.text);
         while (matcher.find()) {
-            String word=matcher.group();
-             int p= pos(word);
-             if (p>=0){
-                 count[p]++;
+            String word = matcher.group();
+            int p = pos(word);
+            if (p >= 0) {
+                count[p]++;
 
-             }
-else{
-    int last = w.length;
-    w= Arrays.copyOf(w,last+1);
-    w[last]=word;
-    count= Arrays.copyOf(count, last+1);
-    count[last]=1;
-             }
+            } else {
+                int last = w.length;
+                w = Arrays.copyOf(w, last + 1);
+                w[last] = word;
+                count = Arrays.copyOf(count, last + 1);
+                count[last] = 1;
+            }
         }
-        for (int i = 0; i <w.length ; i++) {
-            System.out.println(w    [i]+"="+count[i]);
+        for (int i = 0; i < w.length; i++) {
+            System.out.println(w[i] + "=" + count[i]);
         }
 
     }
