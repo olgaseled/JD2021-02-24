@@ -10,7 +10,7 @@ public class TaskA2 {
     private static String[] words = {};
     private static int[] counts = {};
 
-    private static int pos(String word) {
+    private static int pos (String word) {
         for (int i = 0; i < words.length; i++) {
             if (words[i].equals(word))
                 return i;
