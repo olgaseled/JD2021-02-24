@@ -23,8 +23,8 @@ public class TaskA2 {
     private static void processOneWord(String word) {
         boolean newWord = true;
         for (int i = 0, wordsLenght = words.length; i < wordsLenght; i++) {
-            String CurrentWords = words[i];
-            if (CurrentWords.equals(word)) {
+            String CurrentWord = words[i];
+            if (CurrentWord.equals(word)) {
                 newWord = false;
                 counts[i]++;
             }
