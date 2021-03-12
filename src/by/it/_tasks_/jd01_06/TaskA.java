@@ -1,5 +1,5 @@
 package by.it._tasks_.jd01_06;
-
+/*
 import java.util.regex.Pattern;
 
 public class TaskA {
@@ -11,3 +11,6 @@ public class TaskA {
 
     }
 }
+
+
+ */
