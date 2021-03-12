@@ -1,5 +1,6 @@
 package by.it.zmushko.jd01_06;
 
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +22,6 @@ public class TaskB2 {
             sorted = true;
             for (int i = 0; i < mySplitText.length - 1; i++) {
                 String temp;
-
                 if (mySplitText[i].length() > mySplitText[i + 1].length()) {
                     temp = mySplitText[i];
                     mySplitText[i] = mySplitText[i + 1];
@@ -35,6 +35,8 @@ public class TaskB2 {
         }
     }
 
+
+
     public static void findThreeDot(StringBuilder text) {
         Pattern pattern = Pattern.compile("\\.{3}");
         Matcher matcher = pattern.matcher(text);
@@ -42,5 +44,6 @@ public class TaskB2 {
             text.replace(matcher.start(), matcher.end(), "");
         }
     }
+
 
 }
