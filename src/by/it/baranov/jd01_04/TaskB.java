@@ -1,6 +1,5 @@
 package by.it.baranov.jd01_04;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskB {
@@ -29,7 +28,7 @@ public class TaskB {
 
 
 
-            System.out.println(Arrays.deepToString(lastNames));
+           // System.out.println(Arrays.deepToString(lastNames));
             // Создаем двумерный массив
             String[][] graph;
             graph = new String[3][4];
@@ -96,13 +95,13 @@ public class TaskB {
 
            int sum;
 
-            for (int i = 0; i < graph.length;) { sum=0;
+           // for (int i = 0; i < graph.length;) { sum=0;
                 // Цикл по второй размерности (вторые квадратные скобки)
                // for (int j = 0; j < graph[i].length; j++) { sum =sum+ graph[0][j];
 
-                    System.out.println("sum " + sum);
+                  //  System.out.println("sum " + sum);
 
-            }}}
+            }}
 
 
 
