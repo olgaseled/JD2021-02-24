@@ -9,17 +9,17 @@
 //    private static String[] cons = new String[]{"б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р",
 //            "с", "т", "ф", "х", "ц", "ч", "ш", "щ"};
 //
-////
-////    private static int pos(String word) {
-////        String[] split = Poem.text.split(Poem.text);
-////
-////        for (int i = 0; i < split.length; i++) {
-////            if (split[i].equals()) {
-////                System.out.println(split[i]);
-////            }
-////        }
-////    }
-//                public static void main (String[]args){
+//
+//    private static int pos(String word) {
+//        String[] split = Poem.text.split(Poem.text);
+//
+//        for (int i = 0; i < split.length; i++) {
+//            if (split[i].equals()) {
+//                System.out.println(split[i]);
+//            }
+//        }
+//    }
+//    public static void main (String[]args){
 //                    Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
 //                    Matcher matcher = pattern.matcher(Poem.text);
 //                    while (matcher.find()) {
@@ -27,17 +27,12 @@
 //
 //                        for (int i = 0; i < cons.length; i++) {
 //                           // if(matcher.start(1)==cons[i]){
-//
-//                        }
-//
-//
-//
-//                        }
-//
 //                        }
 //                    }
-//                }
-//            }
-//        }
 //    }
 //}
+//
+//
+//
+//
+//
