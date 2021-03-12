@@ -1,21 +1,19 @@
 package by.it.levchuk.levchuk.jd01_07;
 
-public class Scalar extends Var{
-    private final double value;
+class Scalar extends AbstractVar {
 
-    public Scalar(double value) {
-        this.value = value;
-        
-    }
-    
-    Scalar(String strScalar, double value){
+    private double value;
 
+    Scalar(double value) {
         this.value = value;
     }
 
-    public Scalar(Var var2) {
-        super();
-        value = 0;
+    Scalar(String str){
+        this.value=Double.parseDouble(str);
+    }
+
+    Scalar(Scalar scalar){
+        this.value= scalar.value;
     }
 
     @Override
