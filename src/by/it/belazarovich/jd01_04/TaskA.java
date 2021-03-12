@@ -27,8 +27,8 @@ public class TaskA {
         }
     }
     public static void buildOneDimArray(String line) {
-        double[] array = by.it.zmushko.jd01_03.InOut.getArray(line);
-        by.it.zmushko.jd01_03.InOut.printArray(array, "V", 5);
+        double[] array = InOut.getArray(line);
+        InOut.printArray(array, "V", 5);
         double start = array[0];
         double stop = array[array.length - 1];
         Helper.sort(array);
