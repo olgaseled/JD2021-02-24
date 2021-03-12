@@ -16,6 +16,8 @@ public class TaskB2 {
                     .trim();
             System.out.println(sentences[i]);
         }
+        //4. sort
 
+        //5. show result
     }
 }
