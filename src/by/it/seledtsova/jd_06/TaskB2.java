@@ -11,22 +11,24 @@ public class TaskB2 {
         //3. del non-letters;
         for (int i = 0; i < sentences.length; i++) {
             sentences[i] = sentences[i].replaceAll("[^а-яА-ЯёЁ]", " ").trim();
-            //   System.out.println(sentences[i]);
-        }
-        // 4.
-        for (int i = 0; i <= sentences.length - 1; i++) {
-            for (int j = i + 1; j <= sentences.length - 1; j++) {
-                if (sentences[j].compareTo(sentences[i]) < 0) {
-                    String buffer = sentences[i];
-                    sentences[i] = sentences[j];
-                    sentences[j] = buffer;
                 }
 
+
+        for (int i = 0; i <= sentences.length - 1; i++) { // строка в массиве
+            for (int j = i + 1; j <= sentences.length - 1; j++) { // след строка
+                if (sentences[i].length()> sentences[j].length()) {
+                    String buffer = sentences[i]; // запомнили строку
+                    sentences[i] = sentences[j]; //заменили строку
+                    sentences[j] = buffer; // завершили перестановку
+                }
             }
-            System.out.println(sentences[i]);
+          System.out.println(sentences[i]);
         }
     }
 }
+
+
+
 
 
 
