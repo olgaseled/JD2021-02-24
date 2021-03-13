@@ -1,10 +1,36 @@
 package by.it.seledtsova.jd01_07;
 
-public class Vector extends Var{
-    private  final  int[] value;
+import java.util.StringJoiner;
 
-    public Vector(double[] vector) {
-        this.value = new int[0];
+public class Vector extends Var{
+
+
+    private final double[] value;
+
+    public Vector(double[] value) {
+        this.value = value;
     }
 
+    @Override
+    public String toString() {
+        // {1.0, 3.5, 5.8}
+
+        /*
+        StringBuilder strVector = new StringBuilder("{");
+        String delimiter = "";
+        for (int v : value) {
+            strVector.append(delimiter).append(v);
+            delimiter = ", ";
+        }
+        strVector.append("}");
+        */
+
+        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
+        for (Double v : value) {
+            stringJoiner.add(v.toString());
+        }
+
+        return stringJoiner.toString();
+    }
 }
+
