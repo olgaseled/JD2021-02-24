@@ -7,7 +7,6 @@ public class Scalar extends Var {
         this.value = value;
     }
 
-
     public Scalar(String s) {
         this.value = Double.parseDouble(s);
     }
@@ -21,3 +20,7 @@ public class Scalar extends Var {
         return Double.toString(value);
     }
 }
+
+
+
+

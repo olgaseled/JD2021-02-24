@@ -3,33 +3,45 @@ package by.it.khrolovich.jd01_07;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class Vector extends Var{
+public class Vector extends Var {
     private final double[] value;
 
-    public Vector(int[] value) {
+    public Vector(double[] value) {
         this.value = value;
     }
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        for (double v : value) {
-            stringJoiner.add(v.toString());    
-        }
-        
-        //{1.0, 3.6, 5.5}
-        StringBuilder strVector = new StringBuilder("{");//строковое представление вектора
+                /*
+        StringBuilder strVector = new StringBuilder("{");
         String delimiter = "";
         for (int v : value) {
             strVector.append(delimiter).append(v);
-            delimiter  =", ";
-        } 
+            delimiter = ", ";
+        }
         strVector.append("}");
-        return  strVector.toString();
-        
-        
+        */
+        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
+        for (Double v : value) {
+            stringJoiner.add(v.toString());
+        }
+
+        return stringJoiner.toString();
+
+        //{1.0, 3.6, 5.5}
+        //StringBuilder strVector = new StringBuilder("{");//строковое представление вектора
+        //String delimiter = "";
+        //for (int v : value) {
+        //   strVector.append(delimiter).append(v);
+        //    delimiter  =", ";
+        //}
+        //strVector.append("}");
+
+        //return  strVector.toString();
+
+
         //return "Vector{" +
-         //       "value=" + Arrays.toString(value) +
-         //       '}';
+        //       "value=" + Arrays.toString(value) +
+        //       '}';
     }
 }

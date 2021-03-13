@@ -9,9 +9,9 @@ public class TaskB2 {
     public static void main(String[] args) {
 
         String text = Poem.text;
-        text = text.replace("...","");
+        text = text.replace("...", "");
 
-        String sentences = text.replaceAll("[^а-яА-ЯёЁ.!?]+"," ");
+        String sentences = text.replaceAll("[^а-яА-ЯёЁ.!?]+", " ");
         String[] split = sentences.split("\\s*[.!?]\\s*");
         sortText(split);
         for (String s : split) {
@@ -19,7 +19,7 @@ public class TaskB2 {
         }
     }
 
-   static void sortText(String[] arr) {
+    static void sortText(String[] arr) {
         for (int i = 1; i < arr.length; i++) {
             String temp = arr[i];
             int j = i;
