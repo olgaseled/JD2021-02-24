@@ -16,16 +16,17 @@ public class TaskB2 {
 
         for (int i = 0; i <= sentences.length - 1; i++) { // строка в массиве
             for (int j = i + 1; j <= sentences.length - 1; j++) { // след строка
-                if (sentences[i].length()> sentences[j].length()) {
+                if (sentences[i].length() > sentences[j].length()) {
                     String buffer = sentences[i]; // запомнили строку
                     sentences[i] = sentences[j]; //заменили строку
                     sentences[j] = buffer; // завершили перестановку
                 }
             }
-          System.out.println(sentences[i]);
+        }
+            System.out.print(String.join("\n", sentences));
         }
     }
-}
+
 
 
 
