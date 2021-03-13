@@ -1,6 +1,7 @@
 package by.it.levchuk.levchuk.jd01_07;
 
 class Scalar extends Var {
+
     private final double value;
 
     Scalar(double value) {
