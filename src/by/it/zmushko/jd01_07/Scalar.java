@@ -1,6 +1,6 @@
 package by.it.zmushko.jd01_07;
 
-public class Scalar extends Var{
+public class Scalar extends Var {
 
     private final double value;
 
@@ -12,13 +12,13 @@ public class Scalar extends Var{
         this.value = otherScalar.value;
     }
 
+    public Scalar(double value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return Double.toString(value);
-    }
-
-    public Scalar(double value) {
-        this.value = value;
     }
 
 }
