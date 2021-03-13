@@ -10,7 +10,7 @@ public class TaskB2 {
         String[] sentences = text.split("[.!?]");
         //3. del non-letters;
         for (int i = 0; i < sentences.length; i++) {
-            sentences[i] = sentences[i].replaceAll("[^а-яА-ЯёЁ]", " ").trim();
+            sentences[i] = sentences[i].replaceAll("[^а-яА-ЯёЁ]+", " ").trim();
                 }
 
 
