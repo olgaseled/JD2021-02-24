@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("all")
 
 //поставьте курсор на следующую строку и нажмите Ctrl+Shift+F10
-public class jd01_07 extends HomeWork {
+public class Test_jd01_07 extends HomeWork {
 
     @Test(timeout = 5000)
     public void testTaskA1_double__Scalar() throws Exception {
