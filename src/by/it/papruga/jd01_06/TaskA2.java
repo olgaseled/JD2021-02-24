@@ -8,6 +8,7 @@ public class TaskA2 {
 
     private static String[] w = {};
     private static int[] count = {};
+
     private static int pos(String word) {
 
         for (int i = 0; i < w.length; i++) {
@@ -18,11 +19,11 @@ public class TaskA2 {
 
     }
 
-
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder(Poem.text);
+
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
         Matcher matcher = pattern.matcher(Poem.text);
+
         while (matcher.find()) {
             String word = matcher.group();
             int p = pos(word);
@@ -31,8 +32,10 @@ public class TaskA2 {
             } else {
 
                 int last = w.length;
+
                 w = Arrays.copyOf(w, last + 1);
                 w[last] = word;
+
                 count = Arrays.copyOf(count, last + 1);
                 count[last] = 1;
 
@@ -42,7 +45,6 @@ public class TaskA2 {
         for (int i = 0; i < w.length; i++) {
             System.out.println(w[i] + "=" + count[i]);
         }
-
 
     }
 }
