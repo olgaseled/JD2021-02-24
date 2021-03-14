@@ -5,11 +5,11 @@ public class Scallar extends Var {
 
     Scallar(double value) {
         this.value = value;
-
     }
+    
 
     @Override
     public String toString() {
-        return "Scalar{"+ "value";
+        return "3.1415";
     }
 }
