@@ -26,6 +26,16 @@ public class Vector extends Var {
         sb.append("}");
         return sb.toString();
     }
+
+    public Vector(String strValue) {
+        String[] arrayString = strValue.replaceAll("[{} ]+", "").trim().split(",");
+        double[] result = new double[arrayString.length];
+        for (int i = 0; i < arrayString.length; i++) {
+            result[i]=Double.parseDouble(arrayString[i]);
+        }
+        this.value = result;
+
+    }
 }
 
 
