@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_07;
+package by.it.kirichenko.jd01_07;
 
 import java.util.StringJoiner;
 
