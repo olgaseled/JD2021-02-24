@@ -25,8 +25,7 @@ public class TaskB2 {
         boolean isSorted;
         do {
             isSorted = false;
-            int last = sentences.length - 1;
-            for (int i = 0; i < last; i++) {
+            for (int i = 0; i < sentences.length - 1; i++) {
                 if (sentences[i].length() > sentences[i + 1].length()) {
                     String buffer = sentences[i];
                     sentences[i] = sentences[i + 1];
@@ -41,8 +40,8 @@ public class TaskB2 {
     }
 
     private static void printArray(String[] sentences) {
-        for (int i = 0; i < sentences.length; i++) {
-            System.out.printf("%s\n", sentences[i]);
+        for (String sentence : sentences) {
+            System.out.printf("%s\n", sentence);
         }
     }
 }
