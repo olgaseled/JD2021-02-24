@@ -12,10 +12,14 @@ public class Runner {
 
         Var vec4 = new Vector(new double[]{1, 2, 3, 4, 5});
         Var vec5 = new Vector((Vector) vec4);
-       // Var vec6 = new Vector("{1.0, 2.0, 4.0}");
-
+        Var vec6 = new Vector("{1.0, 2.0, 4.0}");
         System.out.printf("vec4=%s\n", vec4);
-        System.out.printf("vec4=%s\n", vec5);
-      //  System.out.printf("vec4=%s\n", vec6);
+        System.out.printf("vec5=%s\n", vec5);
+        System.out.printf("vec6=%s\n", vec6);
+
+        double[][] arrayValues = {{1.0, 2.0}, {3.0, 4.0}};
+        Var matrix1 = new Matrix(arrayValues);
+
+        System.out.printf("matr1=%s\n", matrix1);
     }
 }
