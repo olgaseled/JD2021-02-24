@@ -27,8 +27,8 @@ public class Vector extends Var {
         return sb.toString();
     }
 
-    public Vector(String strValue) {
-        String[] arrayString = strValue.replaceAll("[{} ]+", "").trim().split(",");
+    public Vector(String stringValue) {
+        String[] arrayString = stringValue.replaceAll("[{} ]+", "").trim().split(",");
         double[] result = new double[arrayString.length];
         for (int i = 0; i < arrayString.length; i++) {
             result[i]=Double.parseDouble(arrayString[i]);
