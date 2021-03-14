@@ -1,10 +1,23 @@
 package by.it.belazarovich.jd01_07;
 
-import java.util.Scanner;
+class Scalar extends AbstractVar {
+    private double value;
 
- class Scalar extends AbstractVar{
-     @Override
-     public String toString() {
-         return "Это класс Scalar";
-     }
- }
+    Scalar(double value) {
+        this.value = value;
+    }
+
+    Scalar(String str) {
+        this.value = Double.parseDouble(str);
+    }
+
+    Scalar(Scalar scalar) {
+        this.value = scalar.value;
+
+    }
+
+    @Override
+    public String toString() {
+        return Double.toString(value);
+    }
+}
