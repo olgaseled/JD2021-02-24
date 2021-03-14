@@ -1,12 +1,12 @@
 package by.it.seledtsova.jd01_07;
 
-public class Scalar extends Var{
-    private  final double value;
+public class Scalar extends Var {  // мы создали двух потомков и он наследуется от класca var
 
-    public Scalar(double value) {
+    private final double value;
+
+    Scalar(double value) {
         this.value = value;
-
-        }
+    }
 
     Scalar(String strValue) {
         this.value = Double.parseDouble(strValue);
@@ -20,6 +20,5 @@ public class Scalar extends Var{
     public String toString() {
         return Double.toString(value);
     }
-
 
 }

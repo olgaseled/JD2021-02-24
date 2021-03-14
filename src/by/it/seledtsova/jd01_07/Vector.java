@@ -7,7 +7,7 @@ public class Vector extends Var{
 
     private final double[] value;
 
-    public Vector(double[] value) {
+    public Vector(double[] value) { //мы создали двух потомков и он наследуется от класca var
         this.value = value;
     }
 
@@ -23,7 +23,7 @@ public class Vector extends Var{
             delimiter = ", ";
         }
         strVector.append("}");
-        */
+         */
 
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         for (Double v : value) {
