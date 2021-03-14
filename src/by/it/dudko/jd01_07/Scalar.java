@@ -1,6 +1,6 @@
 package by.it.dudko.jd01_07;
 
-public class Scalar extends Var{
+public class Scalar extends Var {
 
     private final double value;
 

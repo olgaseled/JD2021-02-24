@@ -5,5 +5,4 @@ abstract class Var {
     public String toString() {
         return "abstract Var";
     }
-    
 }
