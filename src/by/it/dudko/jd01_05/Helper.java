@@ -116,7 +116,7 @@ public class Helper {
         return z;
     }
 
-    private static int[] flatten2DArray(int[][] srcArr) {
+    static int[] flatten2DArray(int[][] srcArr) {
         int[] flatArr = new int[srcArr.length * srcArr[0].length];
         int arrCursor = 0;
         for (int[] row : srcArr) {
@@ -128,7 +128,7 @@ public class Helper {
     }
 
 
-    private static int[][] transformArrayTo2D(int[] arr, int cols) {
+    static int[][] transformArrayTo2D(int[] arr, int cols) {
         int arrCursor = 0;
         int rows = (int) Math.ceil((double) arr.length / cols);
         int[][] arr2D = new int[rows][cols];
@@ -141,7 +141,7 @@ public class Helper {
     }
 
 
-    private static int[][] transposeArr(int[][] srcArr) {
+    static int[][] transposeArr(int[][] srcArr) {
         int srcRow = srcArr.length;
         int srcCol = srcArr[0].length;
         int tRow = srcCol;
