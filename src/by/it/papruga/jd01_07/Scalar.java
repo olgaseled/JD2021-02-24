@@ -19,8 +19,6 @@ public class Scalar extends Var {
 
     @Override
     public String toString() {
-        return "Scalar{" +
-                "value=" + value +
-                '}';
+        return Double.toString(value);
     }
 }
