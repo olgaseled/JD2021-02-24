@@ -1,6 +1,5 @@
 package by.it._classwork_.jd01_07;
 
-import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Vector extends Var {
