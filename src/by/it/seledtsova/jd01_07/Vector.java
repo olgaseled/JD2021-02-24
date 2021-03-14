@@ -6,13 +6,18 @@ public class Vector extends Var{
 
 
     private final double[] value;
-
     public Vector(double[] value) { //мы создали двух потомков и он наследуется от класca var
         this.value = value;
     }
 
+    Vector (Vector stringVector){
+        this.value= stringVector.value;
+    }
+
+
     @Override
     public String toString() {
+
         // {1.0, 3.5, 5.8}
 
         /*
