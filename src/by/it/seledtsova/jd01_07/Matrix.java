@@ -6,6 +6,7 @@ public class  Matrix extends Var {
 
     private final double[][] arrayValues;
 
+
     Matrix(double[][] value) { // 1 конструктор на вход принемает некоторый двумерный массив
         this.arrayValues = value;
     }
