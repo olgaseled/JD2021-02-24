@@ -6,7 +6,7 @@ public class Vector extends Var{
 
 
     private final double[] value;
-    public Vector(double[] value) { //мы создали двух потомков и он наследуется от класca var
+    Vector(double[] value) { //мы создали двух потомков и он наследуется от класca var
         this.value = value;
     }
 
