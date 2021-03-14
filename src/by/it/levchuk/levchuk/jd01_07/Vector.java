@@ -1,5 +1,22 @@
 package by.it.levchuk.levchuk.jd01_07;
 
-class Vector extends Var {
+import java.util.Arrays;
+import java.util.StringJoiner;
 
+class Vector extends Var {
+    private final double[] value;
+
+
+    Vector(double[] value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
+        for (Double v : value) {
+            stringJoiner.add(v.toString());
+        }
+        return stringJoiner.toString();
+    }
 }
