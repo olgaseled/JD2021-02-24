@@ -6,22 +6,8 @@ public class  Matrix extends Var {
 
     private final double[][] arrayValues;
 
-    @Override
-    public String toString() {
-        return "Matrix{" +
-                "arrayValue=" + Arrays.toString(arrayValues) +
-                '}';
+    Matrix(double[][] value) { // 1 конструктор на вход принемает некоторый массив
+        this.arrayValues = value;
     }
-
-    Matrix (double[][] arrayValue ) { // 1 конструктор на вход принемает некоторый массив
-        this.arrayValues= arrayValue;
-
-    }
-
-    Matrix(Matrix matrix) {
-        this.arrayValues = matrix.arrayValues;
-    }
-
-
 }
 
