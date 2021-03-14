@@ -22,13 +22,13 @@ public class Vector extends Var {
         Matcher matcher = compile.matcher(s);
         int i = 0;
 
-        while (matcher.find()){
+        while (matcher.find()) {
             i++;
         }
         double[] arrayOfS = new double[i];
         int j = 0;
         int start = 0;
-        while (matcher.find(start)){
+        while (matcher.find(start)) {
             arrayOfS[j] = Double.parseDouble(matcher.group());
             j++;
             start = matcher.end();
@@ -42,7 +42,7 @@ public class Vector extends Var {
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
 
-       for (Double v : value) {
+        for (Double v : value) {
             stringJoiner.add(v.toString());
         }
 
