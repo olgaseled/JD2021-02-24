@@ -8,12 +8,12 @@ class Vector extends Var {
     Vector(double[] value) {
         this.value = value;
     }
-    Vector(Vector vector){
+    Vector(Vector vector) {
         this.value = vector.value;
     }
+
     Vector(String strVector){
-        strVector= strVector.replaceAll("\\{|\\}", " ");
-        strVector= strVector.replaceAll(" ", "");
+        strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");;
         String[] v = strVector.split(",");
         value = new double[v.length];
         for (int i = 0; i < v.length; i++) {
@@ -21,7 +21,6 @@ class Vector extends Var {
             System.out.println(value[i]);
         }
     }
-
 
     @Override
     public String toString() {
