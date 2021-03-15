@@ -1,6 +1,6 @@
 package by.it.levchuk.levchuk.jd01_08;
 
-abstract class Var implements Operation {
+abstract class Var implements Operation{
 
     @Override
     public Var add(Var other) {
