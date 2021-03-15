@@ -10,6 +10,9 @@ class Vector extends Var {
     Vector(double[] value) {
         this.value = value;
     }
+    Vector(Vector vector){
+        this.value= vector.value;
+    }
 
     @Override
     public String toString() {
