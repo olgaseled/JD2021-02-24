@@ -17,8 +17,8 @@ public class Matrix extends Var {
 
     public Matrix(String s) {
         double[][] MatrisOfS = new double[2][2];
-        s = s.replaceAll("\\s*\\{\\s*\\{\\s*", "");
-        s = s.replaceAll("\\s*\\}\\s*\\}\\s*", "");
+        //s = s.replaceAll("\\s*\\{\\s*\\{\\s*", "");
+        //s = s.replaceAll("\\s*\\}\\s*\\}\\s*", "");
         String[] split = s.split("\\s*\\}\\s*\\,\\s*\\{\\s*");
         int j = 0;//count of rows
         for (String s1 : split) {
