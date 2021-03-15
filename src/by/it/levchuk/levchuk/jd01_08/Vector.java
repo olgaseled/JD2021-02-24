@@ -1,15 +1,17 @@
 package by.it.levchuk.levchuk.jd01_08;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 class Vector extends Var {
     private final double[] value;
 
-
     Vector(double[] value) {
+
         this.value = value;
     }
     Vector(Vector vector){
+
         this.value= vector.value;
     }
 
