@@ -17,24 +17,15 @@ public class Vector extends Var {
 
     public Vector(String s) {
 
+        String[] split = s.trim().replaceAll("\\s+", "")
+                .replace("{", "").replace("}", "").split(",");
 
-        Pattern compile = Pattern.compile("[0-9]\\.?");
-        Matcher matcher = compile.matcher(s);
-        int i = 0;
 
-        while (matcher.find()) {
-            i++;
+        double[] arrayOfS = new double[split.length];
+
+        for (int i = 0; i < split.length; i++) {
+            arrayOfS[i] = Double.parseDouble(split[i]);
         }
-        double[] arrayOfS = new double[i];
-        int j = 0;
-        int start = 0;
-        while (matcher.find(start)) {
-            arrayOfS[j] = Double.parseDouble(matcher.group());
-            j++;
-            start = matcher.end();
-        }
-
-
         this.value = arrayOfS;
     }
 
@@ -42,14 +33,12 @@ public class Vector extends Var {
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
 
-        for (Double v : value) {
-            stringJoiner.add(v.toString());
+        for (double v : value) {
+            stringJoiner.add(Double.toString(v));//TODO посмотреть второй вариант
         }
 
         return stringJoiner.toString();
 
-
     }
-
 
 }

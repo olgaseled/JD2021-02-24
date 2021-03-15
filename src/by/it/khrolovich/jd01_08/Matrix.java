@@ -1,12 +1,20 @@
-package by.it.khrolovich.jd01_07;
+package by.it.khrolovich.jd01_08;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Matrix extends Var {
     private final double[][] value;
 
-    public Matrix(double[][] doubles) {
-        this.value = doubles;
+    //копируем, а не просто ссылка. Так лучше!
+    public Matrix(double[][] value) {
+        this.value = new double[value.length][0];
+        for (int i = 0; i < value.length; i++) {
+            this.value[i] = Arrays.copyOf(value[i], value[i].length);
+        }
+        // this.value = doubles;//простой вариант
     }
 
     public Matrix(Matrix otherMatrix) {
@@ -14,7 +22,6 @@ public class Matrix extends Var {
     }
 
     public Matrix(String s) {
-
         s = s.trim().replaceAll("\\s+", "");//нет пробелов
         s = s.replace("{{", "").replace("}}", "");
         String[] Rows = s.split("\\}\\,\\{");
