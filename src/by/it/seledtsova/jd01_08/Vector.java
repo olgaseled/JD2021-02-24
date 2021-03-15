@@ -1,5 +1,7 @@
 package by.it.seledtsova.jd01_08;
 
+import java.util.Arrays;
+
 public class Vector extends Var {
 
     private final double[] value;
@@ -32,7 +34,25 @@ public class Vector extends Var {
             result[i]=Double.parseDouble(arrayString[i]);
         }
         this.value = result;
+   }
 
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]+((Scalar)other).getValue();
+            }
+            return new Vector(res);
+        }
+        else if (other instanceof Vector) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]+((Vector)other).value[i];
+                }
+            return new Vector(res);
+        }
+        return super.add(other);
     }
 }
 
