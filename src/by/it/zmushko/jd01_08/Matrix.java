@@ -14,20 +14,19 @@ public class Matrix extends Var {
     }
 
     Matrix(String doubleStringArray) {
-        String stringWithoutSpace = doubleStringArray.replaceAll(" ", "");
-        String[] tempArrayString = stringWithoutSpace.split("},\\{");
-        String[] tempArrayAfterSplit = new String[tempArrayString.length];
-        for (int i = 0; i < tempArrayString.length; i++) {
-            tempArrayAfterSplit[i] = tempArrayAfterSplit[i] + tempArrayString[i].replaceAll("[{}]", "").replaceAll(",\"", " ").split(" ");
-        }
-        int countElementsInTempArray = 0;
-        double[][] resultDoubleArray = new double[tempArrayString.length][tempArrayString.length];
+        String[] arrayString = doubleStringArray.trim()
+                .replaceAll("\\s+", "")
+                .split("},\\{"); //;
+        double[][] resultDoubleArray = new double[arrayString.length][arrayString[0].split(",").length];
         for (int i = 0; i < resultDoubleArray.length; i++) {
-            for (int j = 0; j < resultDoubleArray.length; j++) {
-                resultDoubleArray[i][j] = Double.parseDouble(tempArrayAfterSplit[countElementsInTempArray++]);
+            String arrayCols = arrayString[i].replace("{", "")
+                    .replace("}", "");
+            String[] arrayStringRows = arrayCols.split(",");
+            for (int j = 0; j < arrayStringRows.length; j++) {
+                resultDoubleArray[i][j] = Double.parseDouble(arrayStringRows[j]);
             }
         }
-        valuesDoubleArray = resultDoubleArray; // затык, не забудь убрать
+        this.valuesDoubleArray = resultDoubleArray;
     }
 
 
@@ -37,8 +36,26 @@ public class Matrix extends Var {
 
     @Override
     public String toString() {
-        return Arrays.deepToString(valuesDoubleArray).replace("[", "{").replace("]", "}");
+        StringBuilder rezString = new StringBuilder(); //расширяемая строка, которую можно изменять без ущерба для производительности
+        rezString.append("{");
+        for (int i = 0; i < valuesDoubleArray.length; i++) {
+            for (int j = 0; j < valuesDoubleArray[0].length; j++) {
+                if (j == 0) {
+                    rezString.append("{");
+                }
+                rezString.append(valuesDoubleArray[i][j]);
+                if (j != valuesDoubleArray[0].length - 1) {
+                    rezString.append(", ");
+                } else if (j == valuesDoubleArray[0].length - 1){
+                    rezString.append("}");
+                }
+            }
+            if (i != valuesDoubleArray.length -1) {
+                rezString.append(", ");
+            }
+        }
+        rezString.append("}");
+        return rezString.toString();
     }
-
 
 }
