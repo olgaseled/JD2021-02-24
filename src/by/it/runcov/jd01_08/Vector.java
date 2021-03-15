@@ -1,17 +1,20 @@
 package by.it.runcov.jd01_08;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 class Vector extends Var {
+
     private final double[] value;
 
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(Vector vector) {
-        this.value = vector.value;
+        this(vector.value);
     }
+
 
     @Override
     public String toString() {

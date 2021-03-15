@@ -4,6 +4,14 @@ class Scalar extends Var {
 
     private final double value;
 
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            return new Scalar(this.value + ((Scalar) other).value);
+        }
+        return other.add(this);
+    }
+
     Scalar(double value) {
         this.value = value;
     }

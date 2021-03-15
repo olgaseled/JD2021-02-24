@@ -1,16 +1,27 @@
 package by.it.runcov.jd01_08;
 
+import java.util.Objects;
+
 public class Runner {
+    private static void print(Var var) {
+        if(Objects.nonNull(var)) {
+            System.out.println(var);
+        }
+    }
+
     public static void main(String[] args) {
-        Var var1 = new Scalar(3.1415);
-        Scalar var2 = new Scalar(3.1415);
-        Var var3 = new Scalar(var2);
-        System.out.printf("var1=%s\n", var1);
-        System.out.printf("var2=%s\n", var2);
-        System.out.printf("var3=%s\n", var3);
-        Var vec1 = new Vector(new double[]{1, 2, 4});
-        Vector vec2 = new Vector(new double[]{1, 2, 4});
-        System.out.printf("vec1=%s\n", vec1);
-        System.out.printf("vec2=%s\n", vec2);
+        Var s = new Scalar(3.0);
+        Var v = new Vector(new double[]{1, 2, 3}); // закомментируйте вектор и/или
+        /* Уровень сложности A (калькулятор) */
+        print(s.add(s)); //выведет в консоль 6.0
+        print(s.sub(s)); //выведет в консоль 0.0
+        print(s.mul(s)); //выведет в консоль 9.0
+        print(s.div(s)); //выведет в консоль 1.0
+        /* Уровень сложности B (векторные операции) закомментируйте, если не реализовали */
+        print(v.add(v)); //выведет в консоль {2.0, 4.0, 6.0}
+        print(v.sub(v)); //выведет в консоль {0.0, 0.0, 0.0}
+        print(v.mul(v)); //выведет в консоль 14.0
+        print(v.div(v)); //сообщит о невозможности операции
+
     }
 }
