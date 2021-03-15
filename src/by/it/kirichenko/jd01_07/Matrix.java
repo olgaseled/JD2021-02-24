@@ -9,6 +9,10 @@ public class Matrix extends Var {
         this.value = value;
     }
 
+    public Matrix(Matrix otherMatrix) {
+        this.value = otherMatrix.value;
+    }
+
     @Override
     public String toString() {
         int numberRows = value.length;
@@ -16,7 +20,7 @@ public class Matrix extends Var {
 
         StringJoiner[] stringJoinerRows = new StringJoiner[numberRows];
         for (int i = 0; i < stringJoinerRows.length; i++) {
-            stringJoinerRows[i]=new StringJoiner(", ", "{", "}");
+            stringJoinerRows[i] = new StringJoiner(", ", "{", "}");
         }
         StringJoiner stringJoinerAll = new StringJoiner(", ", "{", "}");
 

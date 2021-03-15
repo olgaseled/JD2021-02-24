@@ -1,6 +1,5 @@
 package by.it.kirichenko.jd01_07;
 
-import by.it._classwork_.jd01_07.Matrix;
 
 public class Runner {
     public static void main(String[] args) {
@@ -19,6 +18,8 @@ public class Runner {
         System.out.printf("vec6=%s\n", vec6);
 
         Matrix matr7 = new Matrix(new double[][]{{1, 2}, {3, 4}});
+        Var matr8 = new Matrix(matr7);
         System.out.printf("matr7=%s\n", matr7);
+        System.out.printf("matr8=%s\n", matr8);
     }
 }
