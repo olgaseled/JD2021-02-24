@@ -15,9 +15,11 @@ public class Vector extends Var {
         this.value = otherVector.value;
     }
 
-   /* public Vector(String strVector) {
+   public Vector(String strVector) {
 
-       String[] num = strVector.split( "[{},]");
+        String Clean = strVector.replaceAll("[\\{|\\} ]", "");
+
+       String[] num = Clean.split( "[,]");
        double [] mas = new double [num.length];
 
         for (int i = 0; i < num.length; i++) {
@@ -26,7 +28,7 @@ public class Vector extends Var {
         this.value = mas;
 
     }
-*/
+
 
 
 
