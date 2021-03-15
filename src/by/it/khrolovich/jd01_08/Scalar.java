@@ -36,7 +36,7 @@ public class Scalar extends Var {
         }
         var result2 = other.add(this);//other -точно не скаляр, this - точно скаляр
         //other - или вектор,или матрица
-        return result2;//его же и вернем
+        return result2.mul(new Scalar(-1));//его же и вернем
     }
 
     @Override
