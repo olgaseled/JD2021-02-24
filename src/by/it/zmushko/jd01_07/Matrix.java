@@ -27,6 +27,7 @@ public class Matrix extends Var {
         valuesDoubleArray = resultDoubleArray; // затык, не забудь убрать
     }
 
+
     Matrix(Matrix matrix) {
         this.valuesDoubleArray = matrix.valuesDoubleArray;
     }
