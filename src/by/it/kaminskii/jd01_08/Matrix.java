@@ -2,19 +2,55 @@ package by.it.kaminskii.jd01_08;
 
 import java.util.Arrays;
 
-class Matrix extends Var {
-    private double[][] value;
+class Matrix extends by.it.kaminskii.jd01_08.Var {
+    private final double[][] value;
+
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double[][] res = Arrays.copyOf(value, value.length);
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] + ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        }
+        else if(other instanceof Matrix) {
+            double[][] res = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j <res[0].length; j++) {
+                    res[i][j] = res[i][j] * ((Matrix) other).value[i][j];
+
+                }
+            }
+            return new Matrix(res);
+        }
+        else return super.mul(other);
+    }
+
+    @Override
+    public Var sub(Var other) {
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        return super.div(other);
+    }
 
     Matrix(double[][] value) {
-        this.value = Arrays.copyOf(value, value.length);
+        this.value = value;
     }
     Matrix(Matrix matrix){
-        this.value=new double[value.length][0];
-        for (int i = 0; i < value.length; i++) {
-            this.value[i] = Arrays.copyOf(value[i], value[i].length);
-        }
+        this.value= matrix.value;
     }
-
     Matrix(String strMatrix){
         String one="";
         String two="";
