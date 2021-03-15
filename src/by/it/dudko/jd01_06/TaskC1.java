@@ -30,14 +30,6 @@ public class TaskC1 {
             int additionalSpaces = rowLength - initialString.length();
             StringBuilder justifiedString = new StringBuilder(initialString);
             int startOfSearchRange = 0;
-//            while (additionalSpaces > 0) {
-//                startOfSearchRange = (startOfSearchRange > justifiedString.length()) ? justifiedString.indexOf(" ");
-//                int insertPosition = justifiedString.indexOf(" ", startOfSearchRange) + 1;
-//                justifiedString.insert(insertPosition, ' ');
-//                startOfSearchRange = insertPosition + 1;
-//                additionalSpaces--;
-//            }
-//            textRow[i] = justifiedString.toString();
             Pattern pattern = Pattern.compile(" +");
             Matcher matcher = pattern.matcher(justifiedString);
             while (additionalSpaces > 0) {

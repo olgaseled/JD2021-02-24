@@ -17,7 +17,6 @@ public class TaskA {
         double action3 = log(abs(a - 1.12 * x) / 4);
         double z = action1 - action2 - action3;
         System.out.printf("при а=%-10.3f x=%f z=%f\n ", a, x, z);
-        z=cos(pow(x * x + PI / 6, 5))-sqrt(x * pow(a, 3))-log(abs(a - 1.12 * x) / 4);
         System.out.println("z=" + z);
 
     }
@@ -26,7 +25,7 @@ public class TaskA {
         double a = 1.21;
         double b = 0.371;
         double y = tan((a + b) * (a + b)) - cbrt(a + 1.5) + a * pow(b, 5) - (b / log(a * a));
-        System.out.printf("при а=%-10.3f b=%f y=%-10f\n ", a, b, y);
+        System.out.printf("при а=%-10.3f b=%f y=%f\n ", a, b, y);
         System.out.println("y=" + y);
 
     }
