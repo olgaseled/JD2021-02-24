@@ -7,30 +7,50 @@ public class Vector extends Var {
     private final double[] value;
 
     Vector(double[] value) {
-        this.value = Arrays.copyOf(value,value.length);
+        this.value = Arrays.copyOf(value, value.length);
     }
+
     Vector(String strVector) {
         // 1. Удалить из строки скобки
         // 2. Удалить из строки пробелы
-String string = strVector
-        .replace("{", "")
-        .replace("}", "")
-        .replace(" ", "");
+        String string = strVector
+                .replace("{", "")
+                .replace("}", "")
+                .replace(" ", "");
 
         // 3. Сделать сплит по запятой - будет масссив строк
-        String [] strArray = string.split("[,]");
+        String[] strArray = string.split("[,]");
         // 4. Получить массив чисел (как в 3 задании)
-        double [] numberArray= new double[strArray.length];
+        double[] numberArray = new double[strArray.length];
         for (int i = 0; i < strArray.length; i++) {
-            numberArray[i]=Double.parseDouble(strArray[i]);
+            numberArray[i] = Double.parseDouble(strArray[i]);
         }
         // 5. Можно заполнить value вектора
         this.value = numberArray;
     }
 
     Vector(Vector otherVector) {
-        this.value= otherVector.value;
+        this.value = otherVector.value;
     }
+
+
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] = resultVector[i] + ((Scalar) other).getValue();
+            }
+            return new Vector(resultVector);
+        }
+        else if (other instanceof Vector) {
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] = resultVector[i] + ((Vector) other).value[i];
+            }
+            return new Vector(resultVector);
+        } else
+            return super.add(other); }
 
 
 

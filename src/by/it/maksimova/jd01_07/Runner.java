@@ -13,5 +13,7 @@ public class Runner {
         System.out.printf("var4=%s\n", var4);
         Var var5 = new Vector("{1.0, 2.0, 3.0}");
         System.out.printf("var5=%s\n", var5);
+        //  Var var6 = new Vector(var5);
+       // System.out.printf("var5=%s\n", var6);
     }
 }
