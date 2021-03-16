@@ -58,7 +58,7 @@ public class Vector extends Var {
             }
             return new Vector(res);
         }
-        return super.add(other);
+        return super.sub(other);
     }
 
     @Override
