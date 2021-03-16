@@ -50,11 +50,31 @@ public class Matrix extends Var {
             for (int i = 0; i < value.length; i++) {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultMatrix[i][j]+=((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        if(other instanceof Matrix){
+            double[][] resultMatrix = new double[value.length][value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            //TODO условие на длины
+            double[][] secondMatrix = ((Matrix) other).value;
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultMatrix[i][j]+=secondMatrix[i][j];
+                }
+            }
             return new Matrix(resultMatrix);
         }
 
         return super.add(other);
     }
+
 
     @Override
     public String toString() {
