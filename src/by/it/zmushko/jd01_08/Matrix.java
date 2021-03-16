@@ -4,13 +4,15 @@ import java.util.Arrays;
 
 public class Matrix extends Var {
 
+    public double[][] getValuesDoubleArray() {
+        return valuesDoubleArray;
+    }
+
     private final double[][] valuesDoubleArray;
 
     Matrix(double[][] doubleArray) {
-        this.valuesDoubleArray = new double[doubleArray.length][0];
-        for (int i = 0; i < valuesDoubleArray.length; i++) {
-            this.valuesDoubleArray[i] = Arrays.copyOf(valuesDoubleArray[i], doubleArray[i].length);
-        }
+        this.valuesDoubleArray = Arrays.copyOf(doubleArray, doubleArray.length);
+
     }
 
     Matrix(String doubleStringArray) {
@@ -46,11 +48,11 @@ public class Matrix extends Var {
                 rezString.append(valuesDoubleArray[i][j]);
                 if (j != valuesDoubleArray[0].length - 1) {
                     rezString.append(", ");
-                } else if (j == valuesDoubleArray[0].length - 1){
+                } else if (j == valuesDoubleArray[0].length - 1) {
                     rezString.append("}");
                 }
             }
-            if (i != valuesDoubleArray.length -1) {
+            if (i != valuesDoubleArray.length - 1) {
                 rezString.append(", ");
             }
         }
@@ -58,4 +60,92 @@ public class Matrix extends Var {
         return rezString.toString();
     }
 
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double secondOperator = ((Scalar) other).getValue();
+            double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            for (int i = 0; i < resultArray.length; i++) {
+                for (int j = 0; j < resultArray.length; j++) {
+                    resultArray[i][j] += secondOperator;
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        if (other instanceof Matrix) {
+            double[][] secondOperator = ((Matrix) other).getValuesDoubleArray();
+            double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            for (int i = 0; i < resultArray.length; i++) {
+                for (int j = 0; j < resultArray.length; j++) {
+                    resultArray[i][j] += secondOperator[i][j];
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        return other.add(this);
+    }
+
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double secondOperator = ((Scalar) other).getValue();
+            double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            for (int i = 0; i < resultArray.length; i++) {
+                for (int j = 0; j < resultArray.length; j++) {
+                    resultArray[i][j] -= secondOperator;
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        if (other instanceof Matrix) {
+            double[][] secondOperator = ((Matrix) other).getValuesDoubleArray();
+            double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            for (int i = 0; i < resultArray.length; i++) {
+                for (int j = 0; j < resultArray.length; j++) {
+                    resultArray[i][j] -= secondOperator[i][j];
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        return other.sub(this);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double secondOperator = ((Scalar) other).getValue();
+            double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            for (int i = 0; i < resultArray.length; i++) {
+                for (int j = 0; j < resultArray.length; j++) {
+                    resultArray[i][j] *= secondOperator;
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        if (other instanceof Vector) {
+            double[] secondOperator = ((Vector) other).getValues();
+            double[][] firstOperator = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+            double[] arrayAfterMultiplication = new double[firstOperator.length];
+            for (int i = 0; i < firstOperator.length; i++) {
+                for (int j = 0; j < secondOperator.length; j++) {
+                    arrayAfterMultiplication[i] += firstOperator[i][j] * secondOperator[j];
+                }
+            }
+            return new Vector(arrayAfterMultiplication);
+        }
+        if (other instanceof Matrix) {
+            double[][] secondArray = ((Matrix) other).getValuesDoubleArray();
+            double[][] firstArray = Arrays.copyOf(this.valuesDoubleArray, this.valuesDoubleArray.length);
+            double[][] resultArray = new double[firstArray.length][secondArray[0].length];
+            for (int i = 0; i < firstArray.length; i++) {
+                for (int j = 0; j < secondArray[0].length; j++) {
+                    for (int k = 0; k < secondArray.length; k++) {
+                        resultArray[i][j] += firstArray[i][k] * secondArray[k][j];
+                    }
+                }
+            }
+            return new Matrix(resultArray);
+        }
+        return other.mul(this);
+    }
 }

@@ -8,6 +8,10 @@ public class Scalar extends Var {
 
     private final double value;
 
+    public Scalar(double value) {
+        this.value = value;
+    }
+
     public Scalar(String strValue) {
         this.value = Double.parseDouble(strValue);
     }
@@ -29,7 +33,7 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
         }
-        return other.add(this);
+        return other.mul(this);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
         }
-        return other.add(this).mul(new Scalar(-1));
+        return other.sub(this).mul(new Scalar(-1));
     }
 
     @Override
@@ -47,13 +51,9 @@ public class Scalar extends Var {
             if (secondOperator==0){
                 return null; //TODO сменить на выброс ошибки
             }
-            return new Scalar(this.value - ((Scalar) other).value);
+            return new Scalar(this.value / ((Scalar) other).value);
         }
         return super.div(other);
-    }
-
-    public Scalar(double value) {
-        this.value = value;
     }
 
     @Override
