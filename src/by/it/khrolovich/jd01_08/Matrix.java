@@ -107,6 +107,45 @@ public class Matrix extends Var {
     }
 
     @Override
+    public Var mul(Var other) {
+        double[][] resultMatrix = new double[value.length][value[0].length];
+        for (int i = 0; i < value.length; i++) {
+            resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
+        }
+        if(other instanceof Scalar){
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultMatrix[i][j]*=((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        if(other instanceof Vector){
+            double[] resultVector = new double[resultMatrix.length];
+            double[] otherVector =  ((Vector) other).getValue();
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultVector[i] += resultMatrix[i][j]*otherVector[j];
+                }
+            }
+            return new Vector(resultVector);
+        }
+        if(other instanceof Matrix){
+            double[][] secondMatrix = ((Matrix) other).value;
+            double[][] newMatrix = new double[resultMatrix.length][secondMatrix[0].length];
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    for (int k = 0; k < secondMatrix[j].length; k++) {
+                        newMatrix[i][k]+=resultMatrix[i][j]*secondMatrix[j][k];
+                    }
+                }
+            }
+            return new Matrix(newMatrix);
+        }
+        return super.mul(other);
+    }
+
+    @Override
     public String toString() {
 
         StringJoiner stringJoiner2 = new StringJoiner(", ", "{", "}");
