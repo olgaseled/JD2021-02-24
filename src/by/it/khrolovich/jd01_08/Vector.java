@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 public class Vector extends Var {
     private final double[] value;
 
-    private double getValue() {
-        return 0;
+    public double[] getValue() {
+        return value;
     }
 
     /*  public Vector(double[] value) {
@@ -45,10 +45,8 @@ public class Vector extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
-            //проверили, значит имеем право кастить - приводить типы
-            // double otherValue = ((Scalar) other).value;//value не доступно, надо геттер
-            double secondScalar = ((Scalar) other).getValue();
 
+            double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
 
             /*for (int i = 0; i < value.length; i++) {
@@ -58,29 +56,83 @@ public class Vector extends Var {
                 resultVector[i] += secondScalar;
             }
             return new Vector(resultVector);
-            //или одной строкой
         }
         //далее если InstanceOf Vector
         if (other instanceof Vector) {
-            //проверили, значит имеем право кастить - приводить типы
-            //double otherValue = ((Scalar) other).value;//value не доступно, надо геттер
-            double secondScalar = ((Vector) other).getValue();
-
+            double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
-
-            /*for (int i = 0; i < value.length; i++) {
-                value[i]+=secondScalar;
-            }*/
+            //TODO проверка на длины
             for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] += secondScalar;
+                resultVector[i] += secondVector[i];
             }
             return new Vector(resultVector);
             //или одной строкой
         }
-        return other.add(this);
+        //нельзя складывать вектор с матрицей
+        return super.add(other);
     }
 
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar){
+          double[] resultVector = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i]-=((Scalar) other).getValue();
+            }
+            return new Vector(resultVector);
+        }
+        if (other instanceof Vector) {
+        //TODO проверка на длины
+            double[] secondVector = ((Vector) other).value;
+            double[] resultVector = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i]-=secondVector[i];
+            }
+            return new Vector(resultVector);
+        }
 
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof  Scalar){
+
+            double[] resultVector = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i]*= ((Scalar) other).getValue();
+            }
+            return new Vector(resultVector);
+        }
+        if(other instanceof Vector){
+            double[] currentVector =Arrays.copyOf(value,value.length);
+            double[] secondVector = ((Vector) other).value;
+            double sum = 0;
+            for (int i = 0; i < currentVector.length; i++) {
+                    sum+= currentVector[i]*secondVector[i];
+
+            }
+            return new Scalar(sum);
+        }
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if(other instanceof Scalar){
+            double divScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(this.value, this.value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+               if (divScalar ==0){
+                return super.div(other);
+               }
+               resultVector[i]/=divScalar;
+            }
+            return new Vector(resultVector);
+        }
+
+        return super.div(other);
+    }
 
     @Override
     public String toString() {

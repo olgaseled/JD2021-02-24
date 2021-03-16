@@ -36,30 +36,22 @@ public class Scalar extends Var {
         }
         var result2 = other.add(this);//other -точно не скаляр, this - точно скаляр
         //other - или вектор,или матрица
-        return result2.mul(new Scalar(-1));//его же и вернем
+        return result2;//его же и вернем
     }
 
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar) {
-            //проверили, значит имеем право кастить - приводить типы
-            double otherValue = ((Scalar) other).value;//other.value
-            double result = this.value - otherValue;
-            return new Scalar(result);//если это скаляр, значит возвращаем скаляр
-            //или одной строкой
+            double result = this.value - ((Scalar) other).value;
+            return new Scalar(result);
         }
-        Var varSub = other.sub(this);
-        return varSub;//TODO умножение на -1
+        return other.sub(this).mul(new Scalar(-1));
     }
 
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            //проверили, значит имеем право кастить - приводить типы
-            double otherValue = ((Scalar) other).value;//other.value
-            double result = this.value * otherValue;
-            return new Scalar(result);//если это скаляр, значит возвращаем скаляр
-            //или одной строкой
+            return new Scalar(this.value * ((Scalar) other).value);
         }
         return other.mul(this);
     }
@@ -67,19 +59,17 @@ public class Scalar extends Var {
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar) {
-            //проверили, значит имеем право кастить - приводить типы
             double secondOperand = ((Scalar) other).value;//other.value
             if (secondOperand == 0) {
                 return null;//TODO div be zero
             }
 
             return new Scalar(this.value / secondOperand);
-            //или одной строкой
         }
-        //return other.div(this);
+        //нельзя делить скаляр на вектор и на матрицу, поэтому вызываем метод предка
+        //там выводится: деление невозможно
         return super.div(other);
     }
-
 
 }
 

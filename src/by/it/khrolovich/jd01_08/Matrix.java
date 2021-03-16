@@ -10,10 +10,11 @@ public class Matrix extends Var {
 
     //копируем, а не просто ссылка. Так лучше!
     public Matrix(double[][] value) {
-        this.value = new double[value.length][0];
+        double[][] resultMatrix = new double[value.length][value[0].length];
         for (int i = 0; i < value.length; i++) {
-            this.value[i] = Arrays.copyOf(value[i], value[i].length);
+            resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
         }
+        this.value = resultMatrix;
         // this.value = doubles;//простой вариант
     }
 
@@ -40,6 +41,19 @@ public class Matrix extends Var {
         }
 
         this.value = MatrisOfS;
+    }
+
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double[][] resultMatrix = new double[value.length][value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            return new Matrix(resultMatrix);
+        }
+
+        return super.add(other);
     }
 
     @Override
