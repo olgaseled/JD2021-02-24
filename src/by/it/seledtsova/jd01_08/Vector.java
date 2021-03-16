@@ -6,6 +6,10 @@ public class Vector extends Var {
 
     private final double[] value;
 
+    public double[] getValue() {
+        return value;
+    }
+
     Vector(double[] value) { // 1 конструктор на вход принимает некоторый массив
         this.value = value;
     }

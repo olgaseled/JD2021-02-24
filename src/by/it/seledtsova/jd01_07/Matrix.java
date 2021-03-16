@@ -13,14 +13,14 @@ public class  Matrix extends Var {
         }
     }
 
-    public Matrix(String strValue) {
+   public Matrix(String strValue) {
         this(new double[][]{{1, 2}, {3, 4}}); //stub
     }
 
     @Override
     public String toString() {
         return Arrays.deepToString(arrayValues).replace("[", "{").replace("]", "}");
-    }
-}
+     }
 
+    }
 

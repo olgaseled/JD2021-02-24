@@ -20,6 +20,10 @@ public class Runner {
         double[][] arrayValues = {{1.0, 2.0}, {3.0, 4.0}};
         Var matrix1 = new Matrix(arrayValues);
 
+        Var matrix3 = new Matrix("{{1.0,2.0},{3.0,4.0}}");
+
         System.out.printf("matr1=%s\n", matrix1);
+        System.out.printf("matr1=%s\n", matrix3);
+
     }
 }

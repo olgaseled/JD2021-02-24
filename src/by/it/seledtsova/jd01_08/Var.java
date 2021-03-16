@@ -36,7 +36,8 @@ abstract class Var implements Operation{ // cлово abstract (модифика
     public String toString() {    //здесь мы не можешь снять модификатор public,
         return "Это класс abstract Var";  // тк этот класс String  наследуется от Object
     }                                  //а в object  сказано,  метод  toString возвращает String и он public,
-                                    //
+
+    //
 }
 
 
