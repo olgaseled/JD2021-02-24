@@ -22,5 +22,6 @@ public class  Matrix extends Var {
         public String toString() {
             return Arrays.deepToString(arrayValues).replace("[", "{").replace("]", "}");
         }
+
     }
 
