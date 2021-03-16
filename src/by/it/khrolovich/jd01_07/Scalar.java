@@ -15,11 +15,14 @@ public class Scalar extends Var {
         this.value = otherScalar.value;
     }
 
+
     @Override
     public String toString() {
         return Double.toString(value);
     }
 }
+
+
 
 
 
