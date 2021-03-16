@@ -62,8 +62,11 @@ public class Matrix extends Var {
             for (int i = 0; i < value.length; i++) {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
-            //TODO условие на длины
             double[][] secondMatrix = ((Matrix) other).value;
+            if (resultMatrix[0].length != secondMatrix[0].length ||
+                    resultMatrix.length != secondMatrix.length) {
+                return super.add(other);
+            }
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
                     resultMatrix[i][j] += secondMatrix[i][j];
@@ -95,7 +98,10 @@ public class Matrix extends Var {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
             double[][] secondMatrix = ((Matrix) other).value;
-            //TODO добавить условие
+            if (resultMatrix[0].length != secondMatrix[0].length ||
+                    resultMatrix.length != secondMatrix.length) {
+                return super.sub(other);
+            }
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
                     resultMatrix[i][j] -= secondMatrix[i][j];
@@ -112,31 +118,37 @@ public class Matrix extends Var {
         for (int i = 0; i < value.length; i++) {
             resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
         }
-        if(other instanceof Scalar){
+        if (other instanceof Scalar) {
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
-                    resultMatrix[i][j]*=((Scalar) other).getValue();
+                    resultMatrix[i][j] *= ((Scalar) other).getValue();
                 }
             }
             return new Matrix(resultMatrix);
         }
-        if(other instanceof Vector){
+        if (other instanceof Vector) {
             double[] resultVector = new double[resultMatrix.length];
-            double[] otherVector =  ((Vector) other).getValue();
+            double[] otherVector = ((Vector) other).getValue();
+            if (resultMatrix[0].length != otherVector.length) {
+                return super.mul(other);
+            }
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
-                    resultVector[i] += resultMatrix[i][j]*otherVector[j];
+                    resultVector[i] += resultMatrix[i][j] * otherVector[j];
                 }
             }
             return new Vector(resultVector);
         }
-        if(other instanceof Matrix){
+        if (other instanceof Matrix) {
             double[][] secondMatrix = ((Matrix) other).value;
             double[][] newMatrix = new double[resultMatrix.length][secondMatrix[0].length];
+            if (resultMatrix[0].length != secondMatrix.length) {
+                return super.mul(other);
+            }
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
                     for (int k = 0; k < secondMatrix[j].length; k++) {
-                        newMatrix[i][k]+=resultMatrix[i][j]*secondMatrix[j][k];
+                        newMatrix[i][k] += resultMatrix[i][j] * secondMatrix[j][k];
                     }
                 }
             }

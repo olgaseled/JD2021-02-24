@@ -61,7 +61,8 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             double secondOperand = ((Scalar) other).value;//other.value
             if (secondOperand == 0) {
-                return null;//TODO div be zero
+                //return null;//TODO div be zero
+                return super.div(other);
             }
 
             return new Scalar(this.value / secondOperand);
