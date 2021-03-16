@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 class Vector extends Var {
+
     private final double[] value;
 
 
@@ -13,6 +14,8 @@ class Vector extends Var {
     Vector(Vector vector){
         this.value= vector.value;
     }
+
+
 
     @Override
     public String toString() {
