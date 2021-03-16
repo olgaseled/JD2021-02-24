@@ -54,6 +54,63 @@ public class Vector extends Var {
         }
         return super.add(other);
     }
+
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]-((Scalar)other).getValue();
+            }
+            return new Vector(res);
+        }
+        else if (other instanceof Vector) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]-((Vector)other).value[i];
+            }
+            return new Vector(res);
+        }
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]*((Scalar)other).getValue();
+            }
+            return new Vector(res);
+        }
+        else if (other instanceof Vector) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]*((Vector)other).value[i];
+            }
+            return new Vector(res);
+        }
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]/((Scalar)other).getValue();
+            }
+            return new Vector(res);
+        }
+        else if (other instanceof Vector) {
+            double []res = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < res.length; i++) {
+                res [i]=res[i]/((Vector)other).value[i];
+            }
+            return new Vector(res);
+        }
+        return super.div(other);
+    }
 }
 
 
