@@ -1,26 +1,49 @@
 package by.it.levchuk.levchuk.jd01_08;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
-class Vector extends Var {
-    private final double[] value;
+public class Vector extends Var {
+    private final double[] values;
 
-    Vector(double[] value) {
-
-        this.value = value;
+    Vector(double[] values) {
+        this.values = values;
     }
-    Vector(Vector vector){
+    Vector(Vector strVector) {
+        this.values = strVector.values;
+    }
+    Vector(String strVector) {
+        String[] strArray = strVector.trim()
+                .replaceAll("\\s+", "")
+                .replace("{", "")
+                .replace("}", "")
+                .split(",");
+        values = new double[strArray.length];
+        for (int i = 0; i < values.length; i++) {
+            values[i] = Double.parseDouble(strArray[i]);
+        }
+    }
 
-        this.value= vector.value;
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar){
+            double[] res=Arrays.copyOf(values,values.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i]=res[i]+((Scalar)other).getValue();
+            }
+            return new Vector(res);
+        }
+        else if(other instanceof Vector){
+            double[] res=Arrays.copyOf(values,values.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i]=res[i]+((Vector)other).values[i];
+            }
+            return new Vector(res);
+        }
+        return super.add(other);
     }
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        for (Double v : value) {
-            stringJoiner.add(v.toString());
-        }
-        return stringJoiner.toString();
+        return Arrays.toString(values).replace("[", "{").replace("]", "}");
     }
 }
