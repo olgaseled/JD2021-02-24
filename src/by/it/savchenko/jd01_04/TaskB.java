@@ -22,20 +22,20 @@ public class TaskB {
                 salaries[i][j] = salary;
             }
         }
-        int sum1 = salaries[0][0]+salaries[0][1]+salaries[0][2]+salaries[0][3];
-        int sum2 = salaries[1][0]+salaries[1][1]+salaries[1][2]+salaries[1][3];
-        int sum3 = salaries[2][0]+salaries[2][1]+salaries[2][2]+salaries[2][3];
-        int totalSum = sum1+sum2+sum3;
+        int sum1 = salaries[0][0] + salaries[0][1] + salaries[0][2] + salaries[0][3];
+        int sum2 = salaries[1][0] + salaries[1][1] + salaries[1][2] + salaries[1][3];
+        int sum3 = salaries[2][0] + salaries[2][1] + salaries[2][2] + salaries[2][3];
+        int totalSum = sum1 + sum2 + sum3;
 
         System.out.println("----------------------------------------------------------------");
-        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n", "Фамилия", "Квартал1", "Квартал2", "Квартал3", "Квартал4","Итого");
+        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n", "Фамилия", "Квартал1", "Квартал2", "Квартал3", "Квартал4", "Итого");
         System.out.println("----------------------------------------------------------------");
-        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n",worker[0], salaries[0][0],salaries[0][1],salaries[0][2],salaries[0][3],sum1);
-        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n",worker[1], salaries[1][0],salaries[1][1],salaries[1][2],salaries[1][3],sum2);
-        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n",worker[2], salaries[2][0],salaries[2][1],salaries[2][2],salaries[2][3],sum3);
+        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n", worker[0], salaries[0][0], salaries[0][1], salaries[0][2], salaries[0][3], sum1);
+        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n", worker[1], salaries[1][0], salaries[1][1], salaries[1][2], salaries[1][3], sum2);
+        System.out.printf("%-10s%-12s%-12s%-12s%-12s%-12s%n", worker[2], salaries[2][0], salaries[2][1], salaries[2][2], salaries[2][3], sum3);
         System.out.println("----------------------------------------------------------------");
-        System.out.println("Итого "+totalSum);
+        System.out.println("Итого " + totalSum);
         System.out.println("Среднее ");
-        }
     }
+}
 
