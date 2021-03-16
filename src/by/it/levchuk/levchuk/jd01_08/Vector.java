@@ -61,13 +61,13 @@ public class Vector extends Var {
         return super.sub(other);
     }
 
+
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(values, values.length);
             for (int i = 0; i < res.length; i++) {
-                res[i] /= secondScalar;
+                res[i] /= ((Scalar) other).getValue();
             }
             return new Vector(res);
         }
