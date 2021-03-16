@@ -38,11 +38,14 @@ class Scalar extends Var {
     @Override
     public Var div(Var other) {
 
-        if(other instanceof Scalar){
-            double result = this.value / ((Scalar) other).value;
-            return new Scalar(result);
+        if (other instanceof Scalar) {
+            if (((Scalar) other).value != 0) {
+                double result = this.value / ((Scalar) other).value;
+                return new Scalar(result);
+            }
+            else return super.div(other);
         }
-        return super.div(other);
+           else return super.div(other);
     }
 
     Scalar(double value) {
