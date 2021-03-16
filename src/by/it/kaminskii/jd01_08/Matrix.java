@@ -3,12 +3,16 @@ package by.it.kaminskii.jd01_08;
 import java.util.Arrays;
 
 class Matrix extends by.it.kaminskii.jd01_08.Var {
-    private final double[][] value;
+    private double[][] value;
 
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+
+            }
 
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
@@ -16,28 +20,100 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
                 }
             }
             return new Matrix(res);
-        }
-        else if(other instanceof Matrix) {
-            double[][] res = Arrays.copyOf(value, value.length);
+        } else if (other instanceof Matrix) {
+            double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j <res[0].length; j++) {
-                    res[i][j] = res[i][j] * ((Matrix) other).value[i][j];
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] + ((Matrix) other).value[i][j];
 
                 }
             }
             return new Matrix(res);
+        } else if (other instanceof Vector) {
+            return super.mul(other);
         }
-        else return super.mul(other);
+        return super.mul(other);
     }
 
     @Override
     public Var sub(Var other) {
-        return super.sub(other);
+        if (other instanceof Scalar) {
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+
+            }
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] - ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        }
+        else if (other instanceof Matrix) {
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] - ((Matrix) other).value[i][j];
+                }
+            }
+            return new Matrix(res);
+        } else return super.sub(other);
     }
 
     @Override
     public Var mul(Var other) {
-        return super.mul(other);
+        if (other instanceof Scalar) {
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+
+            }
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] * ((Scalar) other).getValue();
+                }
+            }
+
+            return new Matrix(res);
+        } else if (other instanceof Vector) {
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            double vector[] = ((Vector) other).getValue();
+            double[] matrixSize = new double[res.length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < vector.length; j++) {
+                    matrixSize[i] += res[i][j] * vector[j];
+                }
+            }
+            return new Vector(matrixSize);
+        } else  {
+            double[][] res = new double[value.length][0];
+            double[][] last = new double[res.length][((Matrix) other).value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
+                    for (int k = 0; k <((Matrix) other).value.length; k++) {
+                        last[i][j] += res[i][k] * ((Matrix) other).value[k][j];
+                    }
+                }
+            }
+            return new Matrix (last);
+        }
     }
 
     @Override
@@ -45,10 +121,13 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
         return super.div(other);
     }
 
-    Matrix(double[][] value) {
-        this.value = value;
+    public Matrix(double[][] value) {
+        this.value = new double[value.length][0];
+        for (int i = 0; i < value.length; i++) {
+            this.value[i] = Arrays.copyOf(value[i], value[i].length);
+        }
     }
-    Matrix(Matrix matrix){
+    public Matrix(Matrix matrix){
         this.value= matrix.value;
     }
     Matrix(String strMatrix){
@@ -81,7 +160,7 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
     @Override
     public String toString() {
         StringBuilder sb2=new StringBuilder("{");
-        String delim2 = " ";
+        String delim2 = "";
         int j = 0;
         for (int i = 0; i <value.length; i++) {
             sb2.append(delim2).append("{");
@@ -90,13 +169,12 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
                 sb2.append(delim2).append(elem);
                 delim2 = ", ";
             }
-            if(value[0][i]<(value.length)){
-                delim2=",";
-                sb2.append(" }").append(delim2);
-                delim2=" ";
+            if(i < (value.length-1)){
+                sb2.append("}").append(delim2);
+                delim2="";
             }
             else {
-                sb2.append(" } }");
+                sb2.append("}}");
             }
 
 
@@ -105,6 +183,16 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
         return sb2.toString();
     }
 }
+
+
+
+
+
+
+
+
+
+
 //  StringBuilder sb=new StringBuilder("{");
 //        String delim = "";
 //        for(double element:value){

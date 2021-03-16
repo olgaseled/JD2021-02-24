@@ -5,6 +5,10 @@ import java.util.Arrays;
 class Vector extends Var {
     private double[ ] value;
 
+    public double[] getValue() {
+        return value;
+    }
+
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
@@ -17,7 +21,7 @@ class Vector extends Var {
         else if(other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] + ((Vector) other).value[i];
+                res[i] += ((Vector) other).value[i];
             }
             return new Vector(res);
         }
@@ -41,7 +45,6 @@ class Vector extends Var {
         }
         else return super.add(other);
     }
-
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
@@ -55,16 +58,12 @@ class Vector extends Var {
             double[] res = Arrays.copyOf(value, value.length);
             double mul =0;
             for (int i = 0; i < res.length; i++) {
-                    res[i] = res[i] * ((Vector) other).value[i];
-                     mul += res[i];
-
+                mul += res[i] * ((Vector) other).value[i];
             }
             return new Scalar(mul);
         }
         else return super.mul(other);
     }
-
-
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar) {
