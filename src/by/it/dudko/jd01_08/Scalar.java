@@ -16,8 +16,8 @@ public class Scalar extends Var {
         this.value = Double.parseDouble(strValue);
     }
 
-    Scalar(Scalar scalar) {
-        this.value = scalar.value;
+    Scalar(Scalar otherScalar) {
+        this.value = otherScalar.getValue();
     }
 
     @Override
@@ -26,7 +26,39 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var add(Scalar other) {
-        return super.add(other);
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            return new Scalar(this.value + ((Scalar) other).value);
+        }
+        return other.add(this);
     }
+
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            return new Scalar(this.value - ((Scalar) other).value);
+        }
+        return other.add(this).mul(new Scalar(-1));
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            return new Scalar(this.value * ((Scalar) other).value);
+        }
+        return other.mul(this);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).value;
+            if (secondScalar==0){
+                return null; //TODO div by zero
+            }
+            return new Scalar(this.value / secondScalar);
+        }
+        return super.div(other);
+    }
+
 }

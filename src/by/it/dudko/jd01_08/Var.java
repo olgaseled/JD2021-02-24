@@ -12,10 +12,6 @@ abstract class Var implements Operation {
         return null; //TODO replace throw exception
     }
 
-    public Var add(Scalar other) {
-
-    }
-
     @Override
     public Var sub(Var other) {
         System.out.printf("Operation %s - %s is not possible\n", this, other);
