@@ -97,6 +97,24 @@ class Vector extends Var {
     }
 
     @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            if (secondScalar == 0) {
+                return null;//TODO div by zero
+            }
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] /= secondScalar;
+            }
+            return new Vector(resultVector);
+        }
+
+        return super.div(other);
+    }
+
+
+    @Override
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         for (Double element : value) {
