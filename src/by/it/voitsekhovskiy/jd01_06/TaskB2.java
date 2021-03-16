@@ -10,9 +10,9 @@ public class TaskB2 {
         StringBuilder sb = new StringBuilder(Poem.text);
         Pattern pattern = Pattern.compile("\\.{3}");
         Matcher matcher = pattern.matcher(Poem.text);
-        while(matcher.find()) {
+        while (matcher.find()) {
             int start = matcher.start();
-            sb.delete(start, start+3);
+            sb.delete(start, start + 3);
         }
         return sb;
     }
@@ -28,7 +28,7 @@ public class TaskB2 {
         for (int i = 0; i < arrayOfSentence.length; i++) {
             StringBuilder sb = new StringBuilder(arrayOfSentence[i]);
             Matcher matcher = pattern.matcher(arrayOfSentence[i]);
-            while(matcher.find()) {
+            while (matcher.find()) {
                 sb.setCharAt(matcher.start(), ' ');
                 arrayOfSentence[i] = sb.toString().trim().replaceAll("\\s{2,}", " ");
             }
@@ -43,7 +43,7 @@ public class TaskB2 {
             for (int i = 0; i < arr.length - 1; i++) {
                 if (arr[i].length() > arr[i + 1].length()) {
                     String buffer = arr[i];
-                    arr[i] = arr[i+1];
+                    arr[i] = arr[i + 1];
                     arr[i + 1] = buffer;
                     swap = true;
                 }
@@ -64,53 +64,4 @@ public class TaskB2 {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static void main(String[] args) {
-//        StringBuilder sb = new StringBuilder(Poem.text);
-//        Pattern patternDeleteLine = Pattern.compile("\\n");
-//        Matcher matcher = patternDeleteLine.matcher(Poem.text);
-//        while (matcher.find()) {
-//            int start = matcher.start();
-//            sb.setCharAt(start, ' ');
-//        }
-//
-//        Pattern findSentences = Pattern.compile("[.!?]");
-//        String[] arrOfSentences = findSentences.split(sb);
-//        Pattern changeSpecChar = Pattern.compile("\\p{Punct}");
-//
-//        for (int i = 0; i < arrOfSentences.length; i++) {
-//            Matcher matcher1 = changeSpecChar.matcher(arrOfSentences[i]);
-//            while (matcher.find()) {
-//                int start = matcher.start();
-//                arrOfSentences[i] = arrOfSentences[i];
-//            }
-//        }
-
-
-//        Pattern pattern = Pattern.compile("\\p{Punct}");
-//        Matcher matcher = pattern.matcher(Poem.text);
-//        while (matcher.find()) {
-//            int start = matcher.start();
-//            sb.setCharAt(start, ' ');
-//        }
-//        System.out.println(sb);
-    }
-
+}
