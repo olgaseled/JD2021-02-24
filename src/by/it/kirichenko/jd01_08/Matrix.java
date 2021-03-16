@@ -17,21 +17,89 @@ public class Matrix extends Var {
         this.value = otherMatrix.value;
     }
 
-    Matrix(String doubleStringArray) {
-        String stringWithoutSpace = doubleStringArray.replaceAll(" ", "");
-        String[] tempArrayString = stringWithoutSpace.split("},\\{");
-        String[] tempArrayAfterSplit = new String[tempArrayString.length];
-        for (int i = 0; i < tempArrayString.length; i++) {
-            tempArrayAfterSplit[i] = tempArrayAfterSplit[i] + tempArrayString[i].replaceAll("[{}]", "").replaceAll(",\"", " ").split(" ");
+    public Matrix(String otherMatrix) {
+        String[] arrayRows = otherMatrix.split("},");
+        int rowCount = arrayRows.length;
+        int colCount = arrayRows[0].split(",").length;
+        double[][] matrix = new double[rowCount][colCount];
+
+        for (int i = 0; i < arrayRows.length; i++) {
+            arrayRows[i] = arrayRows[i].replaceAll("[{}]", "");
         }
-        int countElementsInTempArray = 0;
-        double[][] resultDoubleArray = new double[tempArrayString.length][tempArrayString.length];
-        for (int i = 0; i < resultDoubleArray.length; i++) {
-            for (int j = 0; j < resultDoubleArray.length; j++) {
-                resultDoubleArray[i][j] = Double.parseDouble(tempArrayAfterSplit[countElementsInTempArray++]);
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            String[] arrayCols = arrayRows[i].split(",");
+            for (int j = 0; j < arrayCols.length; j++) {
+                matrix[i][j] = Double.parseDouble(arrayCols[j]);
             }
         }
-        value = resultDoubleArray;
+        this.value = matrix;
+    }
+
+    @Override
+    public Var add(Var otherMartix) {
+        if (otherMartix instanceof Scalar) {
+            double secondScalar = ((Scalar) otherMartix).getValue();
+            double[][] resultMatrix = copyMatrix(value);
+            int numberRows = resultMatrix.length;
+            int numberColumns = resultMatrix[0].length;
+            for (int row = 0; row < numberRows; row++) {
+                for (int column = 0; column < numberColumns; column++) {
+                    resultMatrix[row][column]+=secondScalar;
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        if (otherMartix instanceof Vector){
+            return null; //TODO не возможная операция мартица + верктор
+        }
+        if (otherMartix instanceof Matrix){
+
+            double[][] secondMatrix = copyMatrix(((Matrix) otherMartix).value);
+            double[][] resultMatrix = copyMatrix(value);
+            int numberRows = resultMatrix.length;
+            int numberColumns = resultMatrix[0].length;
+            for (int row = 0; row < numberRows; row++) {
+                for (int column = 0; column < numberColumns; column++) {
+                    resultMatrix[row][column]+=secondMatrix[row][column];
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        return super.add(otherMartix);
+    }
+
+    @Override
+    public Var sub(Var otherMartix) {
+        if (otherMartix instanceof Scalar) {
+            double secondScalar = ((Scalar) otherMartix).getValue();
+            double[][] resultMatrix = copyMatrix(value);
+            int numberRows = resultMatrix.length;
+            int numberColumns = resultMatrix[0].length;
+            for (int row = 0; row < numberRows; row++) {
+                for (int column = 0; column < numberColumns; column++) {
+                    resultMatrix[row][column]-=secondScalar;
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        if (otherMartix instanceof Vector){
+            return null; //TODO не возможная операция мартица + верктор
+        }
+        if (otherMartix instanceof Matrix){
+
+            double[][] secondMatrix = copyMatrix(((Matrix) otherMartix).value);
+            double[][] resultMatrix = copyMatrix(value);
+            int numberRows = resultMatrix.length;
+            int numberColumns = resultMatrix[0].length;
+            for (int row = 0; row < numberRows; row++) {
+                for (int column = 0; column < numberColumns; column++) {
+                    resultMatrix[row][column]-=secondMatrix[row][column];
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        return super.add(otherMartix);
     }
 
     @Override
@@ -56,5 +124,13 @@ public class Matrix extends Var {
         }
 
         return stringJoinerAll.toString();
+    }
+
+    public double[][] copyMatrix(double[][] src) {
+        double[][] dst = new double[src.length][];
+        for (int i = 0; i < src.length; i++) {
+            dst[i] = Arrays.copyOf(src[i], src[i].length);
+        }
+        return dst;
     }
 }

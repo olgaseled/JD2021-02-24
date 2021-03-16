@@ -84,7 +84,7 @@ public class Vector extends Var {
         }
 
         if (other instanceof Vector) {
-            double[] secondVector = ((Vector) other).value;
+            double[] secondVector = Arrays.copyOf(((Vector) other).value,((Vector) other).value.length);
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] *= secondVector[i];
@@ -96,6 +96,25 @@ public class Vector extends Var {
             return new Scalar(result);
         }
         return super.add(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if(other instanceof Scalar){
+            double secondScalar = ((Scalar) other).getValue();
+            if (secondScalar==0){
+                return null; //TODO div by zero
+            }
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] /= secondScalar;
+            }
+            return new Vector(resultVector);
+        }
+        if (other instanceof Vector){
+            return null; //TODO не возможная операция вектор / вектор
+        }
+        return super.div(other);
     }
 
     @Override
