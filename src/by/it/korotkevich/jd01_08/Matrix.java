@@ -1,6 +1,4 @@
-package by.it.korotkevich.jd01_07;
-
-import java.util.StringJoiner;
+package by.it.korotkevich.jd01_08;
 
 class Matrix extends Var {
     private final double[][] value;

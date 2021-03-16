@@ -7,30 +7,6 @@ public class Vector extends Var {
 
     private final double[] value;
 
-    @Override
-    public Var add(Var other) {
-        if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
-            double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] = secondScalar;
-            }
-            return new Vector(resultVector);
-        }
-        return super.add(other);
-
-
-        //if (other instanceof Vector) {
-        //    double secondVector = ((Vector) other).getValue();
-        //   double[] resultVector = Arrays.copyOf(value, value.length);
-        //    for (int i = 0; i < resultVector.length; i++) {
-        //        resultVector[i] = secondScalar;
-        //    }
-        //    return new Vector(resultVector);
-        //}
-        //return super.add(other);
-    }
-
     Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
     }
@@ -46,6 +22,27 @@ public class Vector extends Var {
             result[i] = Double.parseDouble(trimmedString[i]);
         }
         this.value = result;
+    }
+
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] += secondScalar;
+            }
+            return new Vector(resultVector);
+        }
+        if (other instanceof Vector) {
+            double[] secondVector = ((Vector) other).value;
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] += secondVector[i];
+            }
+            return new Vector(resultVector);
+        }
+        return super.add(other);
     }
 
     @Override
