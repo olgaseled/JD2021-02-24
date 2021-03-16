@@ -52,12 +52,12 @@ public class Matrix extends Var {
             }
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
-                    resultMatrix[i][j]+=((Scalar) other).getValue();
+                    resultMatrix[i][j] += ((Scalar) other).getValue();
                 }
             }
             return new Matrix(resultMatrix);
         }
-        if(other instanceof Matrix){
+        if (other instanceof Matrix) {
             double[][] resultMatrix = new double[value.length][value[0].length];
             for (int i = 0; i < value.length; i++) {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
@@ -66,7 +66,7 @@ public class Matrix extends Var {
             double[][] secondMatrix = ((Matrix) other).value;
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
-                    resultMatrix[i][j]+=secondMatrix[i][j];
+                    resultMatrix[i][j] += secondMatrix[i][j];
                 }
             }
             return new Matrix(resultMatrix);
@@ -75,6 +75,36 @@ public class Matrix extends Var {
         return super.add(other);
     }
 
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double[][] resultMatrix = new double[value.length][value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultMatrix[i][j] -= ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        if (other instanceof Matrix) {
+            double[][] resultMatrix = new double[value.length][value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
+            }
+            double[][] secondMatrix = ((Matrix) other).value;
+            //TODO добавить условие
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix[i].length; j++) {
+                    resultMatrix[i][j] -= secondMatrix[i][j];
+                }
+            }
+            return new Matrix(resultMatrix);
+        }
+        return super.sub(other);
+    }
 
     @Override
     public String toString() {
