@@ -14,13 +14,11 @@ public class Runner {
         System.out.println(vect1);
         Vector vect2=new Vector(new double[]{1,2,3,4,5});
         System.out.println(vect2);
-        Var vect3=new Vector("");
+        Var vect3=new Vector(vect2);
         System.out.println(vect3);
         //Matrix
         Var matrix1=new Matrix(new double[][]{{1,2},{3,4}});
         System.out.println(matrix1);
-        Var matrix2=new Matrix("{0, 0},{0, 0}");
-        System.out.println(matrix2);
 
     }
 

@@ -12,7 +12,14 @@ class Vector extends Var{
         }
 
         Vector (String str) {
-            value=new double[] {1, 2, 4}; //Не уверен что правильно, вроде как я присваиваю значение массиву
+           String[] strArray= str.trim().replaceAll("\\s+", "")
+                   .replace("{", "")
+                   .replace("}", "")
+                   .split(",");
+           value = new double[strArray.length];
+            for (int i = 0; i < value.length; i++) {
+                value[i]=Double.parseDouble(strArray[i]);
+            }
 
         }
 

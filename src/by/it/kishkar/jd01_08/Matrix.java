@@ -1,16 +1,18 @@
-package by.it.kishkar.jd01_07;
+package by.it.kishkar.jd01_08;
+
+import by.it.kishkar.jd01_07.Var;
 
 class Matrix extends Var {
 
     private double[][] value;
 
-    Matrix (double[][] value) {
+    Matrix(double[][] value) {
 
         this.value=value;
     }
 
 
-    Matrix (Matrix matrix) {
+    Matrix(Matrix matrix) {
         this.value= matrix.value;
 
     }
