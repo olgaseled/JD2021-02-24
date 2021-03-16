@@ -2,7 +2,7 @@ package by.it.dudko.jd01_07;
 
 import java.util.StringJoiner;
 
-public class Utils {
+class Utils {
     static String trimBraces(String strMatrix) {
         return strMatrix.trim().replace(" ", "").replaceAll("(^\\{)|(}$)", "");
     }
