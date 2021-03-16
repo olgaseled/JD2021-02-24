@@ -75,6 +75,36 @@ public class  Matrix extends Var {
         }
         return other.sub(this);
     }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res.length; j++) {
+                    res[i][j] = res[i][j] * ((Scalar) other).getValue(); // к каждому элементу этого массива добавим скаляр и добавили геттер для велью
+                }
+            }
+            return new Matrix(res);
+        } else if (other instanceof Matrix) {
+
+            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length); // если к матрице прибавляется тоже матрицу
+            double[][] matrix2 = getArrayValues();
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < matrix2[0].length; j++) {
+                    for (int k = 0; k < matrix2.length; k++) {
+                 res[i][j] += res[i][k]*matrix2[k][j];
+                        }
+                }
+            }
+
+            return new Matrix(res);
+        }
+        return super.mul(other);
+    }
+
+
+
 }
 
 
