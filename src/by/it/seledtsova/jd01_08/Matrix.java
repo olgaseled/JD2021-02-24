@@ -38,15 +38,20 @@ public class  Matrix extends Var {
     @Override
         public Var add(Var other) {
             if (other instanceof Scalar) {
-                double second=((Scalar)other).getValue();
+                double second = ((Scalar) other).getValue();
                 double[][] res = new double[arrayValues.length][0];
                 for (int i = 0; i < res.length; i++) {
-                    for (int j = 0; j < res.length; j++) {
-                        res[i][j] = res[i][j] + ((Scalar) other).getValue(); // к каждому элементу этого массива добавим скаляр и добавили геттер для велью
+                   res[i] = Arrays.copyOf(arrayValues[i], arrayValues[i].length);
                     }
+                    for (int i = 0; i < res.length; i++) {
+                        for (int j = 0; j < res.length; j++) {
+                            res[i][j] = res[i][j] + second;
+                        }
+                    }
+                    return new Matrix(res);
                 }
-                return new Matrix(res);
-            } else if (other instanceof Matrix) {
+
+                else if (other instanceof Matrix) {
                 double[][] second = ((Matrix) other).getValue();
                 double[][] res= new double[arrayValues.length][0];
                 for (int i = 0; i < second.length; i++) {
