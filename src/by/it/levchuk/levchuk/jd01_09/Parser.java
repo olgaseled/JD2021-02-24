@@ -1,18 +1,27 @@
 package by.it.levchuk.levchuk.jd01_09;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
 
-    Var evalued(String expression){
-        expression = expression.replaceAll("\\s+","");
-        String[] parts = expression.split(Patterns.OPERATION, 2);
-        Var leftVar=VarCreator.buld(parts[0]);
-        if (parts.length<2){
-            return leftVar;
+    Var calc(String expression){
+        String[] operand=expression.split(Patterns.OPERATION);
+        Var one=Var.createVar(operand[0]);
+        Var two=Var.createVar(operand[1]);
+        if (one==null||two==null)
+            return null;
+        Pattern p=Pattern.compile(Patterns.OPERATION);
+        Matcher m= p.matcher(expression);
+        if (m.find()){
+            String opertion=m.group();
+            switch (opertion){
+                case "+":return one.add(two);
+                case "-":return one.sub(two);
+                case "*":return one.mul(two);
+                case "/":return one.div(two);
+            }
         }
-        Var rightVar = VarCreator.buld(parts[1]);
-       // Pattern patternOperation=Pattern.compile()
-
-                return null;
-
+        return null;
     }
 }
