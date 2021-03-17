@@ -148,4 +148,21 @@ public class Matrix extends Var {
         }
         return other.mul(this);
     }
+
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double secondOperator = ((Scalar) other).getValue();
+            if (secondOperator != 0) {
+                double[][] resultArray = Arrays.copyOf(valuesDoubleArray, valuesDoubleArray.length);
+                for (int i = 0; i < resultArray.length; i++) {
+                    for (int j = 0; j < resultArray.length; j++) {
+                        resultArray[i][j] /= secondOperator;
+                    }
+                }
+                return new Matrix(resultArray);
+            }
+        }
+        return super.div(other);
+    }
 }

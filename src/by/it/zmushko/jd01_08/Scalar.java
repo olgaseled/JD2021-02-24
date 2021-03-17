@@ -53,7 +53,7 @@ public class Scalar extends Var {
             }
             return new Scalar(this.value / ((Scalar) other).value);
         }
-        return super.div(other);
+        return other.div(this);
     }
 
     @Override
