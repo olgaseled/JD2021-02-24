@@ -18,6 +18,8 @@ public class Matrix extends Var {
 
     @Override
     public String toString() {
-        return "Matrix";
+        return Arrays.deepToString(value)
+                .replace('[', '{')
+                .replace(']', '}');
     }
 }
