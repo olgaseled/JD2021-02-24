@@ -8,7 +8,9 @@ class Runner {
         Var v4 = new Vector("1,2,4");
         Var v5 = new Matrix("{1,2},{3,4}");
         Var v6 = new Matrix(new double[][]{{1,2},{3,4}});
+        Matrix matrix = new Matrix(new double[][]{{1,2},{3,4}});
+        Var v7 = new Matrix(matrix);
 
-        System.out.print(v1+"\n"+v2+"\n"+v3+"\n"+v4+"\n"+v5+"\n"+v6);
+        System.out.print(v1+"\n"+v2+"\n"+v3+"\n"+v4+"\n"+v5+"\n"+v6+"\n"+v7);
     }
 }

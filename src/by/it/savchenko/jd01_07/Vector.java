@@ -31,7 +31,6 @@ class Vector extends Var {
         //заполнить value вектора
     }
 
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
@@ -39,7 +38,6 @@ class Vector extends Var {
         for (double element : value) {
             sb.append(delimiter).append(element);
             delimiter = ", ";
-
         }
         sb.append("}");
         return sb.toString();
