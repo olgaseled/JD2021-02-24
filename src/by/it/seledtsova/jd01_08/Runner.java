@@ -2,7 +2,7 @@ package by.it.seledtsova.jd01_08;
 
 public class Runner {
     private static void print(Var var) {
-  //  if (Object.nonNull(var)) {
+  //  if (Objects.nonNull(var)) {
             System.out.println(var);
        }
   //  }
