@@ -103,58 +103,49 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
-        if (other instanceof Scalar) {
-            double[][] res = new double[value.length][0];
-            for (int i = 0; i < res.length; i++) {
-                res[i] = Arrays.copyOf(value[i], value[i].length);
-
-            }
-
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[0].length; j++) {
-                    res[i][j] = res[i][j] * ((Scalar) other).getValue();
+    public Var mul(Var otherMartix) {
+        if (otherMartix instanceof Scalar) {
+            double secondScalar = ((Scalar) otherMartix).getValue();
+            double[][] resultMatrix = copyMatrix(value);
+            int numberRows = resultMatrix.length;
+            int numberColumns = resultMatrix[0].length;
+            for (int row = 0; row < numberRows; row++) {
+                for (int column = 0; column < numberColumns; column++) {
+                    resultMatrix[row][column]*=secondScalar;
                 }
             }
-
-            return new Matrix(res);
+            return new Matrix(resultMatrix);
         }
-        else if (other instanceof Vector) {
-            if(value[0].length ==((Vector) other).getValue().length || value.length==((Vector) other).getValue().length) {
-                double[][] res = new double[value.length][0];
-                for (int i = 0; i < res.length; i++) {
-                    res[i] = Arrays.copyOf(value[i], value[i].length);
-                }
-                double vector[] = ((Vector) other).getValue();
-                double[] matrixSize = new double[res.length];
-                for (int i = 0; i < res.length; i++) {
+        if (otherMartix instanceof Vector) {
+            if(value[0].length ==((Vector) otherMartix).getValue().length || value.length==((Vector) otherMartix).getValue().length) {
+                double[][] resultMatrix = copyMatrix(value);
+                double vector[] = ((Vector) otherMartix).getValue();
+                double[] matrixSize = new double[resultMatrix.length];
+                for (int i = 0; i < resultMatrix.length; i++) {
                     for (int j = 0; j < vector.length; j++) {
-                        matrixSize[i] += res[i][j] * vector[j];
+                        matrixSize[i] += resultMatrix[i][j] * vector[j];
                     }
                 }
                 return new Vector(matrixSize);
             }
-            else return super.mul(other);
+            else return super.mul(otherMartix);
         }
-        else if(other instanceof Matrix) {
-            if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
-                double[][] res = new double[value.length][0];
-                double[][] last = new double[res.length][((Matrix) other).value[0].length];
-                for (int i = 0; i < res.length; i++) {
-                    res[i] = Arrays.copyOf(value[i], value[i].length);
-                }
-                for (int i = 0; i < res.length; i++) {
-                    for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
-                        for (int k = 0; k < ((Matrix) other).value.length; k++) {
-                            last[i][j] += res[i][k] * ((Matrix) other).value[k][j];
+        if(otherMartix instanceof Matrix) {
+            if(value.length == ((Matrix) otherMartix).value.length && value[0].length== ((Matrix) otherMartix).value[0].length) {
+                double[][] tmpMatrix = copyMatrix(value);
+                double[][] resultMatrix = new double[tmpMatrix.length][((Matrix) otherMartix).value[0].length];
+                for (int i = 0; i < tmpMatrix.length; i++) {
+                    for (int j = 0; j < ((Matrix) otherMartix).value[0].length; j++) {
+                        for (int k = 0; k < ((Matrix) otherMartix).value.length; k++) {
+                            resultMatrix[i][j] += tmpMatrix[i][k] * ((Matrix) otherMartix).value[k][j];
                         }
                     }
                 }
-                return new Matrix(last);
+                return new Matrix(resultMatrix);
             }
-            else return super.mul(other);
+            else return super.mul(otherMartix);
         }
-        else return super.mul(other);
+        return super.mul(otherMartix);
     }
 
     @Override
