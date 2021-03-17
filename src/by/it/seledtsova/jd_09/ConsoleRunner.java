@@ -3,6 +3,7 @@ package by.it.seledtsova.jd_09;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+    /*
     public static void main(String[] args) {
         Printer printer=new Printer();
         Parser parser=new Parser();
@@ -19,4 +20,6 @@ public class ConsoleRunner {
         Var var=VarCreator.build("{123,-45.6}");
         printer.print (var);
     }
+
+     */
 }

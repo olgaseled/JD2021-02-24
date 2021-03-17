@@ -31,6 +31,11 @@ public class Vector extends Var {
         return sb.toString();
     }
 
+    @Override
+    protected double[] getValues() {
+        return new double[0];
+    }
+
     public Vector(String stringValue) {
         String[] arrayString = stringValue.replaceAll("[{} ]+", "").trim().split(",");
         double[] result = new double[arrayString.length];

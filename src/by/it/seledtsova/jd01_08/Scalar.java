@@ -66,4 +66,9 @@ public class Scalar extends Var {  // мы создали двух потомк�
         return Double.toString(value); // вызовем в класе doodle метод toString наше значение value
     }
 
+    @Override
+    protected double[] getValues() {
+        return new double[0];
+    }
+
 }
