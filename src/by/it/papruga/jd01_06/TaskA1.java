@@ -7,12 +7,19 @@ public class TaskA1 {
 
     public static void main(String[] args) {
 
+
+        StringBuilder sb = new StringBuilder(Poem.text);
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]{4,}");
-        StringBuilder builder = new StringBuilder(Poem.text);
-
-        System.out.println(Poem.text);
-
-
+        Matcher matcher = pattern.matcher(Poem.text);
+        while (matcher.find ()){
+            int start = matcher.start();
+            sb.setCharAt(start+3, '#');
+            if (matcher.group().length()>=7)
+            {
+                sb.setCharAt(start+6, '#');
+            }
+        }
+        System.out.println(sb);
 
     }
 
