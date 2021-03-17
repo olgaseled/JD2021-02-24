@@ -71,11 +71,11 @@ public class Vector extends Var {
             if (secondVector.length != this.getValue().length) {
                 return null; //TODO incompatible vectors
             }
-            double[] sum = new double[secondVector.length];
-            for (int i = 0; i < sum.length; i++) {
-                sum[i] = this.value[i] - secondVector[i];
+            double[] subtraction = new double[secondVector.length];
+            for (int i = 0; i < subtraction.length; i++) {
+                subtraction[i] = this.value[i] - secondVector[i];
             }
-            return new Vector(sum);
+            return new Vector(subtraction);
         }
         return other.sub(this);
     }
