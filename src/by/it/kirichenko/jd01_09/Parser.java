@@ -21,11 +21,11 @@ class Parser {
                 case "+":
                     return leftVar.add(rightVar);
                 case "-":
-                    return leftVar.add(rightVar);
+                    return leftVar.sub(rightVar);
                 case "*":
-                    return leftVar.add(rightVar);
+                    return leftVar.mul(rightVar);
                 case "/":
-                    return leftVar.add(rightVar);
+                    return leftVar.div(rightVar);
             }
         }
 

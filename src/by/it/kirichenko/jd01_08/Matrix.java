@@ -103,6 +103,61 @@ public class Matrix extends Var {
     }
 
     @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double[][] res = new double[value.length][0];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = Arrays.copyOf(value[i], value[i].length);
+
+            }
+
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[0].length; j++) {
+                    res[i][j] = res[i][j] * ((Scalar) other).getValue();
+                }
+            }
+
+            return new Matrix(res);
+        }
+        else if (other instanceof Vector) {
+            if(value[0].length ==((Vector) other).getValue().length || value.length==((Vector) other).getValue().length) {
+                double[][] res = new double[value.length][0];
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = Arrays.copyOf(value[i], value[i].length);
+                }
+                double vector[] = ((Vector) other).getValue();
+                double[] matrixSize = new double[res.length];
+                for (int i = 0; i < res.length; i++) {
+                    for (int j = 0; j < vector.length; j++) {
+                        matrixSize[i] += res[i][j] * vector[j];
+                    }
+                }
+                return new Vector(matrixSize);
+            }
+            else return super.mul(other);
+        }
+        else if(other instanceof Matrix) {
+            if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
+                double[][] res = new double[value.length][0];
+                double[][] last = new double[res.length][((Matrix) other).value[0].length];
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = Arrays.copyOf(value[i], value[i].length);
+                }
+                for (int i = 0; i < res.length; i++) {
+                    for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
+                        for (int k = 0; k < ((Matrix) other).value.length; k++) {
+                            last[i][j] += res[i][k] * ((Matrix) other).value[k][j];
+                        }
+                    }
+                }
+                return new Matrix(last);
+            }
+            else return super.mul(other);
+        }
+        else return super.mul(other);
+    }
+
+    @Override
     public String toString() {
         int numberRows = value.length;
         int numberColumns = value[0].length;
