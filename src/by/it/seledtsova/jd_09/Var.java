@@ -46,9 +46,9 @@ static Var createVar (String operand) { // принимает не вход ст
     if (operand.matches(Patterns.SCALAR)) //оперант сообветствует регул выраж скаляра.то вернется новый скаляр в контсруктор
         return new Scalar(operand);
     if (operand.matches(Patterns.VECTOR))
-        return new Scalar(operand);
+        return new Vector (operand);
     if (operand.matches(Patterns.MATRIX))
-        return new Scalar(operand);
+        return new Matrix(operand);
     return null; // если не один из if не сработает , вернется null
 }
 
