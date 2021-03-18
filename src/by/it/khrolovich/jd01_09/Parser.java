@@ -4,10 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    @SuppressWarnings("ConstantConditions")
     Var evaluate(String expression)
     {
         expression = expression.replaceAll("\\s+","");//ту да же положим, теперь переменная на новое значение указывает
         String[] parts = expression.split(Patterns.OPERATION,2);//пока только две части
+        //можно так
+        /*Pattern p = Pattern.compile(Patterns.OPERATION);
+        String[] parts1 = p.split(p.toString());*/
         Var leftVar  = VarCreator.build(parts[0]);
         if(parts.length<2){
             return leftVar;
