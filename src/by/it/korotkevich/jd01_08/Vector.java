@@ -37,6 +37,9 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
+            if (secondVector.length != resultVector.length) {
+                return super.add(other);
+            }
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] += secondVector[i];
             }
@@ -58,6 +61,9 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
+            if (secondVector.length != resultVector.length) {
+                return super.add(other);
+            }
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] -= secondVector[i];
             }
@@ -81,6 +87,9 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] arrayOfNumbers = Arrays.copyOf(value, value.length);
+            if (secondVector.length != arrayOfNumbers.length) {
+                return super.add(other);
+            }
             for (int i = 0; i < arrayOfNumbers.length; i++) {
                 double firstNumber = arrayOfNumbers[i];
                 double secondNumber = secondVector[i];
@@ -99,6 +108,9 @@ public class Vector extends Var {
     public Var div(Var other) {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
+            if (secondScalar==0) {
+                return super.div(other);
+            }
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] /= secondScalar;
@@ -117,5 +129,9 @@ public class Vector extends Var {
         }
 
         return stringJoiner.toString();
+    }
+
+    public double[] getValue() {
+        return value;
     }
 }
