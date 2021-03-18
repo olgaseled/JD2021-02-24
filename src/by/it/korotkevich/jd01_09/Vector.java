@@ -73,7 +73,6 @@ public class Vector extends Var {
     }
 
 
-
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
@@ -108,7 +107,7 @@ public class Vector extends Var {
     public Var div(Var other) {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
-            if (secondScalar==0) {
+            if (secondScalar == 0) {
                 return super.div(other);
             }
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -129,5 +128,9 @@ public class Vector extends Var {
         }
 
         return stringJoiner.toString();
+    }
+
+    public double[] getValue() {
+        return value;
     }
 }
