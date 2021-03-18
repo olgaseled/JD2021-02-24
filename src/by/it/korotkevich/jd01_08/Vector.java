@@ -46,6 +46,70 @@ public class Vector extends Var {
     }
 
     @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] -= secondScalar;
+            }
+            return new Vector(resultVector);
+        }
+        if (other instanceof Vector) {
+            double[] secondVector = ((Vector) other).value;
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] -= secondVector[i];
+            }
+            return new Vector(resultVector);
+        }
+        return super.sub(other);
+    }
+
+
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] *= secondScalar;
+            }
+            return new Vector(resultVector);
+        }
+        if (other instanceof Vector) {
+            double[] secondVector = ((Vector) other).value;
+            double[] arrayOfNumbers = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < arrayOfNumbers.length; i++) {
+                double firstNumber = arrayOfNumbers[i];
+                double secondNumber = secondVector[i];
+                arrayOfNumbers[i] = firstNumber * secondNumber;
+            }
+            double result = 0;
+            for (double arrayOfNumber : arrayOfNumbers) {
+                result += arrayOfNumber;
+            }
+            return new Scalar(result);
+        }
+        return super.add(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] /= secondScalar;
+            }
+            return new Vector(resultVector);
+        } else {
+            return super.div(other);
+        }
+    }
+
+    @Override
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         for (Double v : value) {
