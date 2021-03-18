@@ -1,6 +1,6 @@
-package by.it._classwork_.jd01_09;
+package by.it.savchenko.jd01_09;
 
-class Scalar extends Var {
+class Scalar extends by.it.savchenko.jd01_09.Var {
 
     private final double value;
 
@@ -9,7 +9,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public by.it.savchenko.jd01_09.Var add(by.it.savchenko.jd01_09.Var other) {
         if (other instanceof Scalar) {
             return new Scalar(this.value + ((Scalar) other).value);
         }
@@ -17,7 +17,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public by.it.savchenko.jd01_09.Var sub(by.it.savchenko.jd01_09.Var other) {
         if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
         }
@@ -25,7 +25,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public by.it.savchenko.jd01_09.Var mul(by.it.savchenko.jd01_09.Var other) {
         if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
         }
@@ -33,11 +33,11 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public by.it.savchenko.jd01_09.Var div(by.it.savchenko.jd01_09.Var other) {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).value;
             if (secondScalar==0){
-                return null; //TODO div by zero
+                return null; //TODO div Scalar by zero
             }
             return new Scalar(this.value / secondScalar);
         }
