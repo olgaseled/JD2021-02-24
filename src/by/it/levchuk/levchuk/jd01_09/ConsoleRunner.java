@@ -8,8 +8,8 @@ public class ConsoleRunner {
         String line;
 
         Parser parser = new Parser();
-        Printer printer = new Printer();
 
+        Printer printer = new Printer();
         while (!(line = scanner.nextLine()).equals("end")) {
             Var result = parser.calc(line);
             printer.print(result);
