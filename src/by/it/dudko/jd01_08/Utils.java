@@ -1,5 +1,6 @@
-package by.it.dudko.jd01_07;
+package by.it.dudko.jd01_08;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 class Utils {
@@ -7,11 +8,9 @@ class Utils {
         return strMatrix.trim().replace(" ", "").replaceAll("(^\\{)|(}$)", "");
     }
 
-
     static String[] splitToMatrixRows(String strMatrix) {
         return strMatrix.split("},\\{");
     }
-
 
     static String[] splitToRowItems(String strRow) {
         return strRow.split("\\s*,\\s*");
@@ -23,5 +22,13 @@ class Utils {
             stringJoiner.add(item.toString());
         }
         return stringJoiner.toString();
+    }
+
+    static double[][] copyMatrix(double[][] inMatrix) {
+        double[][] copyMatrix = new double[inMatrix.length][0];
+        for (int i = 0; i < inMatrix.length; i++) {
+            copyMatrix[i] = Arrays.copyOf(inMatrix[i], inMatrix[i].length);
+        }
+        return copyMatrix;
     }
 }
