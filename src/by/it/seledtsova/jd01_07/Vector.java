@@ -4,11 +4,11 @@ import java.util.StringJoiner;
 
 public class Vector extends Var {
 
-    private final double[] value;
+    private final double[] value;  // приватное поле под вектор
 
     Vector(double[] value) { // 1 конструктор на вход принимает некоторый массив
         this.value = value;
-    }
+    } //конструктор на вход принемает некоторый массив
 
     Vector(Vector stringVector) {
         this.value = stringVector.value;
@@ -22,7 +22,7 @@ public class Vector extends Var {
         for (double element:value) {          // переберем все элементы в массиве  value
             sb.append(delimiter).append(element); // будем печатать сразу разделитель , а за ним элемент
             delimiter = ", ";               // после первого числа разделитель заменим на запятую  и пробел
-        }                                   // в итоге все след элементу будут размедять запятой с пробелом
+        }                                   // в итоге все след элементу будут разделять запятой с пробелом
         sb.append("}");
         return sb.toString();
     }
@@ -37,7 +37,8 @@ public class Vector extends Var {
 
     }
 }
-
+//Метод parseDouble() используется для инициализации STRING (который должен содержать некоторое числовое значение)
+// возвращаемое значение имеет тип примитивных данных, например int, float и т.д.
 
 
 
