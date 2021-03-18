@@ -7,7 +7,7 @@ public class  Matrix extends Var {
 
 
     private final double[][] arrayValues;
-
+    private double[][] value;
 
 
     public Matrix(double[][] value) {
@@ -49,15 +49,15 @@ public class  Matrix extends Var {
             double[][] res = copyMatrix(arrayValues);
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] = res[i][j]+second[i][j];
+                    res[i][j] += second[i][j];
                 }
             }
             return new Matrix(res);
         }
-            return other.add(this);
+            return super.add(other);
         }
     private double[][] copyMatrix(double[][] value){
-            double[][] resust = new double[value.length][0];
+         double[][] resust = new double[value.length][0];
             for (int i = 0; i < resust.length; i++) {
                resust[i]=Arrays.copyOf(value[i],value[i].length);
             }
@@ -67,46 +67,46 @@ public class  Matrix extends Var {
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
+            double[] [] res = new double[arrayValues.length][0];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res.length; j++) {
-                    res[i][j] = res[i][j] - ((Scalar) other).getValue(); // к каждому элементу этого массива добавим скаляр и добавили геттер для велью
+                    res[i][j] = res[i][j] - ((Scalar) other).getValue(); // к каждому элементу этого массива - скаляр и добавили геттер для велью
                 }
             }
             return new Matrix(res);
         } else if (other instanceof Matrix) {
-
-            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length); // если к матрице прибавляется тоже матрицу
-            double[][] matrix2 = getArrayValues();
+            double[][] second = ((Matrix) this).arrayValues;
+            double[][] res = copyMatrix(arrayValues);
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res.length; j++) {
-                    res[i][j] = res[i][j] - matrix2[j][i];
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] -= second[i][j];
                 }
             }
-
             return new Matrix(res);
         }
-        return other.sub(this);
+        return super.sub(other);
     }
+
+
+
 
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
+            double[] [] res = new double[arrayValues.length][0];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res.length; j++) {
-                    res[i][j] = res[i][j] * ((Scalar) other).getValue(); // к каждому элементу этого массива добавим скаляр и добавили геттер для велью
+                    res[i][j] = res[i][j] * ((Scalar) other).getValue(); // к каждому элементу этого массива * скаляр и добавили геттер для велью
                 }
             }
             return new Matrix(res);
         } else if (other instanceof Matrix) {
-
-            double[][] res = Arrays.copyOf(arrayValues, arrayValues.length); // если к матрице прибавляется тоже матрицу
-            double[][] matrix2 = getArrayValues();
+            double[][] second = ((Matrix) this).arrayValues;
+            double[][] res = copyMatrix(arrayValues); // если к матрице прибавляется тоже матрицу
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < matrix2[0].length; j++) {
-                    for (int k = 0; k < matrix2.length; k++) {
-                        res[i][j] += res[i][k]*matrix2[k][j];
+                for (int j = 0; j < second[0].length; j++) {
+                    for (int k = 0; k < second.length; k++) {
+                        res[i][j] += res[i][k]*second[k][j];
                     }
                 }
             }
