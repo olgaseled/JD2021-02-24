@@ -40,7 +40,18 @@ abstract class Var implements Operation { // cлово abstract (модифик�
     protected abstract double[] getValues();
 
 
-    //
+    //задание jd0_09
+static Var createVar (String operand) { // принимает не вход строку внутри оперант
+    operand=operand.trim().replace("\\s+",""); // оперант очи-ся от пробелом. они замен. пустой строкой
+    if (operand.matches(Patterns.SCALAR)) //оперант сообветствует регул выраж скаляра.то вернется новый скаляр в контсруктор
+        return new Scalar(operand);
+    if (operand.matches(Patterns.VECTOR))
+        return new Scalar(operand);
+    if (operand.matches(Patterns.MATRIX))
+        return new Scalar(operand);
+    return null; // если не один из if не сработает , вернется null
+}
+
 }
 
 
