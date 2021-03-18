@@ -50,11 +50,11 @@ public class  Matrix extends Var {
              for (int i = 0; i < second.length; i++) {
                    res [i] = Arrays.copyOf(second[i],second[i].length);
               }
-             //  for (int i = 0; i < res.length; i++) {
-              //      for (int j = 0; j < second.length; j++) {
-             //           res[i][j] = res[i][j] + second[i][j];
-             //   }
-             //   }
+               for (int i = 0; i < res.length; i++) {
+                   for (int j = 0; j < second.length; j++) {
+                        res[i][j] = res[i][j] + second[i][j];
+                }
+                }
                 return new Matrix(res);
             }
             return other.add(this);
@@ -67,7 +67,7 @@ public class  Matrix extends Var {
             }
             return resust;
             }
-/*
+
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar) {
@@ -121,6 +121,6 @@ public class  Matrix extends Var {
     }
 
 
- */
+ 
     }
 
