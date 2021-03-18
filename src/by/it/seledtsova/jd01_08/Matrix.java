@@ -22,17 +22,17 @@ public class  Matrix extends Var {
          public double[][] getArrayValues() {
             return arrayValues;
         }
-
+    @Override
+    protected double[] getValues() {
+        return new double[0];
+    }
 
         @Override
         public String toString() {
             return Arrays.deepToString(arrayValues).replace("[", "{").replace("]", "}");
         }
 
-    @Override
-    protected double[] getValues() {
-        return new double[0];
-    }
+
 
     @Override
         public Var add(Var other) {
@@ -45,25 +45,21 @@ public class  Matrix extends Var {
             }
                      return new Matrix(res);
             } else if (other instanceof Matrix) {
-                double[][] second =((Matrix)other).arrayValues;
-                double[][] res= new double[second.length][0];
-             for (int i = 0; i < second.length; i++) {
-                   res [i] = Arrays.copyOf(second[i],second[i].length);
-              }
-               for (int i = 0; i < res.length; i++) {
-                   for (int j = 0; j < second.length; j++) {
-                        res[i][j] = res[i][j] + second[i][j];
+            double[][] second = ((Matrix) this).arrayValues;
+            double[][] res = copyMatrix(arrayValues);
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] = res[i][j]+second[i][j];
                 }
-                }
-                return new Matrix(res);
             }
+            return new Matrix(res);
+        }
             return other.add(this);
         }
     private double[][] copyMatrix(double[][] value){
             double[][] resust = new double[value.length][0];
             for (int i = 0; i < resust.length; i++) {
-                if (resust[i].length >= 0)
-                    System.arraycopy(value[i], 0, resust[i], 0, resust[i].length);
+               resust[i]=Arrays.copyOf(value[i],value[i].length);
             }
             return resust;
             }

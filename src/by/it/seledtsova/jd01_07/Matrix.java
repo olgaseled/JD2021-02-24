@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class  Matrix extends Var {
 
-    public final double[][] arrayValues;
+    public final double[][] arrayValues; // приватное поле для матрицы
 
 
     public Matrix(double[][] value) {
@@ -13,17 +13,17 @@ public class  Matrix extends Var {
             this.arrayValues[i] = Arrays.copyOf(value[i], value[i].length);
         }
     }
+
     Matrix (Matrix matrix) {
         this.arrayValues= matrix.arrayValues;
     }
 
-   public Matrix(String strValue) {
+    public Matrix(String strValue) {
         this(new double[][]{{1, 2}, {3, 4}}); //stub
     }
 
-
     @Override
-    public String toString() {
+    public String toString() { // написали наш массив в строку
         return Arrays.deepToString(arrayValues).replace("[", "{").replace("]", "}");
     }
 
