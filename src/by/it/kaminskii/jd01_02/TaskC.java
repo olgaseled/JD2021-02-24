@@ -1,6 +1,6 @@
 package by.it.kaminskii.jd01_02;
 
-import by.it._classwork_.jd01_08.Matrix;
+
 
 import java.util.Arrays;
 import java.util.Random;

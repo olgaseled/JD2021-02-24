@@ -2,10 +2,10 @@ package by.it.seledtsova.jd01_07;
 
 public class Runner {
     public static void main(String[] args) {
-        Var var1 = new Scalar(9);
+        Var var1 = new Scalar(9); // переменная вар = любому из потомков (скаляр)
         Scalar var2 = new Scalar("12.1234");
         Var var3 = new Scalar(var2);
-        System.out.printf("var1=%s\n", var1);
+        System.out.printf("var1=%s\n", var1); // метод то.стринг из классва скаляр, если этого метода нет, то из абстрактоного класса
         System.out.printf("var2=%s\n", var2);
         System.out.printf("var3=%s\n", var3);
 
@@ -19,7 +19,12 @@ public class Runner {
 
         double[][] arrayValues = {{1.0, 2.0}, {3.0, 4.0}};
         Var matrix1 = new Matrix(arrayValues);
+        Var matrix2 = new Matrix(arrayValues);
+        Var matrix3 = new Matrix("{{1.0,2.0},{3.0,4.0}}");
 
         System.out.printf("matr1=%s\n", matrix1);
+        System.out.printf("matr2=%s\n", matrix2);
+        System.out.printf("matr3=%s\n", matrix3);
+
     }
 }
