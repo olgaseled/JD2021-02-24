@@ -1,4 +1,4 @@
-package by.it.kirichenko.jd01_08;
+package by.it.kirichenko.jd01_09;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
@@ -31,7 +31,7 @@ public class Vector extends Var {
         }
         this.value=arrayDouble;
     }
-	
+
 	@Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
