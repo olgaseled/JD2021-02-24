@@ -5,13 +5,7 @@ import java.util.Arrays;
 public class  Matrix extends Var {
 
 
-        public double[][] getArrayValues() {
-            return arrayValues;
-        }
 
-        public double[][] getValue() {
-            return arrayValues;
-        }
         private final double[][] arrayValues;
 
         public Matrix(double[][] value) {
@@ -21,8 +15,19 @@ public class  Matrix extends Var {
             }
         }
 
+    Matrix (by.it.seledtsova.jd01_07.Matrix matrix) {
+        this.arrayValues= matrix.arrayValues;
+    }
         public Matrix(String strValue) {
             this(new double[][]{{1, 2}, {3, 4}}); //stub
+        }
+
+        public double[][] getArrayValues() {
+            return arrayValues;
+        }
+
+        public double[][] getValue() {
+            return arrayValues;
         }
 
         @Override
@@ -37,28 +42,23 @@ public class  Matrix extends Var {
 
     @Override
         public Var add(Var other) {
-            if (other instanceof Scalar) {
-                double second = ((Scalar) other).getValue();
-                double[][] res = new double[arrayValues.length][0];
-                for (int i = 0; i < res.length; i++) {
-                   res[i] = Arrays.copyOf(arrayValues[i], arrayValues[i].length);
-                    }
-                    for (int i = 0; i < res.length; i++) {
-                        for (int j = 0; j < res.length; j++) {
-                            res[i][j] = res[i][j] + second;
-                        }
-                    }
-                    return new Matrix(res);
+        if (other instanceof Scalar) {
+            double[] [] res = Arrays.copyOf(arrayValues, arrayValues.length);
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res.length; j++) {
+                 res[i] [j]= res[i][j] + ((Scalar) other).getValue(); // к каждому элементу этого массива добавим скаляр и добавили геттер для велью
                 }
+            }
+                     return new Matrix(res);
 
-                else if (other instanceof Matrix) {
+            } else if (other instanceof Matrix) {
                 double[][] second = ((Matrix) other).getValue();
-                double[][] res= new double[arrayValues.length][0];
+                double[][] res= copyMatrix (arrayValues);
                 for (int i = 0; i < second.length; i++) {
                     res [i] = Arrays.copyOf(arrayValues[i],arrayValues[i].length);
                 }
                 for (int i = 0; i < res.length; i++) {
-                    for (int j = 0; j < res.length; j++) {
+                    for (int j = 0; j < second.length; j++) {
                         res[i][j] = res[i][j] + second[i][j];
                     }
                 }
@@ -67,9 +67,17 @@ public class  Matrix extends Var {
             return other.add(this);
         }
 
+    private double[][] copyMatrix(double[][] arrayValues) {
+            double [][] res=new double[arrayValues.length][0];
+        for (int i = 0; i < res.length; i++) {
+            if (res[i].length>=0)
+                System.arraycopy(arrayValues[i],0,res[i],0,res[i].length);
+                    }
+        return res;
+    }
 
 
-        @Override
+    @Override
         public Var sub(Var other) {
             if (other instanceof Scalar) {
                 double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
@@ -124,7 +132,4 @@ public class  Matrix extends Var {
 
 
     }
-
-
-
 
