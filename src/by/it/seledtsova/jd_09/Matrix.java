@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd01_08;
+package by.it.seledtsova.jd_09;
 
 import java.util.Arrays;
 
@@ -121,6 +121,6 @@ public class  Matrix extends Var {
     }
 
 
-
+ 
     }
 
