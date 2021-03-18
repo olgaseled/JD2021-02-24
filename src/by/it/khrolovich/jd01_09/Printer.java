@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_09;
+package by.it.khrolovich.jd01_09;
 
 import java.util.Objects;
 
