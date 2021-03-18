@@ -1,8 +1,8 @@
-package by.it.kaminskii.jd01_08;
+package by.it.kaminskii.jd01_09;
 
 import java.util.Arrays;
 
-class Matrix extends by.it.kaminskii.jd01_08.Var {
+class Matrix extends Var {
     private double[][] value;
 
     @Override
