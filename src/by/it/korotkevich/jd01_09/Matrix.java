@@ -1,4 +1,4 @@
-package by.it.korotkevich.jd01_08;
+package by.it.korotkevich.jd01_09;
 
 import java.util.Arrays;
 
@@ -149,7 +149,7 @@ class Matrix extends Var {
             for (int i = 0; i < value.length; i++) {
                 firstMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
-            if (firstMatrix.length != secondMatrix.length) {
+            if (firstMatrix[0].length != secondMatrix.length) {
                 return super.add(other);
             }
             for (int i = 0; i < firstMatrix.length; i++) {
