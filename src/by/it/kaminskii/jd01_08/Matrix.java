@@ -7,7 +7,7 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
 
     @Override
     public Var add(Var other) {
-        if (other instanceof Scalar) {
+        if(other instanceof Scalar) {
             double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
                 res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -21,7 +21,8 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
             }
             return new Matrix(res);
         }
-        else if (other instanceof Matrix) {
+
+        else if (other instanceof Matrix)
             if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
@@ -36,7 +37,7 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
                 return new Matrix(res);
             }
             else return super.add(other);
-        }
+
             else if (other instanceof Vector) {
             return super.mul(other);
         }

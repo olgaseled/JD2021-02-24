@@ -10,7 +10,9 @@ public class Runner {
         System.out.printf("var3=%s\n", var3);
         Var vec1 = new Vector(new double[]{1, 2, 4});
         Vector vec2 = new Vector(new double[]{1, 2, 4});
+        Var vec3 = new Vector(new double[]{1, 2, 4});
         System.out.printf("vec1=%s\n", vec1);
         System.out.printf("vec2=%s\n", vec2);
+        System.out.printf("vec3=%s\n", vec3);
     }
 }

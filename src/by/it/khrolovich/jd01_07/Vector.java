@@ -34,7 +34,7 @@ public class Vector extends Var {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
 
         for (double v : value) {
-            stringJoiner.add(Double.toString(v));//TODO посмотреть второй вариант
+            stringJoiner.add(Double.toString(v));
         }
 
         return stringJoiner.toString();
