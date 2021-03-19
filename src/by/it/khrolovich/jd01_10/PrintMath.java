@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+
 public class PrintMath {
     public static void main(String[] args) {
         Class<Math> mathClass = Math.class;
@@ -24,17 +25,18 @@ public class PrintMath {
             /*if((modifiers&8)!=0){
                 System.out.println(method);
             }*/
-            if(Modifier.isPublic(modifiers)){
+            if (Modifier.isPublic(modifiers)) {
                 contract.append("public ");
+            } else {
+                continue;
             }
-            else{ continue;}
-            if(Modifier.isPrivate(modifiers)){
+            if (Modifier.isPrivate(modifiers)) {
                 contract.append("private ");
             }
-            if(Modifier.isProtected(modifiers)){
+            if (Modifier.isProtected(modifiers)) {
                 contract.append("protected ");
             }
-            if(Modifier.isStatic(modifiers)){
+            if (Modifier.isStatic(modifiers)) {
                 contract.append("static ");
             }
 
@@ -51,9 +53,6 @@ public class PrintMath {
                 delimiter = ", ";
             }
             contract.append(')');
-
-
-
 
         }
 
