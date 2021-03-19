@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_09;
+package by.it.seledtsova.jd01_09;
 
 interface Operation{
     Var add(Var other); // добавили интерфейс с задания

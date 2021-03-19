@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_06;
+package by.it.seledtsova.jd01_06;
 
 public class TaskB2 {
     public static void main(String[] args) {

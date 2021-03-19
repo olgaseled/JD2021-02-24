@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_06;
+package by.it.seledtsova.jd01_06;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_09;
+package by.it.seledtsova.jd01_09;
 
 public class Printer { // создали класс принтер, который все печатает переменную var в консоле с экземплярным методом вар
     void print (Var var) {

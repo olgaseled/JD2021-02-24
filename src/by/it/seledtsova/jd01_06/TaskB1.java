@@ -1,7 +1,4 @@
-package by.it.seledtsova.jd_06;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package by.it.seledtsova.jd01_06;
 
 public class TaskB1 {
 
