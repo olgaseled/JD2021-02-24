@@ -10,7 +10,7 @@ public class  Matrix extends Var {
 
 
 
-    public Matrix(double[][] value) {
+     Matrix(double[][] value) {
         this.arrayValues = new double[value.length][0];
         for (int i = 0; i < value.length; i++) {
             this.arrayValues[i] = Arrays.copyOf(value[i], value[i].length);
