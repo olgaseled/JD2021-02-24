@@ -7,11 +7,23 @@ class Vector extends Var {
     private final double[] value;
 
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(Vector vector) {
         this.value = vector.value;
+    }
+
+    Vector(String strVector){
+        String [] strArray=strVector.trim()
+                .replaceAll("\\s+","")
+                .replace("{","")
+                .replace("}","")
+                .split(",");
+        value=new double[strArray.length];
+        for (int i = 0; i < value.length; i++) {
+            value[i]=Double.parseDouble(strArray[i]);
+        }
     }
 
     @Override

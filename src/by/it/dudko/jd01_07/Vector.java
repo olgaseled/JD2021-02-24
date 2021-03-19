@@ -1,5 +1,6 @@
 package by.it.dudko.jd01_07;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Vector extends Var {
@@ -7,19 +8,16 @@ public class Vector extends Var {
     private final double[] value;
 
     public Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
     }
-
 
     public Vector(Vector vector) {
-        this.value = vector.value;
+        this(vector.value);
     }
-
 
     public Vector(String strVector) {
         this.value = castAsVectorOfDoubles(strVector);
     }
-
 
     private double[] castAsVectorOfDoubles(String strVector) {
         strVector = Utils.trimBraces(strVector);
@@ -30,7 +28,6 @@ public class Vector extends Var {
         }
         return vector;
     }
-
 
     @Override
     public String toString() {
