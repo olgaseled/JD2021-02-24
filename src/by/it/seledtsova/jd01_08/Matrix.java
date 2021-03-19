@@ -45,16 +45,17 @@ public class  Matrix extends Var {
             }
                      return new Matrix(res);
             } else if (other instanceof Matrix) {
-            double[][] second = ((Matrix) this).arrayValues;
-            double[][] res = copyMatrix(arrayValues);
+            double[][] second = ((Matrix) other).arrayValues;
+            double[][] res= copyMatrix(arrayValues);
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] += second[i][j];
+                for (int j = 0; j < res[i].length ; j++) {
+                    res[i][j] = res[i][j] + second[i][j];
                 }
             }
             return new Matrix(res);
         }
-            return super.add(other);
+
+        return super.add(other);
         }
     private double[][] copyMatrix(double[][] value){
          double[][] resust = new double[value.length][0];
