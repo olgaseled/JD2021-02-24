@@ -16,30 +16,7 @@ class PrintMath {
             //System.out.println(method);
             int modifiers = method.getModifiers();
             //только публичные
-           /* if((modifiers&1)!=0){
-                System.out.println(method);
-            }*/
-            //public static это 9 0b0000000000001001
-            //только static 8 = 0b0000000000001000
-            //&
-            //получиться 8 0b0000000000001000
-            /*if((modifiers&8)!=0){
-                System.out.println(method);
-            }*/
-            if (Modifier.isPublic(modifiers)) {
-                contract.append("public ");
-            } else {
-                continue;
-            }
-            if (Modifier.isPrivate(modifiers)) {
-                contract.append("private ");
-            }
-            if (Modifier.isProtected(modifiers)) {
-                contract.append("protected ");
-            }
-            if (Modifier.isStatic(modifiers)) {
-                contract.append("static ");
-            }
+            if (GetModifier(contract, modifiers)) continue;
 
             Class<?> returnType = method.getReturnType();
             contract
@@ -63,23 +40,28 @@ class PrintMath {
             StringBuilder contract = new StringBuilder();
             int modifiers = field.getModifiers();
 
-            if (Modifier.isPublic(modifiers)) {
-                contract.append("public ");
-            } else {
-                continue;
-            }
-            if (Modifier.isPrivate(modifiers)) {
-                contract.append("private ");
-            }
-            if (Modifier.isProtected(modifiers)) {
-                contract.append("protected ");
-            }
-            if (Modifier.isStatic(modifiers)) {
-                contract.append("static ");
-            }
+            if (GetModifier(contract, modifiers)) continue;
 
             contract.append(field.getType()).append(" ").append(field.getName());
             System.out.println(contract);
         }
+    }
+
+    public static boolean GetModifier(StringBuilder contract, int modifiers) {
+        if (Modifier.isPublic(modifiers)) {
+            contract.append("public ");
+        } else {
+            return true;
+        }
+        if (Modifier.isPrivate(modifiers)) {
+            contract.append("private ");
+        }
+        if (Modifier.isProtected(modifiers)) {
+            contract.append("protected ");
+        }
+        if (Modifier.isStatic(modifiers)) {
+            contract.append("static ");
+        }
+        return false;
     }
 }
