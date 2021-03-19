@@ -3,7 +3,7 @@ package by.it.belazarovich.jd01_09;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-class Vector extends Var {
+class Vector extends by.it.belazarovich.jd01_08.Var {
     private final double[] value;
 
     Vector(double[] value) {
@@ -11,12 +11,11 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
-        if (other instanceof Scalar) {
+    public by.it.belazarovich.jd01_08.Var add(by.it.belazarovich.jd01_08.Var other) {
+        if (other instanceof by.it.belazarovich.jd01_08.Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] + ((Scalar) other).getValue()  ;
-            }
+            for (int i = 0; i < res.length; i++)
+                res[i] = res[i] + ((by.it.belazarovich.jd01_08.Scalar) other).getValue();
             return new Vector(res);
 
         }
