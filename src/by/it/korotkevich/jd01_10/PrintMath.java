@@ -31,10 +31,10 @@ class PrintMath {
                     .append(method.getName())
                     .append('(');
             Class<?>[] parameterTypes = method.getParameterTypes();
-            String delimeter="";
+            String delimeter = "";
             for (Class<?> parameterType : parameterTypes) {
                 contract.append(delimeter).append(parameterType.getSimpleName());
-                delimeter=",";
+                delimeter = ",";
             }
             contract.append(")");
             System.out.println(contract);
