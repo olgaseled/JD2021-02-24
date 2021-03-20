@@ -15,7 +15,7 @@ class Bean {
         return a < b ? a : b;
     }
 
-    @Param(a = 9, b = 18)
+    @Param(a = 10, b = 18)
     double avg(int a, int b) {
         return (a + b) / 2.0;
     }
