@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 public class Vector extends Var {
 
-    private  double[] value;
+    final private  double[] value;
 
     public Vector(double[] value) {
         this.value = value;
@@ -18,7 +18,7 @@ public class Vector extends Var {
 
    public Vector(String strVector) {
 
-        String Clean = strVector.replaceAll("[\\{|\\} ]", "");
+        String Clean = strVector.replaceAll("[{}]", "");
 
        String[] num = Clean.split( "[,]");
        double [] mas = new double [num.length];
