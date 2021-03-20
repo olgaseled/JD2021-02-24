@@ -8,6 +8,10 @@ public class Vector extends Var {
 
     final private  double[] value;
 
+    public double[] getValue() {
+        return value;
+    }
+
     public Vector(double[] value) {
         this.value = value;
     }
