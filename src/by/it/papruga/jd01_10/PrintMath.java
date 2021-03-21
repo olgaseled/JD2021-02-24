@@ -1,52 +1,39 @@
 package by.it.papruga.jd01_10;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 public class PrintMath {
 
     public static void main(String[] args) {
-        Class<Math> mathClass = Math.class;
-        Method[] methods = mathClass.getDeclaredMethods();
+
+        Class<Math> structMath = Math.class;
+        Method[] methods = structMath.getDeclaredMethods();
         for (Method method : methods) {
+            if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC) {
+                String name = method.getName();
+                Class<?>[] types = method.getParameterTypes();
+                String returnType = method.getReturnType().getSimpleName();
 
-            StringBuilder contract = new StringBuilder();
-
-            System.out.println(method);
-            int modifiers = method.getModifiers();
-
-            if (Modifier.isPublic(modifiers)) {
-
-                contract.append(("public "));
-
-            }
-            if (Modifier.isPrivate(modifiers)) {
-
-                contract.append(("private "));
-
-            }
-            if (Modifier.isProtected(modifiers)) {
-
-                contract.append(("protected "));
-
-            }
-            if (Modifier.isStatic(modifiers)) {
-
-                contract.append(("static "));
+                System.out.printf("public static %s %s%s\n", returnType, name, Arrays.toString(types)
+                        .replace("[", "(")
+                        .replace("]", ")")
+                        .replace(" ", ""));
             }
 
-            Class<?> returnType = method.getReturnType();
-            contract
-                    .append(returnType.getSimpleName())
-                    .append(' ')
-                    .append(method.getName())
-                    .append('(');
-            Class<?>[] ParametersTypes = method.getParameterTypes();
+        }
+
+        Field[] fields = structMath.getDeclaredFields();
+        for (Field field : fields) {
+            if ((field.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC) { ;
+
+                System.out.println("double " + field.getName());
+            }
 
 
         }
 
     }
-
-
 }
