@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class TaskC {
     public static void main(String[] args) {
-        int[][] arr1, arr2, arr3;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter array dimension");
         int arrDim = sc.nextInt(); // Read user input
