@@ -11,8 +11,17 @@ public class Runner {
         System.out.printf("var2=%s\n",var2);
         System.out.printf("var3=%s\n",var3);
 
-       Var var4 = new Vector("{1.0, 2.0, 4.0}");
-       System.out.println(var4);
+
+        Var var4 = new Vector(new double[]{1.0, 2.0, 4.0});
+        System.out.println(var4);
+
+        Var var5 = new Vector("{1.0, 2.0, 4.0}");
+        System.out.println(var5);
+
+        Var var6 = new Matrix(new double[][]{{ 1.0, 2.0 }, { 3.0, 4.0 }});
+        System.out.println(var6);
+
+
 
 
     }
