@@ -42,6 +42,7 @@ public class PrintMath {
             contract.append(')');
             System.out.println(contract);
         }
+
         Field[] fields = mathClass.getDeclaredFields();
         for (Field field : fields) {
             StringBuilder contract = new StringBuilder();
