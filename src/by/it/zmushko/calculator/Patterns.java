@@ -1,4 +1,4 @@
-package by.it.zmushko.jd01_09;
+package by.it.zmushko.calculator;
 
 interface Patterns {
 
