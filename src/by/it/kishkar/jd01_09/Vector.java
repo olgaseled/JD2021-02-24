@@ -5,27 +5,29 @@ import java.util.Arrays;
 
 class Vector extends Var {
 
-        private double [] value;
+    private double[] value;
 
-        Vector (double[] value) {
-             this.value=value;
+    public double[] getValue () {return value;}
 
+    Vector(double[] value) {
+        this.value = value;
+
+    }
+
+    Vector(String str) {
+        String[] strArray = str.trim().replaceAll("\\s+", "")
+                .replace("{", "")
+                .replace("}", "")
+                .split(",");
+        value = new double[strArray.length];
+        for (int i = 0; i < value.length; i++) {
+            value[i] = Double.parseDouble(strArray[i]);
         }
 
-        Vector (String str) {
-           String[] strArray= str.trim().replaceAll("\\s+", "")
-                   .replace("{", "")
-                   .replace("}", "")
-                   .split(",");
-           value = new double[strArray.length];
-            for (int i = 0; i < value.length; i++) {
-                value[i]=Double.parseDouble(strArray[i]);
-            }
+    }
 
-        }
-
-    Vector (Vector vector){
-        this.value= vector.value;
+    Vector(Vector vector) {
+        this.value = vector.value;
 
     }
 
@@ -99,6 +101,7 @@ class Vector extends Var {
         }
         return super.div(other);
     }
+
     @Override   //УМНОЖЕНИЕ
     public Var mul(Var other) {
         if (other instanceof Scalar) {
@@ -113,7 +116,7 @@ class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
-            double resultVectorSummMul=0;
+            double resultVectorSummMul = 0;
             for (int i = 0; i < resultVector.length; i++) {
                 resultVectorSummMul += resultVector[i] * secondVector[i];
             }
@@ -124,11 +127,11 @@ class Vector extends Var {
 
     @Override
     public String toString() {
-       StringBuilder sb=new StringBuilder("{");
-       String del="";
+        StringBuilder sb = new StringBuilder("{");
+        String del = "";
         for (double element : value) {
             sb.append(del).append(element);
-            del=", ";
+            del = ", ";
         }
         sb.append("}");
         return sb.toString();
