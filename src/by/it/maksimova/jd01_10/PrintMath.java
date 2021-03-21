@@ -1,7 +1,9 @@
 package by.it.maksimova.jd01_10;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 public class PrintMath {
     public static void main(String[] args) {
@@ -39,12 +41,26 @@ public class PrintMath {
             String delimiter = "";
             for (Class<?> parameterType : parameterTypes) {
                 contract.append(delimiter).append(parameterType.getSimpleName());
-                delimiter = ", ";
+                delimiter = ",";
             }
             contract.append(')');
             System.out.println(contract);
         }
 
+        Field[] fields = mathClass.getDeclaredFields();
+        for (Field field : fields) {
+            int modifiers = field.getModifiers();
+            if (Modifier.isPublic(modifiers)) {
 
+
+
+            StringBuilder fieldName = new StringBuilder();
+            Class<?> type = field.getType();
+            String name = field.getName();
+            StringBuilder append = fieldName.append(type).append(' ').append(name);
+            System.out.println(append);
+            }
+
+        }
     }
 }
