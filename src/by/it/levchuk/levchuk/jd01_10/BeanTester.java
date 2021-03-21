@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 public class BeanTester {
     public static void main(String[] args) throws Exception {
-        Class<Bean> beanClass=Bean.class;
+        Class<Bean> beanClass = Bean.class;
         Method[] methods = beanClass.getDeclaredMethods();
         Object object = null;
         for (Method method : methods) {
@@ -14,10 +14,8 @@ public class BeanTester {
                 }
                 Param bean = method.getAnnotation(Param.class);
                 Object invoke = method.invoke(object, bean.a(), bean.b());
-
                 System.out.println(method.getName() + " " + invoke.toString());
             }
-
         }
     }
 }
