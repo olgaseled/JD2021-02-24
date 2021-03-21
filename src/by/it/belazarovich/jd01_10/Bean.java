@@ -1,27 +1,27 @@
 package by.it.belazarovich.jd01_10;
-/*
+
 public class Bean {
-    @Param(a = 99, b = 19)
-    double sum(int aa, int bb) {
-        return aa + bb;
-    }
-
+    @Param(a = 3, b = 4)
     static double sum(int a, int b) {
-        return a > b ? a : b;
+        return a + b;
+
     }
 
-    @Param(int a, int b) {
+    @Param(a = 3, b = 4)
+     double avg(int a, int b) {
+        return (a + b) / 2.0;
+
+    }
+
+    @Param(a = 3, b = 4)
+     double min(int a, int b) {
         return a < b ? a : b;
+
     }
 
-
-    double sum(int a, int b) {
+    static double max(int a, int b) {
         return a > b ? a : b;
     }
 
 
 }
-
-
-
- */

@@ -5,9 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD)
+
 @Retention(RetentionPolicy.RUNTIME)
-@interface Param {
+@Target(ElementType.METHOD)
+public @interface Param {
     int a();
 
     int b();
