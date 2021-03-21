@@ -10,28 +10,61 @@ public class PrintMath {
         Method[] methods = mathClass.getDeclaredMethods();
         for (Method method : methods) {
             StringBuilder contract = new StringBuilder();
-            System.out.println(method);
             int modifiers = method.getModifiers();
             if (Modifier.isPublic(modifiers)) {
-                contract.append("public");
+                contract.append("public ");
             } else {
                 continue;
             }
             if (Modifier.isPrivate(modifiers)) {
-                contract.append("private");
+                contract.append("private ");
             }
             if (Modifier.isProtected(modifiers)) {
-                contract.append("protected");
+                contract.append("protected ");
             }
             if (Modifier.isStatic(modifiers)) {
-                contract.append("static");
+                contract.append("static ");
             }
             Class<?> returnType = method.getReturnType();
             contract
                     .append(returnType.getSimpleName())
+                    .append(" ")
                     .append(method.getName())
                     .append('(');
+            String delimiter = "";
             Class<?>[] parameterTypes = method.getParameterTypes();
+            for (Class<?> parameterType : parameterTypes) {
+                contract
+                        .append(delimiter)
+                        .append(parameterType.getSimpleName());
+                delimiter = ",";
+            }
+            contract.append(')');
+            System.out.println(contract);
+        }
+        Field[] fields = mathClass.getDeclaredFields();
+        for (Field field : fields) {
+            StringBuilder contract = new StringBuilder();
+            int modifiers = field.getModifiers();
+            if (Modifier.isPublic(modifiers)) {
+                contract.append("private ");
+            } else {
+                continue;
+            }
+            if (Modifier.isPrivate(modifiers)) {
+                contract.append("private ");
+            }
+            if (Modifier.isProtected(modifiers)) {
+                contract.append("protected ");
+            }
+            if (Modifier.isStatic(modifiers)) {
+                contract.append("static ");
+            }
+            contract
+                    .append(field.getType())
+                    .append(" ")
+                    .append(field.getName());
+            System.out.println(contract);
         }
     }
 }
