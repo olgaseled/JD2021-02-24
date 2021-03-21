@@ -11,12 +11,15 @@ package by.it.seledtsova.jd01_10;
      static double sum (int a,int b) {
          return a+b;
      }
+     @Param(a=2, b=5)
      static double avg (int a,int b) {
          return (a+b)/2.0;
      }
+     @Param(a=2, b=5)
      double min (int a,int b) {
          return a<b? a:b; // если оказалось а<b, то мы возвращаем а, иначе b
      }
+
      double max (int a,int b) { //если оказалось а>b,то мы возвращаем b, иначе a
          return a>b? a:b;
      }
