@@ -2,7 +2,7 @@ package by.it.belazarovich.jd01_09;
 
 import java.util.Scanner;
 
-public class ConsileRunner {
+public class ConsoleRunner {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String line;
