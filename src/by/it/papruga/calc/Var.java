@@ -1,4 +1,4 @@
-package by.it.papruga.jd01_09;
+package by.it.papruga.calc;
 
 
 abstract class Var implements Operation {
@@ -8,13 +8,13 @@ abstract class Var implements Operation {
         operand=operand.trim().replace("\\s+", "");
 
         if (operand.matches(Patterns.SCALAR))
-            return new Scalar (operand);
+            return new Scalar(operand);
 
         if (operand.matches(Patterns.VECTOR))
-            return new Vector (operand);
+            return new Vector(operand);
 
-      if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
+      //  if (operand.matches(Patterns.MATRIX))
+      //      return new Matrix(operand);
         return null;
 
     }

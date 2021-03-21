@@ -1,4 +1,4 @@
-package by.it.papruga.jd01_09;
+package by.it.papruga.calc;
 
 
 import java.util.Arrays;
@@ -6,11 +6,7 @@ import java.util.StringJoiner;
 
 public class Vector extends Var {
 
-    final private  double[] value;
-
-    public double[] getValue() {
-        return value;
-    }
+    private  double[] value;
 
     public Vector(double[] value) {
         this.value = value;
@@ -22,7 +18,7 @@ public class Vector extends Var {
 
    public Vector(String strVector) {
 
-        String Clean = strVector.replaceAll("[{}]", "");
+        String Clean = strVector.replaceAll("[\\{|\\} ]", "");
 
        String[] num = Clean.split( "[,]");
        double [] mas = new double [num.length];
