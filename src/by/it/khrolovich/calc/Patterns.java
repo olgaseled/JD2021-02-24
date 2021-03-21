@@ -1,4 +1,4 @@
-package by.it.khrolovich.jd01_09;
+package by.it.khrolovich.calc;
 
 interface Patterns {
     String OPERATION = "[-+*/]";
@@ -6,8 +6,8 @@ interface Patterns {
     //String Vector = "\{-?[0-9]+(\.[0-9]+)?(,-?[0-9]+(\.[0-9]+)?)*}";
     //String VECTOR = "\\{((-?[0-9]+(\\.[0-9]+)?),?)+}";//ещё вариант
     //String VECTOR = "\\{("+SCALAR+",?)+}";//ещё вариант
-    String VECTOR = "\\{" + SCALAR + "(," + SCALAR + ")*}";
-    String MATRIX = "\\{" + VECTOR + "(," + VECTOR + ")*}";
+    String VECTOR = "\\{"+SCALAR+"(,"+SCALAR+")*}";
+    String MATRIX = "\\{"+VECTOR+"(,"+VECTOR+")*}";
 
     /*11+12
     },{
