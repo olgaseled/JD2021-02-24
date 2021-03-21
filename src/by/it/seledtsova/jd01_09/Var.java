@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_09;
+package by.it.seledtsova.jd01_09;
 
 // нажать alt insert
 // все наши переменные наследуется от нашего var

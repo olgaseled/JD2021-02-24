@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_09;
+package by.it.seledtsova.calt;
 
 
 import by.it.HomeWork;

@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd_09;
+package by.it.seledtsova.calt;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,8 +7,8 @@ public class Parsel { // принемает на вход некое значе�
     Var calc (String expression) { //метод калк будет вычислять выражение на вход он принемает строку
         //2.0*2.0
         String[] operand=expression.split(Patterns.OPERATION); // разделяет наше выражени на две части в соотвествии с паттерном операции
-        Var one=Var.createVar(operand[0]); // первая переменная
-        Var two=Var.createVar(operand[1]); // вторая переменная
+        Var one= Var.createVar(operand[0]); // первая переменная
+        Var two= Var.createVar(operand[1]); // вторая переменная
         if (one==null || two==null)  // если кто-либо равен нулю
             return null; //TODO create error
         Pattern p= Pattern.compile(Patterns.OPERATION); //
