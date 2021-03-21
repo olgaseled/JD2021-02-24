@@ -31,8 +31,8 @@ public class PrintMath {
                     .append(" ")
                     .append(method.getName())
                     .append('(');
-            String delimiter = "";
             Class<?>[] parameterTypes = method.getParameterTypes();
+            String delimiter = "";
             for (Class<?> parameterType : parameterTypes) {
                 contract
                         .append(delimiter)
