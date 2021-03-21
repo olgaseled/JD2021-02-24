@@ -1,4 +1,4 @@
-package by.it.korotkevich.jd01_09;
+package by.it.korotkevich.calc;
 
 class Scalar extends Var {
 
