@@ -1,8 +1,6 @@
 package by.it.kaminskii.jd01_10;
 
-import java.beans.beancontext.BeanContextChild;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 public class BeanTester {
     public static void main(String[] args) throws Exception {
@@ -10,7 +8,7 @@ public class BeanTester {
         Class<Param> param = Param.class;
         Method[] methods = bean.getDeclaredMethods();
         for (Method method : methods) {
-            StringBuilder name = new StringBuilder("");
+            StringBuilder name = new StringBuilder();
             if (method.isAnnotationPresent(param)) {
                 Object invObj = bean.getDeclaredConstructor().newInstance();
                 name.append(method.getName());
