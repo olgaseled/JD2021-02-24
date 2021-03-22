@@ -6,6 +6,7 @@ public class Bean {
         return a + b;
     }
 
+
     double min(int a, int b) {
         return a < b ? a : b;
     }
