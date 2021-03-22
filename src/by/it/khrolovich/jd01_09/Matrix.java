@@ -82,7 +82,7 @@ public class Matrix extends Var {
         if (other instanceof Scalar) {
             //double[][] resultMatrix = new double[value.length][value[0].length];
             //две проблемы: матрица не квадратная и пустую матрицу передали
-            
+
             double[][] resultMatrix = new double[value.length][0];
 
             for (int i = 0; i < value.length; i++) {

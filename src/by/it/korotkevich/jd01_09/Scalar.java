@@ -33,7 +33,7 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double otherOperand = ((Scalar) other).value;
             if (otherOperand==0) {
-                return null;
+                return super.div(other);
             }
             return new Scalar(this.value / otherOperand);
         }

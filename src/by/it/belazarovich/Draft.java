@@ -1,4 +1,4 @@
- /* package by.it.belazarovich;
+package by.it.belazarovich; /* package by.it.belazarovich;
 
   import java.util.Scanner;
 
