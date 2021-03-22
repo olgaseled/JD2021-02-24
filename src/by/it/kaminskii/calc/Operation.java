@@ -1,4 +1,4 @@
-package by.it.kaminskii.jd01_09;
+package by.it.kaminskii.calc;
 
 interface Operation {
     Var add(Var other);

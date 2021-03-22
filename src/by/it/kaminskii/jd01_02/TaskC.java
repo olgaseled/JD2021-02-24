@@ -1,7 +1,6 @@
 package by.it.kaminskii.jd01_02;
 
 
-
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -25,7 +24,7 @@ public class TaskC {
         for (int i = 0; i < step1.length; i++) {
             for (int j = 0; j < step1[0].length; j++) {
                 while (plus && min) {
-                    step1[i][j] = (int) (Math.random() * (5+5)) - 5;
+                    step1[i][j] = (int) (Math.random() * (5 + 5)) - 5;
                     System.out.println(step1[i][j]);
                     if (step1[i][j] == n) plus = true;
                     if (step1[i][j] == (-n)) min = true;
