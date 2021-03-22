@@ -1,35 +1,32 @@
 package by.it.papruga.jd01_07;
 
-
 import java.util.StringJoiner;
 
-public class Vector extends Var {
+class Vector extends Var {
 
-    private  double[] value;
+    final private double[] value;
 
-    public Vector(double[] value) {
+    Vector(double[] value) {
         this.value = value;
     }
 
-    public Vector(Vector otherVector) {
+    Vector(Vector otherVector) {
         this.value = otherVector.value;
     }
 
-   public Vector(String strVector) {
+    Vector(String strVector) {
 
-        String Clean = strVector.replaceAll("[\\{|\\} ]", "");
+        String clean = strVector.replaceAll("[{}]", "");
 
-       String[] num = Clean.split( "[,]");
-       double [] mas = new double [num.length];
+        String[] num = clean.split("[,]");
+        double[] mas = new double[num.length];
 
         for (int i = 0; i < num.length; i++) {
-            mas [i] = Double.parseDouble(num[i]);
+            mas[i] = Double.parseDouble(num[i]);
         }
         this.value = mas;
 
     }
-
-
 
 
     @Override
