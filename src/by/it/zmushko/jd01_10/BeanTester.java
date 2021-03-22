@@ -5,25 +5,36 @@ import java.lang.reflect.Method;
 
 public class BeanTester {
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
-        Object obj = Bean.class.newInstance();
-        String str = "";
-        Method[] methods = Bean.class.getDeclaredMethods();
+    public static void main(String[] args) throws Exception { //переделать ещё
+        Class<Bean> cls = Bean.class;
+        Object obj = null;
+        Method[] methods = cls.getDeclaredMethods();
+        Class<Param> parameters = Param.class;
         for (Method method : methods) {
-            Param annotation = method.getAnnotation(Param.class);
-            if (annotation != null) {
+            if (method.isAnnotationPresent(parameters)) {
                 try {
-                    str = (String) method.invoke(obj);
+                if (obj == null) {
+
+                        obj = cls.getConstructor().newInstance();
+                        method.invoke(obj);
+                        System.out.println(method.invoke(obj));
+                    }
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (SecurityException e) {
+                    e.printStackTrace();
                 }
             }
-            System.out.println(str);
         }
+
 
     }
 

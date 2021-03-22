@@ -2,7 +2,7 @@ package by.it.zmushko.jd01_10;
 
 import by.it._examples_.jd01_10.sample_service.Service;
 
-//@Service(name = "test")
+
 class Bean {
 
     @Param(a = 9, b = 123)
