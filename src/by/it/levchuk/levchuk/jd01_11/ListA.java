@@ -1,8 +1,52 @@
 package by.it.levchuk.levchuk.jd01_11;
 
+
 import java.util.*;
 
-public class ListA<E>implements List {
+public class ListA<T>implements List<T> {
+
+    private T[] elements= (T[]) new Object[]{};
+    private int size=0;
+
+    @Override
+    public boolean add(T t) {
+        if (size==elements.length)
+            elements= Arrays.copyOf(elements,(size*3)/2+1);
+        elements[size++]=t;
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb=new StringBuilder("[");
+        String delimeter="";
+        for (T element : elements) {
+            sb.append(delimeter).append(element);
+            delimeter=", ";
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public void add(int index, T element) {
+
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public T remove(int index) {
+        return null;
+    }
+
+    @Override
+    public T get(int index) {
+        return null;
+    }
 
     @Override
     public int size() {
@@ -20,7 +64,7 @@ public class ListA<E>implements List {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return null;
     }
 
@@ -30,22 +74,32 @@ public class ListA<E>implements List {
     }
 
     @Override
-    public boolean add(Object o) {
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
         return false;
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(Collection c) {
+    public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int index, Collection c) {
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
         return false;
     }
 
@@ -55,22 +109,7 @@ public class ListA<E>implements List {
     }
 
     @Override
-    public Object get(int index) {
-        return null;
-    }
-
-    @Override
-    public Object set(int index, Object element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, Object element) {
-
-    }
-
-    @Override
-    public Object remove(int index) {
+    public T set(int index, T element) {
         return null;
     }
 
@@ -85,37 +124,17 @@ public class ListA<E>implements List {
     }
 
     @Override
-    public ListIterator listIterator() {
+    public ListIterator<T> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List subList(int fromIndex, int toIndex) {
+    public List<T> subList(int fromIndex, int toIndex) {
         return null;
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
     }
 }
