@@ -19,4 +19,5 @@ class Bean {
     double avg(int a, int b) {
         return (a + b) / 2.0;
     }
+
 }
