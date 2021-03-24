@@ -29,6 +29,11 @@ public class ListA<T>implements List<T> {
     }
 
     @Override
+    public T get(int index) {
+        return null;
+    }
+
+    @Override
     public void add(int index, T element) {
 
     }
@@ -40,11 +45,6 @@ public class ListA<T>implements List<T> {
 
     @Override
     public T remove(int index) {
-        return null;
-    }
-
-    @Override
-    public T get(int index) {
         return null;
     }
 
