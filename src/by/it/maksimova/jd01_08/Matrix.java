@@ -1,7 +1,6 @@
 package by.it.maksimova.jd01_08;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class Matrix extends Var {
     private final double [][] value;

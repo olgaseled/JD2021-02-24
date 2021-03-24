@@ -1,7 +1,5 @@
 package by.it.maksimova.jd01_08;
 
-import java.util.Scanner;
-
 public class Scalar extends Var {
 
     private final double value;
