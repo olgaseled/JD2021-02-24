@@ -19,8 +19,10 @@ public class Runner {
         myList.add(0,"start"); arList.add(0,"start");
 
         System.out.println("myList:"+myList+"\narList:"+arList);
+
         myList.remove("start"); arList.remove("start");
         myList.remove(3); arList.remove(3);
+
         System.out.println("myList:"+myList+"\narList:"+arList);
         System.out.println("myList(0):"+myList.get(0)+"\narList(0)"+arList.get(0));
     }
