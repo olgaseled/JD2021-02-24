@@ -2,7 +2,7 @@ package by.it.kirichenko.jd01_11;
 
 import java.util.*;
 
-public class ListA<E> implements List<E> {
+public class ListB<E> implements List<E> {
 
     @SuppressWarnings("unchecked")
     private E[] elements = (E[]) new Object[0];
@@ -33,20 +33,69 @@ public class ListA<E> implements List<E> {
     }
 
     @Override
+    public E set(int index, E element) {
+        E returnValue = elements[index];
+        elements[index] = element;
+        return returnValue;
+    }
+
+    @Override
+    public void add(int index, E element) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+        }
+        E resultElements[] = Arrays.copyOf(elements, elements.length);
+
+        //вставляем в результат массив слева от индекса
+        System.arraycopy(elements, 0, resultElements, 0, index);
+
+        //вставляем в результат сам элемент
+        resultElements[index] = element;
+
+        //вставляем в результат массив справа от индекса
+        System.arraycopy(elements, index, resultElements, index + 1, size - index);
+
+        elements = Arrays.copyOf(resultElements, resultElements.length);
+
+        size++;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        int newsize = size + c.size();
+        if (elements.length < newsize) {
+            elements = Arrays.copyOf(elements, newsize * 3 / 2 + 1);
+        }
+        System.arraycopy(c.toArray(), 0, elements, size, c.size());
+        size = newsize;
+        return true;
+    }
+
+    @Override
     public String toString() {
         StringJoiner txt = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
-            txt.add(elements[i].toString());
+            if (elements[i] != null) {
+                txt.add(elements[i].toString());
+            }
+            else{
+                txt.add("null");
+            }
         }
         return txt.toString();
     }
 
-
-    // ---- stubs -----
     @Override
     public int size() {
         return size;
     }
+
+    @Override
+    public Object[] toArray() {
+        return Arrays.copyOf(elements, size);
+    }
+
+    // ---- stubs -----
 
     @Override
     public boolean remove(Object o) {
@@ -69,11 +118,6 @@ public class ListA<E> implements List<E> {
         return null;
     }
 
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
     @SuppressWarnings("ConstantConditions")
     @Override
     public <T> T[] toArray(T[] a) {
@@ -81,16 +125,7 @@ public class ListA<E> implements List<E> {
     }
 
     @Override
-    public void add(int index, E e) {
-    }
-
-    @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
         return false;
     }
 
@@ -112,11 +147,6 @@ public class ListA<E> implements List<E> {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public E set(int index, E element) {
-        return null;
     }
 
     @Override
@@ -148,7 +178,3 @@ public class ListA<E> implements List<E> {
         return null;
     }
 }
-
-
-
-
