@@ -27,12 +27,16 @@ public class ListA<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        return elements[index];
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        StringJoiner txt = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            txt.add(elements[i].toString());
+        }
+        return txt.toString();
     }
 
 
