@@ -3,7 +3,7 @@ package by.it.levchuk.levchuk.jd01_11;
 
 import java.util.*;
 
-public class ListA<T>implements List<T> {
+public class ListA<T> implements List<T> {
 
     private T[] elements = (T[]) new Object[0];
     private int size;
@@ -28,6 +28,46 @@ public class ListA<T>implements List<T> {
         System.arraycopy(elements, index + 1, elements, index, size - index - 1);
         elements[--size] = null;
         return returnValue;
+    }
+
+    @Override
+    public void add(int index, T element) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        int index = indexOf(o);
+        if (index > -1) remove(index);
+        return (index > -1);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        if (o==null) {
+            for (int i = 0; i < size; i++)
+                if (elements[i] == null)
+                    return i;
+        }
+        else {
+            for (int i = 0; i < size; i++)
+                if (o.equals(elements[i]))
+                    return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner txt = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            txt.add(elements[i].toString());
+        }
+        return txt.toString();
     }
 
     @Override
@@ -58,11 +98,6 @@ public class ListA<T>implements List<T> {
     @Override
     public <T1> T1[] toArray(T1[] a) {
         return null;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
     }
 
     @Override
@@ -101,16 +136,6 @@ public class ListA<T>implements List<T> {
     }
 
     @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
     public int lastIndexOf(Object o) {
         return 0;
     }
@@ -128,14 +153,5 @@ public class ListA<T>implements List<T> {
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner txt = new StringJoiner(", ", "[", "]");
-        for (int i = 0; i < size; i++) {
-            txt.add(elements[i].toString());
-        }
-        return txt.toString();
     }
 }
