@@ -1,7 +1,20 @@
-package by.it.kaminskii.jd01_08;
+package by.it.kaminskii.calc;
 
 
 abstract class Var implements Operation {
+
+    static Var creatVar(String operand) {
+        operand = operand.trim().replaceAll("\\s", "");
+        if (operand.matches(Patterns.SCALAR))
+            return new Scalar(operand);
+        else if (operand.matches(Patterns.VECTOR))
+            return new Vector(operand);
+        else if (operand.matches(Patterns.MATRIX))
+            return new Matrix(operand);
+        else
+            return null;//TODO error
+    }
+
 
     @Override
     public Var add(Var other) {

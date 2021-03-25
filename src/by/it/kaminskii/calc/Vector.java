@@ -1,4 +1,4 @@
-package by.it.kaminskii.jd01_08;
+package by.it.kaminskii.calc;
 
 import java.util.Arrays;
 

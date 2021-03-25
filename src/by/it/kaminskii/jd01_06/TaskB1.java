@@ -18,19 +18,20 @@ public class TaskB1 {
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ]+");
         Matcher matcher = pattern.matcher(Poem.text);
         while (matcher.find()) {
-            if(checking(matcher.group())){
+            if (checking(matcher.group())) {
                 String finish = matcher.group();
                 System.out.println(finish);
             }
         }
     }
-    private static boolean checking(String words){
-        String vowels="аиеёоуыэюя";
+
+    private static boolean checking(String words) {
+        String vowels = "аиеёоуыэюя";
         char first = words.toLowerCase().charAt(0);
-            char last = words.toLowerCase().charAt(words.length() - 1);
-            boolean firstcheck = vowels.indexOf(first) < 0;
-            boolean lastcheck = vowels.indexOf(last) >= 0;
-            return firstcheck && lastcheck;
+        char last = words.toLowerCase().charAt(words.length() - 1);
+        boolean firstcheck = vowels.indexOf(first) < 0;
+        boolean lastcheck = vowels.indexOf(last) >= 0;
+        return firstcheck && lastcheck;
     }
 }
 //    private static void checking(String words){

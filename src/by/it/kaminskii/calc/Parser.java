@@ -1,4 +1,4 @@
-package by.it.kaminskii.jd01_09;
+package by.it.kaminskii.calc;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,59 +1,60 @@
 package by.it.kaminskii.jd01_07;
 
- class Matrix extends Var {
+class Matrix extends Var {
     private final double[][] value;
 
     Matrix(double[][] value) {
         this.value = value;
     }
-    Matrix(Matrix matrix){
-        this.value= matrix.value;
+
+    Matrix(Matrix matrix) {
+        this.value = matrix.value;
     }
-    Matrix(String strMatrix){
-        String one="";
-        String two="";
-        strMatrix= strMatrix.replaceAll(" ", "");
+
+    Matrix(String strMatrix) {
+        String one = "";
+        String two = "";
+        strMatrix = strMatrix.replaceAll(" ", "");
         String[] matr = strMatrix.split("\\},\\{");
         for (int i = 0; i < matr.length; i++) {
-            if(i<(matr.length-1)) one = matr[i];
+            if (i < (matr.length - 1)) one = matr[i];
             else two = matr[i];
         }
-        one=one.replaceAll("\\{|\\}","");
+        one = one.replaceAll("\\{|\\}", "");
         String[] oneArray = one.split(",");
-        two=two.replaceAll("\\{|\\}","");
+        two = two.replaceAll("\\{|\\}", "");
         String[] twoArray = two.split(",");
-        String[] both =new String[(oneArray.length+ twoArray.length)];
+        String[] both = new String[(oneArray.length + twoArray.length)];
         for (int i = 0; i < oneArray.length; i++) {
-            both[i]=oneArray[i];
-            both[(i+2)]=twoArray[i];
+            both[i] = oneArray[i];
+            both[(i + 2)] = twoArray[i];
         }
         value = new double[oneArray.length][twoArray.length];
         for (int i = 0; i < oneArray.length; i++) {
             for (int j = 0; j < oneArray.length; j++) {
-                if(i< (oneArray.length-1)) value[i][j]= Double.parseDouble(oneArray[j]);
-                else value[i][j]=Double.parseDouble(twoArray[j]);
+                if (i < (oneArray.length - 1)) value[i][j] = Double.parseDouble(oneArray[j]);
+                else value[i][j] = Double.parseDouble(twoArray[j]);
             }
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder sb2=new StringBuilder("{");
+        StringBuilder sb2 = new StringBuilder("{");
         String delim2 = " ";
         int j = 0;
-        for (int i = 0; i <value.length; i++) {
+        for (int i = 0; i < value.length; i++) {
             sb2.append(delim2).append("{");
-            for (j = 0; j <value[0].length; j++) {
+            for (j = 0; j < value[0].length; j++) {
                 double elem = value[i][j];
                 sb2.append(delim2).append(elem);
                 delim2 = ", ";
             }
-            if(value[0][i]<(value.length)){
-                delim2=",";
+            if (value[0][i] < (value.length)) {
+                delim2 = ",";
                 sb2.append(" }").append(delim2);
-                delim2=" ";
-            }
-            else {
+                delim2 = " ";
+            } else {
                 sb2.append(" } }");
             }
 

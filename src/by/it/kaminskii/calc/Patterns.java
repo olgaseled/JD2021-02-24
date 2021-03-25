@@ -1,6 +1,4 @@
-package by.it.kaminskii.jd01_09;
-
-import java.util.regex.Matcher;
+package by.it.kaminskii.calc;
 
 public interface Patterns {
 
