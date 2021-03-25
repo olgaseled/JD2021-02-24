@@ -5,29 +5,31 @@ import java.util.function.UnaryOperator;
 
 public class ListA<E> implements List<E> {
 
-    //private E[] elements = (E[]) new Object[]{};//массив нулевого размера
+    //private E[] elements = (E[]) new Object[]{};//массив нулевого размера, приводим к типу Е
     @SuppressWarnings("unchecked")
-    private E[] elements = (E[]) new Object[10];//по умолчанию null
+    private E[] elements = (E[]) new Object[0];//по умолчанию null
 
-    private int size;//сколько элеметов содержит
+    private int size ;//сколько элеметов содержит
 
     @Override
     public boolean add(E e) {
         if (size == elements.length) {
+            //получаем новый массив с новой длиной
             elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);//со сдвигом
             //если size 0, то newlength = 1
             //формула, которя эмпирически увеличивает массив
             //для представления, что происходит внутри коллекции
-            elements[size++] = e;//постинкремент: сначала присваивает, затем увеличиваем size
 
         }
+        elements[size++] = e;//постинкремент: сначала присваивает, затем увеличиваем size
         return true;
     }
 
     @Override
     public E remove(int index) {
         E returnValue = elements[index];
-        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        System.arraycopy(elements, index + 1, elements, index, size - index -1);
+        //size - index - 1 - длина кусочка
         elements[--size] = null;
         return returnValue;
     }
@@ -39,12 +41,17 @@ public class ListA<E> implements List<E> {
 
     @Override
     public String toString() {
-        new StringJoiner(", ", "[", "]");
+        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
         //return  Arrays.toString(elements);//в конце остаются нулевые
-        //for (int i=0;i<size;i++){
-
-        //}
-        return super.toString();
+        //обходим до размера массива, а не до elements.length
+        for (int i=0;i<size;i++){
+            //элемент может быть null, тогда не работает toString
+            //stringJoiner.add(elements[i].toString());
+            //stringJoiner.add(String.valueOf(elements[i]));
+            stringJoiner.add((elements[i]==null)?"null":elements[i].toString());
+        }
+        //return super.toString();
+        return stringJoiner.toString();
     }
 
 
