@@ -156,7 +156,7 @@ public class Test_jd01_11 extends HomeWork {
         Class<?> aclass = findClass("SetC");
         Set<Short> a = (Set<Short>) aclass.getDeclaredConstructor().newInstance();
         Set<Short> e = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             e.add((short) (i * 2));
             a.add((short) (i * 2));
             assertSet("ошибка add или toString() не работает", e, a);
