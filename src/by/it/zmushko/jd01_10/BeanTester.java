@@ -12,26 +12,12 @@ public class BeanTester {
         Class<Param> parameters = Param.class;
         for (Method method : methods) {
             if (method.isAnnotationPresent(parameters)) {
-                try {
-                if (obj == null) {
-
-                        obj = cls.getConstructor().newInstance();
-                        method.invoke(obj);
-                        System.out.println(method.invoke(obj));
+                    if (obj == null) {
+                        obj = cls.getDeclaredConstructor().newInstance();
                     }
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                }
+                    Param annotation = method.getAnnotation(Param.class);
+                    Object invoker = method.invoke(obj, annotation.a(), annotation.b());
+                    System.out.printf("%s, %s \n", method.getName(), invoker);
             }
         }
 
