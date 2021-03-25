@@ -4,30 +4,45 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc(String expression) {
 
-        String[] operand = expression.split((Patterns.OPERATIONS));
-        Var one = Var.createVar(operand[0]);
-        Var two = Var.createVar(operand[1]);
-        if (one == null || two == null)
-            return null; //TODO create error
-        Pattern p = Pattern.compile(Patterns.OPERATIONS);
-        Matcher m = p.matcher(expression);
-        if (m.find()) {
-            String operation = m.group();
+    @SuppressWarnings("ConstantConditions")
+    Var evaluate(String expression) {
+        expression = expression.replaceAll("\\s+", "");
+        String[] parts = expression.split(Patterns.OPERATION, 2);
+
+
+        Var leftVar = VarCreator.build(parts[0]);
+        if (parts.length < 2) {
+            return leftVar;
+        }
+
+
+        Var rightVar = VarCreator.build(parts[1]);
+        if (expression.contains("=")){
+            Var.saveVar(parts [0],rightVar);
+
+        }
+        Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
+
+
+
+
+        Matcher matcherOperation = patternOperation.matcher(expression);
+        if (matcherOperation.find()) {
+            String operation = matcherOperation.group();
+
             switch (operation) {
                 case "+":
-                    return one.add(two);
+                    return leftVar.add(rightVar);
                 case "-":
-                    return one.sub(two);
+                    return leftVar.sub(rightVar);
                 case "*":
-                    return one.mul(two);
+                    return leftVar.mul(rightVar);
                 case "/":
-                    return one.div(two);
-
+                    return leftVar.div(rightVar);
             }
         }
-        return null;
 
+        return null; //stub
     }
 }
