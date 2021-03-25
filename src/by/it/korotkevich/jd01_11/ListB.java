@@ -31,11 +31,13 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        E[] otherList = (E[]) c.toArray();
         if (size == elements.length) {
             elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
         }
-        for (int i = 0; i < c.size(); i++) {
-        }
+        elements = Arrays.copyOf(elements, elements.length+otherList.length+1);
+        System.arraycopy(otherList, 0, elements, size, otherList.length);
+        size+=otherList.length;
         return true;
     }
 
@@ -108,7 +110,11 @@ public class ListB<E> implements List<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] array = new Object[elements.length];
+        for (int i = 0; i < elements.length; i++) {
+            array[i] = elements[i];
+        }
+        return array;
     }
 
     @SuppressWarnings("ConstantConditions")
