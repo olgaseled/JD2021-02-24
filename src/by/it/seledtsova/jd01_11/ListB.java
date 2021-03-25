@@ -1,15 +1,11 @@
 package by.it.seledtsova.jd01_11;
 
 import java.util.*;
-import java.util.function.UnaryOperator;
 
-// это интерфейс, поэтому нужно реализовать все нметоды
-
-public class ListA<T> implements List <T> { // указатели типизацию Т и имплементацию
-
+public class ListB <T> implements List <T>  {
     private T[] elements= (T[]) new Object[]{};  // создали приватное поле в котором будет храниться элементы массива
     private int size=0;                  // типа Т с названием elements. Заполним его новым массивом Obgect. и укажем,
-   // что нам массив будет нулевой длинны и скастим его к типу Т. длинна будет увеличиватся по мере добавления элементов
+    // что нам массив будет нулевой длинны и скастим его к типу Т. длинна будет увеличиватся по мере добавления элементов
     //size - хранится наш размер. Первоначально 0
 
     @Override
@@ -27,6 +23,13 @@ public class ListA<T> implements List <T> { // указатели типизац
         size--;
         return del;
     }
+    @Override
+    public T set(int index, T element) {
+        T returnElements=elements[index];
+        elements[index] = element;
+        return returnElements;
+
+    }
 
     @Override
     public T get(int index) {
@@ -42,7 +45,7 @@ public class ListA<T> implements List <T> { // указатели типизац
             stringBuilder.append(delimeter).append(elements[i]); //
             delimeter = ", ";
         }
-            stringBuilder.append("]");
+        stringBuilder.append("]");
 
         return stringBuilder.toString();
     }
@@ -101,8 +104,16 @@ public class ListA<T> implements List <T> { // указатели типизац
     }
 
     @Override
+
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        T[] ArrayList = (T[]) c.toArray();
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, (elements.length * 3 )/ 2 + 1);
+        }
+        elements = Arrays.copyOf(elements, elements.length + ArrayList.length + 1);
+        System.arraycopy(ArrayList, 0, elements, size, ArrayList.length);
+        size += ArrayList.length;
+        return true;
     }
 
     @Override
@@ -123,11 +134,6 @@ public class ListA<T> implements List <T> { // указатели типизац
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public T set(int index, T element) {
-        return null;
     }
 
     @Override
@@ -165,5 +171,4 @@ public class ListA<T> implements List <T> { // указатели типизац
         return null;
     }
 }
-
 
