@@ -68,6 +68,29 @@ public class ListB<E> implements List<E> {
         return true;
     }
 
+    @Override
+    public Iterator<E> iterator() {
+
+        return new Iterator<>() {
+            private int current = -1;
+
+            @Override
+            public boolean hasNext() {
+                return current + 1 < size;
+            }
+
+            @Override
+            public E next() {
+                return elements[current + 1];
+            }
+
+            @Override
+            public void remove() {
+                //удаляем текущий элемент, метож remove уже есть
+                ListB.this.remove(current);
+            }
+        };
+    }
     //----------stubs-------------
 
 
@@ -92,29 +115,7 @@ public class ListB<E> implements List<E> {
     }
 
 
-    @Override
-    public Iterator<E> iterator() {
 
-        return new Iterator<>() {
-            private int current = -1;
-
-            @Override
-            public boolean hasNext() {
-                return current + 1 < size;
-            }
-
-            @Override
-            public E next() {
-                return elements[current + 1];
-            }
-
-            @Override
-            public void remove() {
-                //удаляем текущий элемент, метож remove уже есть
-                ListB.this.remove(current);
-            }
-        };
-    }
 
     @Override
     public void replaceAll(UnaryOperator<E> operator) {
