@@ -2,13 +2,20 @@ package by.it.maksimova.jd01_11;
 
 import java.util.*;
 
-public class ListA<T> implements List<T> {
+public class ListB <T> implements List<T> {
 
-    @SuppressWarnings("unchecked")
     private T[] elements = (T[]) new Object[0];
 
     private int size;
 
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            stringJoiner.add(elements[i].toString());
+        }
+        return stringJoiner.toString();
+    }
 
     @Override
     public boolean add(T element) {
@@ -33,13 +40,31 @@ public class ListA<T> implements List<T> {
     }
 
     @Override
-    public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
-        for (int i = 0; i < size; i++) {
-            stringJoiner.add(elements[i].toString());
-        }
-        return stringJoiner.toString();
+    public T set(int index, T element) {
+        T oldElement=elements[index];
+        elements[index]=element;
+
+        return oldElement;
     }
+
+    @Override
+    public void add(int index, T element) {
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+        System.arraycopy(elements, index, elements, index+1, size-index);
+        size++;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        Object[] newCollection = c.toArray();
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+
+        return true;
+    }
+
+//-----------------------------------------------------------------
 
     @Override
     public int size() {
@@ -82,11 +107,6 @@ public class ListA<T> implements List<T> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
@@ -106,15 +126,7 @@ public class ListA<T> implements List<T> {
 
     }
 
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
 
-    @Override
-    public void add(int index, T element) {
-
-    }
 
     @Override
     public int indexOf(Object o) {
