@@ -53,12 +53,40 @@ public class ListB <T> implements List <T>  {
 
 
     @Override
+    public int indexOf(Object o) { // для коректной работы remove по обьекту нужно реализовать
+        if (o==null) {
+            for (int i = 0; i < size; i++)
+                if (elements[i]==null) // объектом м.б любо null. Если это Null,
+                    return i; //то нужно перебирать все элементы и как только натолкнулись на null возвращать i
+        } else {
+            for (int i = 0; i < size; i++) // иначе перебираемся все элементы и  сравниваемся их по equals.
+                if (o.equals(elements[i]))
+                    return i;
+
+        }
+        return -1;
+    }
+
+    @Override
     public void add(int index, T element) { // должен раздвигать значения массива и при необходимости его увеличивать
         if (size==elements.length)
             elements= Arrays.copyOf(elements,(size*3)/2+1); // копирует из массива элементы с указанной позиции на след позицию
         System.arraycopy(elements,index,elements,index+1,size-index); // указать на какую доинну он копирует
         elements[index]=element;
         size++;
+    }
+
+    @Override
+
+    public boolean addAll(Collection<? extends T> c) {
+        T[] ArrayList = (T[]) c.toArray();
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, (size * 3 )/ 2 + 1);
+        }
+        elements = Arrays.copyOf(elements, size + ArrayList.length + 1);
+        System.arraycopy(ArrayList, 0, elements, size, ArrayList.length);
+        size += ArrayList.length;
+        return true;
     }
 
     @Override
@@ -104,19 +132,6 @@ public class ListB <T> implements List <T>  {
     }
 
     @Override
-
-    public boolean addAll(Collection<? extends T> c) {
-        T[] ArrayList = (T[]) c.toArray();
-        if (size == elements.length) {
-            elements = Arrays.copyOf(elements, (elements.length * 3 )/ 2 + 1);
-        }
-        elements = Arrays.copyOf(elements, elements.length + ArrayList.length + 1);
-        System.arraycopy(ArrayList, 0, elements, size, ArrayList.length);
-        size += ArrayList.length;
-        return true;
-    }
-
-    @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
@@ -134,21 +149,6 @@ public class ListB <T> implements List <T>  {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public int indexOf(Object o) { // для коректной работы remove по обьекту нужно реализовать
-        if (o==null) {
-            for (int i = 0; i < size; i++)
-                if (elements[i]==null) // объектом м.б любо null. Если это Null,
-                    return i; //то нужно перебирать все элементы и как только натолкнулись на null возвращать i
-        } else {
-            for (int i = 0; i < size; i++) // иначе перебираемся все элементы и  сравниваемся их по equals.
-                if (o.equals(elements[i]))
-                    return i;
-
-        }
-        return -1;
     }
 
     @Override
