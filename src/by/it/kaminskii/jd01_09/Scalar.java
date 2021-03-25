@@ -9,30 +9,27 @@ class Scalar extends Var {
 
     @Override
     public Var add(Var other) {
-        if(other instanceof Scalar){
+        if (other instanceof Scalar) {
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
-        }
-        else return other.add(this);
+        } else return other.add(this);
     }
 
     @Override
     public Var sub(Var other) {
-        if(other instanceof Scalar){
+        if (other instanceof Scalar) {
             double odds = this.value - ((Scalar) other).value;
             return new Scalar(-1).mul(other).add(this);
-        }
-        else return other.sub(this);
+        } else return other.sub(this);
 
     }
 
     @Override
     public Var mul(Var other) {
-        if(other instanceof Scalar){
+        if (other instanceof Scalar) {
             double prod = this.value * ((Scalar) other).value;
             return new Scalar(prod);
-        }
-        else return other.mul(this);
+        } else return other.mul(this);
     }
 
     @Override
@@ -42,20 +39,20 @@ class Scalar extends Var {
             if (((Scalar) other).value != 0) {
                 double result = this.value / ((Scalar) other).value;
                 return new Scalar(result);
-            }
-            else return super.div(other);
-        }
-           else return super.div(other);
+            } else return super.div(other);
+        } else return super.div(other);
     }
 
     Scalar(double value) {
         this.value = value;
     }
-    Scalar(String strScalar){
-        this.value= Double.parseDouble(strScalar);
+
+    Scalar(String strScalar) {
+        this.value = Double.parseDouble(strScalar);
     }
-    Scalar(Scalar scallar){
-        this.value=scallar.value;
+
+    Scalar(Scalar scallar) {
+        this.value = scallar.value;
     }
 
     @Override

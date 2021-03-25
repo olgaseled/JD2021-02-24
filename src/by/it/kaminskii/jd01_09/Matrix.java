@@ -7,7 +7,7 @@ class Matrix extends Var {
 
     @Override
     public Var add(Var other) {
-        if(other instanceof Scalar) {
+        if (other instanceof Scalar) {
             double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
                 res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -20,10 +20,8 @@ class Matrix extends Var {
                 }
             }
             return new Matrix(res);
-        }
-
-        else if (other instanceof Matrix)
-            if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
+        } else if (other instanceof Matrix)
+            if (value.length == ((Matrix) other).value.length && value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -35,10 +33,9 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(res);
-            }
-            else return super.add(other);
+            } else return super.add(other);
 
-            else if (other instanceof Vector) {
+        else if (other instanceof Vector) {
             return super.mul(other);
         }
         return super.mul(other);
@@ -59,9 +56,8 @@ class Matrix extends Var {
                 }
             }
             return new Matrix(res);
-        }
-        else if (other instanceof Matrix) {
-            if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
+        } else if (other instanceof Matrix) {
+            if (value.length == ((Matrix) other).value.length && value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -73,10 +69,8 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(res);
-            }
-            else return super.sub(other);
-        }
-        else return super.sub(other);
+            } else return super.sub(other);
+        } else return super.sub(other);
     }
 
     @Override
@@ -95,9 +89,8 @@ class Matrix extends Var {
             }
 
             return new Matrix(res);
-        }
-        else if (other instanceof Vector) {
-            if(value[0].length ==((Vector) other).getValue().length || value.length==((Vector) other).getValue().length) {
+        } else if (other instanceof Vector) {
+            if (value[0].length == ((Vector) other).getValue().length || value.length == ((Vector) other).getValue().length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -110,11 +103,9 @@ class Matrix extends Var {
                     }
                 }
                 return new Vector(matrixSize);
-            }
-            else return super.mul(other);
-        }
-        else if(other instanceof Matrix) {
-            if(value.length == ((Matrix) other).value.length && value[0].length== ((Matrix) other).value[0].length) {
+            } else return super.mul(other);
+        } else if (other instanceof Matrix) {
+            if (value.length == ((Matrix) other).value.length && value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
                 double[][] last = new double[res.length][((Matrix) other).value[0].length];
                 for (int i = 0; i < res.length; i++) {
@@ -128,16 +119,14 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(last);
-            }
-            else return super.mul(other);
-        }
-        else return super.mul(other);
+            } else return super.mul(other);
+        } else return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
-        if(other instanceof Scalar){
-            if(((Scalar) other).getValue()!=0){
+        if (other instanceof Scalar) {
+            if (((Scalar) other).getValue() != 0) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
@@ -150,8 +139,7 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(res);
-            }
-            else return super.div(other);
+            } else return super.div(other);
         }
         return super.div(other);
     }
@@ -162,53 +150,54 @@ class Matrix extends Var {
             this.value[i] = Arrays.copyOf(value[i], value[i].length);
         }
     }
-    public Matrix(Matrix matrix){
-        this.value= matrix.value;
+
+    public Matrix(Matrix matrix) {
+        this.value = matrix.value;
     }
-    Matrix(String strMatrix){
-        String one="";
-        String two="";
-        strMatrix= strMatrix.replaceAll(" ", "");
+
+    Matrix(String strMatrix) {
+        String one = "";
+        String two = "";
+        strMatrix = strMatrix.replaceAll(" ", "");
         String[] matr = strMatrix.split("\\},\\{");
         for (int i = 0; i < matr.length; i++) {
-            if(i<(matr.length-1)) one = matr[i];
+            if (i < (matr.length - 1)) one = matr[i];
             else two = matr[i];
         }
-        one=one.replaceAll("\\{|\\}","");
+        one = one.replaceAll("\\{|\\}", "");
         String[] oneArray = one.split(",");
-        two=two.replaceAll("\\{|\\}","");
+        two = two.replaceAll("\\{|\\}", "");
         String[] twoArray = two.split(",");
-        String[] both =new String[(oneArray.length+ twoArray.length)];
+        String[] both = new String[(oneArray.length + twoArray.length)];
         for (int i = 0; i < oneArray.length; i++) {
-            both[i]=oneArray[i];
-            both[(i+2)]=twoArray[i];
+            both[i] = oneArray[i];
+            both[(i + 2)] = twoArray[i];
         }
         value = new double[oneArray.length][twoArray.length];
         for (int i = 0; i < oneArray.length; i++) {
             for (int j = 0; j < oneArray.length; j++) {
-                if(i< (oneArray.length-1)) value[i][j]= Double.parseDouble(oneArray[j]);
-                else value[i][j]=Double.parseDouble(twoArray[j]);
+                if (i < (oneArray.length - 1)) value[i][j] = Double.parseDouble(oneArray[j]);
+                else value[i][j] = Double.parseDouble(twoArray[j]);
             }
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder sb2=new StringBuilder("{");
+        StringBuilder sb2 = new StringBuilder("{");
         String delim2 = "";
         int j = 0;
-        for (int i = 0; i <value.length; i++) {
+        for (int i = 0; i < value.length; i++) {
             sb2.append(delim2).append("{");
-            for (j = 0; j <value[0].length; j++) {
+            for (j = 0; j < value[0].length; j++) {
                 double elem = value[i][j];
                 sb2.append(delim2).append(elem);
                 delim2 = ", ";
             }
-            if(i < (value.length-1)){
+            if (i < (value.length - 1)) {
                 sb2.append("}").append(delim2);
-                delim2="";
-            }
-            else {
+                delim2 = "";
+            } else {
                 sb2.append("}}");
             }
 
@@ -218,14 +207,6 @@ class Matrix extends Var {
         return sb2.toString();
     }
 }
-
-
-
-
-
-
-
-
 
 
 //  StringBuilder sb=new StringBuilder("{");

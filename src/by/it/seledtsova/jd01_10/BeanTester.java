@@ -14,7 +14,7 @@ public class BeanTester {
             {
                 if (o == null) {
                     o = beanClass.getDeclaredConstructor().newInstance();
-                  //  method.invoke(o);
+
                 }
                 Param param = method.getAnnotation(Param.class);
                 Object invoke = method.invoke(o, param.a(), param.b());
