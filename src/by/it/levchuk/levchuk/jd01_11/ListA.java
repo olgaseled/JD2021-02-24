@@ -5,47 +5,29 @@ import java.util.*;
 
 public class ListA<T>implements List<T> {
 
-    private T[] elements= (T[]) new Object[]{};
-    private int size=0;
+    private T[] elements = (T[]) new Object[0];
+    private int size;
 
     @Override
     public boolean add(T t) {
-        if (size==elements.length)
-            elements= Arrays.copyOf(elements,(size*3)/2+1);
-        elements[size++]=t;
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb=new StringBuilder("[");
-        String delimeter="";
-        for (T element : elements) {
-            sb.append(delimeter).append(element);
-            delimeter=", ";
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
         }
-        sb.append("]");
-        return sb.toString();
+        elements[size++] = t;
+        return false;
     }
 
     @Override
     public T get(int index) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
+        return elements[index];
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        T returnValue = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        elements[--size] = null;
+        return returnValue;
     }
 
     @Override
@@ -76,6 +58,11 @@ public class ListA<T>implements List<T> {
     @Override
     public <T1> T1[] toArray(T1[] a) {
         return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
     }
 
     @Override
@@ -114,6 +101,11 @@ public class ListA<T>implements List<T> {
     }
 
     @Override
+    public void add(int index, T element) {
+
+    }
+
+    @Override
     public int indexOf(Object o) {
         return 0;
     }
@@ -136,5 +128,14 @@ public class ListA<T>implements List<T> {
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner txt = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            txt.add(elements[i].toString());
+        }
+        return txt.toString();
     }
 }
