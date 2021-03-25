@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-        List<String> list =new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("one");
         list.add("two");
         list.add("three");
@@ -14,6 +14,5 @@ public class Runner {
         list.remove(2);
         System.out.println(list);
         System.out.println(list.get(1));
-
     }
 }
