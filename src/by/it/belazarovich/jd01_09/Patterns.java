@@ -1,11 +1,10 @@
 package by.it.belazarovich.jd01_09;
 
+interface Patterns {
 
-    public class Patterns {
+    String OPERATION = "[-+*/]";
+    String SCALAR = "-?[0-9]+(\\.[0-9]+)?";
+    String VECTOR = "\\{" + SCALAR + "(," + SCALAR + ")*}";
+    String MATRIX = "\\{" + VECTOR + "(," + VECTOR + ")*}";
 
-        static  final String OPERATIONS  = "[-+/*]";
-        static  final String SCALAR = "-?[0-9]+\\.?[0-9]*";
-        static  final String VECTOR = "\\{((-?[0-9]+\\.?[0-9]*),?)+}";
-        static  final String MATRIX = "\\{(\\{((-?[0-9]+\\.?[0-9]*),?)+},?)+}";
-
-    }
+}
