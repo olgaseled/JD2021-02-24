@@ -3,9 +3,8 @@ package by.it.khrolovich.jd01_11;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-public class ListA<E> implements List<E> {
+public class ListB<E> implements List<E> {
 
-    //private E[] elements = (E[]) new Object[]{};//массив нулевого размера, приводим к типу Е
     @SuppressWarnings("unchecked")
     private E[] elements = (E[]) new Object[0];//по умолчанию null
 
@@ -14,14 +13,9 @@ public class ListA<E> implements List<E> {
     @Override
     public boolean add(E e) {
         if (size == elements.length) {
-            //получаем новый массив с новой длиной
             elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);//со сдвигом
-            //если size 0, то newlength = 1
-            //формула, которя эмпирически увеличивает массив
-            //для представления, что происходит внутри коллекции
-
         }
-        elements[size++] = e;//постинкремент: сначала присваивает, затем увеличиваем size
+        elements[size++] = e;
         return true;
     }
 
@@ -29,7 +23,6 @@ public class ListA<E> implements List<E> {
     public E remove(int index) {
         E returnValue = elements[index];
         System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        //size - index - 1 - длина кусочка
         elements[--size] = null;
         return returnValue;
     }
@@ -42,30 +35,40 @@ public class ListA<E> implements List<E> {
     @Override
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
-        //return  Arrays.toString(elements);//в конце остаются нулевые
-        //обходим до размера массива, а не до elements.length
         for (int i = 0; i < size; i++) {
-            //элемент может быть null, тогда не работает toString
-            //stringJoiner.add(elements[i].toString());
-            //stringJoiner.add(String.valueOf(elements[i]));
+
             stringJoiner.add((elements[i] == null) ? "null" : elements[i].toString());
         }
-        //return super.toString();
         return stringJoiner.toString();
     }
 
-
-    //----------stubs-------------
-
     @Override
     public void add(int index, E element) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);//со сдвигом
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
+        size++;
 
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+    public E set(int index, E element) {
+        E delItem = elements[index];
+        elements[index] = element;
+        return delItem;
     }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        for (E element : c) {
+            this.add(element);
+        }
+        return true;
+    }
+
+    //----------stubs-------------
 
 
     @Override
@@ -89,10 +92,28 @@ public class ListA<E> implements List<E> {
     }
 
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public Iterator<E> iterator() {
-        return null;
+
+        return new Iterator<>() {
+            private int current = -1;
+
+            @Override
+            public boolean hasNext() {
+                return current + 1 < size;
+            }
+
+            @Override
+            public E next() {
+                return elements[current + 1];
+            }
+
+            @Override
+            public void remove() {
+                //удаляем текущий элемент, метож remove уже есть
+                ListB.this.remove(current);
+            }
+        };
     }
 
     @Override
@@ -105,6 +126,10 @@ public class ListA<E> implements List<E> {
 
     }
 
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        return false;
+    }
 
     @Override
     public Object[] toArray() {
@@ -122,10 +147,6 @@ public class ListA<E> implements List<E> {
         return false;
     }
 
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
 
     @Override
     public boolean removeAll(Collection<?> c) {
@@ -142,10 +163,6 @@ public class ListA<E> implements List<E> {
 
     }
 
-    @Override
-    public E set(int index, E element) {
-        return null;
-    }
 
     @Override
     public int indexOf(Object o) {
