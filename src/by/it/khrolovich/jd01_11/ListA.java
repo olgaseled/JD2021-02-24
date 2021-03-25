@@ -98,11 +98,6 @@ public class ListA<E> implements List<E> {
 
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public Spliterator<E> spliterator() {
-        return null;
-    }
 
     @Override
     public Object[] toArray() {
@@ -140,7 +135,6 @@ public class ListA<E> implements List<E> {
 
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public E set(int index, E element) {
         return null;
