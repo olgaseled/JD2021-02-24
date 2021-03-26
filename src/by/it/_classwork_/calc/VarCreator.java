@@ -14,7 +14,7 @@ class VarCreator {
         } else if (strVar.matches(Patterns.MATRIX)) {
             return new Matrix(strVar);
         } else {
-            return null; //TODO stub - generate Error here
+            return Var.load(strVar); //TODO stub - generate Error here
         }
 
     }
