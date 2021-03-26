@@ -21,7 +21,7 @@ abstract class Var implements Operation {
             Map.Entry<String, Var> mapEntry = i.next();
             System.out.println(mapEntry.getKey() + "=" + mapEntry.getValue());
         }
-    }
+    } //TODO sortVar делается при помощи TreeMap
 
     @Override
     public Var add(Var other) {
