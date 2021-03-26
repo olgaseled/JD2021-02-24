@@ -73,28 +73,20 @@ public class Vector extends Var {
 
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
-            double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] *= secondScalar;
+            double[] res = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i] = res[i] * ((Scalar) other).getValue();
             }
-            return new Vector(resultVector);
+            return new Vector(res);
         }
-        double sum = 0;
-        double [] sumArray = new double[1];
         if (other instanceof Vector) {
-            double[] secondVector = ((Vector) other).value;
-            double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] *= secondVector[i];
+            double sum = 0;
+            for (int i = 0; i < value.length; i++) {
+                sum += value[i] * ((Vector) other).value[i];
             }
-        for (int i = 0; i < resultVector.length; i++) {
-            sum += resultVector[i];
+            return new Scalar(sum);
         }
-            sumArray[0]=sum;
-            return new Vector(sumArray);
-        }
-        return super.mul(other);
+        return super.sub(other);
     }
 
     public Var div(Var other) {

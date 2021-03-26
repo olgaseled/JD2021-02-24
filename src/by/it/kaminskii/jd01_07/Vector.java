@@ -3,32 +3,34 @@ package by.it.kaminskii.jd01_07;
 import java.util.Arrays;
 
 class Vector extends Var {
-    private final double[ ] value;
+    private final double[] value;
 
     Vector(double[] value) {
         this.value = value;
     }
+
     Vector(Vector vector) {
         this.value = vector.value;
     }
 
-    Vector(String strVector){
-        strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");;
+    Vector(String strVector) {
+        strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");
+        ;
         String[] v = strVector.split(",");
         value = new double[v.length];
         for (int i = 0; i < v.length; i++) {
-            value[i]=Double.parseDouble(v[i]);
+            value[i] = Double.parseDouble(v[i]);
             System.out.println(value[i]);
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder sb=new StringBuilder("{");
+        StringBuilder sb = new StringBuilder("{");
         String delim = "";
-        for(double element:value){
+        for (double element : value) {
             sb.append(delim).append(element);
-            delim=", ";
+            delim = ", ";
         }
         sb.append("}");
         return sb.toString();

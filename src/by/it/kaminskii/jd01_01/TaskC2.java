@@ -20,9 +20,9 @@ OCT:42+32=74
 class TaskC2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-                int i = sc.nextInt();
-                int j = sc.nextInt();
-                int k = i + j;
+        int i = sc.nextInt();
+        int j = sc.nextInt();
+        int k = i + j;
         System.out.println("DEC:" + i + "+" + j + "=" + k);
 
         String c = Integer.toBinaryString(i);
@@ -40,6 +40,6 @@ class TaskC2 {
         String e = Integer.toOctalString(k);
         System.out.println("OCT:" + q + "+" + w + "=" + e);
     }
-    }
+}
 
 

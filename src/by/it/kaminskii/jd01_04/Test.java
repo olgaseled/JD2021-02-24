@@ -7,40 +7,32 @@ public class Test {
     public static void main(String[] args) {
 
     }
-        static void buildOneDimArray(String line) {
-            double[] array = InOut.getArray(line);
-            double start = array[0];
-            double last = array[array.length - 1];
-            InOut.printArray(array, "V", 5);
-            Helper.sort(array);
-            InOut.printArray(array, "V", 4);
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] == start) {
-                    System.out.println("Index of first element=" + i);
-                    break;
-                }
-            }
-        }
-        static void quickSort(int[] array, int min, int max){
-            if (array.length == 0)
-                return;
-            if(min >= max)
-                return;
-            int mid = min + (max - min) / 2;
-            int main = array[mid];
 
+    static void buildOneDimArray(String line) {
+        double[] array = InOut.getArray(line);
+        double start = array[0];
+        double last = array[array.length - 1];
+        InOut.printArray(array, "V", 5);
+        Helper.sort(array);
+        InOut.printArray(array, "V", 4);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == start) {
+                System.out.println("Index of first element=" + i);
+                break;
+            }
         }
     }
 
+    static void quickSort(int[] array, int min, int max) {
+        if (array.length == 0)
+            return;
+        if (min >= max)
+            return;
+        int mid = min + (max - min) / 2;
+        int main = array[mid];
 
-
-
-
-
-
-
-
-
+    }
+}
 
 
 //        Scanner sc=new Scanner(System.in);
