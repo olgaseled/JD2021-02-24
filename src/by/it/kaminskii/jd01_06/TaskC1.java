@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class TaskC1 {
     static String text = Poem.text;
     static String[] sent = text.split("[\n]");
-    static int position=1;
+    static int position = 1;
 
 
     public static void main(String[] args) {
@@ -28,9 +28,7 @@ public class TaskC1 {
                         position = matcher.end();
                         search.insert(position, " ");
                         position++;
-                    }
-
-                else{
+                    } else {
                         position = 0;
                     }
                 }

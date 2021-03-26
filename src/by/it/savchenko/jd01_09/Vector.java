@@ -30,8 +30,8 @@ public class Vector extends by.it.savchenko.jd01_09.Var {
 
     @Override
     public by.it.savchenko.jd01_09.Var add(by.it.savchenko.jd01_09.Var other) {
-        if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
+        if (other instanceof by.it.savchenko.jd01_09.Scalar) {
+            double secondScalar = ((by.it.savchenko.jd01_09.Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] += secondScalar;
@@ -51,8 +51,8 @@ public class Vector extends by.it.savchenko.jd01_09.Var {
     }
 
     public by.it.savchenko.jd01_09.Var sub(by.it.savchenko.jd01_09.Var other) {
-        if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
+        if (other instanceof by.it.savchenko.jd01_09.Scalar) {
+            double secondScalar = ((by.it.savchenko.jd01_09.Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] -= secondScalar;
@@ -72,34 +72,26 @@ public class Vector extends by.it.savchenko.jd01_09.Var {
     }
 
     public by.it.savchenko.jd01_09.Var mul(by.it.savchenko.jd01_09.Var other) {
-        if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
-            double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] *= secondScalar;
+        if (other instanceof by.it.savchenko.jd01_09.Scalar) {
+            double[] res = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i] = res[i] * ((by.it.savchenko.jd01_09.Scalar) other).getValue();
             }
-            return new Vector(resultVector);
+            return new Vector(res);
         }
-        double sum = 0;
-        double [] sumArray = new double[1];
         if (other instanceof Vector) {
-            double[] secondVector = ((Vector) other).value;
-            double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] *= secondVector[i];
+            double sum = 0;
+            for (int i = 0; i < value.length; i++) {
+                sum += value[i] * ((Vector) other).value[i];
             }
-        for (int i = 0; i < resultVector.length; i++) {
-            sum += resultVector[i];
+            return new by.it.savchenko.jd01_09.Scalar(sum);
         }
-            sumArray[0]=sum;
-            return new Vector(sumArray);
-        }
-        return super.mul(other);
+        return super.sub(other);
     }
 
     public by.it.savchenko.jd01_09.Var div(by.it.savchenko.jd01_09.Var other) {
-        if (other instanceof Scalar) {
-            double secondScalar = ((Scalar) other).getValue();
+        if (other instanceof by.it.savchenko.jd01_09.Scalar) {
+            double secondScalar = ((by.it.savchenko.jd01_09.Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] /= secondScalar;
