@@ -58,10 +58,16 @@ public class SetC<T> implements Set<T> {
             return false;
         }
         for (int i = 0; i < size; i++) {
-            if (elements[i].equals(o)) {
-                switcherRemove = true;
-                index = i;
-                break;
+            if(elements[i] == null) {
+                if (elements[i] == o) {
+                    return true;
+                }
+            } else {
+                if (elements[i].equals(o)) {
+                    switcherRemove = true;
+                    index = i;
+                    break;
+                }
             }
         }
         if (switcherRemove) {
@@ -74,10 +80,17 @@ public class SetC<T> implements Set<T> {
 
 
     @Override
+    public boolean removeAll(Collection<?> c) {
+
+        return false;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
-            private  int current = -1;
+            private int current = -1;
+
             @Override
             public boolean hasNext() {
                 return current + 1 < size;
@@ -98,47 +111,29 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean contains(Object o) {
         Iterator<T> it = iterator();
-            while(it.hasNext()) {
-                if(o == null) {
-                    if(it.next() == o) {
-                        return true;
-                    }
-                } else {
-                    if(o.equals(it.next())) {
-                        return true;
-                    }
+        while (it.hasNext()) {
+            if (o == null) {
+                if (it.next() == o) {
+                    return true;
+                }
+            } else {
+                if (o.equals(it.next())) {
+                    return true;
                 }
             }
+        }
         return false;
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-//        for(Object element : c) {
-//            if(!contains(element)) {
-//                return false;
-//            }
-//        }
-        Object[] newElements = c.toArray();
-        for (int i = 0; i < newElements.length; i++) {
-            if(!contains(newElements[i])) {
+    public boolean containsAll(Collection<?> newElements) {
+//        Object[] newElements1 = newElements.toArray(); ??????????????????????????????????
+        for (Object newElement : newElements) { // ?????
+            if (!contains(newElement)) {
                 return false;
             }
         }
         return true;
-    }
-
-    @Override
-    public int size() {
-        return this.size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -152,6 +147,19 @@ public class SetC<T> implements Set<T> {
             }
         }
         return txt.toString();
+    }
+
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -171,11 +179,6 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
         return false;
     }
 

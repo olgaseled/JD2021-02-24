@@ -1,5 +1,6 @@
 package by.it.voitsekhovskiy.jd01_11;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Runner {
@@ -9,10 +10,10 @@ public class Runner {
         hash.add("two");
         hash.add("two2");
 
-//        SetC<String> hash2 = new SetC<>();
-//        hash2.add("one");
-//        hash2.add("three");
-//        System.out.println(hash.containsAll(hash2));
+        SetC<String> hash2 = new SetC<>();
+        hash2.add("one");
+        hash2.add("two");
+        System.out.println(hash.containsAll(hash2));
 //
 //        HashSet<String> hash3 = new HashSet<>();
 
