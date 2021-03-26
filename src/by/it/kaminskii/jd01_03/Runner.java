@@ -13,7 +13,7 @@ public class Runner {
         double[][] arrayMatrix = new double[2][2];
         for (int i = 0; i < arrayMatrix.length; i++) {
             for (int j = 0; j < arrayMatrix.length; j++) {
-                arrayMatrix[i][j]= scanner.nextDouble();
+                arrayMatrix[i][j] = scanner.nextDouble();
 
             }
 
@@ -21,7 +21,7 @@ public class Runner {
 
 
         InOut.printArray(array);
-        InOut.printArray(array,"V",3);
+        InOut.printArray(array, "V", 3);
         Helper.findMin(array);
         Helper.findMax(array);
         Helper.sort(array);
