@@ -11,5 +11,6 @@ public class TaskA3 {
         while (true){
             String word = scanner.next();
         }
+
     }
 }
