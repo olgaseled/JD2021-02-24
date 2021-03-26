@@ -35,27 +35,26 @@ import java.util.Scanner;
 */
 class TaskC3 {
 
-        public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
-            int we = sc.nextInt();
-            double wm = getWeight(we);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int we = sc.nextInt();
+        double wm = getWeight(we);
 
-            System.out.println(wm);
-        }
-
-        private static double getWeight(int we) {
-
-           final double GE = 9.81;
-           final double GM = 3.86;
-            double wm= we / GE * GM;
-            int we100 = (int) (wm * 100);
-            if (wm * 100 - we100 < 0.5){
-                return  we100 / 100.00;
-            }
-            else
-                return (we100 + 1) / 100.00;
-
-        }
+        System.out.println(wm);
     }
+
+    private static double getWeight(int we) {
+
+        final double GE = 9.81;
+        final double GM = 3.86;
+        double wm = we / GE * GM;
+        int we100 = (int) (wm * 100);
+        if (wm * 100 - we100 < 0.5) {
+            return we100 / 100.00;
+        } else
+            return (we100 + 1) / 100.00;
+
+    }
+}
 
 

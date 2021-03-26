@@ -1,7 +1,7 @@
 package by.it.seledtsova.calt;
 
 public class Patterns {
-    static final String OPERATION ="[-+/*]"; //смотри ниже коментарии
+    static final String OPERATION ="[-=+/*]"; //смотри ниже коментарии
     static final String SCALAR ="-?[0-9]+\\.?[0-9]*";
     static final String VECTOR ="\\{((-?[0-9]+\\.?[0-9]*),?)+}";
     static final String MATRIX ="\\{(\\{((-?[0-9]+\\.?[0-9]*),?)+},?)+}"; // не учитываются отрицательные числа
