@@ -4,28 +4,28 @@ import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
-    step1();
+        step1();
 
-    Scanner scanner = new Scanner(System.in);
-    int month = scanner.nextInt();
-    step2(month);
-        double a =scanner.nextDouble();
-        double b =scanner.nextDouble();
-        double c =scanner.nextDouble();
-        step3(a, b, c );
+        Scanner scanner = new Scanner(System.in);
+        int month = scanner.nextInt();
+        step2(month);
+        double a = scanner.nextDouble();
+        double b = scanner.nextDouble();
+        double c = scanner.nextDouble();
+        step3(a, b, c);
     }
 
-    private static void step1(){
+    private static void step1() {
         for (int i = 0; i <= 25; i++) {
-            System.out.print(i+" ");
-            if (i % 5 == 0){
+            System.out.print(i + " ");
+            if (i % 5 == 0) {
                 System.out.println();
+            }
         }
     }
-}
 
     private static void step2(int month) {
-        switch (month){
+        switch (month) {
             case 1:
                 System.out.println("январь");
                 break;
@@ -66,7 +66,6 @@ public class TaskB {
                 System.out.println("нет такого месяца");
 
 
-
         }
 
     }
@@ -74,17 +73,15 @@ public class TaskB {
     private static void step3(double a, double b, double c) {
 
         double dis = b * b - 4 * a * c;
-        if(dis<0){
+        if (dis < 0) {
             System.out.println("корней нет");
-        }
-        else if (dis == 0){
-            double x=-b/(2*a);
+        } else if (dis == 0) {
+            double x = -b / (2 * a);
             System.out.println(x);
-        }
-        else {
-            double x1=(-b+ Math.sqrt(dis))/(2*a);
-            double x2=(-b+ Math.sqrt(dis))/(2*a);
-            System.out.println(x1+" "+ x2);
+        } else {
+            double x1 = (-b + Math.sqrt(dis)) / (2 * a);
+            double x2 = (-b + Math.sqrt(dis)) / (2 * a);
+            System.out.println(x1 + " " + x2);
             System.out.println("-2.0");
         }
 

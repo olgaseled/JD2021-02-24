@@ -23,7 +23,4 @@ class TaskC1 {
     }
 
 
-
-
-
 }
