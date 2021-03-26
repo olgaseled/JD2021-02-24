@@ -9,17 +9,28 @@ public class Runner {
     public static void main(String[] args) {
         List<String> list = new ListB<>();
         List<String> listerList= new ListB<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        list.add("four");
-        list.add("five");
+        list.add("0");
+        list.add("2");
+        list.add("4");
+        list.add("6");
+        list.add("8");
+        list.add("10");
+        list.add("12");
+        list.add("14");
+        list.add("16");
+        list.add("18");
         System.out.println(list);
-        list.remove(2);
+        list.remove(0);
+        list.remove(4);
+        list.remove(7);
         list.get(2);
-        list.set(2,"triiiii");
-        list.add(3,"beng");
-        list.set(0,"3");
         System.out.println(list +"\n");
+        list.set(0,"0");
+        list.set(6,null);
+        listerList.add("1000");
+        listerList.add("1001");
+        listerList.add("1002");
+        System.out.println(list);
+
     }
 }

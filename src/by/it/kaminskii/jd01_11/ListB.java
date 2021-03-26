@@ -1,5 +1,6 @@
 package by.it.kaminskii.jd01_11;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ListB<E> implements List<E> {
@@ -32,12 +33,12 @@ public class ListB<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        E el= elements[index];
+        E el = elements[index];
         if (size == elements.length)
             elements = Arrays.copyOf(elements, (size * 3 / 2 + 1));
-        elements[index]=element;
+        elements[index] = element;
 
-            return el;
+        return el;
 
     }
 
@@ -52,16 +53,19 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        if (size == elements.length)
-            elements = Arrays.copyOf(elements, (size * 3 / 2 + 1));
-        return false;
+        for(E element : c){
+            this.add(element);
+        }
+        return true;
     }
 
     @Override
     public String toString() {
         StringJoiner sj = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
-            sj.add(elements[i].toString());
+            if (elements[i] == null) {
+                sj.add("null");
+            } else sj.add(elements[i].toString());
         }
         return sj.toString();
     }
