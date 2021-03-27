@@ -1,6 +1,21 @@
 package by.it._classwork_.calc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract class Var implements Operation {
+
+    private static Map<String, Var> vars = new HashMap<>();
+
+    static Var save(String key, Var value) {
+        vars.put(key, value);
+        return value;
+    }
+
+    static Var load(String key) {
+
+        return vars.get(key);
+    }
 
     @Override
     public Var add(Var other) {
