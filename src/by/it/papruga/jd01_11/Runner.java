@@ -13,7 +13,10 @@ public class Runner {
         myList.add("First"); arList.add("First");
         myList.add("Two"); arList.add("Two");
         myList.add("Four"); arList.add("Four");
-        System.out.println("add myList:"+myList+"\narList:"+arList);
+
+        System.out.println("myList:"+myList+"\narList:"+arList);
+
+
         myList.add(2,"Tree"); arList.add(2,"Tree");
         myList.add(0,"Start"); arList.add(0,"Start");
         System.out.println("add() myList:"+myList+"\narList:"+arList);

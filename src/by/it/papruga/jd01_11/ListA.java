@@ -7,7 +7,9 @@ public class ListA<T> implements List<T> {
 
     private int size = 0;
 
-
+    public int getSize() {
+        return size;
+    }
 
     @Override
     public boolean add(T t) {
