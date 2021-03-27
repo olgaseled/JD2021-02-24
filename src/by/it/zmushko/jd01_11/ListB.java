@@ -40,7 +40,7 @@ public class ListB<T> implements List<T> {
     public boolean addAll(Collection<? extends T> c) {
         boolean check = false;
         for (T t : c) {
-            add(t);
+            this.add(t);
             check = true;
         }
         return check;
@@ -50,7 +50,7 @@ public class ListB<T> implements List<T> {
     public T remove(int index) {
         T returnValue = elem[index]; //возврат удаляемого эл=та
         System.arraycopy(elem, index + 1, elem, index, size - index - 1);
-        elem[size--] = null;
+        elem[--size] = null;
         return returnValue;
     }
 
@@ -75,7 +75,7 @@ public class ListB<T> implements List<T> {
 
     @Override
     public int size() {
-        return elem.length;
+        return size;
     }
 
     @Override

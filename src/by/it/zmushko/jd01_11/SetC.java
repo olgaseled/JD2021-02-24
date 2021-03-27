@@ -1,8 +1,6 @@
 package by.it.zmushko.jd01_11;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class SetC<E> implements Set<E> {
 
@@ -11,47 +9,83 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public String toString() {
-        return null;
+        StringJoiner join = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            join.add(String.valueOf(elem[i]));
+        }
+        return join.toString();
     }
 
     @Override
     public boolean add(E e) {
+        //сразу проверка на размер
+        if (size == elem.length) {
+            elem = Arrays.copyOf(elem, elem.length * 3 / 2 + 1);
+        }
+        //проверка на вхождение в множество
+        for (int i = 0; i < elem.length; i++) {
+            if (!Arrays.asList(elem).contains(e)) {
+                elem[size++] = e;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        for (E e : c) {
+            add(e);
+        }
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (elem[i] == o) {
+                System.arraycopy(elem, i + 1, elem, i, size - i - 1);
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean contains(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (elem[i] == o) return true;
+        }
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
+        for (Object o : c) {
+            if (Arrays.asList(elem).contains(o)) ;
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        Arrays.asList(elem).clear();
+        return true;
     }
 
     //дальше не лезть
