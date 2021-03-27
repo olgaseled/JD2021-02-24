@@ -11,12 +11,15 @@ public class TaskA1 {
     private static Object Integer;
 
     public static void main(String[] args) {
+        TaskA1 taskA1=new TaskA1();
         ArrayList<Integer> marks=new ArrayList<Integer>(20);
         for (int i = 0; i <10; i++) {
             int element = (int) (Math.random() * 10 + 1);
             marks.add(element);
         }
         System.out.println(marks);// заполнить массив,
+        taskA1.clearBad(marks);
+        System.out.println(marks);
         }
 
         private void clearBad (List<Integer>myMarks) {
@@ -25,9 +28,9 @@ public class TaskA1 {
            Integer myMark= iterator.next();
            if (myMark<=3) {
                iterator.remove();
+
            }
 
-            System.out.println(myMarks);
         }
         }
         /*
