@@ -98,7 +98,6 @@ public class ListB <T> implements List<T> {
         if (size < (elements.length + a.length))
             elements = Arrays.copyOf(elements, size + a.length);
 
-
         for (int i = 0; i < a.length; i++) {
             elements[i+size] = (T) a[i];
         }
