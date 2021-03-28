@@ -13,11 +13,14 @@ public class TaskA1 {
 
     private void clearBad(List<Integer> ratingList) {
         Iterator<Integer> iterator = ratingList.iterator();
-        while (iterator.hasNext()) {
-            int rating = iterator.next();
-            if (rating < 4)
-                iterator.remove();
+        if (iterator.hasNext()) {
+            do {
+                int rating = iterator.next();
+                if (rating < 4)
+                    iterator.remove();
+            } while (iterator.hasNext());
         }
+//        ratingList.removeIf(i -> (i<4));
     }
 
     public static void main(String[] args) {
