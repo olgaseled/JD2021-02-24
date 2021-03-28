@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_12;
+package by.it.dudko.jd01_12;
 
 
 import by.it.HomeWork;
