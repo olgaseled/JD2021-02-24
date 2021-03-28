@@ -1,37 +1,44 @@
 package by.it.papruga.jd01_12;
 
-import by.it.papruga.jd01_04.TaskA;
-
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class TaskA1 {
 
-    private List<Integer> grades = new ArrayList<>();
 
-    private static Random random = new Random();
+    private List<Integer> grades = new ArrayList<>();
 
     public static void main(String[] args) {
 
-        TaskA1 instance = new TaskA1();
+        TaskA1 task = new TaskA1();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 25; i++) {
 
-            int grade = random.nextInt(10) + 1;
-
-            instance.grades.add(grade);
-
+            task.grades.add((int) Math.ceil(Math.random()*10));
+            
         }
 
-        System.out.println(instance.grades);
-        instance.clearBad(instance.grades);
+        System.out.println(task.grades);
+        task.clearBad(task.grades);
+
+        System.out.println(task.grades);
+
     }
 
     void clearBad(List<Integer> grades){
 
+        Iterator<Integer> iterator = grades.iterator();
+
+        while (iterator.hasNext())
+        {
+            int grade = iterator.next();
+            if (grade < 4)
+            iterator.remove();
+        }
+
+    }
 
 
-}
 
 }
