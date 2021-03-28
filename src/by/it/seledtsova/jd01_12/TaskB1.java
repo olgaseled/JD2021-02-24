@@ -9,27 +9,27 @@ package by.it.seledtsova.jd01_12;
 import java.util.*;
 
 public class TaskB1 {
+    private static Object Integer;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-       List<String> result = new ArrayList<>();
+        Map<Integer,String> hashMap = new HashMap<Integer,String>();
 
-        while (true) {
+       while (true) {
+           int a= (int) (Math.random()*100+1);
             String word = scanner.next(); // слова будут вводися, пока не будет слово "end"
             if (word.equals("end")) { //сравнении объектов между собой
                 break;
                         }
-            else result.add(word);
+            else hashMap.put(a, word);
         }
-        System.out.println(result);
-
-      //  Map<String,Integer> hashMap=new HashMap<String,Integer>();
-
+        System.out.println(hashMap);
+        System.out.println(hashMap);
         }
-
     }
 
 /*
-Meet my family. There are five of us – my parents, my elder brother,
+Meet my family. There are five of us – my parents, my elder brother ,
 my baby sister and me. First, meet my mum and dad, Jane and Michael. My mum enjoys reading
- and my dad enjoys playing chess with my brother Ken. My mum is slim and rather tall.
+ and my dad enjoys playing chess with my brother Ken. My mum is slim and rather tall. end
  */
