@@ -9,24 +9,27 @@ package by.it.seledtsova.jd01_12;
 import java.util.*;
 
 public class TaskB1 {
-    private static Object Integer;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Map<Integer,String> hashMap = new HashMap<Integer,String>();
-
-       while (true) {
-           int a= (int) (Math.random()*100+1);
-            String word = scanner.next(); // слова будут вводися, пока не будет слово "end"
-            if (word.equals("end")) { //сравнении объектов между собой
+        Map<String, Integer> hashMap = new HashMap<>();
+        while (true) {
+        String word = scanner.next(); // слова будут вводится, пока не будет слово "end"
+          if (word.equals("end")) { //сравнение объектов между собой. при встрече с end stop
                 break;
-                        }
-            else hashMap.put(a, word);
+            }
+            String text = word.replaceAll("[.;:,!?]", "").trim();
+            if (!hashMap.containsKey(text)) {
+                hashMap.put(text, 1);
+            } else {
+                hashMap.put(text, hashMap.get(text)+1);
+            }
         }
-        System.out.println(hashMap);
-        System.out.println(hashMap);
-        }
+            System.out.println(hashMap);
     }
+}
+
+
 
 /*
 Meet my family. There are five of us – my parents, my elder brother ,
