@@ -21,11 +21,12 @@ public class TaskA1 {
         instance.clearBad(instance.grades);
     }
 
-    void clearBad(List<Integer> grades){
-        for (Iterator<Integer> iterator = grades.iterator(); iterator.hasNext(); ) {
-            Integer grade = iterator.next();
-            if (grade < 4) {
-                grades.remove(grade);
+    private void clearBad(List<Integer> myGrades){
+        Iterator<Integer> iterator = myGrades.iterator();
+        while (iterator.hasNext()) {
+            Integer myGrade = iterator.next();
+            if (myGrade < 4) {
+                iterator.remove();
             }
         }
     }
