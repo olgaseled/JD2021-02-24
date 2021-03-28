@@ -9,25 +9,20 @@ public class TaskB1 {
         Scanner scanner = new Scanner(System.in);
         HashMap<String, Integer> hashMap = new HashMap<>();
         int count = 1;
-        boolean endOfText = false;
         while (true) {
             String words = scanner.nextLine();
             Pattern pattern = Pattern.compile("[a-zA-Z']+");
             Matcher matcher = pattern.matcher(words);
+            if (words.equals("end")) {
+                break;
+            }
             while (matcher.find()) {
                 String word = matcher.group();//слово
-                if (word.equals("end")) {
-                    endOfText = true;
-                    break;
-                }
                 if (hashMap.containsKey(word)) {
                     hashMap.put(word, hashMap.get(word) + 1);
                 } else {
                     hashMap.put(word, count);
                 }
-            }
-            if (endOfText) {
-                break;
             }
         }
         Iterator<Map.Entry<String, Integer>> itr = hashMap.entrySet().iterator();
