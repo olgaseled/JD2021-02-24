@@ -13,8 +13,8 @@ public class TaskB2 {
             sentence[i] = sentence[i].replaceAll("[^а-яА-ЯёЁ]+", " ").trim();
         }
         for (int i = 0; i < sentence.length - 1; i++) {
-            for (int j = i ; j < sentence.length; j++) {
-                if(sentence[i].length() > sentence[j].length()) {
+            for (int j = i; j < sentence.length; j++) {
+                if (sentence[i].length() > sentence[j].length()) {
                     String cup = sentence[i];
                     sentence[i] = sentence[j];
                     sentence[j] = cup;
