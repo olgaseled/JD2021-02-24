@@ -50,11 +50,8 @@ public class ListB<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        Object[] newCollection = c.toArray();
-        if (size == elements.length)
-            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
-        for (int i = 0; i < c.size(); i++) {
-            newCollection[i] = elements[i];
+        for (T element : elements) {
+
         }
         return true;
     }
