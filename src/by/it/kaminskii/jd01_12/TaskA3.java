@@ -7,20 +7,23 @@ import java.util.Scanner;
 
 public class TaskA3 {
     public static void main(String[] args) {
-        List<Integer> listArr = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        String str;
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> res = new ArrayList<>();
         int pos = 0;
-        while (!(str = sc.next()).equals("end")) {
-            Integer value = Integer.valueOf(str);
-            if (value > 0)
-                listArr.add(pos++, value);
-            else if (value == 0)
-                listArr.add(pos, value);
-            else
-                listArr.add(value);
+        while (true) {
+            String word = scanner.next();
+            if (word.equals("end")) {
+                break;
+            }
+            Integer value = Integer.valueOf(word);
+            if (value < 0) {
+                res.add(value);
+            } else if (value == 0) {
+                res.add(pos, value);
+            } else {
+                res.add(pos++, value);
+            }
         }
-        System.out.println(listArr);
+        System.out.println(res);
     }
 }
