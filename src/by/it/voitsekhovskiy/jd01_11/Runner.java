@@ -8,12 +8,15 @@ public class Runner {
         SetC<String> hash = new SetC<>();
         hash.add("one");
         hash.add("two");
-        hash.add("two2");
+        hash.add(null);
 
         SetC<String> hash2 = new SetC<>();
         hash2.add("one");
-        hash2.add("two");
-        System.out.println(hash.containsAll(hash2));
+        hash2.add("two2");
+        hash2.add(null);
+        System.out.println(hash.removeAll(hash2));
+        hash.clear();
+        System.out.println(hash);
 //
 //        HashSet<String> hash3 = new HashSet<>();
 

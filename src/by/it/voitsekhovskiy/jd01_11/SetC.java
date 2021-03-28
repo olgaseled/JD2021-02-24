@@ -58,9 +58,11 @@ public class SetC<T> implements Set<T> {
             return false;
         }
         for (int i = 0; i < size; i++) {
-            if(elements[i] == null) {
-                if (elements[i] == o) {
-                    return true;
+            if (elements[i] == null) {
+                if (o == elements[i]) {
+                    switcherRemove = true;
+                    index = i;
+                    break;
                 }
             } else {
                 if (elements[i].equals(o)) {
@@ -80,9 +82,14 @@ public class SetC<T> implements Set<T> {
 
 
     @Override
-    public boolean removeAll(Collection<?> c) {
-
-        return false;
+    public boolean removeAll(Collection<?> newElements) {
+        boolean isChanged = false;
+        for (Object newElement : newElements) {
+            if (remove(newElement)) {
+                isChanged = true;
+            }
+        }
+        return isChanged;
     }
 
     @Override
@@ -184,6 +191,8 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-
+        for (int to = size, i = 0; i < to; i++) {
+            size--;
+        }
     }
 }

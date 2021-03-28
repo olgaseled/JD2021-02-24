@@ -210,7 +210,7 @@ public class Test_jd01_11 extends HomeWork {
 
         assertEquals("ошибка removeAll не работает", e.removeAll(added), a.removeAll(added));
         assertSet("ошибка removeAll", e, a);
-        System.out.println("          removeAll ok: " + a);
+        System.out.println("removeAll ok: " + a);
         System.out.flush();
 
         assertEquals("ошибка isEmpty не работает", e.isEmpty(), a.isEmpty());
