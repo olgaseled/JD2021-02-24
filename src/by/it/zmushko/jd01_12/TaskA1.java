@@ -16,7 +16,6 @@ public class TaskA1 {
         for (int i = 0; i < 20; i++) {
             int grade = random.nextInt(10) + 1;
             taskA1.grades.add(grade);
-
         }
         System.out.println(taskA1.grades);
         taskA1.clearBad(taskA1.grades);
@@ -27,7 +26,7 @@ public class TaskA1 {
         while (iterator.hasNext()) {
             Integer thisGrade = iterator.next();
             if (thisGrade < 4) {
-                thisGrades.remove(thisGrade);
+                iterator.remove();
             }
         }
     }
