@@ -11,8 +11,7 @@ public class TaskA3 {
         List<Integer> res = new ArrayList<>();
         int posZero = 0;
         System.out.println();
-        while(true)
-        {
+        while (true) {
             String word = scanner.next();
             if (word.equals("end")) {
                 break;
@@ -21,11 +20,11 @@ public class TaskA3 {
             if (integer < 0) {
                 res.add(integer);
             } else if (integer == 0) {
-                res.add(posZero, integer);
+                res.add(posZero, integer);//вставляем в эту же позицию -> разъедется
             } else if (integer > 0) {
                 res.add(posZero++, integer);
             }
-            //вставляем в эту же позицию -> разъедется
         }
+        System.out.println(res);
     }
 }

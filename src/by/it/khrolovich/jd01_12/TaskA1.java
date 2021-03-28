@@ -9,45 +9,35 @@ public class TaskA1 {
 
     private List<Integer> grades = new ArrayList<>();
 
-    private static Random random = new Random(6565665656L);
+    private static Random random = new Random();
 
     public static void main(String[] args) {
         TaskA1 instance = new TaskA1();
-        for(int i =0;i<20;i++){
-
+        for (int i = 0; i < 20; i++) {
             //grades.add(); - нужен объект, конструкторами не получится
             //int g =(int) (Math.random()*10)+1;
-            int g = random.nextInt();
-            instance.grades.add(g);
+            int grade = random.nextInt(10) + 1;
+            instance.grades.add(grade);
         }
         System.out.println(instance.grades);
-        //instance.cle
+        instance.clearBad(instance.grades);
+        System.out.println(instance.grades);
     }
+
     //void ClearBad(List<Integer> grades){//передается по ссылке
-    void ClearBad(List<Integer> myGrades){
+    void clearBad(List<Integer> myGrades) {
 
-        //Alt+enter
-        myGrades.removeIf(myGrade -> myGrade < 4);
+        Iterator<Integer> iterator = myGrades.iterator();
 
-        //Alt+enter Replace Iterator
-        for (Iterator<Integer> iterator = myGrades.iterator(); iterator.hasNext(); ) {
+        while (iterator.hasNext()) {
             Integer myGrade = iterator.next();
-            //внутри итератора нельзя удалять
             if (myGrade < 4) {
-                myGrades.remove(myGrade);
-
+                iterator.remove();
             }
-
         }
 
-//внутри итератора нельзя удалять, значит заменяем ALt+Enter
-       /* for (Integer myGrade : myGrades) {
-            //внутри итератора нельзя удалять
-            if(myGrade<4){
-                myGrades.remove(myGrade);
+        //подсказка на while
+        // myGrades.removeIf(myGrade -> myGrade < 4);
 
-            }
-
-        }*/
     }
 }
