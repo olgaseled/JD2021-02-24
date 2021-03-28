@@ -11,11 +11,11 @@ public class TaskA3 {
         List<Integer> res = new ArrayList<>();
         int pos = 0;
         while (true) {
-            String word = scanner.next();
-            if (word.equals("end")) {
+            String numb = scanner.next();
+            if (numb.equals("end")) {
                 break;
             }
-            Integer value = Integer.valueOf(word);
+            Integer value = Integer.valueOf(numb);
             if (value < 0) {
                 res.add(value);
             } else if (value == 0) {
