@@ -28,7 +28,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -41,9 +41,12 @@ class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] += secondVector[i];
+            if (this.value.length != secondVector.length){
+                throw new CalcException("Incorrect size");
             }
+                for (int i = 0; i < resultVector.length; i++) {
+                    resultVector[i] += secondVector[i];
+                }
             return new Vector(resultVector);
         }
         return super.add(other);
@@ -52,7 +55,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -75,7 +78,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -89,7 +92,7 @@ class Vector extends Var {
             double[] secondVector = ((Vector) other).value;
             double resultVector = 0;
             for (int i = 0; i < value.length; i++) {
-                resultVector +=value[i]*secondVector[i];
+                resultVector += value[i] * secondVector[i];
             }
             return new Scalar(resultVector);
         }
@@ -97,7 +100,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             if (secondScalar == 0) {

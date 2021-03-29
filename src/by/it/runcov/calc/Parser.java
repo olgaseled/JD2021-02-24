@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     @SuppressWarnings("ConstantConditions")
-    Var evaluate(String expression) {
+    Var evaluate(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
         String[] parts = expression.split(Patterns.OPERATION, 2);
         if (parts.length > 2) {
