@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+class Parser {
 
     Var evaluate(String expression) {
         expression = expression.replaceAll("\\s+", "");
