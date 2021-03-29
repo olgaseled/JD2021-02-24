@@ -22,30 +22,24 @@ public class TaskB2 {
 //    }
 
     static String process(ArrayList<String> people) {
-        int currentRoundPlayersCount = people.size();
-        int counter = 1;
-        int cursor = 1;
-        while (currentRoundPlayersCount >= 2) {
-            if ((counter - 1) % 2 == 0 || counter == 0) {
-                people.remove(cursor++);
-                if (counter-1 < currentRoundPlayersCount - 2) {
+
+        for (int counter = 1, cursor = 1; ; counter += 2) {
+            if (counter % 2 == 0) {
+                people.remove(cursor % people.size());
+                cursor += 1;
+                if (people.size() - cursor > 2) {
                     counter++;
                     continue;
-                }
-                // finish of current round
-                if (counter-1 ==  currentRoundPlayersCount - 2) { // before last in the list
-                    // remove first
+                } else if (people.size() - cursor == 1) { // before last
                     counter = 0;
-                } else  { // last in the list
-                    // remove second from start
+                    cursor = 0;
+                } else if (people.size() - cursor == 0) { // last
                     counter = 1;
+                    cursor = 1;
                 }
-                // reset cursor
-                cursor = counter;
-                currentRoundPlayersCount = people.size();
-            } else {
-                counter++;
             }
+            counter++;
+            if (people.size() < 2) break;
         }
         return people.get(0);
     }
