@@ -9,10 +9,10 @@ public class ConsoleRunner {
         Printer print = new Printer();
         for (; ; ) {
             String expression = sc.nextLine();
-            if(!expression.equals("end")) {
+            if (!expression.equals("end")) {
                 Var result = calc.calc(expression);
                 print.print(result);
-            } else{
+            } else {
                 break;
             }
         }
