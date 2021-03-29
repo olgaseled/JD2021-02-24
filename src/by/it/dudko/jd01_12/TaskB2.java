@@ -22,24 +22,11 @@ public class TaskB2 {
 //    }
 
     static String process(ArrayList<String> people) {
-
-        for (int counter = 1, cursor = 1; ; counter += 2) {
+        for (int counter = 1, cursor = 1; people.size() > 1; counter++) {
             if (counter % 2 == 0) {
-                people.remove(cursor % people.size());
-                cursor += 1;
-                if (people.size() - cursor > 2) {
-                    counter++;
-                    continue;
-                } else if (people.size() - cursor == 1) { // before last
-                    counter = 0;
-                    cursor = 0;
-                } else if (people.size() - cursor == 0) { // last
-                    counter = 1;
-                    cursor = 1;
-                }
+                cursor = (cursor >= people.size()) ? cursor % people.size() : cursor;
+                people.remove(cursor++);
             }
-            counter++;
-            if (people.size() < 2) break;
         }
         return people.get(0);
     }
