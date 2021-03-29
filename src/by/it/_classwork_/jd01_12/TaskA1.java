@@ -18,6 +18,7 @@ public class TaskA1 {
             instance.grades.add(grade);
         }
         System.out.println(instance.grades);
+
         instance.clearBad(instance.grades);
     }
 
