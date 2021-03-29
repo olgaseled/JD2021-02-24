@@ -45,11 +45,11 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondOperator = ((Scalar) other).value;
             if (secondOperator==0){
-                return null; //TODO сменить на выброс ошибки
+                throw new CalcException("division by zero");
             }
             return new Scalar(this.value / ((Scalar) other).value);
         }
