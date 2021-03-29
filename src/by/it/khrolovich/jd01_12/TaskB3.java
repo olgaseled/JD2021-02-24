@@ -62,6 +62,21 @@ public class TaskB3 {
                 }
             }
         }
+        //используя интерфейс очереди
+        /*boolean isDel = false;
+        while (peoples.size() != 1) {
+            LinkedList<String> newList = new LinkedList<>();
+            while (peoples.size() != 0) {
+                if (isDel) {
+                    peoples.poll();
+                    isDel = false;
+                } else {
+                    newList.add(peoples.poll());
+                    isDel = true;
+                }
+            }
+            peoples.addAll(newList);
+        }*/
 
         return peoples.getFirst();
     }
