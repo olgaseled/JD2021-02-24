@@ -21,6 +21,6 @@ class VarCreator {
                 return var;
             }
         }
-        throw new CalcException(); //TODO fix this
+        throw new CalcException("Unknown variable " + strVar);
     }
 }

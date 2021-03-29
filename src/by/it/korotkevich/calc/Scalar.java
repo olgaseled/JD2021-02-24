@@ -27,14 +27,14 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
         }
-        return other.add(this).mul(new Scalar(-1));
+        return other.sub(this).mul(new Scalar(-1));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherOperand = ((Scalar) other).value;
-            if (otherOperand==0) {
+            if (otherOperand == 0) {
                 throw new CalcException("division by zero");
             }
             return new Scalar(this.value / otherOperand);
@@ -58,7 +58,6 @@ class Scalar extends Var {
     public String toString() {
         return Double.toString(value);
     }
-
 
 
     public double getValue() {
