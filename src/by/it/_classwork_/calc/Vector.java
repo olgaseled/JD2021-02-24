@@ -29,7 +29,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -42,6 +42,9 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).value;
             double[] resultVector = Arrays.copyOf(value, value.length);
+            if (this.value.length != secondVector.length) {
+                throw new CalcException("Incorrect size");
+            }
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] += secondVector[i];
             }
