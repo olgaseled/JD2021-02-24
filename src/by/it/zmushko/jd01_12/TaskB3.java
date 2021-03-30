@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TaskB2 {
+public class TaskB3 {
     public static void main(String[] args) {
+        Timer clock = new Timer();
         ArrayList<String> arrayLists = new ArrayList<>();
         LinkedList<String> linkedList = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
@@ -14,8 +15,8 @@ public class TaskB2 {
         for (int i = 0; i < 10; i++) {
             linkedList.add(String.valueOf(i));
         }
-        System.out.println(process(arrayLists));
-        System.out.println(process(linkedList));
+        System.out.println(process(arrayLists) + clock);
+        System.out.println(process(linkedList) + clock);
     }
 
     static String process(ArrayList<String> peoples) {
@@ -49,4 +50,22 @@ public class TaskB2 {
         }
         return peoples.toString().replaceAll("[\\[\\]]", "");
     }
+
+    public static class Timer {
+        private long iniTime;
+        private Double Delta;
+
+        public Timer() {
+            iniTime = System.nanoTime();
+        }
+
+        ;
+
+        public String toString() {
+            Delta = (double) (System.nanoTime() - iniTime) / 1000;
+            iniTime = System.nanoTime();
+            return " Прошло " + Delta.toString() + " микросек.";
+        }
+    }
+
 }

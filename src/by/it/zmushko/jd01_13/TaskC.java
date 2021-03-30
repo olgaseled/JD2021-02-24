@@ -17,7 +17,6 @@ public class TaskC {
     static void readData() throws Exception {
         int errorCount = 0;
         List<Double> objects = new ArrayList<>();
-        List<Double> objectsAfterReverse = new ArrayList<>();
         while (true) {
             try {
                 String text = scanner.nextLine();
