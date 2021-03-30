@@ -1,5 +1,6 @@
 package by.it._classwork_.calc;
 
+@SuppressWarnings("unused")
 public class CalcException extends Exception {
 
     public CalcException() {

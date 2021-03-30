@@ -21,7 +21,6 @@ class VarCreator {
                 return var;
             }
         }
-        throw new CalcException("Unknown variable " + strVar);
-
+        throw new CalcException("Unknown variable or expression: " + strVar);
     }
 }
