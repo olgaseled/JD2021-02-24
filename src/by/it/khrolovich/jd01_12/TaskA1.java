@@ -27,9 +27,9 @@ public class TaskA1 {
     //void ClearBad(List<Integer> grades){//передается по ссылке
     void clearBad(List<Integer> myGrades) {
 
-        Iterator<Integer> iterator = myGrades.iterator();
 
-        while (iterator.hasNext()) {
+
+        for (Iterator<Integer> iterator = myGrades.iterator();iterator.hasNext();) {
             Integer myGrade = iterator.next();
             if (myGrade < 4) {
                 iterator.remove();
