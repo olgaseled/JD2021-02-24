@@ -5,19 +5,10 @@ import java.util.HashMap;
 public class TaskA {
     public static void main(String[] args) {
         try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
             if (Math.random() > 0.5)
                 new HashMap<String, String>(null);
             else
                 Integer.parseInt("привет");
-
-
         } catch (NumberFormatException | NullPointerException e) {
             Class<? extends RuntimeException> exceptionStructure = e.getClass();
             String nameExceptionClass = exceptionStructure.getName();
