@@ -1,11 +1,13 @@
 package by.it.korotkevich.calc;
 
+import by.it._examples_.jd01_11.generics.Demo;
+
 class Scalar extends Var {
 
     private final double value;
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value + ((Scalar) other).value);
         }
@@ -13,7 +15,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
         }
@@ -21,19 +23,19 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
         }
-        return other.add(this).mul(new Scalar(-1));
+        return other.sub(this).mul(new Scalar(-1));
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherOperand = ((Scalar) other).value;
-            if (otherOperand==0) {
-                return super.div(other);
+            if (otherOperand == 0) {
+                throw new CalcException("division by zero");
             }
             return new Scalar(this.value / otherOperand);
         }
@@ -56,7 +58,6 @@ class Scalar extends Var {
     public String toString() {
         return Double.toString(value);
     }
-
 
 
     public double getValue() {

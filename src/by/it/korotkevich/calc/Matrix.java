@@ -35,7 +35,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[][] resultMatrix = new double[value.length][value[0].length];
@@ -55,11 +55,11 @@ class Matrix extends Var {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
             if (resultMatrix.length != secondMatrix.length) {
-                return super.add(other);
+                throw new CalcException("unequal matrix sizes");
             }
             for (int i = 0; i < resultMatrix.length; i++) {
                 if (resultMatrix[i].length != secondMatrix[i].length) {
-                    return super.add(other);
+                    throw new CalcException("unequal matrix sizes");
                 }
             }
             for (int i = 0; i < resultMatrix.length; i++) {
@@ -74,7 +74,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[][] resultMatrix = new double[value.length][value[0].length];
@@ -94,11 +94,11 @@ class Matrix extends Var {
                 resultMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
             if (resultMatrix.length != secondMatrix.length) {
-                return super.add(other);
+                throw new CalcException("unequal matrix sizes");
             }
             for (int i = 0; i < resultMatrix.length; i++) {
                 if (resultMatrix[i].length != secondMatrix[i].length) {
-                    return super.add(other);
+                    throw new CalcException("unequal matrix sizes");
                 }
             }
             for (int i = 0; i < resultMatrix.length; i++) {
@@ -113,7 +113,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[][] resultMatrix = new double[value.length][value[0].length];
@@ -134,7 +134,7 @@ class Matrix extends Var {
                 matrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
             if (matrix.length != secondVector.length) {
-                return super.add(other);
+                throw new CalcException("invalid vector size");
             }
             for (int i = 0; i < matrix.length; i++) {
                 for (int j = 0; j < secondVector.length; j++) {
@@ -150,11 +150,11 @@ class Matrix extends Var {
                 firstMatrix[i] = Arrays.copyOf(value[i], value[i].length);
             }
             if (firstMatrix[0].length != secondMatrix.length) {
-                return super.add(other);
+                throw new CalcException("unequal matrix sizes");
             }
             for (int i = 0; i < firstMatrix.length; i++) {
                 if (firstMatrix[i].length != secondMatrix[i].length) {
-                    return super.add(other);
+                    throw new CalcException("unequal matrix sizes");
                 }
             }
             for (int i = 0; i < firstMatrix.length; i++) {
