@@ -13,7 +13,8 @@ public class VarCreator {
         } else if (strVar.matches(Patterns.MATRIX)){
             return  new Matrix(strVar);
         } else {
-            return null;//TODO stub - generate ERROR
+            //return null;//TODO stub - generate ERROR
+            return Var.load(strVar);
         }
     }
 }

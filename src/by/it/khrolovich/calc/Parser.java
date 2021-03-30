@@ -13,11 +13,19 @@ public class Parser {
         //можно так
         /*Pattern p = Pattern.compile(Patterns.OPERATION);
         String[] parts1 = p.split(p.toString());*/
-        Var leftVar  = VarCreator.build(parts[0]);
+        //A=2
         if(parts.length<2){
-            return leftVar;
+            //return leftVar;
+            return VarCreator.build(expression);//если одна часть, то возвращаем переменную
         }
+        //если 2 части
+        if(expression.contains("=")){
+            return Var.save(parts[0],VarCreator.build(parts[1]));
+        }
+        Var leftVar  = VarCreator.build(parts[0]);
         Var rightVar  = VarCreator.build(parts[1]);
+
+
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
         if(matcherOperation.find()){
