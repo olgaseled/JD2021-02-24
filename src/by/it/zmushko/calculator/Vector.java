@@ -101,7 +101,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(values, values.length);

@@ -15,7 +15,6 @@ public class TaskA {
             System.out.println("name: " + name);
             Class<TaskA> runStruct = TaskA.class;
             String name1 = runStruct.getName();
-           // System.out.println(name1);
             StackTraceElement[] stackTrace = e.getStackTrace();
             for (StackTraceElement stackTraceElement : stackTrace) {
                 String classNameInStackTrace = stackTraceElement.getClassName();
