@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class TaskB {
-    
+
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         double sum = 0;

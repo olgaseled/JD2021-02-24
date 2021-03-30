@@ -50,8 +50,8 @@ public class ListB<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        for (T element : elements) {
-
+        for (T element : c) {
+this.add(element);
         }
         return true;
     }
