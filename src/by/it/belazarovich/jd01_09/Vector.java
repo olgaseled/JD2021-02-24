@@ -3,39 +3,72 @@ package by.it.belazarovich.jd01_09;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-class Vector extends by.it.belazarovich.jd01_08.Var {
+public class Vector extends Var {
+
     private final double[] value;
 
-    Vector(double[] value) {
-        this.value = value;
+    public Vector(double[] value) {
+        this.value = Arrays.copyOf(value, value.length);
+    }
+
+    public Vector(Vector vector) {
+        this(vector.value);
+    }
+
+    public Vector(String strVector) {
+        //1.0,2.343,987.0
+        String[] strArray = strVector.trim()
+                .replaceAll("\\s+", "")
+                .replace("{", "")
+                .replace("}", "")
+                .split(",");
+        value = new double[strArray.length];
+        for (int i = 0; i < value.length; i++) {
+            value[i] = Double.parseDouble(strArray[i]);
+        }
     }
 
     @Override
-    public by.it.belazarovich.jd01_08.Var add(by.it.belazarovich.jd01_08.Var other) {
-        if (other instanceof by.it.belazarovich.jd01_08.Scalar) {
-            double[] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++)
-                res[i] = res[i] + ((by.it.belazarovich.jd01_08.Scalar) other).getValue();
-            return new Vector(res);
-
-        }
-        else if (other instanceof Vector){
-            double[] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] + ((Vector) other).value[i];
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double secondScalar = ((Scalar) other).getValue();
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] += secondScalar;
             }
-            return new Vector(res);
+            return new Vector(resultVector);
         }
-else
-    return super.add(other);
+
+        if (other instanceof Vector) {
+            double[] secondVector = ((Vector) other).value;
+            double[] resultVector = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < resultVector.length; i++) {
+                resultVector[i] += secondVector[i];
+            }
+            return new Vector(resultVector);
+        }
+        return super.add(other);
     }
 
     @Override
     public String toString() {
+        // {1.0, 3.5, 5.8}
+
+        /*
+        StringBuilder strVector = new StringBuilder("{");
+        String delimiter = "";
+        for (int v : value) {
+            strVector.append(delimiter).append(v);
+            delimiter = ", ";
+        }
+        strVector.append("}");
+        */
+
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         for (Double v : value) {
             stringJoiner.add(v.toString());
         }
+
         return stringJoiner.toString();
     }
 }

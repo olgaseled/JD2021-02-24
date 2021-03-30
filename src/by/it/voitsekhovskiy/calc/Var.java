@@ -2,7 +2,7 @@ package by.it.voitsekhovskiy.calc;
 
 abstract class Var implements Operation {
 
-    static Var createVar(String strExp) {
+    static Var createVar(String strExp) throws CalcException {
         if (strExp.matches(Patterns.SCALAR)) {
             return new Scalar(strExp);
         } else if (strExp.matches(Patterns.VECTOR)) {
@@ -10,7 +10,7 @@ abstract class Var implements Operation {
         } else if (strExp.matches(Patterns.MATRIX)) {
             return new Matrix(strExp);
         }
-        return null; //TODO change to error
+        throw new CalcException("Can't define as Var!");
     }
 
     @Override
@@ -19,26 +19,22 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.printf("Operation %s + %s is impossible\n", this, other);
-        return null; //TODO replace throw exception
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Operation %s + %s is impossible\n", this, other));
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Operation %s - %s is impossible\n", this, other);
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Operation %s - %s is impossible\n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Operation %s * %s is impossible\n", this, other);
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Operation %s * %s is impossible\n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Operation %s / %s is impossible\n", this, other);
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Operation %s / %s is impossible\n", this, other));
     }
 }
