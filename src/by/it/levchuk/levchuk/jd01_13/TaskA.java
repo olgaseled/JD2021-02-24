@@ -8,9 +8,9 @@ public class TaskA {
     public static void main(String[] args) {
         try {
 
-            if (Math.random() > 0.5)
+            if (Math.random() > 0.5) {
                 new HashMap<String, String>(null);
-            else
+            } else
                 Integer.parseInt("привет");
         } catch (NumberFormatException | NullPointerException e) {
             Class<? extends RuntimeException> exceptionStructure = e.getClass();
