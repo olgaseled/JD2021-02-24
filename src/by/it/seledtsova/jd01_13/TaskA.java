@@ -17,14 +17,14 @@ public class TaskA {
             else
                 Integer.parseInt("привет"); // преобразует строку в число
         } catch (NumberFormatException | NullPointerException e) { // e.printStackTrace(); в консоле распечатаются все наши ошибки
-            e.getStackTrace(); // метод возв массив всех стектрейсов, кот в классе и модуле в кот произвошла ошибка
+            e.getStackTrace(); // метод возв массив всех стектрейсов, кот в классе и модуле, в кот произвошла ошибка
             StackTraceElement[] stackTrace = e.getStackTrace(); // занесем в массив наш стектрейс
             for (StackTraceElement element : stackTrace) { //распечатаем все , что есть в стектрейсе System.out.println(element);
                 if (TaskA.class.getName().equals(element.getClassName())) { //имя класса в элементы совпадает с ошибкой в такс А
                     System.out.println(element);
-                    String name = e.getClass().getName(); // пемененная . получили инфу о ошибке ( название и где возникла)
+                    String name = e.getClass().getName(); // пемененная . получили инфу об ошибке ( название и где возникла)
                     String classname = element.getClassName(); // инфа о классе, в котором возникла ошибка
-                    int number = element.getLineNumber(); // номер строки , в кот ошибка
+                    int number = element.getLineNumber(); // номер строки , в кот. ошибка
                     System.out.printf("name: %s\n" +
                                     "class: %s\n" +
                                     "line: %d\n",
