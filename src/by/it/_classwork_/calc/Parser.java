@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    @SuppressWarnings("ConstantConditions")
     Var evaluate(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
         String[] parts = expression.split(Patterns.OPERATION, 2);
@@ -36,6 +35,6 @@ class Parser {
             }
         }
 
-        return null; //stub
+        throw new CalcException("The something stupid "); //stub
     }
 }
