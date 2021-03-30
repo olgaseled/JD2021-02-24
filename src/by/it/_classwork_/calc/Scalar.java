@@ -36,7 +36,7 @@ class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).value;
-            if (secondScalar==0){
+            if (secondScalar == 0) {
                 throw new CalcException("division by zero");
             }
             return new Scalar(this.value / secondScalar);
