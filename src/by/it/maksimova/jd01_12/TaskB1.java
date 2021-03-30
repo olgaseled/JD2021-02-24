@@ -15,18 +15,12 @@ public class TaskB1 {
                 break;
             }
 // Для каждого слова с помощью коллекций подсчитать частоту его встречаемости
-String[] splittedWords = words.split("[,.:; ]");
-            for (String word : splittedWords) {
-
-                numberOfWords.put(word, numberOfWords.getOrDefault(word, 0) + 1);
+            for (String word : words.split("[,.:; ]")) {
+                numberOfWords.put(word, numberOfWords.getOrDefault(word, 0)+1);
             }
-
-
         }
         System.out.println(numberOfWords);
     }
-
-
 }
 
 
