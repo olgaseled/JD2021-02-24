@@ -11,7 +11,7 @@ package by.it.kaminskii.jd01_01;
 class TaskA2 {
     public static void main(String[] args) {
         int i;
-        for (i=0; i<5; i++)
+        for (i = 0; i < 5; i++)
             System.out.print("Я начинаю изучать Java!\n");
     }
 

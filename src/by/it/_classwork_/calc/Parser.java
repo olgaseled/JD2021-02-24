@@ -5,15 +5,19 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    @SuppressWarnings("ConstantConditions")
-    Var evaluate(String expression) {
+    Var evaluate(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
         String[] parts = expression.split(Patterns.OPERATION, 2);
-        Var leftVar = VarCreator.build(parts[0]);
+        //A=2
         if (parts.length < 2) {
-            return leftVar;
+            return VarCreator.build(expression);
         }
         Var rightVar = VarCreator.build(parts[1]);
+        if (expression.contains("=")) {
+            return Var.save(parts[0], VarCreator.build(parts[1]));
+        }
+        Var leftVar = VarCreator.build(parts[0]);
+
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
         if (matcherOperation.find()) {
@@ -31,6 +35,6 @@ class Parser {
             }
         }
 
-        return null; //stub
+        throw new CalcException("The something stupid "); //stub
     }
 }

@@ -52,14 +52,14 @@ public class TaskA {
             if (element < min) {
                 min = element;
             }
-            for (int i = 9; i >= 0 ; i--) {
+            for (int i = 9; i >= 0; i--) {
                 if (arr[i] == min)
                     System.out.print(i + " ");
-                }
-
             }
 
         }
+
     }
+}
 
 
