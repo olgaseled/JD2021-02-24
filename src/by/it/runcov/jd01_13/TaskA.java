@@ -9,6 +9,8 @@ public class TaskA {
                 new HashMap<String, String>(null);
             else
                 Integer.parseInt("привет");
+
+
         } catch (NumberFormatException | NullPointerException e) {
             Class<? extends RuntimeException> exceptionStructure = e.getClass();
             String nameExceptionClass = exceptionStructure.getName();
@@ -21,9 +23,11 @@ public class TaskA {
                 if (classNameInStackTrace.equals(nameRunnerClass)) {
                     int lineNumber = stackTraceElement.getLineNumber();
                     System.out.printf("" +
-                            "name: %s\n" +
-                            "class: %s\n" +
-                            "line: %s\n");
+                                    "name: %s\n" +
+                                    "class: %s\n" +
+                                    "line: %s\n",
+                            nameExceptionClass, classNameInStackTrace, lineNumber);
+                    break;
                 }
             }
         }

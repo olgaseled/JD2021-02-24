@@ -34,6 +34,6 @@ public class Parser {
                     return leftVar.div(rightVar);
             }
         }
-        return null; //stub
+        throw new CalcException("The something stupid ");
     }
 }
