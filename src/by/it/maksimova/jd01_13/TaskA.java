@@ -4,11 +4,6 @@ import java.util.HashMap;
 
 public class TaskA {
     public static void main(String[] args) {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         try {
             if (Math.random() > 0.5) {
