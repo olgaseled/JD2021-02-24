@@ -1,7 +1,5 @@
 package by.it.maksimova.jd01_12;
 
-import by.it._classwork_.calc.Printer;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

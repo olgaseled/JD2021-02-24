@@ -7,8 +7,6 @@ package by.it.seledtsova.jd01_13;
 если невозможно извлечь корень, то обработка аналогична, но тип ошибки -ArithmeticException
  */
 
-import by.it._classwork_.jd01_13.TaskA;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
