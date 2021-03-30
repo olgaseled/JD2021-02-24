@@ -7,74 +7,64 @@ package by.it.seledtsova.jd01_13;
 если невозможно извлечь корень, то обработка аналогична, но тип ошибки -ArithmeticException
  */
 
+import by.it._classwork_.jd01_13.TaskA;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<>();
+
+        ArrayList<Double> elements = new ArrayList<>();
+        double sum = 0;
         Scanner scanner = new Scanner(System.in);
-        // 4 9 END
         while (true) {
             String word = scanner.next();
-            arrayList.add(word);
             if (word.equals("END")) {
                 break;
             }
-        }
-        ArrayList<Double> result = new ArrayList<Double>();
-        try {
-            for (String s : arrayList) {
-                result.add(Double.parseDouble(s));
-            }
-        } catch (NumberFormatException e) {
-            e.getStackTrace();
-            StackTraceElement[] stackTrace = e.getStackTrace(); // стек поместики в массив
-            for (StackTraceElement element : stackTrace) {
-                if (TaskB.class.getName().equals(element.getClassName())) {
-                    String name = e.getClass().getName(); // пемененная . получили инфу о ошибке ( название и где возникла)
-                    String classname = element.getClassName(); // инфа о классе, в котором возникла ошибка
-                    int number = element.getLineNumber(); // номер строки , в кот ошибка
-                    System.out.printf("name: %s\n" +
-                                    "class: %s\n" +
-                                    "line: %d\n",
-                            name, classname, number);
-                    break;
-                }
-            }
-        }
-        Iterator<Double> iterator = result.iterator();
-        double sum = 0;
-        while (iterator.hasNext()) {
-            Double element = iterator.next();
-            sum = sum + element;
-        }
-        System.out.println(sum);
-        if (sum >= 0) {
-            double squareRoot = Math.sqrt(sum);
-            System.out.println(squareRoot);
-        } else if (sum < 0) {
             try {
-            } catch (ArithmeticException e) {
-                e.getStackTrace();
-                StackTraceElement[] stackTrace = e.getStackTrace(); // стек поместики в массив
-                for (StackTraceElement element : stackTrace) {
-                    if (TaskB.class.getName().equals(element.getClassName())) {
-                        String name = e.getClass().getName(); // пемененная . получили инфу о ошибке ( название и где возникла)
-                        String classname = element.getClassName(); // инфа о классе, в котором возникла ошибка
-                        int number = element.getLineNumber(); // номер строки , в кот ошибка
+                double a = Double.parseDouble(word);
+                System.out.println(a);
+                sum = sum + a;
+                if (sum < 0) {
+                    throw new ArithmeticException();
+                }
+                System.out.println(Math.sqrt(sum));
+            } catch (NumberFormatException | ArithmeticException e) {
+                Class<? extends RuntimeException> aClass = e.getClass();
+                String name = aClass.getName();
+                StackTraceElement[] stackTrace = e.getStackTrace();
+                Class<TaskB> taskB = TaskB.class;
+                String nameClass = taskB.getName();
+                for (StackTraceElement stackTraceElement : stackTrace) {
+                    String className = stackTraceElement.getClassName();
+                    if (className.equals(nameClass)) {
+                        int number = stackTraceElement.getLineNumber();
                         System.out.printf("name: %s\n" +
-                                        "class: %s\n" +
-                                        "line: %d\n",
-                                name, classname, number);
-                        break;
+                                "class: %s\n" +
+                                "line: %d", name, taskB, number);
                     }
                 }
+                break;
+
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
