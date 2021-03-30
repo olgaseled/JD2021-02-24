@@ -59,8 +59,6 @@ public class TaskB3 {
             iniTime = System.nanoTime();
         }
 
-        ;
-
         public String toString() {
             Delta = (double) (System.nanoTime() - iniTime) / 1000;
             iniTime = System.nanoTime();
