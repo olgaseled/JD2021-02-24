@@ -4,7 +4,7 @@ class Scalar extends Var {
     private final double value;
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value + ((Scalar) other).value);
         }
@@ -12,7 +12,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
         }
@@ -20,19 +20,27 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
-        if(other instanceof Scalar) {
+    public Var mul(Var other) throws CalcException {
+        if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
         }
         return other.mul(this);
     }
 
     @Override
-    public Var div(Var other) {
-        if(other instanceof Scalar) {
-            if(((Scalar) other).value > 0) {
+    public Var div(Var other) throws CalcException {
+        if (other instanceof Scalar) {
+            if (((Scalar) other).value != 0) {
                 return new Scalar(this.value / ((Scalar) other).value);
+            } else {
+                throw new CalcException("division by zero!");
             }
+        }
+        if (other instanceof Vector) {
+            throw new CalcException("can't division scalar on vector");
+        }
+        if( other instanceof Matrix) {
+            throw new CalcException("can't division scalar on matrix");
         }
         return other.div(this);
     }
