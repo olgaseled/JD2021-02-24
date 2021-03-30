@@ -10,8 +10,12 @@ public class ConsoleRunner {
         for (; ; ) {
             String expression = sc.nextLine();
             if (!expression.equals("end")) {
-                Var result = calc.calc(expression);
-                print.print(result);
+                try {
+                    Var result = calc.calc(expression);
+                    print.print(result);
+                } catch (CalcException e) {
+                    print.print(e);
+                }
             } else {
                 break;
             }
