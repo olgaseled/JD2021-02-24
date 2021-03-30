@@ -17,10 +17,8 @@ public class TaskC1 {
             firstMap.put(key, text);
         }
         System.out.println(firstMap);
-        Iterator<Map.Entry<Object, Object>> iterator = firstMap.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<Object, Object> next = iterator.next();
-            if (!secondResultMap.containsValue(next.getValue())){
+        for (Map.Entry<Object, Object> next : firstMap.entrySet()) {
+            if (!secondResultMap.containsValue(next.getValue())) {
                 secondResultMap.put(next.getKey(), next.getValue());
             }
         }
