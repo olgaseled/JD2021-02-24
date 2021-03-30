@@ -17,10 +17,10 @@ public class TaskA {
             String nameExceptionClass = exceptionStructure.getName();
             System.out.println(nameExceptionClass);
             Class<TaskA> runnerStructure = TaskA.class;
-            String nameRunnerClass=runnerStructure.getName();
+            String nameRunnerClass = runnerStructure.getName();
             StackTraceElement[] stackTrace = e.getStackTrace();
-            for (StackTraceElement stackTraceElement: stackTrace){
-                String classNameInStackTrace=stackTraceElement.getClassName();
+            for (StackTraceElement stackTraceElement : stackTrace) {
+                String classNameInStackTrace = stackTraceElement.getClassName();
                 if (classNameInStackTrace.equals(nameRunnerClass)) {
                     int lineNumber = stackTraceElement.getLineNumber();
                     System.out.printf("" +
