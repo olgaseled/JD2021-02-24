@@ -48,6 +48,6 @@ public class TaskB2 {
             }
         }
 
-       return peoples.getFirst();
+        return peoples.getFirst();
     }
 }
