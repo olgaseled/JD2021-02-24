@@ -2,20 +2,12 @@ package by.it.maksimova.jd01_11;
 
 import java.util.*;
 
-public class ListB <T> implements List<T> {
+public class ListB<T> implements List<T> {
 
     private T[] elements = (T[]) new Object[0];
 
     private int size;
 
-    @Override
-    public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
-        for (int i = 0; i < size; i++) {
-            stringJoiner.add(elements[i].toString());
-        }
-        return stringJoiner.toString();
-    }
 
     @Override
     public boolean add(T element) {
@@ -30,7 +22,7 @@ public class ListB <T> implements List<T> {
     public T remove(int index) {
         T removeValue = elements[index];
         System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
-        elements[size--]=null;
+        elements[size--] = null;
         return removeValue;
     }
 
@@ -41,8 +33,8 @@ public class ListB <T> implements List<T> {
 
     @Override
     public T set(int index, T element) {
-        T oldElement=elements[index];
-        elements[index]=element;
+        T oldElement = elements[index];
+        elements[index] = element;
 
         return oldElement;
     }
@@ -51,7 +43,8 @@ public class ListB <T> implements List<T> {
     public void add(int index, T element) {
         if (size == elements.length)
             elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
-        System.arraycopy(elements, index, elements, index+1, size-index);
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
         size++;
     }
 
@@ -60,10 +53,20 @@ public class ListB <T> implements List<T> {
         Object[] newCollection = c.toArray();
         if (size == elements.length)
             elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
-
+        for (int i = 0; i < c.size(); i++) {
+            newCollection[i] = elements[i];
+        }
         return true;
     }
 
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            stringJoiner.add(String.valueOf(elements[i]));
+        }
+        return stringJoiner.toString();
+    }
 //-----------------------------------------------------------------
 
     @Override
@@ -125,7 +128,6 @@ public class ListB <T> implements List<T> {
     public void clear() {
 
     }
-
 
 
     @Override
