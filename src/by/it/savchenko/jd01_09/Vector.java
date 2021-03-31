@@ -14,6 +14,9 @@ public class Vector extends by.it.savchenko.jd01_09.Var {
     public Vector(Vector vector) {
         this(vector.value);
     }
+    public double[] getValue() {
+        return value;
+    }
 
     public Vector(String strVector) {
         //1.0,2.343,987.0

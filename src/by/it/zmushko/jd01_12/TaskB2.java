@@ -14,29 +14,39 @@ public class TaskB2 {
         for (int i = 0; i < 10; i++) {
             linkedList.add(String.valueOf(i));
         }
-        System.out.println(arrayLists);
         System.out.println(process(arrayLists));
         System.out.println(process(linkedList));
-        System.out.println(arrayLists);
     }
 
-    static String process(ArrayList<String> peoples){
-        Iterator<String> objectIterator = peoples.iterator();
+    static String process(ArrayList<String> peoples) {
 
-       // while (peoples.size() != 1) {
-            peoples.trimToSize();
-            int check = 0;
+        int counter = 0;
+        while (peoples.size() != 1) {
+            Iterator<String> objectIterator = peoples.iterator();
             while (objectIterator.hasNext()) {
-//                check++;
-//                if (check % 2 != 0);
-//                peoples.remove(objectIterator);
-                System.out.println(peoples);
+                counter++;
+                objectIterator.next();
+                if (counter % 2 != 1) {
+                    objectIterator.remove();
+                }
             }
-       // }
-        return peoples.toString();
+        }
+
+        return peoples.toString().replaceAll("[\\[\\]]", "");
     }
 
-    static String process(LinkedList<String> peoples){
-        return null;
+    static String process(LinkedList<String> peoples) {
+        int counter = 0;
+        while (peoples.size() != 1) {
+            Iterator<String> objectIterator = peoples.iterator();
+            while (objectIterator.hasNext()) {
+                counter++;
+                objectIterator.next();
+                if (counter % 2 != 1) {
+                    objectIterator.remove();
+                }
+            }
+        }
+        return peoples.toString().replaceAll("[\\[\\]]", "");
     }
 }

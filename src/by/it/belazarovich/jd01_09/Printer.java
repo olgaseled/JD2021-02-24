@@ -1,9 +1,11 @@
 package by.it.belazarovich.jd01_09;
 
-public class Printer {
-    void print(Var var) {
-        if (var != null)
-            System.out.println(var);
-    }
+import java.util.Objects;
 
+public class Printer {
+    void print(Var var){
+        if (Objects.nonNull(var)){
+            System.out.println(var);
+        }
+    }
 }
