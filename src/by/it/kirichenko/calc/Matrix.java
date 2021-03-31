@@ -37,7 +37,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var otherMartix) {
+    public Var add(Var otherMartix) throws CalcException {
         if (otherMartix instanceof Scalar) {
             double secondScalar = ((Scalar) otherMartix).getValue();
             double[][] resultMatrix = copyMatrix(value);
@@ -70,7 +70,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var otherMartix) {
+    public Var sub(Var otherMartix) throws CalcException {
         if (otherMartix instanceof Scalar) {
             double secondScalar = ((Scalar) otherMartix).getValue();
             double[][] resultMatrix = copyMatrix(value);
@@ -99,11 +99,11 @@ public class Matrix extends Var {
             }
             return new Matrix(resultMatrix);
         }
-        return super.add(otherMartix);
+        return super.sub(otherMartix);
     }
 
     @Override
-    public Var mul(Var otherMartix) {
+    public Var mul(Var otherMartix) throws CalcException {
         if (otherMartix instanceof Scalar) {
             double secondScalar = ((Scalar) otherMartix).getValue();
             double[][] resultMatrix = copyMatrix(value);
