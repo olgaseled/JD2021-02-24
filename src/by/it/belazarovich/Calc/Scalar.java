@@ -28,7 +28,7 @@ class Scalar extends Var {
     @Override
     public Var mul(Var other) throws CalkExeption {
         if (other instanceof Scalar) {
-            double div = this.value / ((Scalar) other).value);
+            double div = this.value / (((Scalar) other).value);
             return new Scalar(div);
         }
         return other.add(this);
