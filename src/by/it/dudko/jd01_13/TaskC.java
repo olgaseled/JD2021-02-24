@@ -10,28 +10,28 @@ public class TaskC {
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
         numbers = new ArrayList<>();
-
-        try {
-            readData();
-        } catch (BadInputQuotaExceededException e) {
-            throw new RuntimeException(e);
-        }
+        readData();
     }
 
-    static void readData() throws BadInputQuotaExceededException {
+    static void readData() {
+        //noinspection InfiniteLoopStatement
         while (true) {
             try {
-                Double inputNumber = scanner.nextDouble();
+                // Double inputNumber = scanner.nextDouble();
+                String strNum = scanner.nextLine();
+                Double inputNumber = Double.parseDouble(strNum);
                 numbers.add(inputNumber);
-            } catch (InputMismatchException e) {
+            // } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 if (++failureCount == 5) {
-                    throw new BadInputQuotaExceededException("You've broken the scanner");
+                    throw new RuntimeException(e);
                 }
                 try {
+                    //noinspection BusyWait
                     Thread.sleep(100);
                     pintNumbers();
-                } catch (InterruptedException interruptedException) {
-                    throw new RuntimeException(interruptedException);
+                } catch (InterruptedException | InputMismatchException interruptedException) {
+                    interruptedException.printStackTrace();
                 }
             }
         }
@@ -45,22 +45,5 @@ public class TaskC {
             delimiter = " ";
         }
         System.out.println();
-    }
-
-    private static class BadInputQuotaExceededException extends Exception {
-        public BadInputQuotaExceededException() {
-        }
-
-        public BadInputQuotaExceededException(String message) {
-            super(message);
-        }
-
-        public BadInputQuotaExceededException(String message, Throwable cause) {
-            super(message, cause);
-        }
-
-        public BadInputQuotaExceededException(Throwable cause) {
-            super(cause);
-        }
     }
 }
