@@ -8,7 +8,7 @@ import java.io.*;
 
 public class TaskA {
 
-    protected static String dir(Class<?> cl) {
+    private static String dir(Class<?> cl) {
         String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
         String clDir = cl.getName()
                 .replace(cl.getSimpleName(), "")
