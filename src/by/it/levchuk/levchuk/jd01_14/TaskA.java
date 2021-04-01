@@ -17,21 +17,21 @@ public class TaskA {
     }
 
     public static void main(String[] args) {
-        DataOutputStream dos = null;
+        DataOutputStream doc = null;
         try {
-            dos = new DataOutputStream(
+            doc = new DataOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream(dir(TaskA.class) + "dataTaskA.bin"))
             );
             for (int i = 0; i < 20; i++) {
-                dos.writeInt((int) (Math.random() * 25));
+                doc.writeInt((int) (Math.random() * 25));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (dos != null) {
+            if (doc != null) {
                 try {
-                    dos.close();
+                    doc.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
