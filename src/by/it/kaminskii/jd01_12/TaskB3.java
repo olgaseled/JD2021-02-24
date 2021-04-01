@@ -1,13 +1,19 @@
 package by.it.kaminskii.jd01_12;/* created by Kaminskii Ivan
  */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
-public class TaskB2 {
+public class TaskB3 {
     public static void main(String[] args) {
-        String[] peoples = new String[]{"1", "2", "3",};
+        String[] peoples = new String[]{"1", "2", "3","4","1","23","12"};
         ArrayList<String> peoplesArrayL = new ArrayList<>(Arrays.asList(peoples));
         LinkedList<String> peoplesLinkedL = new LinkedList<>(Arrays.asList(peoples));
+        System.out.println(process(peoplesArrayL));
+        System.out.println(process(peoplesLinkedL));
+
     }
 
     private static String process(ArrayList<String> peoples) {
@@ -40,3 +46,4 @@ public class TaskB2 {
         return peoples.get(0);
     }
 }
+
