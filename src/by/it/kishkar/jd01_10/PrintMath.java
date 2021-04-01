@@ -8,8 +8,10 @@ public class PrintMath {
         Class<Math> classMath = Math.class;
         Method[] methods = classMath.getDeclaredMethods();
         for (Method method : methods) {
-            if ((method.getModifiers() & Modifier.STATIC) ==Modifier.STATIC)
-                System.out.println(method);
+            if ((method.getModifiers() & Modifier.PUBLIC) ==Modifier.PUBLIC)
+                System.out.println(method.toString().replaceAll("java.lang.Math.", "")); //print all exclude import's words
+            System.out.println("double E");
+            System.out.println("double PI");
         }
 
     }
