@@ -32,5 +32,5 @@ public class TaskB2 {
         }
       return peoples.get(0);
     }
-    
+
 }
