@@ -12,6 +12,7 @@ package by.it.seledtsova.jd01_13;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,14 +37,19 @@ public class TaskC {
             } catch (Exception e) {
                 mistakes++; //  ошибки суммируются
                 Thread.sleep(100); // пауза
-                for (int i = arrayList.size(); i > 0; i--) {
-                    System.out.print(arrayList.get(i - 1) + " ");
-                }
+            //Вариант 1 Обратный вывод
+            //    Collections.reverse(arrayList);
+            //    System.out.print(arrayList+" "); // выводит с [ ]
+            //  Вариант 2 Обратный вывод
+            for (int i = arrayList.size(); i > 0; i--) { // обратный FOR переб. кол. от послед. к первому эл-ту
+                   System.out.print(arrayList.get(i - 1) + " ");}
+
                 System.out.println(mistakes);
                 if (mistakes >= 5) {
                     throw new Exception();
                 }
             }
+
         }
     }
 }
