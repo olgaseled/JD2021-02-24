@@ -26,16 +26,9 @@ public class TaskB2 {
     }
 
     private static String process(LinkedList<String> peoples) {
-        boolean del = false;
         while (peoples.size() > 1) {
-            Iterator<String> iterator = peoples.iterator();
-            while (iterator.hasNext()) {
-                iterator.next();
-                if (del) {
-                    iterator.remove();
-                }
-                del = !del;
-            }
+            peoples.addLast(peoples.removeFirst());
+            peoples.removeFirst();
         }
         return peoples.get(0);
     }
