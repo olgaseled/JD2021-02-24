@@ -18,7 +18,7 @@ abstract class Var implements Operation {
 
 
 
-    static Var createVar (String operand){
+    static Var createVar (String operand) throws CalcException {
 
         operand=operand.trim().replace("\\s+", "");
 
@@ -34,36 +34,32 @@ abstract class Var implements Operation {
         else if(vars.containsKey(operand))
           return vars.get(operand);
 
-        return null;
+        throw new CalcException("Невозможно создать "+ operand);
 
     }
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
 
-        System.out.printf("Operation %s + %s is impossible\n", this, other);
-        return null; // TODO replace throw exception
+        throw new CalcException(String.format("Operation %s + %s is impossible\n", this, other));
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
 
-        System.out.printf("Operation %s - %s is impossible\n", this, other);
-        return null;
+        throw new CalcException(String.format("Operation %s - %s is impossible\n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Operation %s * %s is impossible\n", this, other);
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Operation %s * %s is impossible\n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
 
-        System.out.printf("Operation %s / %s is impossible\n", this, other);
-        return null;
+        throw new CalcException(String.format("Operation %s / %s is impossible\n", this, other));
     }
 
     @Override

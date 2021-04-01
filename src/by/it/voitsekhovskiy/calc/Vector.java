@@ -8,7 +8,7 @@ public class Vector extends Var {
     private final double[] value;
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < this.value.length; i++) {
@@ -25,13 +25,15 @@ public class Vector extends Var {
                     resultVector[i] = resultVector[i] + secondVector[i];
                 }
                 return new Vector(resultVector);
+            } else {
+                throw new CalcException("Incorrect size");
             }
         }
         return super.add(other);
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < resultVector.length; i++) {
@@ -39,7 +41,7 @@ public class Vector extends Var {
             }
             return new Vector(resultVector);
         }
-        if(other instanceof Vector) {
+        if (other instanceof Vector) {
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             double[] secondVector = ((Vector) other).value;
             if (secondVector.length == resultVector.length) {
@@ -53,7 +55,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < this.value.length; i++) {
@@ -66,7 +68,7 @@ public class Vector extends Var {
             double[] secondVector = ((Vector) other).value;
             if (secondVector.length == this.value.length) {
                 for (int i = 0; i < this.value.length; i++) {
-                    sum+=this.value[i] * secondVector[i];
+                    sum += this.value[i] * secondVector[i];
                 }
             }
             return new Scalar(sum);
@@ -75,10 +77,10 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
-        if(other instanceof Scalar) {
-            if(((Scalar) other).getValue() == 0) {
-                return super.add(other);
+    public Var div(Var other) throws CalcException {
+        if (other instanceof Scalar) {
+            if (((Scalar) other).getValue() == 0) {
+                throw new CalcException("division by zero!");
             }
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < this.value.length; i++) {

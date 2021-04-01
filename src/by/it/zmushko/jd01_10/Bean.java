@@ -1,8 +1,5 @@
 package by.it.zmushko.jd01_10;
 
-import by.it._examples_.jd01_10.sample_service.Service;
-
-
 class Bean {
 
     public Bean() {

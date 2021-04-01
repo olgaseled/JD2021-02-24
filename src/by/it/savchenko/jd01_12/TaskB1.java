@@ -11,7 +11,7 @@ public class TaskB1 {
         while (true) {
             String word = scanner.next();
 
-            word = word.replaceAll("\\W,"," ");
+            word = word.replaceAll("[.,;:]"," ");
             if (word.equals("end")) {
                 break;
             }
