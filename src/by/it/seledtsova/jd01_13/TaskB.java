@@ -23,9 +23,9 @@ public class TaskB {
                 break;
             }
             try {
-                double a = Double.parseDouble(word);
-                System.out.println(a);
-                sum = sum + a;
+                double arrayParseDouble = Double.parseDouble(word);
+                System.out.println(arrayParseDouble);
+                sum = sum + arrayParseDouble;
                 if (sum < 0) {
                     throw new ArithmeticException();
                 }
