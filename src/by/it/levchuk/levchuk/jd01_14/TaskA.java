@@ -8,10 +8,10 @@ import java.io.*;
 
 public class TaskA {
 
-    private static String dir(Class<?> cl) {
+    private static String dir() {
         String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String clDir = cl.getName()
-                .replace(cl.getSimpleName(), "")
+        String clDir = TaskA.class.getName()
+                .replace(TaskA.class.getSimpleName(), "")
                 .replace(".", File.separator);
         return path + clDir;
     }
@@ -21,7 +21,7 @@ public class TaskA {
         try {
             doc = new DataOutputStream(
                     new BufferedOutputStream(
-                            new FileOutputStream(dir(TaskA.class) + "dataTaskA.bin"))
+                            new FileOutputStream(dir() + "dataTaskA.bin"))
             );
             for (int i = 0; i < 20; i++) {
                 doc.writeInt((int) (Math.random() * 25));
@@ -40,8 +40,8 @@ public class TaskA {
 
         try (DataInputStream inp = new DataInputStream(
                 new BufferedInputStream(
-                        new FileInputStream(dir(TaskA.class) + "dataTaskA.bin")));
-             PrintWriter out2 = new PrintWriter(new FileWriter(dir(TaskA.class) + "resultTaskA.txt"))
+                        new FileInputStream(dir() + "dataTaskA.bin")));
+             PrintWriter out2 = new PrintWriter(new FileWriter(dir() + "resultTaskA.txt"))
         ) {
             double sum = 0;
             double count = 0;
