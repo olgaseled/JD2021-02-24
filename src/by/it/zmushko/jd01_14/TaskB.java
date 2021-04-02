@@ -21,12 +21,12 @@ public class TaskB {
         writeInTxtFile(dataPathTaskB, txtPath, str);
     }
 
-    private static void writeInTxtFile(String dataPathTaskB, String txtPath, String str) throws FileNotFoundException {
+    private static void writeInTxtFile(String dataPathTaskB, String txtPath, String str){
         try (PrintWriter write = new PrintWriter(txtPath)) {
             write.println("words=" + getCountWords(replaceFileTxtInString(dataPathTaskB, str)));
             write.println("marks=" + getCountPunctuation(replaceFileTxtInString(dataPathTaskB, str)));
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            throw new RuntimeException();
         }
     }
 
