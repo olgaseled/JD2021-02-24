@@ -2,7 +2,7 @@ package by.it._classwork_.calc;
 
 import java.io.File;
 
-public class FileNameHelper {
+class FileNameHelper {
 
     private static final String USER_DIR = "user.dir";
     private static final String SRC = "src";
