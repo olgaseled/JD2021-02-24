@@ -10,6 +10,7 @@ class FileNameHelper {
     private FileNameHelper() {
     }
 
+    @SuppressWarnings("SameParameterValue")
     static String getFilePath(String filename, Class<?> currentStructure) {
         String rootProject = System.getProperty(USER_DIR);
         String src = rootProject + File.separator + SRC + File.separator;
