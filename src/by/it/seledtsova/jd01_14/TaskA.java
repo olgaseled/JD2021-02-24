@@ -18,7 +18,7 @@ public class TaskA {
      String clDir=cl.getName().replace(cl.getSimpleName(),"").replace(".",File.separator);
                                             //узнаю полный путь к классу. TaskA сотрется, а "." заменится "\"
      return  path+clDir; // возвращаем путь и инфу из клааса
-    } //
+    }
 
     public static void main(String[] args) {
         // OutPutStream
