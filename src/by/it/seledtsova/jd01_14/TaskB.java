@@ -29,7 +29,7 @@ public class TaskB {
                     new FileReader(
                             dir(TaskB.class) + "Poem.txt"));
 
-            PrintWriter out2 = new PrintWriter(
+            printWriter= new PrintWriter(
                     new FileWriter(
                             dir(TaskB.class) + "resultTaskB.txt"));
 
@@ -49,11 +49,10 @@ public class TaskB {
                     Matcher matcher1 = pattern1.matcher(line);
                     while (matcher1.find())
                         sumPunctuationMark++;
-                    //System.out.println(line+sumPunctuationMark);
                 }
             System.out.println("words="+sumWord+", "+"punctuation marks="+sumPunctuationMark);
 
-            out2.println("words="+sumWord+", punctuation marks="+sumPunctuationMark);
+            printWriter.print("words="+sumWord+", punctuation marks="+sumPunctuationMark);
 
 
 

@@ -93,6 +93,4 @@ public class Test_jd01_14 extends HomeWork {
         return System.getProperty("user.dir") + "/src/" +
                 cl.getName().replace(cl.getSimpleName(), "").replace('.', '/');
     }
-
-
 }
