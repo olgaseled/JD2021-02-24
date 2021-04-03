@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 public class InputOutput {
 
+//    public static final int[] BOM_HEX = {0xEF, 0xBB, 0xBF};
+      public static final byte[] BOM_BYTES = { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF };
+
     public static void main(String[] args) {
         try {
             run();
@@ -19,7 +22,7 @@ public class InputOutput {
         BufferedInputStream bufferedInputStream = null;
         FileOutputStream fileOutputStream = null;
 
-        String srcFileName = "src/by/it/dudko/sandbox/" + "one.txt";
+        String srcFileName = "src/by/it/dudko/sandbox/" + "bom.txt";
         String outFileName = "src/by/it/dudko/sandbox/" + "ten.txt";
 
         int i = 0, ch = 0;
@@ -34,7 +37,7 @@ public class InputOutput {
 
             bufferedInputStream.mark(0);
             if (bufferedInputStream.read(maybeBom, 0, 3) != -1 &&
-                    Arrays.equals(maybeBom, new byte[]{-17, -69, -65})) {
+                    Arrays.equals(maybeBom, BOM_BYTES)) {
                 bufferedInputStream.mark(0); // set mark to byte after BOM
             }
 
