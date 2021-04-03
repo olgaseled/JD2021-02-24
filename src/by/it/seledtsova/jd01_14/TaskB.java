@@ -23,13 +23,13 @@ public class TaskB {
     public static void main(String[] args) {
 
         BufferedReader bufferedReader=null; // создали пустое значение
-        PrintWriter printWriter=null;
+
         try {
             bufferedReader= new BufferedReader( // читаем
                     new FileReader(
                             dir(TaskB.class) + "Poem.txt"));
 
-            printWriter= new PrintWriter(
+            PrintWriter printWriter= new PrintWriter(
                     new FileWriter(
                             dir(TaskB.class) + "resultTaskB.txt"));
 
@@ -52,7 +52,7 @@ public class TaskB {
                 }
             System.out.println("words="+sumWord+", "+"punctuation marks="+sumPunctuationMark);
 
-            printWriter.print("words="+sumWord+", punctuation marks="+sumPunctuationMark);
+            printWriter.print("words="+sumWord+", "+"punctuation marks="+sumPunctuationMark);
 
 
 
@@ -60,7 +60,7 @@ public class TaskB {
                 e.printStackTrace(); //
             }
 
-        finally{ // будем закрывать файл
+        finally{ // закрываю файл
             if (bufferedReader != null) {
                 try {
 
