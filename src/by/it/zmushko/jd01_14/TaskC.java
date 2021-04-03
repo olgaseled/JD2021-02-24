@@ -9,7 +9,7 @@ import java.util.Objects;
 public class TaskC {
 
     private static final String USER_DIR = "user.dir";
-    private static final String SRC = "src/by/it/zmushko";
+    private static final String SRC_ZMUSHKO_DIR = "src/by/it/zmushko";
     public static final String RESULT_TASK_C_TXT = "resultTaskC.txt";
     private static final String SRC_FILE_FOUND = "src";
 
@@ -42,7 +42,7 @@ public class TaskC {
     }
 
     public static String getFilePath() {
-        return System.getProperty(USER_DIR) + File.separator + SRC + File.separator;
+        return System.getProperty(USER_DIR) + File.separator + SRC_ZMUSHKO_DIR + File.separator;
     }
 
     public static String getFilePath(String filename, Class<?> currentStructure) {
