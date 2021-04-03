@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd14_01;
+package by.it.seledtsova.jd01_14;
 
 
 import by.it.HomeWork;

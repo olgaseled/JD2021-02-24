@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd14_01;
+package by.it.seledtsova.jd01_14;
 
 import java.io.File;
 
@@ -10,12 +10,17 @@ import java.io.File;
  */
 public class TaskB {
 
+
+
     private static String dir (Class<?> cl) {
         String path=System.getProperty("user.dir")+ File.separator+"src"+File.separator; // определяю ПУТЬ , где находится каталог SRC
-        String clDir=cl.getName().replace(cl.getSimpleName(),"").replace(".",File.separator);
+        String clDir=path+"jd14_01";
         //узнаю полный путь к классу. TaskB сотрется, а "." заменится "\"
         return  path+clDir; // возвращаем путь и инфу из клааса
     }
-    
+
+    public static void main(String[] args) {
+
+    }
 
 }

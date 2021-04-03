@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd14_01;
+package by.it.seledtsova.jd01_14;
 /*
 В классе TaskAнужно выполнить следующие шаги:
 Записать в двоичный файл dataTaskA.bin20 случайных чисел типа Integer.
