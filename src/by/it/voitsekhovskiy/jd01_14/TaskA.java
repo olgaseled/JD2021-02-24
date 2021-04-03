@@ -6,8 +6,13 @@ import java.util.List;
 
 class TaskA {
 
+    public static final String DATA_TASK_A_BIN = "dataTaskA.bin";
+    public static final String RESULT_TASK_A_TXT = "resultTaskA.txt";
+    public static final String USER_DIR = "user.dir";
+    public static final String SRC = "src";
+
     public static void main(String[] args) {
-        String path = dir(TaskA.class) + "dataTaskA.bin";
+        String path = dir(TaskA.class) + DATA_TASK_A_BIN;
         saveIntegers(path);
         List<Integer> list = getIntegers(path);
         printToTxt(printConsole(list));
@@ -18,7 +23,7 @@ class TaskA {
         try (
                 PrintWriter pw = new PrintWriter( // ????
                         new BufferedWriter(
-                                new FileWriter(dir(TaskA.class) + "resultTaskA.txt"))
+                                new FileWriter(dir(TaskA.class) + RESULT_TASK_A_TXT))
                 )
         ) {
             pw.write(numbers);
@@ -65,7 +70,7 @@ class TaskA {
 
 
     private static String dir(Class<?> cl) {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String path = System.getProperty(USER_DIR) + File.separator + SRC + File.separator;
         String clDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
         return path + clDir;
     }
