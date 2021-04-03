@@ -27,6 +27,7 @@ public class TaskB {
                 PrintWriter printWriter = new PrintWriter( // записываем
                         new FileWriter(
                                 dir(TaskB.class) + "resultTaskB.txt"));
+
                 int sumPunctuationMark = 0; // сумма знаков препинания
                 int sumWord = 0; // количество прочитанных слов
 
@@ -40,9 +41,10 @@ public class TaskB {
                     while (matcher.find())
                         sumWord++;
                     Pattern pattern1 = Pattern.compile("[.,?!]+");
-                    Matcher matcher1 = pattern.matcher(line);
+                    Matcher matcher1 = pattern1.matcher(line);
                     while (matcher1.find())
                         sumPunctuationMark++;
+                    System.out.println(line+sumPunctuationMark);
                 }
                 System.out.println(sumWord);
                 System.out.println(sumPunctuationMark);
