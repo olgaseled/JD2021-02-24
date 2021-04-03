@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
-В классе TaskBнужно выполнить следующие шаги:
+В классе TaskB нужно выполнить следующие шаги:
 В файле с текстом TaskB.txt нужно подсчитать общее количество знаков препинания и слов
 Вывести результат на консоль в виде одной строки:words=123, punctuation marks=15
 Продублировать вывод в консоль в файл resultTaskB.txt
@@ -29,9 +29,9 @@ public class TaskB {
                     new FileReader(
                             dir(TaskB.class) + "Poem.txt"));
 
-            printWriter=new PrintWriter(
+            PrintWriter out2 = new PrintWriter(
                     new FileWriter(
-                            dir(TaskB.class)+"resultTaskB.txt"));
+                            dir(TaskB.class) + "resultTaskB.txt"));
 
                 int sumPunctuationMark = 0; // сумма знаков препинания
                 int sumWord = 0; // количество прочитанных слов
@@ -45,7 +45,7 @@ public class TaskB {
                     Matcher matcher = pattern.matcher(line);
                     while (matcher.find())
                         sumWord++;
-                    Pattern pattern1 = Pattern.compile("[.,?!:-;+]+");
+                    Pattern pattern1 = Pattern.compile("[.,!?:-]+");
                     Matcher matcher1 = pattern1.matcher(line);
                     while (matcher1.find())
                         sumPunctuationMark++;
@@ -53,10 +53,11 @@ public class TaskB {
                 }
             System.out.println("words="+sumWord+", "+"punctuation marks="+sumPunctuationMark);
 
-            printWriter.print("words="+sumWord+", "+"punctuation marks="+sumPunctuationMark);
+            out2.println("words="+sumWord+", punctuation marks="+sumPunctuationMark);
 
 
-            } catch(IOException e){
+
+        } catch(IOException e){
                 e.printStackTrace(); //
             }
 
