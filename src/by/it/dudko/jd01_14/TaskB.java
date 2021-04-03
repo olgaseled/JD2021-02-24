@@ -1,7 +1,6 @@
 package by.it.dudko.jd01_14;
 
 import java.io.*;
-import java.util.Locale;
 import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,7 +50,7 @@ public class TaskB {
     private static int countMatchesByGivenPattern(Pattern pat, String text) {
         int counter = 0;
         Matcher matcher = pat.matcher(text);
-        while(matcher.find()) {
+        while (matcher.find()) {
             counter++;
         }
         return counter;
@@ -59,7 +58,6 @@ public class TaskB {
 
     private static String readTxtFileContent(String srcFilePath) {
         int i;
-        char c;
         StringBuilder sb = new StringBuilder();
 
         try (
