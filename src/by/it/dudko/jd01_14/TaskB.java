@@ -20,13 +20,14 @@ public class TaskB {
         String srcOutputPath = getFullPathToFile(RESULT_FILE_NAME);
 
         String txtData = readTxtFileContent(srcFilePath);
-        Pattern punctuationMarks = Pattern.compile("\\.{1}|[-,;:!]|\\.{3}");
+        Pattern punctuationMarks = Pattern.compile("[-,;:!]|\\.+");
         Pattern words = Pattern.compile("[а-яА-ЯЁё]+");
         punctuationMarksCount = countMatchesByGivenPattern(punctuationMarks, txtData);
         wordsCount = countMatchesByGivenPattern(words, txtData);
         String output = createResultLine(punctuationMarksCount, wordsCount);
         printResultToConsole(output);
         printResultToTextFile(output, srcOutputPath);
+
     }
 
     private static void printResultToTextFile(String output, String outputFilePath) {
