@@ -8,8 +8,10 @@ import java.io.*;
 
 public class TaskA {
 
+    public static final String USER_DIR = "user.dir";
+
     private static String dir() {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String path = System.getProperty(USER_DIR) + File.separator + "src" + File.separator;
         String clDir = TaskA.class.getName()
                 .replace(TaskA.class.getSimpleName(), "")
                 .replace(".", File.separator);
