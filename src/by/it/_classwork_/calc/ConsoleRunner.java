@@ -7,6 +7,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
+        VarRepository.load();
         for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
@@ -17,6 +18,11 @@ public class ConsoleRunner {
                     printer.print(e);
                 }
             } else {
+                try {
+                    VarRepository.save(Var.vars);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
                 break;
             }
         }
