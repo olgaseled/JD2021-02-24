@@ -19,6 +19,7 @@ public class ConsoleRunner {
                 }
                 printer.print(resultVar);
             } else {
+                //VarRepository.save(key,value);//TODO вырезаем из Var
                 break;
             }
 

@@ -5,10 +5,12 @@ import java.util.Map;
 
 //здесь уже нет абстрактных методов, оставляем абстрактным, чтобы нельзя было создать объект var
 abstract class Var implements Operation {
-    private static Map<String,Var> vars = new HashMap<>();
+    //private static Map<String,Var> vars = new HashMap<>();
+    static Map<String,Var> vars = new HashMap<>();//TODO
 
     public static Var save(String key, Var value) {
         vars.put(key,value);
+        VarRepository.save(key,value);//TODO вырезаем
         //сохраняет по ключу
         return value;
     }

@@ -28,21 +28,24 @@ public class TaskC {
 
     }
 
-    private static void printFiles(File dir, PrintWriter printWriter) throws NullPointerException{
+    private static void printFiles(File dir, PrintWriter printWriter){
+
 
         if (dir.isDirectory()) {
             File[] directories = dir.listFiles();
             String s;
-            for (File file : directories) {
-                if (file.isDirectory()) {
-                    s = "dir:" + file.getName() + "\n";
-                    System.out.print(s);//вывод на  консоль
-                    printWriter.write(s);//вывод в файл
-                    printFiles(file, printWriter);
-                } else {
-                    s = "file:" + file.getName() + "\n";
-                    System.out.print(s);
-                    printWriter.write(s);
+            if(directories!=null) {
+                for (File file : directories) {
+                    if (file.isDirectory()) {
+                        s = "dir:" + file.getName() + "\n";
+                        System.out.print(s);//вывод на  консоль
+                        printWriter.write(s);//вывод в файл
+                        printFiles(file, printWriter);
+                    } else {
+                        s = "file:" + file.getName() + "\n";
+                        System.out.print(s);
+                        printWriter.write(s);
+                    }
                 }
             }
         }
