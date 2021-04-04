@@ -1,12 +1,13 @@
 package by.it.papruga.jd01_11;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Runner {
 
     public static void main(String[] args) {
 
+        /*
         List<String> myList = new ListA<>();
         List<String> arList = new ArrayList<>();
 
@@ -26,6 +27,20 @@ public class Runner {
         System.out.println("remove myList:"+myList+"\narList:"+arList);
 
         System.out.println("get myList(0):"+myList.get(0)+ "\narList(0):"+arList.get(0));
+*/
+
+        Set<String> mySetList = new SetC<>();
+        Set<String> hashSetList = new HashSet<>();
+
+
+
+        mySetList.add("Тест1"); hashSetList.add("Тест1");
+        mySetList.add("Тест2"); hashSetList.add("Тест2");
+        mySetList.add("Тест3"); hashSetList.add("Тест3");
+
+
+
+        System.out.println("mySetList:"+mySetList+"\nhashSetList:"+hashSetList);
 
 
 
