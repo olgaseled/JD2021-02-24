@@ -9,7 +9,6 @@ import static by.it.levchuk.levchuk.jd01_14.TaskA.USER_DIR;
 import static java.awt.AlphaComposite.SRC;
 
 
-
 public class FileNameHelper {
 
     static String getFilePath(String filename, Class<?> currentStructure) {
