@@ -1,8 +1,11 @@
 package by.it.khrolovich.jd01_14;
 
+import by.it._examples_.jd01_07.bean.Run;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,34 +23,53 @@ public class TaskC {
 
         System.out.println(dirPath);
         File dir = new File(dirPath);
-        try (PrintWriter printWriter = new PrintWriter(txtPath)) {
+        List<String> list = new ArrayList<>();
+        addFilesToList(dir,list);
+        printFilesToConsole(list);
+        printFilesToFile(list, txtPath);
+       /* try (PrintWriter printWriter = new PrintWriter(txtPath)) {
             printFiles(dir, printWriter);
         } catch (FileNotFoundException | NullPointerException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
-    private static void printFiles(File dir, PrintWriter printWriter){
-
+    private static List<String> addFilesToList(File dir,List<String> list) {
 
         if (dir.isDirectory()) {
             File[] directories = dir.listFiles();
             String s;
-            if(directories!=null) {
+            if (directories != null) {
                 for (File file : directories) {
                     if (file.isDirectory()) {
                         s = "dir:" + file.getName() + "\n";
-                        System.out.print(s);//вывод на  консоль
-                        printWriter.write(s);//вывод в файл
-                        printFiles(file, printWriter);
+                        list.add(s);
+                        addFilesToList(file,list);
                     } else {
                         s = "file:" + file.getName() + "\n";
-                        System.out.print(s);
-                        printWriter.write(s);
+                        list.add(s);
                     }
                 }
             }
+        }
+        return list;
+    }
+
+    private static void printFilesToConsole(List<String> listForPrint) {
+        for (String s : listForPrint) {
+            System.out.println(s);
+        }
+    }
+
+    private static void printFilesToFile(List<String> listForPrint, String txtPath) {
+
+        try (PrintWriter printWriter = new PrintWriter(txtPath)) {
+            for (String s : listForPrint) {
+                printWriter.write(s);
+            }
+        } catch (FileNotFoundException | NullPointerException e) {
+            throw new RuntimeException(e);
         }
     }
 
