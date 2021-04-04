@@ -2,7 +2,7 @@ package by.it.dudko.sandbox;
 
 import java.io.*;
 
-public class Pipe {
+public class Streams2 {
 
     public static void main(String[] args) {
         try {

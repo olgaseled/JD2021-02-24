@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Encoding {
+public class HexDump {
 
     public static void main(String[] args) {
         try {

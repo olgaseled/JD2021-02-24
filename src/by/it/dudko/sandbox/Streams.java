@@ -3,7 +3,7 @@ package by.it.dudko.sandbox;
 import java.io.*;
 import java.util.Arrays;
 
-public class InputOutput {
+public class Streams {
 
 //    public static final int[] BOM_HEX = {0xEF, 0xBB, 0xBF};
       public static final byte[] BOM_BYTES = { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF };
@@ -25,7 +25,7 @@ public class InputOutput {
         String srcFileName = "src/by/it/dudko/sandbox/" + "bom.txt";
         String outFileName = "src/by/it/dudko/sandbox/" + "ten.txt";
 
-        int i = 0, ch = 0;
+        int i = 0, ch;
         int emojiLength = 5;
         int copies = 10;
         byte[] maybeBom = new byte[3];
