@@ -10,7 +10,7 @@ abstract class Var implements Operation {
         return var;
     }
 
-    static Var createVar (String strVar){
+    static Var createVar (String strVar) throws CalkExeption{
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
         else if (strVar.matches(Patterns.VECTOR))
@@ -19,8 +19,7 @@ abstract class Var implements Operation {
     return new Matrix(strVar);
         else if (vars.containsKey( strVar))
             return vars.get(strVar);
-
-        return null;
+            throw  new CalkExeption("Невозможно создать "+strVar);
 
     }
 
@@ -30,26 +29,26 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.printf("Operation %s + %s is not possible\n", this, other);
-        return null; //TODO replace throw exception
+    public Var add(Var other) throws CalkExeption {
+       throw new CalkExeption("Operation %s + %s is not possible\n", this, other);
+
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Operation %s - %s is not possible\n", this, other);
-        return null;
+    public Var sub(Var other) throws CalkExeption {
+        throw new CalkExeption ("Operation %s - %s is not possible\n", this, other);
+
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Operation %s * %s is not possible\n", this, other);
-        return null;
+    public Var mul(Var other)throws CalkExeption {
+        throw new CalkExeption("Operation %s * %s is not possible\n", this, other);
+
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Operation %s / %s is not possible\n", this, other);
-        return null;
+    public Var div(Var other)throws CalkExeption {
+        throw new CalkExeption("Operation %s / %s is not possible\n", this, other);
+
     }
 }
