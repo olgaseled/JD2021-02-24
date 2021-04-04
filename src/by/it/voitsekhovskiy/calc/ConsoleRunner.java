@@ -10,6 +10,14 @@ public class ConsoleRunner {
         for (; ; ) {
             String expression = sc.nextLine();
             if (!expression.equals("end")) {
+                if(expression.equals("printvar")) {
+                    Var.getVar();
+                    continue;
+                }
+                if(expression.equals("sortvar")) {
+                    Var.sortVars();
+                    continue;
+                }
                 try {
                     Var result = calc.calc(expression);
                     print.print(result);

@@ -5,6 +5,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskB {
+
+    public static final String RESULT_TASK_B_TXT = "resultTaskB.txt";
+    public static final String POEM_TXT = "Poem.txt";
+    public static final String USER_DIR = "user.dir";
+    public static final String SRC = "src";
+
     public static void main(String[] args) {
         String text = getText();
         String resultStr = resultString(text);
@@ -14,7 +20,7 @@ public class TaskB {
     private static void stringToTxt(String str) {
         try (
                 BufferedWriter bw = new BufferedWriter(
-                        new FileWriter(dir(TaskB.class) + "resultTaskB.txt")
+                        new FileWriter(dir(TaskB.class) + RESULT_TASK_B_TXT)
                 )
         ) {
             bw.write(str);
@@ -51,7 +57,7 @@ public class TaskB {
         StringBuilder sb = new StringBuilder();
         try (
                 BufferedReader isRead = new BufferedReader(
-                        new FileReader(dir(TaskB.class) + "Poem.txt")
+                        new FileReader(dir(TaskB.class) + POEM_TXT)
                 )
         ) {
             String line;
@@ -68,7 +74,7 @@ public class TaskB {
 
 
     private static String dir(Class<?> cl) {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String path = System.getProperty(USER_DIR) + File.separator + SRC + File.separator;
         String clDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
         return path + clDir;
     }
