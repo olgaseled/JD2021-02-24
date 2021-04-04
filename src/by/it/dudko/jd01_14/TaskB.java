@@ -15,8 +15,8 @@ public class TaskB {
 
     public static void main(String[] args) {
         int punctuationMarksCount, wordsCount;
-        String srcFilePath = getFullPathToFile(SRC_FILE_NAME);
-        String srcOutputPath = getFullPathToFile(RESULT_FILE_NAME);
+        String srcFilePath = getFullPathToFile(SRC_FILE_NAME, TaskB.class);
+        String srcOutputPath = getFullPathToFile(RESULT_FILE_NAME, TaskB.class);
 
         String txtData = readTxtFileContent(srcFilePath);
         Pattern punctuationMarks = Pattern.compile("[-,;:!]|\\.+");
@@ -75,12 +75,11 @@ public class TaskB {
         return sb.toString();
     }
 
-    private static String getFullPathToFile(String fileName) {
+    public static String getFullPathToFile(String fileName, Class<?> struct) {
         String projectRoot = System.getProperty(USER_DIR);
         String fileSeparator = System.getProperty(FILE_SEPARATOR);
-        Class<TaskA> classStructure = TaskA.class;
-        String classSimpleName = classStructure.getSimpleName();
-        String classRelPath = classStructure.getName()
+        String classSimpleName = struct.getSimpleName();
+        String classRelPath = struct.getName()
                 .replace(classSimpleName, "")
                 .replace(".", fileSeparator);
         StringJoiner classFullPath = new StringJoiner(fileSeparator);
