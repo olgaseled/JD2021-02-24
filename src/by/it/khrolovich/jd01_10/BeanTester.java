@@ -2,10 +2,11 @@ package by.it.khrolovich.jd01_10;
 
 import by.it._examples_.jd01_10.sample_service.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class BeanTester {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<Bean> beanClass = Bean.class;
         Method[] methods = beanClass.getDeclaredMethods();
         Object o = null;

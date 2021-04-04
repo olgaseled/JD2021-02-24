@@ -48,7 +48,7 @@ public class TaskB3 {
     }
 
     static String process(LinkedList<String> peoples) {
-        boolean isDel = false;
+        /*boolean isDel = false;
         while (peoples.size() != 1) {
             Iterator<String> itrLinked = peoples.iterator();
 
@@ -61,23 +61,14 @@ public class TaskB3 {
                     isDel = true;
                 }
             }
-        }
-        //используя интерфейс очереди
-        /*boolean isDel = false;
-        while (peoples.size() != 1) {
-            LinkedList<String> newList = new LinkedList<>();
-            while (peoples.size() != 0) {
-                if (isDel) {
-                    peoples.poll();
-                    isDel = false;
-                } else {
-                    newList.add(peoples.poll());
-                    isDel = true;
-                }
-            }
-            peoples.addAll(newList);
         }*/
 
+        //используя интерфейс очереди
+
+        while (peoples.size() != 1) {
+            peoples.offerLast(peoples.pollFirst());//заталкиваем в конец очереди
+            peoples.pollFirst();
+        }
         return peoples.getFirst();
     }
 }
