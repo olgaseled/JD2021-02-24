@@ -44,7 +44,7 @@ public class TaskB {
             }
             if (stringBuffer[i].toString().contains("/*") && stringBuffer[i].toString().contains("*/")) {
                 deleteBigCommentInOneLine(stringBuffer[i]);
-            }
+            } 
             if (stringBuffer[i].toString().contains("/*") && !stringBuffer[i].toString().contains("*/")) {
                 deleteFirstLineComment(stringBuffer[i]);
                 i = deleteAfterFirstLineComment(stringBuffer, i+1, true);
