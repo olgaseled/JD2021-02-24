@@ -20,6 +20,7 @@ public class TaskC {
         }
     }
 
+    
     private static void commandLineApplication(String line) {
         if (line.startsWith("cd")) {
             String[] split = line.split("\\s");
