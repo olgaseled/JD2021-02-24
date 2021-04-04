@@ -1,16 +1,22 @@
 package by.it.voitsekhovskiy.calc;
 
-abstract class Var implements Operation {
+import java.util.HashMap;
+import java.util.Map;
 
-    static Var createVar(String strExp) throws CalcException {
-        if (strExp.matches(Patterns.SCALAR)) {
-            return new Scalar(strExp);
-        } else if (strExp.matches(Patterns.VECTOR)) {
-            return new Vector(strExp);
-        } else if (strExp.matches(Patterns.MATRIX)) {
-            return new Matrix(strExp);
-        }
-        throw new CalcException("Can't define as Var!");
+abstract class Var implements Operation {
+    static Map<String, Var> vars = new HashMap<>();
+
+    static Var save(String key, Var value) {
+        vars.put(key, value);
+        return value;
+    }
+
+    static void getVar() {
+        vars.entrySet().forEach(System.out::println);
+    }
+
+    static void sortVars() {
+        vars.entrySet().forEach(System.out::println);
     }
 
     @Override
@@ -36,5 +42,16 @@ abstract class Var implements Operation {
     @Override
     public Var div(Var other) throws CalcException {
         throw new CalcException(String.format("Operation %s / %s is impossible\n", this, other));
+    }
+
+    static Var createVar(String strExp) throws CalcException {
+        if (strExp.matches(Patterns.SCALAR)) {
+            return new Scalar(strExp);
+        } else if (strExp.matches(Patterns.VECTOR)) {
+            return new Vector(strExp);
+        } else if (strExp.matches(Patterns.MATRIX)) {
+            return new Matrix(strExp);
+        }
+        throw new CalcException("Can't define as Var!");
     }
 }
