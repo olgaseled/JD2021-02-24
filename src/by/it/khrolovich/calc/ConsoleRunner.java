@@ -3,7 +3,7 @@ package by.it.khrolovich.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException {
 
         Printer printer = new Printer();
         Parser parser = new Parser();
@@ -11,9 +11,15 @@ public class ConsoleRunner {
         for(;;){
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
-                Var resultVar = parser.evaluate(expression);
+                Var resultVar = null;
+                try {
+                    resultVar = parser.evaluate(expression);
+                } catch (CalcException e) {
+                    printer.printCalcException(e);
+                }
                 printer.print(resultVar);
             } else {
+                //VarRepository.save(key,value);//TODO вырезаем из Var
                 break;
             }
 

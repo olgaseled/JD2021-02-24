@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     @SuppressWarnings("ConstantConditions")
-    Var evaluate(String expression)
-    {
+    Var evaluate(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+","");//ту да же положим, теперь переменная на новое значение указывает
         String[] parts = expression.split(Patterns.OPERATION,2);//пока только две части
         //можно так
