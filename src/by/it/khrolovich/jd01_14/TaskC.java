@@ -1,12 +1,9 @@
 package by.it.khrolovich.jd01_14;
 
-import by.it._examples_.jd01_07.bean.Run;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskC {

@@ -1,7 +1,5 @@
 package by.it.khrolovich.jd01_10;
 
-import by.it._examples_.jd01_10.sample_service.Service;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
