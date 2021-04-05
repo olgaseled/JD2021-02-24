@@ -1,7 +1,7 @@
 package by.it.belazarovich.Calc;
 
 public class CalkExeption extends  Exception{
-    public CalkExeption() {
+    public CalkExeption(String s, Var var, Var other) {
         super();
     }
 
