@@ -26,7 +26,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             //проверили, значит имеем право кастить - приводить типы
             double otherValue = ((Scalar) other).value;//other.value
@@ -40,7 +40,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double result = this.value - ((Scalar) other).value;
             return new Scalar(result);
@@ -49,7 +49,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
         }
@@ -57,12 +57,14 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondOperand = ((Scalar) other).value;//other.value
             if (secondOperand == 0) {
                 //return null;//TODO div be zero
-                return super.div(other);
+               // return super.div(other);
+                throw new CalcException("division by zero");
+                // throws CalcException добавляется везде
             }
 
             return new Scalar(this.value / secondOperand);

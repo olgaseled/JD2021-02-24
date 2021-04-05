@@ -1,10 +1,12 @@
 package by.it.khrolovich.calc;
 
+import java.util.Objects;
+
 public class VarCreator {
     public VarCreator() {
     }
 
-    static Var build(String strVar){
+    static Var build(String strVar) throws CalcException {
         strVar = strVar.replaceAll("\\s+","");
         if (strVar.matches(Patterns.SCALAR)){
             return  new Scalar(strVar);
@@ -14,7 +16,12 @@ public class VarCreator {
             return  new Matrix(strVar);
         } else {
             //return null;//TODO stub - generate ERROR
-            return Var.load(strVar);
+            Var var = Var.load(strVar);
+            if(Objects.nonNull(var)){
+                return var;
+            }
+            throw new CalcException("unknow variable");
+            //return Var.load(strVar);
         }
     }
 }
