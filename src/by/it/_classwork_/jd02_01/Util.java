@@ -1,16 +1,18 @@
 package by.it._classwork_.jd02_01;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 class Util {
-
-    private static Random random = new Random();
 
     private Util() {
     }
 
     static int getRandom(int min, int max) {
-        return random.nextInt(max - min + 1) + min;
+
+        return ThreadLocalRandom
+                .current()
+                .nextInt(max - min + 1) + min;
     }
 
     static int getRandom(int max) {
