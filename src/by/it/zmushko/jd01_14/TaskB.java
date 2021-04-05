@@ -59,7 +59,7 @@ public class TaskB {
         return countWords;
     }
 
-    private static String replaceFileTxtInString(String dataPathTaskB, String str) throws FileNotFoundException {
+    private static String replaceFileTxtInString(String dataPathTaskB, String str){
         try (BufferedReader buff = new BufferedReader(new FileReader(dataPathTaskB))) {
             int b;
             StringBuilder strBuilder = new StringBuilder(str);
@@ -68,7 +68,7 @@ public class TaskB {
             }
             str = strBuilder.toString();
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            throw new RuntimeException(e);
         }
         return str;
     }
