@@ -7,6 +7,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
+        //todo
         for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
@@ -18,6 +19,8 @@ public class ConsoleRunner {
                     printer.print(e);
                 }
             } else {
+
+                //TODO
                 break;
             }
         }
