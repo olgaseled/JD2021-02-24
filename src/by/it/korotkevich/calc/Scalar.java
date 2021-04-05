@@ -1,7 +1,5 @@
 package by.it.korotkevich.calc;
 
-import by.it._examples_.jd01_11.generics.Demo;
-
 class Scalar extends Var {
 
     private final double value;

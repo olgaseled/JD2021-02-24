@@ -36,6 +36,13 @@ public class TaskA1 {
             }
         }
 
+        /*for (Iterator<Integer> iterator = myGrades.iterator();iterator.hasNext();) {
+            Integer myGrade = iterator.next();
+            if (myGrade < 4) {
+                iterator.remove();
+            }
+        }*/
+
         //подсказка на while
         // myGrades.removeIf(myGrade -> myGrade < 4);
 

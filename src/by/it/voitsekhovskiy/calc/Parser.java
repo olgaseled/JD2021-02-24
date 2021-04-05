@@ -5,8 +5,11 @@ import java.util.regex.Pattern;
 
 public class Parser {
     Var calc(String expression) throws CalcException {
-        expression = expression.replace(" ", "");
+        expression = expression.replace("\\s+", "");
         String[] operands = expression.split(Patterns.OPERATION);
+        if(expression.contains("=")) {
+            return Var.save(operands[0], Var.createVar(operands[1]));
+        }
         Var firstOperand = Var.createVar(operands[0]);
         Var secondOperand = Var.createVar(operands[1]);
 

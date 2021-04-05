@@ -27,13 +27,14 @@ public class TaskB2 {
                 } else {
                     isDel = true;
                 }
+                //isDel = !isDel;
             }
         }
         return peoples.get(0);
     }
 
     static String process(LinkedList<String> peoples) {
-        boolean isDel = false;
+        /*boolean isDel = false;
         while (peoples.size() != 1) {
             Iterator<String> itrLinked = peoples.iterator();
 
@@ -46,8 +47,12 @@ public class TaskB2 {
                     isDel = true;
                 }
             }
-        }
+        }*/
 
-       return peoples.getFirst();
+        while(peoples.size() != 1){
+            peoples.addLast(peoples.removeFirst());
+            peoples.removeFirst();
+        }
+        return peoples.getFirst();
     }
 }
