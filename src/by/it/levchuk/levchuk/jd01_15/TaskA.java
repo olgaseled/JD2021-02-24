@@ -18,19 +18,9 @@ public class TaskA {
     public static void main(String[] args) {
         int[][] matrix = new int[6][4];
         fillRandom(matrix);
-        String filename = FileNameHelper.getFilePath(MATRIX_TXT, by.it.levchuk.levchuk.jd01_15.TaskA.class);
+        String filename = FileNameHelper.getFilePath(MATRIX_TXT, TaskA.class);
         saveTxtMatrix(matrix, filename);
         showFileInConsole(filename);
-    }
-
-    private static void showFileInConsole(String filename) {
-        try {
-            Files.lines(Paths.get(filename))
-                    .forEach(System.out::println);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void saveTxtMatrix(int[][] matrix, String filename) {
@@ -42,6 +32,16 @@ public class TaskA {
                 out.println();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void showFileInConsole(String filename) {
+        try {
+            Files.lines(Paths.get(filename))
+                    .forEach(System.out::println);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
