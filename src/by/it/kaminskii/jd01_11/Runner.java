@@ -1,8 +1,5 @@
 package by.it.kaminskii.jd01_11;
 
-import by.it._classwork_.jd01_11.ListA;
-
-
 import java.util.List;
 
 public class Runner {

@@ -10,7 +10,6 @@ public class TaskA2 {
         Integer[] valuesForTreeSet = {4, 4, 5, 5, 3, 4, 5, 5, 6, 6};
         //new HashSet<Integer>(Arrays.asList(1,1,2,2,3,4,5,5,6,6));//тоже самое
 
-
         Set<Integer> hashSet = new HashSet<>(Arrays.asList(valuesForHashSet));//capasity - степень 2-ки, например, 1024
         Set<Integer> treeSet = new HashSet<>(Arrays.asList(valuesForHashSet));
         System.out.println(hashSet);
@@ -19,7 +18,8 @@ public class TaskA2 {
 
         Set<Integer> cross = getCross(hashSet, treeSet);
     }
-    static  Set<Integer> getUnion(Set<Integer> a,Set<Integer> b){
+
+    static Set<Integer> getUnion(Set<Integer> a, Set<Integer> b) {
        /* a.addAll(b);
         return a;*/
         HashSet<Integer> resultSet = new HashSet<>(a);//быстрее всего(быстрее чем TreeSet)
@@ -27,7 +27,7 @@ public class TaskA2 {
         return resultSet;
     }
 
-    static  Set<Integer> getCross(Set<Integer> a,Set<Integer> b){
+    static Set<Integer> getCross(Set<Integer> a, Set<Integer> b) {
 
         HashSet<Integer> resultSet = new HashSet<>(a);//быстрее всего(быстрее чем TreeSet)
         resultSet.retainAll(b);//TODO посмотреть как работает
