@@ -1,5 +1,6 @@
 package by.it.seledtsova.jd02_01;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 class Util {
@@ -16,6 +17,7 @@ class Util {
     static int getRandom(int max) {
         return getRandom(0, max);
     } // вместо 4 было макс
+
 
     static void sleep(int timeout) {
         try {

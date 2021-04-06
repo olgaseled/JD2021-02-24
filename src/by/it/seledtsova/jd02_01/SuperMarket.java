@@ -3,11 +3,13 @@ package by.it.seledtsova.jd02_01;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 
-public class Store {
+public class SuperMarket extends BasketProduct {
 
+    public static Map<String, Double> basketProduct = basketProduct();
 
-    public static void main(String[] args) throws InterruptedException {
+      public static void main(String[] args) throws InterruptedException {
         int countBuyers = 0; // счетчик покупателей
 
         List<Buyer> buyers = new ArrayList<>(120);
@@ -35,7 +37,6 @@ public class Store {
         System.out.println("The store  has closed");
 
     }
-
 }
 
 
