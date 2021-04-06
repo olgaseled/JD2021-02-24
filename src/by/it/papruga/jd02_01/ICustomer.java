@@ -2,10 +2,10 @@ package by.it.papruga.jd02_01;
 
 public interface ICustomer {
 
-    void enterToMark();
+    void enterToMarket();   // вошел в магазин (мгновенно)
 
-    void chooseGoods();
+    void chooseGoods();     // выбрал товар (от 0,5 до 2 секунд)
 
-    void goOut();
+    void goOut();           // отправился на выход
 
 }
