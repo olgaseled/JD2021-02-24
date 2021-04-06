@@ -14,14 +14,18 @@ public class TaskB1 {
             if (finalText.equals("end")) {
                 break;
             }
-            if (!map.containsKey(finalText)) {
-                map.put(finalText, justCounter);
-            } else {
-                int changeVal = map.get(finalText);
-                changeVal++;
-                map.put(finalText, changeVal);
-            }
+            mapWithoutClonableElem(map, justCounter, finalText);
         }
         System.out.println(map);
+    }
+
+    private static void mapWithoutClonableElem(HashMap<String, Integer> map, int justCounter, String finalText) {
+        if (!map.containsKey(finalText)) {
+            map.put(finalText, justCounter);
+        } else {
+            int changeVal = map.get(finalText);
+            changeVal++;
+            map.put(finalText, changeVal);
+        }
     }
 }
