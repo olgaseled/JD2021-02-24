@@ -28,8 +28,8 @@ public class Buyer extends Thread implements IBuyer, Runnable {
     @Override
     public void chooseGoods() {
         System.out.println(this+"The buyer star to choose products");
-        int timeout = Util.getRandom(500, 2000);
-        Util.sleep(timeout);
+        int pause = Util.getRandom(500, 2000);
+        Util.sleep(pause);
         System.out.println(this + "finished choose goods");
     }
 

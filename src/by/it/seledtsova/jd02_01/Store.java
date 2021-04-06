@@ -13,6 +13,7 @@ public class Store {
     public static void main(String[] args) throws InterruptedException {
         int countBuyers = 0; // счетчик покупателей
         List<Buyer> buyers = new ArrayList<>(120);
+
         System.out.println("The store is opened");
         for (int waitTime = 0; waitTime < Config.FINAL_TIME; waitTime++) {
             int count = Util.getRandom(2); // каждую сек в магаз приходит от 0 до 2 покупателей
@@ -23,6 +24,8 @@ public class Store {
             }
             Util.sleep(1000);
         }
+
+
         for (Buyer buyer : buyers) {
             try {
                 buyer.join();
@@ -31,6 +34,7 @@ public class Store {
             }
         }
         System.out.println("The store  has closed");
+
     }
 
 }

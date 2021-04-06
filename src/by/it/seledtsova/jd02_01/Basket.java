@@ -1,8 +1,14 @@
 package by.it.seledtsova.jd02_01;
 
 import java.util.HashMap;
+/*
+У каждого покупателя с корзиной (Basket) собирается набор от 1..4 товаров (Good)
+ из фиксированного списка с ценой (рекомендуется hashmap, где товар –key,цена –value).
+Время на каждую операцию от 0,5до 2 секунд, итог операции –в консоль.
+ */
 
 public class Basket extends Thread implements IUseBasket {
+
 
     HashMap <String,Integer> basket= new HashMap<>(4);
     {
@@ -15,13 +21,17 @@ public class Basket extends Thread implements IUseBasket {
     @Override
     public void takeBasket() {
         System.out.println(this+"The buyer takes the basket");
+        int pause = Util.getRandom(500, 2000); //
+        Util.sleep(pause);
+        System.out.println();
     }
 
     @Override
     public void putProductToTheBasket() {
             System.out.println(this+"The buyer put product to the basket");
-            int timeout = Util.getRandom(500, 2000); //
-            Util.sleep(timeout);
+            int pause = Util.getRandom(500, 2000); //
+            Util.sleep(pause);
+        System.out.println(this+"The buyer put product to the basket");
         }
     }
 
