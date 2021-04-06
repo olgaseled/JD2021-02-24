@@ -12,12 +12,13 @@ public class TaskB1 {
             if (words.equals("end")) {
                 break;
             }
-            String word=words.replaceAll("[.;:,!?]", "").trim();
+            String word = words.replaceAll("[.;:,!?]", "").trim();
 
-            if (!result.containsKey(word)){
+            if (!result.containsKey(word)) {
                 result.put(word, 1);
+            } else {
+                result.put(word, result.get(word) + 1);
             }
-            else { result.put(word, result.get(word) +1);}
         }
         System.out.println(result);
     }

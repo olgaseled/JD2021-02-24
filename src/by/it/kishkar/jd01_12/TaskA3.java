@@ -7,18 +7,18 @@ import java.util.Scanner;
 public class TaskA3 {
 
     public static void main(String[] args) {
-        List<Integer> arr=new ArrayList<>();
+        List<Integer> arr = new ArrayList<>();
 
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String str;
-        int pos=0;
-        while (!(str=scanner.next()).equals("end")) {
-            Integer value=Integer.valueOf(str);
+        int pos = 0;
+        while (!(str = scanner.next()).equals("end")) {
+            Integer value = Integer.valueOf(str);
 
-            if (value>0)
-                arr.add(pos++,value);
-            else if (value==0)
-                arr.add(pos,0);
+            if (value > 0)
+                arr.add(pos++, value);
+            else if (value == 0)
+                arr.add(pos, 0);
             else arr.add(value);
         }
         System.out.println(arr);

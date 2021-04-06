@@ -2,7 +2,7 @@ package by.it.kishkar.jd01_11;
 
 import java.util.*;
 
-public class ListB <T> implements List<T> {
+public class ListB<T> implements List<T> {
 
     private T[] elements = (T[]) new Object[]{};
     private int size = 0;
@@ -20,41 +20,38 @@ public class ListB <T> implements List<T> {
     public void add(int index, T element) {
         if (size == elements.length)
             elements = Arrays.copyOf(elements, (size * 3 / 2 + 1));
-        System.arraycopy(elements, index,elements,index+1, size-index);
-        elements[index]=element;
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
         size++;
 
     }
 
 
-
     @Override
     public boolean remove(Object o) {
-        int index=indexOf(o);
-        if (index>-1) remove(index);
+        int index = indexOf(o);
+        if (index > -1) remove(index);
 
-        return (index>-1);
+        return (index > -1);
     }
 
 
     @Override
     public T remove(int index) {
-        T del=elements[index];
-        System.arraycopy(elements, index+1, elements,index,size-1-index);
+        T del = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
         size--;
         return del;
     }
-
 
 
     @Override
     public int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < size; i++)
-                if (elements[i]==null)
+                if (elements[i] == null)
                     return i;
-        }
-        else {
+        } else {
             for (int i = 0; i < size; i++)
                 if (o.equals(elements[i]))
                     return i;
@@ -71,22 +68,19 @@ public class ListB <T> implements List<T> {
     }
 
 
-
     @Override
     public T set(int index, T element) {
-       T ReturnElem=elements[index];
-       elements[index]=element;
-       return ReturnElem;
+        T ReturnElem = elements[index];
+        elements[index] = element;
+        return ReturnElem;
     }
-
-
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         String delimeter = "";
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             sb.append(delimeter).append(elements[i]);
             delimeter = ", ";
         }
@@ -97,23 +91,16 @@ public class ListB <T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-       T[] ArrayList= (T[]) c.toArray();
-if (size== elements.length) {
-    elements=Arrays.copyOf(elements, (size*3/2+1));
-}
-elements=Arrays.copyOf(elements, size+ArrayList.length+1);
-System.arraycopy(ArrayList, 0, elements, size,ArrayList.length);
-size+=ArrayList.length;
-return true;
+        T[] ArrayList = (T[]) c.toArray();
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, (size * 3 / 2 + 1));
+        }
+        elements = Arrays.copyOf(elements, size + ArrayList.length + 1);
+        System.arraycopy(ArrayList, 0, elements, size, ArrayList.length);
+        size += ArrayList.length;
+        return true;
 
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -172,7 +159,6 @@ return true;
     public void clear() {
 
     }
-
 
 
     @Override

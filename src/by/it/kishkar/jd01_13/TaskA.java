@@ -23,7 +23,7 @@ public class TaskA {
                                     " name: %s\n" +
                                     "class: %s\n" +
                                     " line: %d\n",
-                            nameExceptionClass,classNameInStackTrace,lineNumber);
+                            nameExceptionClass, classNameInStackTrace, lineNumber);
                     break;
                 }
             }
