@@ -40,7 +40,7 @@ public class Test_jd01_15 extends HomeWork {
     }
 
 
-    @Test(timeout = 1500)
+    @Test(timeout = 150000)
     public void testTaskB() throws Exception {
         run("");
         String s1 = getText("TaskB.txt").trim();
@@ -49,6 +49,9 @@ public class Test_jd01_15 extends HomeWork {
         assertTrue("Удалены не все многострочные комментарии", s1.equals(s2));
         assertTrue("Удалены не все однострочные комментарии", s1.equals(s3));
 
+        System.out.println("Сделано тестом:");
+        System.out.println();
+
         String s0 = getText("TaskB.java").trim();
         s0 = s0.replaceAll("(?s)/\\*.*?\\*/", "");
         s0 = s0.replaceAll("//[^\\n]*+", "");
@@ -56,10 +59,12 @@ public class Test_jd01_15 extends HomeWork {
         char[] ch1 = s1.replaceAll("\r", "").toCharArray();
 
         for (int i = 0; i < ch1.length; i++) {
+            if(i==475)
+                i=475;
             if (ch1[i] == ch0[i])
                 System.out.print(ch1[i]);
             else
-                fail("expected <<" + ch1[i] + ">>, actual <<" + ch0[i] + ">>");
+                fail("expected <<" + (int)ch1[i] + ">>, actual <<" + (int)ch0[i] + ">> i="+i);
             System.out.flush();
         }
     }

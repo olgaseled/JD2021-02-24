@@ -23,23 +23,24 @@ public class TaskB {
                 break;
             }
             try {
-                double a = Double.parseDouble(word);
-                System.out.println(a);
-                sum = sum + a;
+
+                double arrayParseNumber = Double.parseDouble(word); // пробуем перевести в числовой массив
+                System.out.println(arrayParseNumber);
+                sum = sum + arrayParseNumber;
                 if (sum < 0) {
-                    throw new ArithmeticException();
+                    throw new ArithmeticException("Сумма меньше нуля. Найти квадратный корень нельзя"); // бросаемся ошибкой
                 }
                 System.out.println(Math.sqrt(sum));
             } catch (NumberFormatException | ArithmeticException e) {
-                Class<? extends RuntimeException> aClass = e.getClass();
-                String name = aClass.getName();
-                StackTraceElement[] stackTrace = e.getStackTrace();
-                Class<TaskB> taskB = TaskB.class;
-                String nameClass = taskB.getName();
+                Class<? extends RuntimeException> aClass = e.getClass(); //
+                String name = aClass.getName(); // имя ошибки
+                Class<TaskB> taskB = TaskB.class; // инфа о классе, где ошибка
+                String nameClass = taskB.getName(); //
+                StackTraceElement[] stackTrace = e.getStackTrace(); // получили инфу об ошибке ( название и где возникла)
                 for (StackTraceElement stackTraceElement : stackTrace) {
                     String className = stackTraceElement.getClassName();
                     if (className.equals(nameClass)) {
-                        int number = stackTraceElement.getLineNumber();
+                        int number = stackTraceElement.getLineNumber(); // номер строки в кот, ошибка
                         System.out.printf("name: %s\n" +
                                 "class: %s\n" +
                                 "line: %d", name, taskB, number);
@@ -51,6 +52,10 @@ public class TaskB {
         }
     }
 }
+
+
+
+
 
 
 
