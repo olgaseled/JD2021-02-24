@@ -1,13 +1,38 @@
 package by.it.belazarovich.jd02_01;
 
+class Customer extends Thread implements ICustomer {
 
-    public interface Customer {
+    public Customer(int number) {
+        super("Customer #" + number + " ");
+    }
 
-        void enterToMarket(); //вошел в магазин (мгновенно)
+    @Override
+    public void run() {
+        enterToMarket();
+        chooseGoods();
+        goOut();
+    }
 
-        void chooseGoods(); //выбрал товар (от 0,5 до 2 секунд)
+    @Override
+    public void enterToMarket() {
+        System.out.println(this + "goes to the store");
+    }
 
-        void goOut(); //отправился на выход(мгновенно)
+    @Override
+    public void chooseGoods() {
+        System.out.println(this + "started choose goods");
+        int timeout = Util.getRandom(500, 2000);
+        Util.sleep(timeout);
+        System.out.println(this + "finished choose goods");
+    }
 
+    @Override
+    public void goOut() {
+        System.out.println(this + "leaves the store");
+    }
 
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }
