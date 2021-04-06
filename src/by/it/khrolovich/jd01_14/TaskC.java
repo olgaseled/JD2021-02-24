@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskC {
+    public static final String MY_DIR = "khrolovich";
     private static final String USER_DIR = "user.dir";
     private static final String SRC = "src";
     private static final String RESULT_TASK_C_TXT = "resultTaskC.txt";
@@ -16,23 +17,18 @@ public class TaskC {
         String txtPath = getFilePath(RESULT_TASK_C_TXT, currentStructure);
         String rootProject = System.getProperty(USER_DIR);//здесь в IDE это корень проекта
         String dirPath = rootProject + File.separator + SRC + File.separator + "by"
-                + File.separator + "it" + File.separator + "khrolovich";
+                + File.separator + "it" + File.separator + MY_DIR;
 
         System.out.println(dirPath);
         File dir = new File(dirPath);
         List<String> list = new ArrayList<>();
-        addFilesToList(dir,list);
+
+        addFilesToList(dir, list);
         printFilesToConsole(list);
         printFilesToFile(list, txtPath);
-       /* try (PrintWriter printWriter = new PrintWriter(txtPath)) {
-            printFiles(dir, printWriter);
-        } catch (FileNotFoundException | NullPointerException e) {
-            e.printStackTrace();
-        }*/
-
     }
 
-    private static List<String> addFilesToList(File dir,List<String> list) {
+    private static List<String> addFilesToList(File dir, List<String> list) {
 
         if (dir.isDirectory()) {
             File[] directories = dir.listFiles();
@@ -42,7 +38,7 @@ public class TaskC {
                     if (file.isDirectory()) {
                         s = "dir:" + file.getName() + "\n";
                         list.add(s);
-                        addFilesToList(file,list);
+                        addFilesToList(file, list);
                     } else {
                         s = "file:" + file.getName() + "\n";
                         list.add(s);
