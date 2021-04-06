@@ -3,7 +3,7 @@ package by.it.levchuk.levchuk.jd02_01;
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
-public interface ICustomer {
+public interface IBuyer {
 
         void enterToMarket();    //вошел в магазин (мгновенно)
 
