@@ -8,14 +8,14 @@ import java.util.LinkedHashMap;
 Время на каждую операцию от 0,5до 2 секунд, итог операции –в консоль.
  */
 
-public class Basket extends Thread implements IUseBasket {
+public class Basket extends Thread implements IUseBasket  {
 /*
 public Buyer(int number) {
         super("Customer #" + number + " ");
     }
  */
 
-   LinkedHashMap <String,Integer> basket= new LinkedHashMap<>(4);
+    LinkedHashMap <String,Integer> basket= new LinkedHashMap<>(4);
     {
         basket.put ("Milk", 2);
         basket.put("Bread", 1);
@@ -40,6 +40,6 @@ public Buyer(int number) {
         System.out.println(this+"The buyer put product to the basket");
         }
 
-    
+
 }
 
