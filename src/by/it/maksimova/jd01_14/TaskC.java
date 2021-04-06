@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Objects;
 
 public class TaskC {
     //классе TaskC нужно выполнить следующие шаги:
@@ -26,25 +27,19 @@ public class TaskC {
         File file = new File(new File(System.getProperty(USER_DIR)) +
                 File.separator + SRC +
                 File.separator + BY + File.separator + IT + File.separator + MAKSIMOVA);
-
-        if (file.isDirectory()) {
-            for (File item : file.listFiles()) {
-                if (item.isDirectory()) {
-                    System.out.println("dir: " + item.getName());
-                } else
-                    System.out.println("file: " + item.getName());
-
-                try (PrintWriter out = new PrintWriter(new FileWriter(dir(TaskC.class) + RESULT_TASK_С_TXT))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter(dir(TaskC.class) + RESULT_TASK_С_TXT))) {
+            if (file.isDirectory()) {
+                for (File item : Objects.requireNonNull(file.listFiles())) {
                     if (item.isDirectory()) {
-                        out.println("dir: " + item.getName());
+                        System.out.println("dir:" + item.getName());
+                        out.println("dir:" + item.getName());
                     } else
-                        out.println("file: " + item.getName());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                        System.out.println("file:" + item.getName());
+                    out.println("file:" + item.getName());
                 }
             }
-
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
