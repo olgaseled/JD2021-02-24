@@ -19,7 +19,7 @@ class Util {
 
     static void sleep(int timeout) {
         try {
-            Thread.sleep(timeout / Config.K_SPEED);
+            Thread.sleep(timeout / Configuration.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
