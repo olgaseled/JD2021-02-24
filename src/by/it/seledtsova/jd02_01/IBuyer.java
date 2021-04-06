@@ -1,6 +1,6 @@
 package by.it.seledtsova.jd02_01;
 
-public interface ICustomer {
+public interface IBuyer {
 
     void enterToMarket(); //вошел в магазин (мгновенно)
 
