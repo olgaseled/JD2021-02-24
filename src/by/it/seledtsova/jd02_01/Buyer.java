@@ -6,7 +6,7 @@ package by.it.seledtsova.jd02_01;
  */
 
 
-public class Buyer extends Thread implements IBuyer, Runnable, IUseBasket {
+public class Buyer extends Thread implements IBuyer, Runnable {
 
 
     public Buyer(int number) {
@@ -45,15 +45,5 @@ public class Buyer extends Thread implements IBuyer, Runnable, IUseBasket {
         return this.getName();
     }
 
-    @Override
-    public void takeBasket() {
-        System.out.println(this+"The buyer takes the basket");
-            }
 
-    @Override
-    public void putProductToTheBasket() {
-        System.out.println(this+"The buyer put product to the basket");
-        int timeout = Util.getRandom(500, 2000); //  
-        Util.sleep(timeout);
-    }
 }

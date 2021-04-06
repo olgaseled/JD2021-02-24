@@ -1,6 +1,7 @@
 package by.it.seledtsova.jd02_01;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Store {
@@ -31,6 +32,7 @@ public class Store {
         }
         System.out.println("The store  has closed");
     }
+
 }
 
 
