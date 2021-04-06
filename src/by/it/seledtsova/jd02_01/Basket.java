@@ -1,6 +1,7 @@
 package by.it.seledtsova.jd02_01;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 /*
 У каждого покупателя с корзиной (Basket) собирается набор от 1..4 товаров (Good)
  из фиксированного списка с ценой (рекомендуется hashmap, где товар –key,цена –value).
@@ -8,15 +9,20 @@ import java.util.HashMap;
  */
 
 public class Basket extends Thread implements IUseBasket {
+/*
+public Buyer(int number) {
+        super("Customer #" + number + " ");
+    }
+ */
 
-
-    HashMap <String,Integer> basket= new HashMap<>(4);
+   LinkedHashMap <String,Integer> basket= new LinkedHashMap<>(4);
     {
-        basket.put("Milk", 2);
+        basket.put ("Milk", 2);
         basket.put("Bread", 1);
         basket.put("Cheese", 3);
         basket.put("Chocolate", 4);
     }
+
 
     @Override
     public void takeBasket() {
@@ -33,5 +39,7 @@ public class Basket extends Thread implements IUseBasket {
             Util.sleep(pause);
         System.out.println(this+"The buyer put product to the basket");
         }
-    }
+
+    
+}
 

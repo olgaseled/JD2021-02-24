@@ -7,4 +7,5 @@ public interface IUseBasket {
     void putProductToTheBasket (); // положил выбранный продукт
 
 
+
 }
