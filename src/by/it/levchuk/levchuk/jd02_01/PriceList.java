@@ -1,12 +1,10 @@
 package by.it.levchuk.levchuk.jd02_01;
-
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
 import java.util.HashMap;
 
 public class PriceList {
-
     HashMap<String,Double> priceList = new HashMap<>();
 
     public void setPriceList(HashMap<String, Double> priceList) {
@@ -19,7 +17,7 @@ public class PriceList {
         priceList.put("Фрукты", 6.50);
         priceList.put("Напитки", 3.40);
         priceList.put("Алкоголь", 30.60);
-        priceList.put("Сигареты", 3.20);
+        priceList.put("Сигареты", 3.40);
 
         this.priceList = priceList;
     }

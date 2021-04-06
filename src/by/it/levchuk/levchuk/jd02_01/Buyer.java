@@ -3,6 +3,9 @@ package by.it.levchuk.levchuk.jd02_01;
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     public Buyer(int number) {
@@ -39,7 +42,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        System.out.println(this + "Положил товары в корзину");
+        List<String> chosenProducts = new ArrayList<>();
+        int quantityOfProducts = Tools.getRandom(1, 4);
+            System.out.println(this + "Положил товары в корзину");
     }
 
     @Override
