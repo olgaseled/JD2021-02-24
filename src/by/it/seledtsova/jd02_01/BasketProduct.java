@@ -1,8 +1,5 @@
 package by.it.seledtsova.jd02_01;
 
-
-import by.it.seledtsova.jd01_11.ListB;
-
 import java.util.*;
 
 /*

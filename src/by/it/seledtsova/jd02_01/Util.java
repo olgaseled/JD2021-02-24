@@ -1,6 +1,6 @@
 package by.it.seledtsova.jd02_01;
 
-import java.util.ArrayList;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 class Util {
