@@ -1,6 +1,8 @@
 package by.it.dudko.jd02_01;
 
-public class Customer extends Thread implements ICustomer {
+public class Customer extends Thread implements ICustomer, IUseBasket {
+
+    Basket basket;
 
     public Customer(int number) {
         super(String.format("Customer #%d", number));
@@ -34,5 +36,17 @@ public class Customer extends Thread implements ICustomer {
     @Override
     public String toString() {
         return this.getName();
+    }
+
+    @Override
+    public void takeBasket() {
+        int actionTime = CustomerUtil.getRandom(500, 2000);
+        CustomerUtil.sleep(actionTime);
+        System.out.println(this + " got a basket");
+    }
+
+    @Override
+    public void putGoodsToBasket() {
+
     }
 }
