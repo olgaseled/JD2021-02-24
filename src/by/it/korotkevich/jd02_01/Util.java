@@ -1,16 +1,15 @@
 package by.it.korotkevich.jd02_01;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 class Util {
 
-    private static Random random = new Random();
 
     private Util() {
     }
 
     static int getRandom(int min, int max) {
-        return random.nextInt(max - min + 1) + min; //TODO заменить на ThreadLocalRandom
+        return ThreadLocalRandom.current().nextInt(max - min + 1);
     }
 
     static int getRandom(int max) {
@@ -19,7 +18,7 @@ class Util {
 
     static void sleep(int timeout) {
         try {
-            Thread.sleep(timeout/Config.K_SPEED);
+            Thread.sleep(timeout / Config.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
