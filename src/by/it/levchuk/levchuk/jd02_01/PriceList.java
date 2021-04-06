@@ -12,14 +12,14 @@ public class PriceList {
     public void setPriceList(HashMap<String, Double> priceList) {
 
         priceList.put("Хлеб", 2.15);
-        priceList.put("Молоко", 2.15);
-        priceList.put("Масло", 2.15);
-        priceList.put("Мясо", 2.15);
-        priceList.put("Овощи", 2.15);
-        priceList.put("Фрукты", 2.15);
-        priceList.put("Напитки", 2.15);
-        priceList.put("Алкоголь", 2.15);
-        priceList.put("Сигареты", 2.15);
+        priceList.put("Молоко", 1.20);
+        priceList.put("Масло", 3.40);
+        priceList.put("Мясо", 11.20);
+        priceList.put("Овощи", 8.15);
+        priceList.put("Фрукты", 6.50);
+        priceList.put("Напитки", 3.40);
+        priceList.put("Алкоголь", 30.60);
+        priceList.put("Сигареты", 3.20);
 
         this.priceList = priceList;
     }
