@@ -1,5 +1,7 @@
 package by.it.dudko.jd02_01;
 
+import java.util.List;
+
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
     Basket basket;
@@ -11,7 +13,9 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void run() {
         enterToMarket();
-        chooseGoods();
+        takeBasket();
+        List<Good> goods = chooseGoods();
+        putGoodsToBasket(goods);
         goOut();
     }
 
@@ -21,11 +25,13 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     }
 
     @Override
-    public void chooseGoods() {
+    public List<Good> chooseGoods() {
         System.out.println(this + " started choosing goods");
+        List<Good> goods = CustomerUtil.getRandomGoods(Config.MAX_GOODS_IN_BASKET);
         int actionTime = CustomerUtil.getRandom(500, 2000);
         CustomerUtil.sleep(actionTime);
         System.out.println(this + " finished choosing goods");
+        return goods;
     }
 
     @Override
@@ -41,12 +47,19 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void takeBasket() {
         int actionTime = CustomerUtil.getRandom(500, 2000);
+        basket = new Basket();
         CustomerUtil.sleep(actionTime);
-        System.out.println(this + " got a basket");
+        System.out.println(this + " took a basket");
     }
 
     @Override
-    public void putGoodsToBasket() {
-
+    public void putGoodsToBasket(List<Good> goods) {
+        int actionTime;
+        for (Good good : goods) {
+            actionTime = CustomerUtil.getRandom(500, 2000);
+            CustomerUtil.sleep(actionTime);
+            basket.putGood(good);
+            System.out.printf("%s put %s to the basket\n", this, good);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package by.it.dudko.jd02_01;
 
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomerUtil {
@@ -23,5 +24,27 @@ public class CustomerUtil {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static List<Good> getRandomGoods(int count) {
+        List<Good> goods = new ArrayList<>(count * 4 / 3 + 1);
+        Set<String> selectedProducts = new HashSet<>(); // provides unique products control
+        PriceList priceList = Store.getPriceList();
+        StoreCurrency currency = priceList.getCurrency();
+        List<String> productList = priceList.getProductsList();
+        int random;
+        while (goods.size() < count) {
+            random = getRandom(productList.size() - 1);
+            String productName = productList.get(random);
+            if (selectedProducts.contains(productName)) {
+                continue;
+            }
+            selectedProducts.add(productName);
+            double cost = priceList.getCostByName(productName);
+            goods.add(new Good(productName, cost, currency));
+        }
+
+        return goods;
     }
 }

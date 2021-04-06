@@ -3,23 +3,39 @@ package by.it.dudko.jd02_01;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
-public class PriceList<T1, T2> {
+public class PriceList implements IPriceList {
 
-    Map<T1, T2> priceTable;
+    private final Map<String, Double> priceTable;
+    StoreCurrency currency;
+    List<String> productList = new ArrayList<>();
 
-    public PriceList(Map<T1, T2> priceTable) {
-        Iterator<Map.Entry<T1, T2>> iterator = priceTable.entrySet().iterator();
-        //noinspection WhileLoopReplaceableByForEach
-        while (iterator.hasNext()) {
-            Map.Entry<T1, T2> product = iterator.next();
-            this.priceTable.put(product.getKey(), product.getValue());
-        }
+
+    public PriceList(String priceListLines, StoreCurrency currency) {
+        priceTable = new HashMap<>();
+        parseToMap(priceListLines);
+        this.currency = currency;
+        productList.addAll(priceTable.keySet());
     }
 
-    public PriceList(String priceListLines) {
+    @Override
+    public List<String> getProductsList() {
+        return productList;
+    }
+
+    @Override
+    public StoreCurrency getCurrency() {
+        return currency;
+    }
+
+    @Override
+    public double getCostByName(String product) {
+        return priceTable.get(product);
+    }
+
+    private Map<String, Double> parseToMap(String priceListLines) {
+        Map<String, Double> price = new HashMap<>();
         try (
                 BufferedReader reader = new BufferedReader(
                         new StringReader(priceListLines)
@@ -27,17 +43,13 @@ public class PriceList<T1, T2> {
         ) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] productInfo = line.split("\\s*:\\s*");
-                //noinspection unchecked
-                priceTable.put((T1) productInfo[0],
-                        (T2) productInfo[1]);
+                String[] productInfo = line.trim().split("\\s*:\\s*");
+                priceTable.put(productInfo[0], Double.parseDouble(productInfo[1]));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    public T2 getCostByName(T1 product) {
-        return priceTable.get(product);
+        return price;
     }
 }
