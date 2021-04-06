@@ -5,13 +5,12 @@ package by.it.seledtsova.jd02_01;
 Каждую секунду в магазин приходят от 0 до 2 новых покупателей в течение двух минут.
  */
 
+
 public class Buyer extends Thread implements IBuyer, Runnable {
 
-    int buyerNumber; // номер покупателя
 
-    public Buyer (int BuyerNumber) { // создали покупателя и присвоили ему номер
-    this.setName("The buyer number №"+buyerNumber+" ");
-    start(); // поток начал работу. Покупатель начал покупать
+    public Buyer(int number) {
+        super("Customer #" + number + " ");
     }
 
     public void run(){   // выделили наш поток. Покупатель пришел в зал магазина,выбирает и покупает товар
@@ -29,7 +28,9 @@ public class Buyer extends Thread implements IBuyer, Runnable {
     @Override
     public void chooseGoods() {
         System.out.println(this+"The buyer star to choose products");
-
+        int timeout = Util.getRandom(500, 2000);
+        Util.sleep(timeout);
+        System.out.println(this + "finished choose goods");
     }
 
 
