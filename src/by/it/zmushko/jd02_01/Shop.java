@@ -9,7 +9,7 @@ public class Shop {
         System.out.println("Open shop");
         Products products = new Products(); //задать вопрос не забыть
         System.out.println(Products.products); //just test
-        List<Buyer> listBuyers = new ArrayList();
+        List<Buyer> listBuyers = new ArrayList<>();
         int numberOfPeopleWhoCome = 0;
         for (int openStoreTime = 0; openStoreTime < Constants.OPEN_STORE_TIME; openStoreTime++) {
             int wentToTheShop = Support.getRandom(2);
