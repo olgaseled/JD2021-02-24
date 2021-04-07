@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
-import java.util.stream.Stream;
 
 public class TaskA {
     public static void main(String[] args) throws IOException {
@@ -22,6 +21,7 @@ public class TaskA {
         try {
             Files.lines(Paths.get(fileName))
                     .forEach(System.out::println);//readLine() все строки
+            //Files.lines(Paths.get(fileName)).forEach(s->System.out.println(s));
         } catch (IOException e) {
             e.printStackTrace();
         }
