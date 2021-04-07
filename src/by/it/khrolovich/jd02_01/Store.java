@@ -22,7 +22,7 @@ public class Store {
                 customers.add(customer);
                 customer.start();
             }
-            //Util.Sleep(1000);
+            Util.Sleep(1000);
         }
         for (Customer customer : customers) {
             try {
