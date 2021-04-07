@@ -5,7 +5,8 @@ Liauchuk Aliaksandr*/
 import java.util.HashMap;
 
 public class PriceList {
-    HashMap<String,Double> priceList = new HashMap<>();
+
+    HashMap<String, Double> priceList = new HashMap<>();
 
     public void setPriceList(HashMap<String, Double> priceList) {
 
