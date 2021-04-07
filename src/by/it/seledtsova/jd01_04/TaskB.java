@@ -7,7 +7,7 @@ package by.it.seledtsova.jd01_04;
 //После подсказки можно через пробел вводить с консоли 4 цифры зарплат по кварталам(nextInt() в сканере).
 //Постройте в консоли таблицу доходов людей по кварталам с фамилиями и итогом за год в последней колонке.
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class TaskB {
@@ -19,7 +19,7 @@ public class TaskB {
         for (int i = 0; i < lastNames.length; i++) {
             lastNames[i] = scanner.next(); // фамилии сотрудников
         }
-        int salaryArr[][] = new int[n][4]; // создала массив з/п сотрудников с фамилиями
+        int[][] salaryArr = new int[n][4]; // создала массив з/п сотрудников с фамилиями
         for (int i = 0; i < salaryArr.length; i++) {
             System.out.printf("Введите зарплату для %s\n", lastNames[i]);//вводим з/п сотрудников
             for (int j = 0; j < salaryArr[0].length; j++) {
