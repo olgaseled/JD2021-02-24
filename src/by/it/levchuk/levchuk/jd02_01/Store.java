@@ -6,7 +6,7 @@ Liauchuk Aliaksandr*/
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import static by.it.levchuk.levchuk.jd02_01.ConstAndCoeffic.VISIT_TIME;
+import static by.it.levchuk.levchuk.jd02_01.Сoefficients.VISIT_TIME;
 
 public class Store {
 

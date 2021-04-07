@@ -42,8 +42,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        List<String> chosenProducts = new ArrayList<>();
-        int quantityOfProducts = Tools.getRandom(1, 4);
+        List<String> listProducts = new ArrayList<>();
             System.out.println(this + "Положил товары в корзину");
     }
 

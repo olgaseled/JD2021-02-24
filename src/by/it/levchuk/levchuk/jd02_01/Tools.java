@@ -4,7 +4,7 @@ package by.it.levchuk.levchuk.jd02_01;
 Liauchuk Aliaksandr*/
 
 import java.util.concurrent.ThreadLocalRandom;
-import static by.it.levchuk.levchuk.jd02_01.ConstAndCoeffic.K_SPEED;
+import static by.it.levchuk.levchuk.jd02_01.Сoefficients.K_SPEED;
 
 class Tools {
 
