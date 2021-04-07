@@ -11,11 +11,12 @@ public class Store {
     public static void main(String[] args) {
         priceList = new PriceList();
         //List<Customer> customers = new ArrayList<>(120);//список покупателей
-        List<Thread> customers = new ArrayList<>(120);//список покупателей
+        List<Thread> threads = new ArrayList<>(120);//список покупателей
 
         for (int i=1;i<=2;i++){
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier, cashier.toString());
+            threads.add(thread);//TODO
             thread.start();
         }
 
@@ -29,7 +30,8 @@ public class Store {
                     // если нет проверки Manager.storeIsOpened() , то проскакивает больше покупателей//ЕЩВЩ
                     numberCustomer++;
                     Customer customer = new Customer(numberCustomer);
-                    customers.add(customer);
+                    //customers.add(customer);
+                    threads.add(customer);
                     customer.start();
                 }
                 Util.Sleep(1000);
