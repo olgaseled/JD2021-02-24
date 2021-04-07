@@ -8,7 +8,7 @@ import java.util.Map;
 class Store {
 
 
-    public static Map<String, Double> priceList = priceList();
+    static Map<String, Double> priceList = priceList();
 
     public static void main(String[] args) {
         List<Customer> customers = new ArrayList<>(120);

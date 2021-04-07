@@ -46,7 +46,7 @@ class Customer extends Thread implements ICustomer, IUseBasket {
         List<String> goodsList = new ArrayList<>(goodsSet);
         for (int i = 0; i < numberOfGoods; i++) {
             Util.sleep(Util.getRandom(500, 2000));
-            int goodsSelection = Util.getRandom(1, goodsList.size());
+            int goodsSelection = Util.getRandom(1, 4);
             basketContent.add(goodsList.get(goodsSelection));
             System.out.println(this + "puts " + goodsList.get(goodsSelection).toLowerCase() + " inside his basket.");
         }
