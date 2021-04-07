@@ -1,7 +1,7 @@
 package by.it.zmushko.jd02_01;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-
+    
     public Buyer(int name) {
         super("Name " + name);
     }
