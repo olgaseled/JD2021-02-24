@@ -8,10 +8,11 @@ import java.util.*;
 Время на каждую операцию от 0,5до 2 секунд, итог операции –в консоль.
  */
 
-public class BasketProduct extends Thread  {
+public class ProductList extends Thread  {
 
 
    public static  Map<String, Double> basketProduct () {
+
         Map<String, Double> basketProduct = new HashMap<>();
         basketProduct.put("Milk", 2.15);
         basketProduct.put("Bread", 1.85);

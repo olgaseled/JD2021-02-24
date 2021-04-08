@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SuperMarket extends BasketProduct {
+public class SuperMarket extends ProductList {
 
     public static Map<String, Double> basketProduct = basketProduct();
 
