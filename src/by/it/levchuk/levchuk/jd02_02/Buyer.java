@@ -10,10 +10,21 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private final Object MONITOR;
 
+    public Object getMONITOR() {
+        return MONITOR;
+    }
+
+    public boolean waiting= false;
+
+    public void setWaiting(boolean waiting) {
+        this.waiting=waiting;
+    }
+
     public Buyer(int number) {
 
         super("Покупатель №" + number + " ");
         MONITOR = this;
+        SeniorCashier.newBuyer();
     }
 
     @Override
@@ -22,6 +33,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
+        SeniorCashier.lastBuyer();
         goOut();
     }
 
@@ -62,7 +74,6 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
                 }
             }
         }
-
     }
 
     @Override
@@ -75,15 +86,5 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public String toString() {
 
         return this.getName();
-    }
-
-    public Object getMONITOR() {
-        return MONITOR;
-    }
-
-    public boolean waiting= false;
-
-    public void setWaiting(boolean waiting) {
-        this.waiting=waiting;
     }
 }
