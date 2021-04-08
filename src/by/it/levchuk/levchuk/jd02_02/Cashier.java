@@ -13,6 +13,15 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this+ "Cash Opened");
+        while (SeniorCashier.storeIsClosed()){
+            Buyer buyer=QueueBuyers.poll();
+            if (buyer !=null){
+                synchronized (buyer.getMONITOR()){
+
+                }
+
+            }
+        }
 
         System.out.println(this+ "Cash Closed");
     }

@@ -8,9 +8,12 @@ import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
+    private final Object MONITOR;
+
     public Buyer(int number) {
 
         super("Покупатель №" + number + " ");
+        MONITOR = this;
     }
 
     @Override
@@ -47,6 +50,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
     @Override
+    public void goToQueue() {
+
+    }
+
+    @Override
     public void goOut() {
 
         System.out.println(this + "Покидает магазин");
@@ -56,5 +64,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public String toString() {
 
         return this.getName();
+    }
+
+    public Object getMONITOR() {
+        return MONITOR;
     }
 }
