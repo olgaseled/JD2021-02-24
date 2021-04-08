@@ -69,4 +69,10 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public Object getMONITOR() {
         return MONITOR;
     }
+
+    public boolean waiting= false;
+
+    public void setWaiting(boolean waiting) {
+        this.waiting=waiting;
+    }
 }
