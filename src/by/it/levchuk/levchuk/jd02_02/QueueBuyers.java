@@ -11,6 +11,12 @@ public class QueueBuyers {
 
     private static Deque<Buyer> buyers = new LinkedList<>();
 
+    static void add(Buyer buyer){
+        synchronized (MONITOR_QUEUE){
+            boolean add = buyers.add(buyer);
+        }
+    }
+
     static Buyer poll(){
         synchronized (MONITOR_QUEUE){
             return buyers.pollFirst();
