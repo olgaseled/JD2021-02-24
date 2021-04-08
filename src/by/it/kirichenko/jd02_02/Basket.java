@@ -17,6 +17,7 @@ public class Basket {
     }
 
     public String getBasket(){
+
         return listProductBuyer.toString();
     }
 }

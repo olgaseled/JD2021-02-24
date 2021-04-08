@@ -2,12 +2,41 @@ package by.it.kirichenko.jd02_02;
 
 class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
+    private final Object MONITOR;
+
+    private boolean waiting = false;
+
     private int numberBuyer;
     Basket basket;
+
+    public Object getMONITOR() {
+        return MONITOR;
+    }
+
+    public void setWaiting(boolean waiting) {
+        this.waiting = waiting;
+    }
 
     public Buyer(int numberBuyer) {
         super("Buyer number " + numberBuyer + " ");
         this.numberBuyer = numberBuyer;
+        MONITOR = this;
+        Manager.newBuyer();
+    }
+
+    @Override
+    public void goToQueue() {
+        synchronized (MONITOR) {
+            QueueBuyers.add(this);
+            waiting = true;
+            while (waiting) {
+                try {
+                    MONITOR.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -15,8 +44,10 @@ class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
         storeEntrace();
         takeBasket();
         productSelection();
-        viewBasket();
+        //viewBasket();
+        goToQueue();
         exitingStore();
+        Manager.completeBuyer();
     }
 
     private void viewBasket() {

@@ -9,21 +9,34 @@ class Store {
 
         putProductsInWindow();
 
-        List<Buyer> buyers = new ArrayList<>(120);
+
+        List<Thread> threads = new ArrayList<>(120);
+
+        for (int i = 1; i <= 2; i++) {
+            Cashier cashier = new Cashier(i);
+            Thread thread = new Thread(cashier, cashier.toString());
+            threads.add(thread);
+            thread.start();
+        }
+
         System.out.println("Store opened.");
         int numberBuyer = 0;
-        for (int time = 0; time < Config.FINAL_TIME; time++) {
+        while (Manager.storeIsOpened()) {
+//            for (int time = 0; time < 2; time++) {
+                for (int time = 0; time < Config.FINAL_TIME; time++) {
+//                int count = 2;
             int count = Util.getRandom(2);
-            for (int i = 0; i < count; i++) {
-                Buyer buyer = new Buyer(++numberBuyer);
-                buyers.add(buyer);
-                buyer.start();
+                for (int i = 0; i < count && Manager.storeIsOpened(); i++) {
+                    Buyer buyer = new Buyer(++numberBuyer);
+                    threads.add(buyer);
+                    buyer.start();
+                }
+                Util.sleep(1000);
             }
-            Util.sleep(1000);
         }
-        for (Buyer buyer : buyers) {
+        for (Thread thread : threads) {
             try {
-                buyer.join();
+                thread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
