@@ -12,17 +12,22 @@ public class Cashier implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(this+ "Cash Opened");
+        System.out.println(this+ "Кассы открыты");
         while (SeniorCashier.storeIsClosed()){
             Buyer buyer=QueueBuyers.poll();
             if (buyer !=null){
                 synchronized (buyer.getMONITOR()){
+                    System.out.println(this+" Начало обслуживания "+ buyer);
+                    int timeout = Tools.getRandom(2000,5000);
+                    Tools.sleep(timeout);
+                    System.out.println(this+"Закончили обслуживать"+buyer);
+                    buyer.notify();
 
                 }
 
             }
         }
 
-        System.out.println(this+ "Cash Closed");
+        System.out.println(this+ "Кассы закрыты");
     }
 }
