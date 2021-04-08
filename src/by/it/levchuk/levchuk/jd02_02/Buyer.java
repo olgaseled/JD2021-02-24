@@ -6,7 +6,7 @@ Liauchuk Aliaksandr*/
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buyer extends Thread implements IBuyer, IUseBasket {
+class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private final Object MONITOR;
 
@@ -32,6 +32,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
+        goToQueue();
         SeniorCashier.lastBuyer();
         goOut();
     }
