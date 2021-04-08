@@ -6,6 +6,6 @@ Liauchuk Aliaksandr*/
 class Сoefficients {
 
     static final int VISIT_TIME = 120;
-    static final int K_SPEED = 100;
+    static final int K_SPEED = 120;
     static final int TOTAL_BUYERS=100;
 }
