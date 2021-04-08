@@ -1,7 +1,6 @@
-package by.it.kaminskii.jd02_01;/* created by Kaminskii Ivan
+package by.it.kaminskii.jd02_02;/* created by Kaminskii Ivan
  */
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Helper {
@@ -21,7 +20,7 @@ public class Helper {
 
     static void sleep(int sleepTime) {
         try {
-            Thread.sleep(sleepTime / 10);
+            Thread.sleep(sleepTime / 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
