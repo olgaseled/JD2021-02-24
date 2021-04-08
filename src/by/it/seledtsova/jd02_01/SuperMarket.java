@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SuperMarket extends ProductList {
 
-    public static Map<String, Double> basketProduct = basketProduct();
+    public static ProductList productList;
 
       public static void main(String[] args) throws InterruptedException {
         int countBuyers = 0; // счетчик покупателей
