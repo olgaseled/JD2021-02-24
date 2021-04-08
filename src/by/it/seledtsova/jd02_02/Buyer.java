@@ -11,10 +11,23 @@ import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
+    private final Object MONITOR;
+
+    private boolean waiting = false;
+
+    public Object getMONITOR() {
+        return MONITOR;
+    }
+
+    public void setWaiting(boolean waiting) {
+        this.waiting = waiting;
+    }
 
 
     public Buyer(int number) {
-        super("Customer #" + number + " ");
+        super("Buyer №" + number + " ");
+        MONITOR=this;
+        Manager.newCustomer();
     }
 
 
@@ -26,6 +39,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         putProductToTheBasket();
         goToQueue();
         goOut();
+        Manager.completeBuyer();
     }
 
 // Реализовали методы класса предка enterToMarket(), chooseGoods(), goOut()
@@ -49,10 +63,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         System.out.println(this + "finished choose goods");
     }
 
-    @Override
-    public void goToQueue() { // добавляем в очередь
-    QueueBuyers.add(this);
-    }
+
 
     @Override
     public void putProductToTheBasket() {
@@ -67,7 +78,20 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
 
-
+    @Override
+    public void goToQueue() { // добавляем в очередь
+        synchronized (MONITOR) {
+            QueueBuyers.add(this);
+            waiting = true;
+            while (waiting) {
+                try {
+                    MONITOR.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Override
     public void goOut() {

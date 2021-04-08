@@ -9,12 +9,9 @@ public class SuperMarket extends ProductList {
 
 
       public static void main(String[] args) throws InterruptedException {
-
-
-
           List <Thread> threads=new ArrayList<>(120); // кассиры и покупатели стали в одном листе
 
-          for (int i = 0; i <=2 ; i++) { // запускаем от 1 до 2 кассиров
+          for (int i = 1; i <=2 ; i++) { // запускаем от 1 до 2 кассиров
               Cashier cashier=new Cashier(i); // создали кассира нового
               Thread thread=new Thread(cashier, cashier.toString()); // положили нашего кассива в поток
               threads.add(thread);
@@ -25,14 +22,13 @@ public class SuperMarket extends ProductList {
 
           int countBuyers = 0; // счетчик покупателей
 
-        for (int waitTime = 0; waitTime < Configuration.FINAL_TIME; waitTime++) {
-            int count = Util.getRandom(2); // каждую сек в магаз приходит от 0 до 2 покупателей
-            for (int i = 0; i < count; i++) {
-                Buyer buyer = new Buyer(++countBuyers);
-                threads.add(buyer);
-                buyer.start(); // покупатель вошел в магазин
-            Configuration.addBuyer();
-            }
+          while (Manager.storeIsOpened()) {
+              int count = Util.getRandom(2);
+              for (int i = 0; i < count && Manager.storeIsOpened(); i++) {
+                  Buyer buyer = new Buyer(++countBuyers);
+                  threads.add(buyer);
+                  buyer.start();
+              }
             Util.sleep(1000);
         }
 
