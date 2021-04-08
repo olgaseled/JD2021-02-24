@@ -6,16 +6,25 @@ package by.it.seledtsova.jd02_02;
  */
 
 
-public class Buyer extends Thread implements IBuyer, Runnable {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Buyer extends Thread implements IBuyer, IUseBasket {
+
 
 
     public Buyer(int number) {
         super("Customer #" + number + " ");
     }
 
+
+    @Override
     public void run(){   // выделили наш поток. Покупатель пришел в зал магазина,выбирает и покупает товар
         enterToMarket();
+        takeBasket();
         chooseGoods();
+        putProductToTheBasket();
+        goToQueue();
         goOut();
     }
 
@@ -26,12 +35,38 @@ public class Buyer extends Thread implements IBuyer, Runnable {
 
     }
     @Override
+    public void takeBasket() {
+        System.out.println(this + "The buyer takes the basket");
+        int pause = Util.getRandom(500, 2000); //
+        Util.sleep(pause);
+    }
+
+    @Override
     public void chooseGoods() {
         System.out.println(this+"The buyer star to choose products");
         int pause = Util.getRandom(500, 2000);
         Util.sleep(pause);
         System.out.println(this + "finished choose goods");
     }
+
+    @Override
+    public void goToQueue() { // добавляем в очередь
+    QueueBuyers.add(this);
+    }
+
+    @Override
+    public void putProductToTheBasket() {
+        List<Integer> basketProduct=new ArrayList<>();
+        int pause = Util.getRandom(500, 2000); //
+        Util.sleep(pause);
+        int howMuchProducts=Util.getRandom(1,4);
+        for (int product = 0; product < basketProduct.size(); product++) {
+            basketProduct.add(howMuchProducts);
+        }
+        System.out.println(this + "The buyer put "+howMuchProducts+" product to the basket");
+    }
+
+
 
 
     @Override

@@ -14,6 +14,7 @@ class Util {
                 .nextInt(max - min + 1) + min;
     }
 
+
     static int getRandom(int max) {
         return getRandom(0, max);
     } // вместо 4 было макс

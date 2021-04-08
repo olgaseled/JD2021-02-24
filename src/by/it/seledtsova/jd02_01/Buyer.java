@@ -9,7 +9,7 @@ package by.it.seledtsova.jd02_01;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buyer extends Thread implements IBuyer,Runnable, IUseBasket {
+public class Buyer extends Thread implements IBuyer, IUseBasket {
 
 
 
