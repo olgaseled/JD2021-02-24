@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_01;
+package by.it.papruga.jd02_02;
 
 
 public class Good {
