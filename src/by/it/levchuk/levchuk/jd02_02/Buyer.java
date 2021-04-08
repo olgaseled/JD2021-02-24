@@ -14,14 +14,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         return MONITOR;
     }
 
-    public boolean waiting= false;
+    public boolean waiting = false;
 
     public void setWaiting(boolean waiting) {
-        this.waiting=waiting;
+        this.waiting = waiting;
     }
 
     public Buyer(int number) {
-
         super("Покупатель №" + number + " ");
         MONITOR = this;
         SeniorCashier.newBuyer();
@@ -58,15 +57,15 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void putGoodsToBasket() {
         List<String> listProducts = new ArrayList<>();
-            System.out.println(this + "Положил товары в корзину");
+        System.out.println(this + "Положил товары в корзину");
     }
 
     @Override
     public void goToQueue() {
-        synchronized (MONITOR){
+        synchronized (MONITOR) {
             QueueBuyers.add(this);
-            waiting=true;
-            while (waiting){
+            waiting = true;
+            while (waiting) {
                 try {
                     MONITOR.wait();
                 } catch (InterruptedException e) {
@@ -78,13 +77,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goOut() {
-
         System.out.println(this + "Покидает магазин");
     }
 
     @Override
     public String toString() {
-
         return this.getName();
     }
 }
