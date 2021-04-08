@@ -4,11 +4,16 @@ package by.it.levchuk.levchuk.jd02_02;
 Liauchuk Aliaksandr*/
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 public class Store {
 
     public static void main(String[] args) {
+
+        List<Buyer> buyers=new ArrayList<>(Сoefficients.VISIT_TIME);
+
         System.out.println("МАГАЗИН ОТКРЫЛСЯ");
         int numberBuyer = 0;
         Queue<Buyer> queue = new ArrayDeque<>();
