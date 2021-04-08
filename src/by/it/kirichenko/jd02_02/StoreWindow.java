@@ -11,19 +11,19 @@ public class StoreWindow {
         listProduct.put(name, price);
     }
 
-    public static  String getRandomProduct() {
+    public static  Map<String, Double> getRandomProduct() {
         int randomNumberProduct = Util.getRandom(0, listProduct.size() - 1);
         Iterator<Map.Entry<String, Double>> iterator = listProduct.entrySet().iterator();
         int i = 0;
-        String nameProduct="";
+        Map<String, Double> product= new HashMap<>();
         while (iterator.hasNext()) {
             Map.Entry<String, Double> entry = iterator.next();
             if(i++==randomNumberProduct){
-                nameProduct=entry.getKey();
+                product.put(entry.getKey(), entry.getValue());
                 break;
             }
         }
-        return nameProduct;
+        return product;
     }
 
     public Double getProductPrice(String name) {

@@ -20,6 +20,7 @@ public class Cashier implements Runnable {
                     System.out.println(this + "started service " + buyer);
                     int timeout = Util.getRandom(2000, 5000);
                     Util.sleep(timeout);
+                    buyer.viewBasket();
                     System.out.println(this + "finished service " + buyer);
                     buyer.setWaiting(false);
                     buyer.notify();

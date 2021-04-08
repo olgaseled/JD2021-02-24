@@ -1,5 +1,8 @@
 package by.it.kirichenko.jd02_02;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
     private final Object MONITOR;
@@ -50,7 +53,7 @@ class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
         Manager.completeBuyer();
     }
 
-    private void viewBasket() {
+    public void viewBasket() {
         System.out.println(this + " take products: "+basket.getBasket());
     }
 
@@ -90,8 +93,8 @@ class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
     @Override
     public void putProductInBasket() {
-        String nameProduct = StoreWindow.getRandomProduct();
-        basket.addProductInBasket(nameProduct);
+        Map<String, Double> product = StoreWindow.getRandomProduct();
+        basket.addProductInBasket(product);
         int timeout = Util.getRandom(500, 2000);
         Util.sleep(timeout);
 
