@@ -12,7 +12,7 @@ public class Store {
         System.out.println("МАГАЗИН ОТКРЫЛСЯ");
         int numberBuyer = 0;
         Queue<Buyer> queue = new ArrayDeque<>();
-        for (int time = 0; time < Сoefficients.VISIT_TIMEE; time++) {
+        for (int time = 0; time < Сoefficients.VISIT_TIME; time++) {
             int count = Tools.getRandom();
             for (int i = 0; i < count; i++) {
                 Buyer buyer = new Buyer(++numberBuyer);
