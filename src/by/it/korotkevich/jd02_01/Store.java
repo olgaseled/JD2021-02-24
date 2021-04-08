@@ -1,16 +1,12 @@
 package by.it.korotkevich.jd02_01;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class Store {
 
-
-    public static Map<String, Double> priceList = priceList();
-
     public static void main(String[] args) {
+        GoodsList.fillPriceList();
         List<Customer> customers = new ArrayList<>(120);
         System.out.println("The store is opened.");
         int customerNumber = 0;
@@ -32,16 +28,4 @@ class Store {
         }
         System.out.println("The store is closed.");
     }
-
-    static Map<String, Double> priceList() {
-        Map<String, Double> priceList = new HashMap<>();
-        priceList.put("Apple", 0.50);
-        priceList.put("Banana", 0.90);
-        priceList.put("Meat", 6.20);
-        priceList.put("Juice", 2.0);
-        priceList.put("Cake", 7.0);
-        priceList.put("Fish", 5.60);
-        return priceList;
-    }
-
 }
