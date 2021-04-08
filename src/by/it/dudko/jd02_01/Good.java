@@ -22,6 +22,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return String.format("\"%s\" with cost %.2f %s", name, price, currency);
+        return String.format("\"%s\" for %.2f %s", name, price, currency);
     }
 }

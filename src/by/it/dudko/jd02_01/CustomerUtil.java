@@ -33,10 +33,10 @@ public class CustomerUtil {
         PriceList priceList = Store.getPriceList();
         StoreCurrency currency = priceList.getCurrency();
         List<String> productList = priceList.getProductsList();
-        int random;
+        int randomProductId;
         while (goods.size() < count) {
-            random = getRandom(productList.size() - 1);
-            String productName = productList.get(random);
+            randomProductId = getRandom(productList.size() - 1);
+            String productName = productList.get(randomProductId);
             if (selectedProducts.contains(productName)) {
                 continue;
             }

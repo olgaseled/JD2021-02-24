@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
+    double slowRatio = 1.0;
+    boolean pensioner = false;
     Basket basket;
 
     public Customer(int number) {
@@ -22,14 +24,17 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void enterToMarket() {
         System.out.println(this + " enters the store");
+        Store.customersInStore++;
     }
 
     @Override
     public List<Good> chooseGoods() {
         System.out.println(this + " started choosing goods");
-        List<Good> goods = CustomerUtil.getRandomGoods(Config.MAX_GOODS_IN_BASKET);
-        int actionTime = CustomerUtil.getRandom(500, 2000);
-        CustomerUtil.sleep(actionTime);
+        int goodsCount = CustomerUtil.getRandom(1, Config.MAX_GOODS_IN_BASKET);
+        List<Good> goods = CustomerUtil.getRandomGoods(goodsCount);
+        int actionTime = CustomerUtil.getRandom(500, (int)(2000 * slowRatio));
+
+        CustomerUtil.sleep(pensioner ? (int)(actionTime * 1.5) : actionTime);
         System.out.println(this + " finished choosing goods");
         return goods;
     }
@@ -37,6 +42,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void goOut() {
         System.out.println(this + " leaves the store");
+        Store.customersInStore--;
     }
 
     @Override
@@ -46,8 +52,8 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        int actionTime = CustomerUtil.getRandom(500, 2000);
         basket = new Basket();
+        int actionTime = CustomerUtil.getRandom(500, (int)(2000 * slowRatio));
         CustomerUtil.sleep(actionTime);
         System.out.println(this + " took a basket");
     }
@@ -56,7 +62,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public void putGoodsToBasket(List<Good> goods) {
         int actionTime;
         for (Good good : goods) {
-            actionTime = CustomerUtil.getRandom(500, 2000);
+            actionTime = CustomerUtil.getRandom(500, (int)(2000 * slowRatio));
             CustomerUtil.sleep(actionTime);
             basket.putGood(good);
             System.out.printf("%s put %s to the basket\n", this, good);

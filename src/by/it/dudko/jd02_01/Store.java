@@ -7,35 +7,34 @@ public class Store {
 
     private static PriceList priceList;
 
-    public static void main(String[] args) {
-        String priceItems = "" +
-                "яблоки : 2.0\n" +
-                "крупа гречневая: 2.57\n" +
-                "картофель: 1.85\n" +
-                "морковь: 1.44\n" +
-                "лук: 0.95\n" +
-                "вермишель : 1.95\n" +
-                "хлеб ржаной: 1.22\n" +
-                "яйцо куриное : 2.75\n" +
-                "масло сливочное: 4.1\n" +
-                "масло подсолнечное: 4.1\n" +
-                "молоко питьевое : 1.55\n" +
-                "сахар-песок: 2.20\n" +
-                "чай черный байховый: 1.7\n" +
-                "мука пшеничная: 2.4\n" +
-                "рис шлифованный: 2.0\n";
+    static int customersInStore = 0;
 
+    public static void main(String[] args) {
+
+        priceList = new PriceList(Config.PRICE_ITEMS, StoreCurrency.BYN);
         System.out.println("Price is loaded");
-        priceList = new PriceList(priceItems, StoreCurrency.BYN);
+
         List<Customer> customers = new ArrayList<>();
         System.out.println("Store is open");
+
         int customerId = 0;
+        int nth = Config.NTH_PENSIONER; // short alias
+        int newCustomers;
         for (int second = 0; second < Config.MEASURE_TIME; second++) {
-            int newCustomers = CustomerUtil.getRandom(2);
-            for (int i = 0; i < newCustomers; i++) {
-                Customer customer = new Customer(++customerId);
-                customers.add(customer);
-                customer.start();
+            // int newCustomers = CustomerUtil.getRandom(Config.MAX_CAPACITY_PER_SECOND);
+            int sec = second % 60;
+            int needCount = 10 + (sec < 30 ? sec : 60 - sec);
+            if (needCount > customersInStore) {
+                int delta = needCount - customersInStore;
+                newCustomers = CustomerUtil.getRandom(delta - 1, delta + 1);
+                // System.out.printf("t=%-3d sec=%-2d n=%-2d in=%-2d\n", second, sec, needCount, customersInStore);
+                for (int i = 0; i < newCustomers; i++) {
+                    Customer customer = CustomerUtil.getRandom(1, nth) < nth
+                            ? new Customer(++customerId)
+                            : new Pensioner(++customerId);
+                    customers.add(customer);
+                    customer.start();
+                }
             }
             CustomerUtil.sleep(1000);
         }
