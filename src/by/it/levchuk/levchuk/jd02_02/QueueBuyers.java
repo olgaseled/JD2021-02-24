@@ -13,6 +13,7 @@ public class QueueBuyers {
 
     static void add(Buyer buyer){
         synchronized (MONITOR_QUEUE){
+            buyers.addLast(buyer);
         }
     }
 
