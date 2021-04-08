@@ -51,6 +51,17 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goToQueue() {
+        synchronized (MONITOR){
+            QueueBuyers.add(this);
+            waiting=true;
+            while (waiting){
+                try {
+                    MONITOR.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
 
