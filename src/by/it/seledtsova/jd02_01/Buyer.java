@@ -7,11 +7,10 @@ package by.it.seledtsova.jd02_01;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Buyer extends Thread implements IBuyer,Runnable, IUseBasket {
+
 
 
     public Buyer(int number) {
@@ -58,10 +57,10 @@ public class Buyer extends Thread implements IBuyer,Runnable, IUseBasket {
         for (int product = 0; product < basketProduct.size(); product++) {
             basketProduct.add(howMuchProducts);
         }
-
-
         System.out.println(this + "The buyer put "+howMuchProducts+" product to the basket");
     }
+
+
 
 
     @Override
