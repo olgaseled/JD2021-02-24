@@ -6,15 +6,13 @@ Liauchuk Aliaksandr*/
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import static by.it.levchuk.levchuk.jd02_01.Сoefficients.VISIT_TIME;
-
 public class Store {
 
     public static void main(String[] args) {
         System.out.println("МАГАЗИН ОТКРЫЛСЯ");
         int numberBuyer = 0;
         Queue<Buyer> queue = new ArrayDeque<>();
-        for (int time = 0; time < VISIT_TIME; time++) {
+        for (int time = 0; time < Сoefficients.VISIT_TIMEE; time++) {
             int count = Tools.getRandom();
             for (int i = 0; i < count; i++) {
                 Buyer buyer = new Buyer(++numberBuyer);

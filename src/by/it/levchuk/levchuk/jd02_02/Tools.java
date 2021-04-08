@@ -5,8 +5,6 @@ Liauchuk Aliaksandr*/
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static by.it.levchuk.levchuk.jd02_01.Сoefficients.K_SPEED;
-
 class Tools {
 
     protected static int getRandom(int min, int max) {
@@ -23,7 +21,7 @@ class Tools {
 
     protected static void sleep(int timeout) {
         try {
-            Thread.sleep(timeout / K_SPEED);
+            Thread.sleep(timeout / Сoefficients.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
