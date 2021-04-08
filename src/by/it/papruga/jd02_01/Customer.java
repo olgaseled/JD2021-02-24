@@ -1,8 +1,5 @@
 package by.it.papruga.jd02_01;
 
-import java.util.*;
-
-
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
     public Customer(int number) {
@@ -11,7 +8,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     }
 
-    List<String> basket = new ArrayList<>();
+    private Basket basket = new Basket();
 
     @Override
     public void run() {
@@ -35,23 +32,19 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         int timeout = Util.getRandom(500, 2000);
         Util.sleep(timeout);
 
-
-        List<String> goods = new ArrayList<>(Arrays.asList("apple", "milk", "bread", "fish"));
-
-        int goodsCount = Util.getRandom(4);
+        int goodsCount = Util.getRandom(1, 4);
 
         for (int i = 0; i < goodsCount; i++) {
 
-            basket.add(goods.get(i));
+            basket.put(ListGoods.randomGood());
 
         }
 
-        if (goodsCount > 0) {
-            System.out.println(this + "choose " + basket.toString()
-                    .replace("[", "")
-                    .replace("]", ""));
-            putGoodsToBasket();
-        }
+        System.out.println(this + "choose:" + basket);
+
+        putGoodsToBasket();
+
+
         System.out.println(this + "finished choose goods");
     }
 
@@ -69,9 +62,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         int timeout = Util.getRandom(500, 2000);
         Util.sleep(timeout);
 
-
-
-
     }
 
     @Override
@@ -80,7 +70,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         System.out.println(this + "put goods to basket");
         int timeout = Util.getRandom(500, 2000);
         Util.sleep(timeout);
-
 
     }
 
