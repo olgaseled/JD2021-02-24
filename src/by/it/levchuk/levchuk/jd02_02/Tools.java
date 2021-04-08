@@ -14,9 +14,9 @@ class Tools {
                 .nextInt(max - min + 1) + min;
     }
 
-    protected static int getRandom() {
+    protected static int getRandom(int max) {
 
-        return getRandom(0, 2);
+        return getRandom(0, max);
     }
 
     protected static void sleep(int timeout) {

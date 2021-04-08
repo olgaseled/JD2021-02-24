@@ -6,10 +6,9 @@ Liauchuk Aliaksandr*/
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+class Store {
 
     public static void main(String[] args) {
-
         List<Thread> threads = new ArrayList<>(Сoefficients.VISIT_TIME);
         for (int i = 0; i <= 2; i++) {
             Cashier cashier = new Cashier(i);
@@ -17,12 +16,11 @@ public class Store {
             threads.add(thread);
             thread.start();
         }
-
         System.out.println("МАГАЗИН ОТКРЫЛСЯ");
         int numberBuyer = 0;
-        for (int time = 0; time < Сoefficients.VISIT_TIME; time++) {
-            int count = Tools.getRandom();
-            for (int i = 0; i < count; i++) {
+        while (SeniorCashier.storeIsOpened()) {
+            int count = Tools.getRandom(2);
+            for (int i = 0; i < count && SeniorCashier.storeIsOpened(); i++) {
                 Buyer buyer = new Buyer(++numberBuyer);
                 threads.add(buyer);
                 buyer.start();
