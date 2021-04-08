@@ -9,7 +9,7 @@ public class Helper {
 
         return ThreadLocalRandom
                 .current()
-                .nextInt(max - min + 1);
+                .nextInt(min, max+1);
 //        Random random = new Random();
 //        return random.nextInt(max - min + 1) - min;
     }

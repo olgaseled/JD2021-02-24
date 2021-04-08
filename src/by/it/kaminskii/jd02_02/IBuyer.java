@@ -6,4 +6,6 @@ interface IBuyer {
     void choosePurchase();
 
     void leavingTheMarket();
+
+    void goToQueue();
 }

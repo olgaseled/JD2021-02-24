@@ -1,15 +1,29 @@
 package by.it.kaminskii.jd02_02;/* created by Kaminskii Ivan
  */
 
+
 import java.util.StringJoiner;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-    public static final Object monitor = new Object();
+    private final Object MONITOR_BUYER;
+    boolean waiting = false;
 
     public Buyer(int whichOne) {
         super("Buyer№" + whichOne + " ");
+        MONITOR_BUYER=this;
+        Manager.newBuyer();
+    }
+    public Object getMONITOR() {
+        return MONITOR_BUYER;
+    }
+    public void setSomeWaiting(boolean waiting) {
+        this.waiting = waiting;
     }
 
+//    Customer(int number) {
+//        super("Customer #" + number + " ");
+//        MONITOR = this;
+//        Manager.newCustomer();
     @Override
     public void run() {
         enterToMarket();
@@ -41,14 +55,27 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        synchronized (monitor) {
+        synchronized (MONITOR_BUYER) {
             int sleepTime = Helper.randomValue(500, 2000);
             Helper.sleep(sleepTime);
-            StringJoiner basketJoiner= new StringJoiner(",");
-            for (int i = 0; i < Helper.randomValue(1,4); i++) {
-                basketJoiner.add(Basket.basketGoods().get(Helper.randomValue(1,10)));
+            StringJoiner basketJoiner = new StringJoiner(",");
+            for (int i = 0; i < Helper.randomValue(1, 4); i++) {
+                basketJoiner.add(Basket.basketGoods().get(Helper.randomValue(0, 9)));
             }
             System.out.println(this + "put: " + basketJoiner + " to basket");
+        }
+    }
+
+    @Override
+    public void goToQueue() {
+        BuyerQueue.buyerAdd(this);
+        waiting = true;
+        while (waiting) {
+            try {
+                MONITOR_BUYER.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
