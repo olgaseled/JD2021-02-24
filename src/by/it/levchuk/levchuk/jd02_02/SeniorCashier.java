@@ -12,5 +12,5 @@ public class SeniorCashier {
 
     static boolean storeIsOpened() { return buyerIn != Сoefficients.TOTAL_BUYERS; }
 
-    static boolean storeIsClosed() { return buyerIn == Сoefficients.TOTAL_BUYERS; }
+    static boolean storeIsClosed() { return buyerOut == Сoefficients.TOTAL_BUYERS; }
 }
