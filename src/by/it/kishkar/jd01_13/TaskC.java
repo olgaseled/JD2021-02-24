@@ -19,8 +19,13 @@ public class TaskC {
     static void readData() throws Exception {
         int error=0;
         while (true) try {
-            String consoleText = scanner.nextLine();
-            numbers.add(Double.parseDouble(consoleText));
+            String input = scanner.nextLine();
+            if (input.equals("END") | input.equals("end") | input.equals("End")) {
+                break;
+
+            }
+            else
+            numbers.add(Double.parseDouble(input));
         } catch (Exception e) {
             Thread.sleep(100);
             for (int i = numbers.size(); i > 0; i--) {
