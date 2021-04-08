@@ -4,25 +4,13 @@ Liauchuk Aliaksandr*/
 
 public class SeniorCashier {
 
-    static synchronized void newBuyer() {
-
-        buyerIn++;
-
-    }
-
     private volatile static int buyerIn = 0;
-
-    static boolean storeIsOpened() {
-
-        return buyerIn != Сoefficients.TOTAL_BUYERS;
-
-    }
-
     private volatile static int buyerOut = 0;
 
-    static boolean storeIsClosed() {
+    static synchronized void newBuyer() { buyerIn++; }
+    static void lastBuyer(){ synchronized (SeniorCashier.class){buyerOut++;}}
 
-        return buyerIn == Сoefficients.TOTAL_BUYERS;
+    static boolean storeIsOpened() { return buyerIn != Сoefficients.TOTAL_BUYERS; }
 
-    }
+    static boolean storeIsClosed() { return buyerIn == Сoefficients.TOTAL_BUYERS; }
 }
