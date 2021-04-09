@@ -1,9 +1,23 @@
 package by.it.zmushko.jd02_02;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-    
-    public Buyer(int name) {
-        super("Name " + name);
+
+    private final Object MONITOR;
+
+    private boolean waitInQueue = false;
+
+    public Object takeMonitor(){
+        return MONITOR;
+    }
+
+    public void waiting(boolean wait) {
+        this.waitInQueue = wait;
+    }
+
+    Buyer(int number) {
+        super("Buyer number <<" + number + ">>");
+        MONITOR = this;
+        Manager.peopleCome();
     }
 
     @Override
@@ -11,7 +25,9 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         enterToShop();
         takeBasket();
         chooseItems();
+        stayInQueue();
         goOutFromShop();
+        Manager.counterPeople();
     }
 
     @Override
@@ -23,7 +39,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public void chooseItems() {
         System.out.println(this.getName() + " Start choose ");
         putGoodsToBasket();
-        System.out.print(this.getName() + " End choose ");
+        System.out.println(this.getName() + " End choose ");
     }
 
     @Override
@@ -48,4 +64,19 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
             Support.sleep(Support.getRandom(500, 2000));
         }
     }
+
+    public void stayInQueue() {
+        synchronized (MONITOR) {
+            QueuePeoples.addInQueue(this);
+            waitInQueue = true;
+            while(waitInQueue) {
+                try {
+                    MONITOR.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

@@ -9,27 +9,34 @@ public class Shop {
         System.out.println("Open shop");
         Products products = new Products(); //задать вопрос не забыть
         System.out.println(Products.products); //just test
-        List<Buyer> listBuyers = new ArrayList<>();
+
+        List<Thread> listBuyers = new ArrayList<>();
+
+        for (int i = 1; i < 3; i++) {
+            Cashier cashier = new Cashier(i);
+            Thread thread = new Thread(cashier, cashier.toString());
+            listBuyers.add(thread);
+            thread.start();
+        }
+
         int numberOfPeopleWhoCome = 0;
-        for (int openStoreTime = 0; openStoreTime < Constants.OPEN_STORE_TIME; openStoreTime++) {
+        while (Manager.storeOpen()) {
             int wentToTheShop = Support.getRandom(2);
-            for (int i = 0; i < wentToTheShop; i++) {
+            for (int i = 0; i < wentToTheShop && Manager.storeOpen(); i++) {
                 Buyer buyer = new Buyer(++numberOfPeopleWhoCome);
                 listBuyers.add(buyer);
                 buyer.start();
             }
             Support.sleep(1000);
         }
-        try {
-            for (Buyer listBuyer : listBuyers) {
+        for (Thread listBuyer : listBuyers) {
+            try {
                 listBuyer.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
         System.out.println("Close shop");
-
-
     }
 
 }
