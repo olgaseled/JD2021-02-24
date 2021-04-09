@@ -11,10 +11,8 @@ public class PriceList implements IPriceList {
     StoreCurrency currency;
     List<String> productList = new ArrayList<>();
 
-
     public PriceList(String priceListLines, StoreCurrency currency) {
-        priceTable = new HashMap<>();
-        parseToMap(priceListLines);
+        priceTable = parseToMap(priceListLines);
         this.currency = currency;
         productList.addAll(priceTable.keySet());
     }
@@ -44,7 +42,7 @@ public class PriceList implements IPriceList {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] productInfo = line.trim().split("\\s*:\\s*");
-                priceTable.put(productInfo[0], Double.parseDouble(productInfo[1]));
+                price.put(productInfo[0], Double.parseDouble(productInfo[1]));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
