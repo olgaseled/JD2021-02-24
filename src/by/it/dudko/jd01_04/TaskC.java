@@ -1,12 +1,11 @@
 package by.it.dudko.jd01_04;
 
-import java.util.Arrays;
-
 public class TaskC {
     public static void main(String[] args) {
         buildOneDimArray("2 6 3 5 1 1 8");
     }
 
+    @SuppressWarnings("SameParameterValue")
     static void buildOneDimArray(String line) {
         double[] arr = InOut.getArray(line);
         double firstElemValue = arr[0];
@@ -14,16 +13,8 @@ public class TaskC {
         InOut.printArray(arr, "V", 5);
         mergeSort(arr);
         InOut.printArray(arr, "V", 4);
-        int indexOfFirst = Arrays.binarySearch(arr, firstElemValue);
-        int from, to;
-        if (firstElemValue <= lastElemValue) {
-            from = indexOfFirst;
-            to = arr.length;
-        } else {
-            from = 0;
-            to = indexOfFirst;
-        }
-        int indexOfLast = Arrays.binarySearch(arr, from, to, lastElemValue);
+        int indexOfFirst = binarySearch(arr, firstElemValue);
+        int indexOfLast = binarySearch(arr, lastElemValue);
         System.out.printf("Index of first element=%d\nIndex of last element=%d", indexOfFirst, indexOfLast);
     }
 
@@ -41,9 +32,6 @@ public class TaskC {
         }
     }
 
-//    private static void mergeSort(double[] arr, int left, int right) {
-//
-//    }
 
     private static void merge(double[] part1, double[] part2, double[] result) {
 
@@ -63,5 +51,25 @@ public class TaskC {
         // copy remaining elements from both halves
         System.arraycopy(part1, cursorPart1, result, cursorMerged, part1.length - cursorPart1);
         System.arraycopy(part2, cursorPart2, result, cursorMerged, part2.length - cursorPart2);
+    }
+
+    private static int binarySearch(double[] arr, double needle) {
+        // arr is already ordered
+        int base;
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            base = (right + left) / 2;
+            if (arr[base] == needle) {
+                return base;
+            } else if (arr[base] > needle) {
+                right = base - 1;
+            } else {
+                left = base + 1;
+            }
+        }
+
+        return -1;
     }
 }
