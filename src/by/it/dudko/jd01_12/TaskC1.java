@@ -43,7 +43,7 @@ public class TaskC1 {
     private static <T1, T2> Map<T2, T1> swapMap(Map<T1, T2> objects) {
         Map<T2, T1> swappedMap = new LinkedHashMap<>(); // order is matters
         List<Map.Entry<T1, T2>> objEntrySet = new ArrayList<>(objects.entrySet());
-        // Iterate backward to provide copying only of the first occurred entry to LinkedHashMap
+        // Iterate backward to provide copying to LinkedHashMap only the first occurred entry
         for (int i = objEntrySet.size() - 1; i >= 0; i--) {
             Map.Entry<T1, T2> bufferEntry = objEntrySet.get(i);
             // do swap (and get collapsing from HashMap for free!)
