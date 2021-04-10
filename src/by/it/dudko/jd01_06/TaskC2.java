@@ -4,39 +4,32 @@ import java.util.Random;
 
 public class TaskC2 {
 
-    Random random;
-
-    private final int OUTPUT_TEXT_MIN_LENGTH = 100_000;
+    private static final int OUTPUT_TEXT_MIN_LENGTH = 100_000;
 
     public static void main(String[] args) {
 
         String randomText;
         long time;
-
-        TaskC2 textMaker = new TaskC2();
         Timer timer = new Timer();
 
         timer.start();
-        randomText = textMaker.slow(Poem.text);
+        randomText = slow(Poem.text);
         time = timer.stop();
         System.out.println(randomText);
         System.out.println(time);
         System.out.println("\n***********************************\n");
 
         timer.start();
-        randomText = textMaker.fast(Poem.text);
+        randomText = fast(Poem.text);
         time = timer.stop();
         System.out.println(randomText);
         System.out.println(time);
 
     }
 
-    public TaskC2() {
-        random = new Random();
-    }
-
     @SuppressWarnings("SameParameterValue")
-    public String slow(String text) {
+    public static String slow(String text) {
+        Random random = new Random(123);
         String randomText = "";
         String randomWord;
         String[] words = getWords(text);
@@ -49,7 +42,8 @@ public class TaskC2 {
     }
 
     @SuppressWarnings("SameParameterValue")
-    public String fast(String text) {
+    public static String fast(String text) {
+        Random random = new Random(123);
         StringBuilder randomText = new StringBuilder();
         String randomWord;
         String[] words = getWords(text);
@@ -62,7 +56,7 @@ public class TaskC2 {
         return randomText.toString();
     }
 
-    private String[] getWords(String text) {
+    public static String[] getWords(String text) {
         return text.trim().split("[^а-яА-ЯёЁa-zA-Z]+");
     }
 
