@@ -1,9 +1,6 @@
 package by.it.dudko.jd01_15;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -18,6 +15,7 @@ public class TaskB {
     static String lineSep = System.getProperty("line.separator");
     /* Определить три режима обработки текста:
         - OPEN: режим открытого комментария
+        - BLOCK: режим блочного комментария
         - READ: режим чтения
     */
     static Mode mode = Mode.READ;
@@ -28,25 +26,46 @@ public class TaskB {
          */
         String simpleName = TaskB.class.getSimpleName() + ".java";
         String absClassPath = FileNameHelper.getFullPath(simpleName, TaskB.class);
+        String simpleResultName = TaskB.class.getSimpleName() + ".txt";
+        String absSavePath = FileNameHelper.getFullPath(simpleResultName, TaskB.class);
 
 
         // Прочитать содержимое файла в StringBuilder переменную
         StringBuilder programText = new StringBuilder();
+        StringBuilder cleanedText = new StringBuilder();
         readFileIntoStringBuilder(absClassPath, programText);
 
         String line, cleanLine;
         int lineEndPos;
         int from = 0, to;
+        String newLine = "";
         while ((lineEndPos = programText.indexOf(lineSep, from)) != -1) {
             to = lineEndPos;
             line = programText.substring(from, to);
             // Построчно обрабатывать текст, передавая в функцию анализа комментариев
-            cleanLine = processLineRemoveComments(line, mode);
-            if (line.length() > cleanLine.length()) {
-                programText.replace(from, to, cleanLine);
-            }
+            cleanLine = processLineRemoveComments(line);
+            cleanedText.append(newLine);
+            cleanedText.append(cleanLine);
             from = to + lineSep.length();
-            System.out.println(line);
+            newLine = lineSep;
+        }
+
+        System.out.println(cleanedText);
+        writeToFile(absSavePath, cleanedText.toString());
+
+    }
+
+    private static void writeToFile(String absSavePath, String text) {
+        try (
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(
+                                new FileOutputStream(absSavePath), charset)
+                )
+        ) {
+            writer.write(text);
+            writer.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -55,8 +74,7 @@ public class TaskB {
         try (
                 InputStreamReader isr = new InputStreamReader(
                         new BufferedInputStream(
-                                new FileInputStream(absClassPath
-                                )
+                                new FileInputStream(absClassPath)
                         ), charset)
         ) {
             int ch;
@@ -69,15 +87,15 @@ public class TaskB {
     }
 
     /**
+     * Removes all Java comments from a given string
+     *
      * @param lineStr - processed line of a program
-     * @param mode    - current state of search
-     *                "OPEN"
-     * @return number of position in @line where comment
-     * starts or closes. That depends on current @mode
+     * @return cleaned line
      */
-    static String processLineRemoveComments(String lineStr, Mode mode) {
-        int start = 0;
-        int end = lineStr.length(); // по умолчанию вся строка
+    static String processLineRemoveComments(String lineStr) {
+        StringBuilder buffer = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+
         char currChar;
         char lineComment = '/';
         char blockComment = '*';
@@ -88,27 +106,43 @@ public class TaskB {
                 if (Objects.equals(mode, Mode.READ)) {
                     // потенциально начало комментария, выставляем режим
                     mode = Mode.OPEN;
-                    start = i;
+                    // пока что пишем в буфер
+                    buffer.append(currChar);
                 } else if (Objects.equals(mode, Mode.OPEN)) {
-                    // это строчный комментарий
+                    // это строчный комментарий - строка обработана
                     break;
                 } else if (Objects.equals(mode, Mode.BLOCK)) {
                     // закрылся блочный комментарий
-                    end = i + 1; // substring + 1
+                    // очистим буфер и читаем дальше
+                    clearStringBuilder(buffer);
+                    mode = Mode.READ;
                 }
                 /* -> * */
             } else if (currChar == blockComment) {
                 if (Objects.equals(mode, Mode.OPEN)) {
                     // начало блочного комментария
                     mode = Mode.BLOCK;
+                    // пока что пишем в буфер
+                    buffer.append(currChar);
+                } else if (!Objects.equals(mode, Mode.BLOCK)){
+                    result.append(currChar);
                 }
-
+            } else if (Objects.equals(mode, Mode.BLOCK)) {
+                // пишем в буфер блочный комментарий
+                buffer.append(currChar);
             } else {
+                // копируем буфер в вывод
+                result.append(buffer);
+                // пишем в результат
+                result.append(currChar);
                 // сброс флага
                 mode = Mode.READ;
             }
-
         }
-        return lineStr.substring(start, end);
+        return result.toString();
+    }
+
+    static void clearStringBuilder(StringBuilder sb) {
+        sb.delete(0, sb.length());
     }
 }
