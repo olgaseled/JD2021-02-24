@@ -1,17 +1,17 @@
 package by.it.seledtsova.jd02_02;
 
-public class Cashier implements Runnable{
+public class Cashier implements Runnable{   // интерфейс Runnnable с методом run ()
 
     private String name; // имя нашего кассира
 
     public Cashier(int number) {
-        name="\tCachier №" + number+" ";
+        name="\tCashier №" + number+" ";
     }
 
     @Override
     public void run() { //
-        System.out.println(this+"opened");
-        while (!Manager.storeIsClosed()) {
+        System.out.println(this+"opened"); // кассир открыл кассу
+        while (!Manager.marketIsClosed()) { // пока магаз октрыт , кассиры работают
             Buyer buyer = QueueBuyers.poll();
             if (buyer != null) {
                 synchronized (buyer.getMONITOR()) {
@@ -27,11 +27,11 @@ public class Cashier implements Runnable{
                 Util.sleep(1);
             }
         }
-        System.out.println(this+"closed");
+        System.out.println(this+"closed"); // кассир закрыл кассу
     }
 
     @Override
-    public String toString() {
+    public String toString() { // печатаем имя
         return name;
     }
 }
