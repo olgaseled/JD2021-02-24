@@ -14,8 +14,10 @@ public class TaskB {
     static Charset charset = StandardCharsets.UTF_8;
     /* Определить три режима обработки текста:
         - LINE: режим обработки строчного комментария
-        - OPEN: режим обработки открытого комментария
-        - CLOSE: режим закрытия блочного комментария
+        - BLOCK: режим обработки блочного комментария
+        - OPEN: возможно комментарий
+        - CLOSE_LINE: режим закрытия строчного комментария
+        - CLOSE_BLOCK: режим закрытия блочного комментария
         - READ: режим обработки остального содержимого
     */
     static Mode mode = Mode.READ;
@@ -147,6 +149,7 @@ public class TaskB {
      * @param lineStr - processed line of a program
      * @return cleaned line
      */
+    @SuppressWarnings("unused")
     static String processLineRemoveComments(String lineStr) {
         StringBuilder buffer = new StringBuilder();
         StringBuilder result = new StringBuilder();
