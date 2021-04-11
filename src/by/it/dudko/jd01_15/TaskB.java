@@ -8,14 +8,13 @@ import java.util.Objects;
 public class TaskB {
 
     public enum Mode {
-        LINE, OPEN, CLOSE, READ
+        LINE, BLOCK, OPEN, CLOSE_LINE, CLOSE_BLOCK, READ
     }
 
     static Charset charset = StandardCharsets.UTF_8;
-    static String lineSep = System.getProperty("line.separator");
     /* Определить три режима обработки текста:
         - LINE: режим обработки строчного комментария
-        - OPEN: режим обработки открытого блочного комментария
+        - OPEN: режим обработки открытого комментария
         - CLOSE: режим закрытия блочного комментария
         - READ: режим обработки остального содержимого
     */
@@ -36,33 +35,52 @@ public class TaskB {
         StringBuilder cleanedText = new StringBuilder();
         readFileIntoStringBuilder(absClassPath, programText);
 
-        char lineComment = '/';
-        char blockComment = '*';
+        char slash = '/';
+        char asterisk = '*';
+        String lineSep = System.getProperty("line.separator");
         char ch;
         for (int i = 0; i < programText.length(); i++) {
             ch = programText.charAt(i);
             switch (mode.name()) {
-                case "LINE":
-                    if (ch == blockComment) {
-                        mode = Mode.OPEN;
-                    } else if (ch != lineComment) {
-                        cleanedText.append(lineComment);
-                        mode = Mode.READ;
-                    }
-                    break;
                 case "OPEN":
-                    if (ch == blockComment) {
-                        mode = Mode.CLOSE;
+                    if (ch == slash) {
+                        mode = Mode.LINE;
+                    } else if (ch == asterisk) {
+                        mode = Mode.BLOCK;
+                    } else {
+                        cleanedText.append(slash);
+                        cleanedText.append(ch);
+                        mode = Mode.READ;
                     }
                     break;
-                case "CLOSE":
-                    if (ch == lineComment) {
+                case "LINE":
+                    if (lineSep.charAt(0) == ch) {
+                        mode = Mode.CLOSE_LINE;
+                    }
+                    break;
+                case "CLOSE_LINE":
+                    if (lineSep.charAt(1) == ch) {
                         mode = Mode.READ;
+                        cleanedText.append(lineSep);
+                    } else {
+                        mode = Mode.LINE;
+                    }
+                    break;
+                case "BLOCK":
+                    if (ch == asterisk) {
+                        mode = Mode.CLOSE_BLOCK;
+                    }
+                    break;
+                case "CLOSE_BLOCK":
+                    if (ch == slash) {
+                        mode = Mode.READ;
+                    } else {
+                        mode = Mode.BLOCK;
                     }
                     break;
                 default:
-                    if (ch == lineComment) {
-                        mode = Mode.LINE;
+                    if (ch == slash) {
+                        mode = Mode.OPEN;
                     } else {
                         cleanedText.append(ch);
                     }
@@ -140,7 +158,7 @@ public class TaskB {
             currChar = lineStr.charAt(i);
             /* -> / */
             if (currChar == lineComment) {
-                if (Objects.equals(mode, Mode.CLOSE)) {
+                if (Objects.equals(mode, Mode.BLOCK)) {
                     // потенциально начало комментария, выставляем режим
                     mode = Mode.LINE;
                     // пока что пишем в буфер
@@ -152,7 +170,7 @@ public class TaskB {
                     // закрылся блочный комментарий
                     // очистим буфер и читаем дальше
                     clearStringBuilder(buffer);
-                    mode = Mode.CLOSE;
+                    mode = Mode.BLOCK;
                 }
                 /* -> * */
             } else if (currChar == blockComment) {
@@ -170,7 +188,7 @@ public class TaskB {
                 // пишем в результат
                 result.append(currChar);
                 // сброс флага
-                mode = Mode.CLOSE;
+                mode = Mode.BLOCK;
             }
         }
         return result.toString();
