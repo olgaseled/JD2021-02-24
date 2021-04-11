@@ -8,15 +8,16 @@ import java.util.Objects;
 public class TaskB {
 
     public enum Mode {
-        OPEN, BLOCK, READ
+        LINE, OPEN, CLOSE, READ
     }
 
     static Charset charset = StandardCharsets.UTF_8;
     static String lineSep = System.getProperty("line.separator");
     /* Определить три режима обработки текста:
-        - OPEN: режим открытого комментария
-        - BLOCK: режим блочного комментария
-        - READ: режим чтения
+        - LINE: режим обработки строчного комментария
+        - OPEN: режим обработки открытого блочного комментария
+        - CLOSE: режим закрытия блочного комментария
+        - READ: режим обработки остального содержимого
     */
     static Mode mode = Mode.READ;
 
@@ -35,20 +36,56 @@ public class TaskB {
         StringBuilder cleanedText = new StringBuilder();
         readFileIntoStringBuilder(absClassPath, programText);
 
-        String line, cleanLine;
-        int lineEndPos;
-        int from = 0, to;
-        String newLine = "";
-        while ((lineEndPos = programText.indexOf(lineSep, from)) != -1) {
-            to = lineEndPos;
-            line = programText.substring(from, to);
-            // Построчно обрабатывать текст, передавая в функцию анализа комментариев
-            cleanLine = processLineRemoveComments(line);
-            cleanedText.append(newLine);
-            cleanedText.append(cleanLine);
-            from = to + lineSep.length();
-            newLine = lineSep;
+        char lineComment = '/';
+        char blockComment = '*';
+        char ch;
+        for (int i = 0; i < programText.length(); i++) {
+            ch = programText.charAt(i);
+            switch (mode.name()) {
+                case "LINE":
+                    if (ch == blockComment) {
+                        mode = Mode.OPEN;
+                    } else if (ch != lineComment) {
+                        cleanedText.append(lineComment);
+                        mode = Mode.READ;
+                    }
+                    break;
+                case "OPEN":
+                    if (ch == blockComment) {
+                        mode = Mode.CLOSE;
+                    }
+                    break;
+                case "CLOSE":
+                    if (ch == lineComment) {
+                        mode = Mode.READ;
+                    }
+                    break;
+                default:
+                    if (ch == lineComment) {
+                        mode = Mode.LINE;
+                    } else {
+                        cleanedText.append(ch);
+                    }
+            }
         }
+
+
+//        String line, cleanLine;
+//        int lineEndPos;
+//        int from = 0, to;
+//        String newLine = "";
+//        while ((lineEndPos = programText.indexOf(lineSep, from)) != -1) {
+//            to = lineEndPos;
+//            line = programText.substring(from, to);
+//            // Построчно обрабатывать текст, передавая в функцию анализа комментариев
+//            cleanLine = processLineRemoveComments(line);
+//            if (!(cleanLine.equals("skip_me"))) {
+//                cleanedText.append(newLine);
+//                cleanedText.append(cleanLine);
+//            }
+//            from = to + lineSep.length();
+//            newLine = lineSep;
+//        }
 
         System.out.println(cleanedText);
         writeToFile(absSavePath, cleanedText.toString());
@@ -103,40 +140,37 @@ public class TaskB {
             currChar = lineStr.charAt(i);
             /* -> / */
             if (currChar == lineComment) {
-                if (Objects.equals(mode, Mode.READ)) {
+                if (Objects.equals(mode, Mode.CLOSE)) {
                     // потенциально начало комментария, выставляем режим
-                    mode = Mode.OPEN;
+                    mode = Mode.LINE;
                     // пока что пишем в буфер
                     buffer.append(currChar);
-                } else if (Objects.equals(mode, Mode.OPEN)) {
+                } else if (Objects.equals(mode, Mode.LINE)) {
                     // это строчный комментарий - строка обработана
                     break;
-                } else if (Objects.equals(mode, Mode.BLOCK)) {
+                } else if (Objects.equals(mode, Mode.OPEN)) {
                     // закрылся блочный комментарий
                     // очистим буфер и читаем дальше
                     clearStringBuilder(buffer);
-                    mode = Mode.READ;
+                    mode = Mode.CLOSE;
                 }
                 /* -> * */
             } else if (currChar == blockComment) {
-                if (Objects.equals(mode, Mode.OPEN)) {
+                if (Objects.equals(mode, Mode.LINE)) {
                     // начало блочного комментария
-                    mode = Mode.BLOCK;
+                    mode = Mode.OPEN;
                     // пока что пишем в буфер
                     buffer.append(currChar);
-                } else if (!Objects.equals(mode, Mode.BLOCK)){
+                } else if (!Objects.equals(mode, Mode.OPEN)) {
                     result.append(currChar);
                 }
-            } else if (Objects.equals(mode, Mode.BLOCK)) {
-                // пишем в буфер блочный комментарий
-                buffer.append(currChar);
-            } else {
+            } else if (!Objects.equals(mode, Mode.OPEN)) {
                 // копируем буфер в вывод
                 result.append(buffer);
                 // пишем в результат
                 result.append(currChar);
                 // сброс флага
-                mode = Mode.READ;
+                mode = Mode.CLOSE;
             }
         }
         return result.toString();
