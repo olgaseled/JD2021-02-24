@@ -9,7 +9,7 @@ class Util {
     }
 
     static int getRandom(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(max - min + 1);
+        return ThreadLocalRandom.current().nextInt(max - min + 1) + min;
     }
 
     static int getRandom(int max) {

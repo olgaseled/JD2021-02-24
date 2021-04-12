@@ -9,6 +9,7 @@ public class Store {
 
 
         List<Customer> customers = new ArrayList<>(120);
+        ListGoods listGoods = new ListGoods();
         System.out.println("Store opened");
 
         int numberCustomer = 0;

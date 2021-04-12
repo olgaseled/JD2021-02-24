@@ -4,12 +4,21 @@ package by.it.papruga.jd02_01;
 public class Good {
 
     private String name;
-    private double price;
 
-    public Good (String name, double price) {
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
         this.name = name;
-        this.price = price;
+    }
 
+    public Good(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
