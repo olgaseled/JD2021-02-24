@@ -5,6 +5,8 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskC {
 
@@ -14,11 +16,12 @@ public class TaskC {
         Path runnerPath = Paths.get(runnerStringPath);
         Navigator nav = new Navigator(runnerPath);
         CommandLine cmd = new CommandLine(nav);
+        CommandParser parser = new CommandParser();
         Scanner sc = new Scanner(System.in);
 
-        String command;
+        String command = "";
         while (!(command= sc.nextLine()).equalsIgnoreCase("end")) {
-
+            parser.parseCommand(command);
         }
     }
 
@@ -27,17 +30,21 @@ public class TaskC {
             CD, DIR, END
         }
 
-        Command command;
-        String directory;
+        private Command command;
+        private String directory;
+        private Pattern commandPattern = Pattern.compile("[^\\s.]+");
+        private Matcher commandMatcher;
 
         public CommandParser() {
         }
 
         void parseCommand(String input) {
-            input = input.trim().toUpperCase();
-            String[] tokens;
-            if (input.startsWith(Command.CD.name())) {
-                tokens = input.split(Command.CD.name());
+            input = input.trim();
+            String command;
+            commandMatcher = commandPattern.matcher(input);
+            if (commandMatcher.matches()) {
+                command = commandMatcher.group();
+                System.out.println(command);
             }
         }
     }
@@ -99,7 +106,7 @@ public class TaskC {
             }
 
             public void pwd(String line) {
-                output.println(line + ">");
+                output.print(line + ">");
             }
 
             public void dir(String line) {
