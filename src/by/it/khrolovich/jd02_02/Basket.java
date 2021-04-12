@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Basket {
 
-
     private List<Good> list = new ArrayList<>();
 
     void put(Good good) {
