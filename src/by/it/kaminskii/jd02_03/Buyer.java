@@ -1,30 +1,28 @@
-package by.it.kaminskii.jd02_02;/* created by Kaminskii Ivan
+package by.it.kaminskii.jd02_03;/* created by Kaminskii Ivan
  */
 
 
 import java.util.StringJoiner;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-
-    final Object MONITOR_BUYER;
+    private final Object MONITOR_BUYER;
     boolean waiting = false;
 
     public Buyer(int whichOne) {
         super("Buyer№" + whichOne + " ");
-        MONITOR_BUYER=this;
+        MONITOR_BUYER = this;
         Manager.newBuyer();
     }
+
     public Object getMONITOR() {
         return MONITOR_BUYER;
     }
-
-
 
     public void setSomeWaiting(boolean waiting) {
         this.waiting = waiting;
     }
 
-//    Customer(int number) {
+    //    Customer(int number) {
 //        super("Customer #" + number + " ");
 //        MONITOR = this;
 //        Manager.newCustomer();
@@ -34,7 +32,9 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         choosePurchase();
         putGoodsToBasket();
+        goToQueue();
         leavingTheMarket();
+        Manager.marketIsClosed();
     }
 
     @Override
@@ -44,7 +44,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.println("buyer take basket");
+        System.out.println( this + "take basket");
         int sleepTime = Helper.randomValue(500, 2000);
         Helper.sleep(sleepTime);
     }
@@ -85,7 +85,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void leavingTheMarket() {
-        System.out.println(this + "steal somthing and leave the market");
+        System.out.println(this + "leave the market");
 
     }
 
