@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Store {
 
-    public static  PriceList priceList;
+    public static ListGoods priceList;
 
 
     public static void main(String[] args) {
-        priceList = new PriceList();
+        priceList = new ListGoods();
         List<Customer> customers = new ArrayList<>(120);//список покупателей
         System.out.println("Store opened");
         int numberCustomer = 0;
