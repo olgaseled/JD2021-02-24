@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 class Store {
 
     public static void main(String[] args) {
-        QueueBuyers queueBuyers = new QueueBuyers();
-        Manager manager = new Manager();
-        new Context(new Manager(),new QueueBuyers());
-
         putProductsInWindow();
 
         List<Thread> threads = new ArrayList<>(120);
 
         ExecutorService executorServiceCashiers = Executors.newFixedThreadPool(5);
+
 
         for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i);
@@ -29,9 +27,9 @@ class Store {
         int numberBuyer = 0;
         while (Manager.storeIsOpened()) {
 //            for (int time = 0; time < 2; time++) {
-                for (int time = 0; time < Config.FINAL_TIME; time++) {
+            for (int time = 0; time < Config.FINAL_TIME; time++) {
 //                int count = 2;
-            int count = Util.getRandom(2);
+                int count = Util.getRandom(2);
                 for (int i = 0; i < count && Manager.storeIsOpened(); i++) {
                     Buyer buyer = new Buyer(++numberBuyer);
                     threads.add(buyer);

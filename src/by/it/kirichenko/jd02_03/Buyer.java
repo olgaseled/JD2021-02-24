@@ -1,6 +1,7 @@
 package by.it.kirichenko.jd02_03;
 
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
@@ -10,6 +11,8 @@ class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
     private int numberBuyer;
     Basket basket;
+
+    private static Semaphore semaphore = new Semaphore(Config.COUNT_BYERS_IN_SHOPPING_ROOM);
 
     public Object getMONITOR() {
         return MONITOR;
@@ -43,11 +46,19 @@ class Buyer extends Thread implements BuyerActions, BuyerActionsWithBasket {
 
     @Override
     public void run() {
-        storeEntrace();
-        takeBasket();
-        productSelection();
-        //viewBasket();
-        goToQueue();
+        try {
+            semaphore.acquire();
+            storeEntrace();
+            takeBasket();
+            productSelection();
+            //viewBasket();
+            goToQueue();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
         exitingStore();
         Manager.completeBuyer();
     }

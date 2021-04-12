@@ -5,4 +5,5 @@ class Config {
     static final int FINAL_TIME = 120;
     static final int PLAN = 100;
     static final int QUEUE_LENGTH = 30;
+    static final int COUNT_BYERS_IN_SHOPPING_ROOM = 20;
 }
