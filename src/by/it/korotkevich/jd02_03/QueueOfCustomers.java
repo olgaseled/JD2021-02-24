@@ -5,9 +5,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueueOfCustomers {
 
-    static private BlockingDeque<Customer> customers = new LinkedBlockingDeque<>(Config.QUEUE_LENGTH);
+    private BlockingDeque<Customer> customers = new LinkedBlockingDeque<>(Config.QUEUE_LENGTH);
 
-    static void add(Customer customer) {
+    void add(Customer customer) {
         try {
             customers.putLast(customer);
         } catch (InterruptedException e) {
@@ -15,7 +15,11 @@ public class QueueOfCustomers {
         }
     }
 
-    static Customer poll() {
+    Customer poll() {
         return customers.pollFirst();
+    }
+
+    int getQueueSize(){
+        return customers.size();
     }
 }

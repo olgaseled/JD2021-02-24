@@ -1,11 +1,16 @@
 package by.it.korotkevich.jd02_03;
 
+import java.util.concurrent.Semaphore;
+
 class Customer extends Thread implements ICustomer, IUseBasket {
+
     private final Object MONITOR;
 
     private boolean waiting = false;
 
     Basket basket = new Basket();
+
+    private static Semaphore semaphore = new Semaphore(20);
 
     private final Context context;
 
@@ -21,16 +26,24 @@ class Customer extends Thread implements ICustomer, IUseBasket {
         super("Customer #" + number + " ");
         MONITOR = this;
         this.context = context;
-        context.getManager().newCustomer();;
+        context.getManager().newCustomer();
+        ;
     }
 
 
     @Override
     public void run() {
-        enterMarket();
-        takeBasket();
-        chooseGoods();
-        putGoodsToBasket();
+        try{
+            semaphore.acquire();
+            enterMarket();
+            takeBasket();
+            chooseGoods();
+            putGoodsToBasket();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
         joinQueue();
         goOut();
         context.getManager().servedCustomer();
@@ -63,6 +76,7 @@ class Customer extends Thread implements ICustomer, IUseBasket {
     private void joinQueue() {
         synchronized (MONITOR) {
             context.getQueueOfCustomers().add(this);
+            System.out.println(this + "joined the queue.");
             waiting = true;
             while (waiting) {
                 try {

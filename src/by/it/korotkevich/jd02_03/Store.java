@@ -1,7 +1,5 @@
 package by.it.korotkevich.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +18,7 @@ class Store {
             Cashier cashier = new Cashier(i, context);
             executorServiceForCashiers.execute(new Cashier(i, context));
         }
+        executorServiceForCashiers.shutdown();
 
         System.out.println("The store is opened.");
         int customerNumber = 0;
@@ -32,13 +31,14 @@ class Store {
             Util.sleep(1000);
         }
 
-        while (true){
-            try {
-                if (!executorServiceForCashiers.awaitTermination(1, TimeUnit.HOURS)) break;
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+
+
+        try {
+            while (!executorServiceForCashiers.awaitTermination(10, TimeUnit.MINUTES)){
+                System.out.println("oops");
             }
-            System.out.println("oops");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         System.out.println("Store closed.");
