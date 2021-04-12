@@ -13,7 +13,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         super("Customer №" + numberCustomer + " ");
         this.pensioneer = pensioneer;
         if (pensioneer) {
-            this.setName("Pensioneer-"+this.getName());
+            this.setName("Pensioneer-" + this.getName());
         }
     }
 
@@ -38,7 +38,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         int countOfGoods = Util.getRandom(1, 4);
         for (int i = 0; i < countOfGoods; i++) {
             int pause = Util.getRandom(500, 2000);//от 0.5 до 2х секунд
-            Util.Sleep(pause, true);//выбираем товар от 0.5 до 2х секунд
+            Util.Sleep(pause, this.pensioneer);//выбираем товар от 0.5 до 2х секунд
             putGoodsToBasket();//кладем в корзину
         }
         System.out.println(this + "finished to choose good");
@@ -58,7 +58,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void takeBasket() {
-
         System.out.println(this + "take the basket");
     }
 

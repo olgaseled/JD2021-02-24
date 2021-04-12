@@ -3,6 +3,7 @@ package by.it.khrolovich.jd02_02;
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
     //int number;//номер покупателя
+    private Basket basket = new Basket();//его личная корзинка
 
     private final Object MONITOR;
     private boolean waiting = false;
@@ -16,10 +17,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     }
 
     public Customer(int numberCustomer){
-       /* this.number = numberCustomer;
-        this.setName("Покупатель №"+numberCustomer+" ");
-        start();*/
-        //или
         super("Customer №"+numberCustomer+" ");
         MONITOR = this;
         Manager.newCustomer();//посчитается в момент рождения покупателя
@@ -27,15 +24,13 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void run() {
         //Manager.newCustomer();//здесь нельзя считать. Покупатель существует
+
         enterToMarket();
         takeBasket();//покупатель взял корзину
         goToQueue();//покупатель идет в очередь
-        int countOfGoods = Util.getRandom(1, 4);
-        for (int i = 0; i < countOfGoods; i++) {
-            chooseGoods();//выбрал товар
-            putGoodsToBasket();//положил в корзину
-           }
+        chooseGoods();//выбрал товар
         goOut();
+
         Manager.completeCustomer();
     }
 
@@ -46,11 +41,15 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void chooseGoods() {
-        System.out.println(this+"started to choose good");
-        int pause = Util.getRandom(500, 2000);//от 0.5 до 2х секунд
+        System.out.println(this + "started to choose good");
 
-        Util.Sleep(pause);//выбираем товар от 0.5 до 2х секунд
-        System.out.println(this+"finished to choose good");
+        int countOfGoods = Util.getRandom(1, 4);
+        for (int i = 0; i < countOfGoods; i++) {
+            int pause = Util.getRandom(500, 2000);//от 0.5 до 2х секунд
+            Util.Sleep(pause);//выбираем товар от 0.5 до 2х секунд
+            putGoodsToBasket();//кладем в корзину
+        }
+        System.out.println(this + "finished to choose good");
     }
 
     @Override
@@ -60,7 +59,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public String toString() {
-
         //return super.toString();
         return this.getName();
     }
@@ -88,7 +86,8 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-
-        System.out.println(this+"put to basket: ");
+        Good good = ListGoods.randomGood();
+        basket.put(good);
+        System.out.println(this + " put to the Basket " + good);
     }
 }
