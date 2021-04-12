@@ -11,13 +11,12 @@ public class Store {
         List<Thread> threads = new ArrayList<>(120);
         ListGoods listGoods = new ListGoods();
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 5; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier);
             threads.add(thread);
             thread.start();
         }
-
 
 
         System.out.println("Store opened");
@@ -44,6 +43,9 @@ public class Store {
                 throw new RuntimeException();
             }
         }
+
+
+
 
         System.out.println("Store closed");
 
