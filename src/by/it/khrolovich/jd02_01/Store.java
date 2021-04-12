@@ -13,12 +13,23 @@ public class Store {
         List<Customer> customers = new ArrayList<>(120);//список покупателей
         System.out.println("Store opened");
         int numberCustomer = 0;
+        int counterForPensionner = 0;
+        int intervalForPensioneer = Util.getRandom(3, 5);
         for (int i = 0; i < Config.FINAL_TIME; i++) {
 
-            int count = Util.getRandom(0, 2);
+            int count = Util.getRandom(2);
             for (int j = 0; j < count; j++) {
                 numberCustomer++;
-                Customer customer = new Customer(numberCustomer);
+                counterForPensionner++;
+
+                Customer customer;
+                if (counterForPensionner == intervalForPensioneer) {
+                    customer = new Customer(numberCustomer, true);
+                    counterForPensionner = 0;
+                    intervalForPensioneer = Util.getRandom(3, 5);
+                } else {
+                    customer = new Customer(numberCustomer, false);
+                }
                 customers.add(customer);
                 customer.start();
             }
