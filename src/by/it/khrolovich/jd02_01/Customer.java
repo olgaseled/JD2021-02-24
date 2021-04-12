@@ -1,17 +1,18 @@
 package by.it.khrolovich.jd02_01;
 
-public class Customer extends Thread implements ICustomer, IUseBasket{
+public class Customer extends Thread implements ICustomer, IUseBasket {
 
     //int number;//номер покупателя
     private Basket basket = new Basket();//его личная корзинка
 
-    public Customer(int numberCustomer){
+    public Customer(int numberCustomer) {
      /*   this.number = numberCustomer;
         this.setName("Покупатель №"+numberCustomer+" ");
         start();*/
 
-        super("Customer №"+numberCustomer+" ");
+        super("Customer №" + numberCustomer + " ");
     }
+
     @Override
     public void run() {
         enterToMarket();
@@ -23,12 +24,12 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
 
     @Override
     public void enterToMarket() {
-        System.out.println(this+" entered to the Store");
+        System.out.println(this + " entered to the Store");
     }
 
     @Override
     public void chooseGoods() {
-        System.out.println(this+"started to choose good");
+        System.out.println(this + "started to choose good");
 
         int countOfGoods = Util.getRandom(1, 4);
         for (int i = 0; i < countOfGoods; i++) {
@@ -36,12 +37,12 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
             Util.Sleep(pause);//выбираем товар от 0.5 до 2х секунд
             putGoodsToBasket();//кладем в корзину
         }
-        System.out.println(this+"finished to choose good");
+        System.out.println(this + "finished to choose good");
     }
 
     @Override
     public void goOut() {
-        System.out.println(this +"go out from the Store");
+        System.out.println(this + "go out from the Store");
     }
 
     @Override
@@ -54,13 +55,13 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
     @Override
     public void takeBasket() {
 
-        System.out.println(this+"take the basket");
+        System.out.println(this + "take the basket");
     }
 
     @Override
     public void putGoodsToBasket() {
         Good good = ListGoods.randomGood();
         basket.put(good);
-        System.out.println(this+" put to the Basket "+ good);
+        System.out.println(this + " put to the Basket " + good);
     }
 }

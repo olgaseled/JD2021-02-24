@@ -7,13 +7,14 @@ public class Basket {
 
 
     private List<Good> list = new ArrayList<>();
+
     void put(Good good) {
         list.add(good);
     }
 
-    void showContent(){
+    void showContent() {
         for (Good good : list) {
-            System.out.println(good+" price "+ ListGoods.getPrice(good));
+            System.out.println(good + " price " + ListGoods.getPrice(good));
         }
     }
 
