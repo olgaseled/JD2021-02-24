@@ -1,4 +1,4 @@
-package by.it.korotkevich.jd02_01;
+package by.it.korotkevich.jd02_02;
 
 import java.util.*;
 
@@ -19,7 +19,7 @@ public class GoodsList {
 
 
     static Good getAGood() {
-        Collections.shuffle(goodsNameList);
-        return goodsNameList.get(0);
+        int random = Util.getRandom(0, goodsNameList.size()-1);
+        return goodsNameList.get(random);
     }
 }
