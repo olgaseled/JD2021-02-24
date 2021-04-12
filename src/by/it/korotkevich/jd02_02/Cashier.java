@@ -1,5 +1,8 @@
 package by.it.korotkevich.jd02_02;
 
+import java.util.List;
+import java.util.Map;
+
 class Cashier implements Runnable {
     private String name;
 
@@ -10,13 +13,17 @@ class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this + "started service.");
+        Map<Good, Double> priceList = GoodsList.getPriceList();
         while (!Manager.storeIsClosed()) {
             Customer customer = QueueOfCustomers.poll();
             if (customer != null) {
                 synchronized (customer.getMONITOR()) {
                     System.out.println(this + "is serving " + customer);
-                    int timeout = Util.getRandom(2000, 5000);
-                    Util.sleep(timeout);
+                    List<Good> basketContents = Basket.getBasketContents();
+                    for (Good basketContent : basketContents) {
+                        System.out.println(this+"has added "+basketContent+" to the check. It costs "
+                                +priceList.get(basketContent));
+                    }
                     System.out.println(this + "finished serving " + customer);
                     customer.setWaiting(false);
                     customer.notify();
