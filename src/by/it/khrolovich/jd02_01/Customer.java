@@ -17,7 +17,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
         enterToMarket();
         takeBasket();//покупатель взял корзину
         chooseGoods();//выбрал товар
-        putGoodsToBasket();//положил в корзину
+        //putGoodsToBasket();//положил в корзину
         goOut();
     }
 
@@ -32,12 +32,10 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
 
         int countOfGoods = Util.getRandom(1, 4);
         for (int i = 0; i < countOfGoods; i++) {
-            Good good = ListGoods.randomGood();
-            basket.put(good);
+            int pause = Util.getRandom(500, 2000);//от 0.5 до 2х секунд
+            Util.Sleep(pause);//выбираем товар от 0.5 до 2х секунд
+            putGoodsToBasket();//кладем в корзину
         }
-        int pause = Util.getRandom(500, 2000);//от 0.5 до 2х секунд
-
-        Util.Sleep(pause);//выбираем товар от 0.5 до 2х секунд
         System.out.println(this+"finished to choose good");
     }
 
@@ -55,12 +53,14 @@ public class Customer extends Thread implements ICustomer, IUseBasket{
 
     @Override
     public void takeBasket() {
+
         System.out.println(this+"take the basket");
     }
 
     @Override
     public void putGoodsToBasket() {
-
-        System.out.println(this+"put to basket: ");
+        Good good = ListGoods.randomGood();
+        basket.put(good);
+        System.out.println(this+" put to the Basket "+ good);
     }
 }

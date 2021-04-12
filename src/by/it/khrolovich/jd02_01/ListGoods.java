@@ -16,6 +16,7 @@ public  class ListGoods {
 
     };*/
 
+    //constructor
     public ListGoods(){
         price.put(new Good("apple"),4.0);//price
         price.put(new Good("tomato"),5.0);
