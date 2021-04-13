@@ -13,11 +13,19 @@ public class Shop {
         int numberOfPeopleWhoCome = 0;
         for (int openStoreTime = 0; openStoreTime < Constants.OPEN_STORE_TIME; openStoreTime++) {
             int wentToTheShop = Support.getRandom(2);
-            for (int i = 0; i < wentToTheShop; i++) {
-                Buyer buyer = new Buyer(++numberOfPeopleWhoCome);
-                listBuyers.add(buyer);
-                buyer.start();
-            }
+           // if (numberOfPeopleWhoCome % 4 != 0) {
+                for (int i = 0; i < wentToTheShop; i++) {
+                    Buyer buyer = new Buyer(++numberOfPeopleWhoCome);
+                    listBuyers.add(buyer);
+                    buyer.start();
+                }
+//            } else {
+//                for (int i = 0; i < wentToTheShop; i++) {
+//                    Buyer buyer = new BuyerPensioner(++numberOfPeopleWhoCome);
+//                    listBuyers.add(buyer);
+//                    buyer.start();
+//                }
+//            }
             Support.sleep(1000);
         }
         try {
@@ -28,7 +36,6 @@ public class Shop {
             throw new RuntimeException(e);
         }
         System.out.println("Close shop");
-
 
     }
 
