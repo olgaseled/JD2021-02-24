@@ -1,14 +1,13 @@
 package by.it.seledtsova.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SuperMarket extends ProductList {
 
-    public static ProductList productList;
+
 
 
     public static void main(String[] args) throws InterruptedException {
