@@ -1,13 +1,22 @@
 package by.it.dudko.jd01_15;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class Terminal {
     private String command;
@@ -27,13 +36,13 @@ public class Terminal {
 
     public void process(String commandStr) throws TerminalException {
         parser.parseCommand(this, commandStr);
-        navigator.validateCommand(this);
-        console.displayCommand(this);
+        navigator.setCommand(this);
+        console.executeCommand(this);
     }
 
-    public void alert(String message) {
+    public void alert(String message) throws TerminalException {
         console.alert(message);
-        console.displayCommand(this);
+        console.executeCommand(this);
     }
 
 
@@ -59,6 +68,8 @@ public class Terminal {
     private static class Navigator {
         private Path cwd;
 
+        private Path dirPath = null;
+
         private Command command;
 
         private Navigator(Path runnerPath) {
@@ -69,12 +80,16 @@ public class Terminal {
             return cwd;
         }
 
+        public Path getDirPath() {
+            return dirPath;
+        }
+
         public Command getCommand() {
             return command;
         }
 
 
-        public void validateCommand(Terminal terminal) throws TerminalException {
+        public void setCommand(Terminal terminal) throws TerminalException {
 
             if (terminal.command.equalsIgnoreCase(Command.CD.name())) {
                 command = Command.CD;
@@ -85,15 +100,11 @@ public class Terminal {
             }
             Path path;
             path = Paths.get(terminal.argument);
-//            if (!Files.exists(path) || !Files.isDirectory(path)) {
-//                throw new TerminalException("Path doesn't exist " + path);
-//            }
-            // processCommand(terminal.argument);
-            processCommand(path);
+            processPath(path);
 
         }
 
-        private void processCommand(Path path) throws TerminalException {
+        private void processPath(Path path) throws TerminalException {
             Path resultPath = cwd;
             String targetPath = path.toString();
             switch (targetPath) {
@@ -119,13 +130,28 @@ public class Terminal {
             if (!Files.exists(resultPath)) {
                 throw new TerminalException("Path doesn't exist " + resultPath.toString());
             } else {
+                setPath(resultPath);
+                // cwd = resultPath;
+            }
+        }
+
+        private void setPath(Path resultPath) {
+            // DIR command does not change current working directory
+            // but may display other directory content
+            if (Objects.equals(command, Command.CD)) {
                 cwd = resultPath;
+                dirPath = null;
+            } else if (Objects.equals(command, Command.DIR)) {
+                dirPath = resultPath;
             }
         }
     }
 
     private static class Console {
 
+        public static final String DIR_LABEL = "<DIR>";
+        private static final DateTimeFormatter DATE_FORMATTER =
+                DateTimeFormatter.ofPattern("dd.MM.yyyy  HH:mm");
         private final PrintStream output;
 
         private Console(PrintStream output) {
@@ -140,16 +166,19 @@ public class Terminal {
                     "cd ..\n" +
                     "cd <dir from current directory>\n" +
                     "dir\n" +
+                    "dir <path to directory>" +
                     "end\n" +
                     "You are at \"home\" directory now";
             output.println(greeting);
         }
 
-        public void displayCommand(Terminal terminal) {
-            Path dir = terminal.navigator.getCwd();
+        public void executeCommand(Terminal terminal) {
             Command command = terminal.navigator.getCommand();
             if (Objects.equals(command, Command.CD)) {
-                pwd(dir.toString());
+                pwd(terminal.navigator.getCwd().toString());
+            } else if (Objects.equals(command, Command.DIR)) {
+                listDir(terminal.navigator.getDirPath());
+                pwd(terminal.navigator.getCwd().toString());
             }
         }
 
@@ -157,12 +186,46 @@ public class Terminal {
             output.printf("\n%s>", pathString);
         }
 
-        public void dir(String line) {
-            output.println(line);
+        public void listDir(Path dir) {
+            String dirItemInfo;
+            try {
+                output.println("\nСодержимое каталога " + dir);
+                Stream<Path> dirList = Files.list(dir);
+                Iterator<Path> dirIterator = dirList.iterator();
+                Path dirObj;
+                while (dirIterator.hasNext()) {
+                    dirObj = dirIterator.next();
+                    FileTime lastModifiedTime = Files.getLastModifiedTime(dirObj);
+                    String formattedDate = formatDateTime(lastModifiedTime);
+                    Path fileName = dirObj.getFileName();
+                    if (Files.isDirectory(dirObj)) {
+                        dirItemInfo = String.format("%s\t%5s\t%10s %s", formattedDate, DIR_LABEL, "", fileName);
+                    } else {
+                        // int fileSize = (int) (Files.size(dirObj) / 1024);
+                        String strFileSize = String.format(Locale.US, "%,d", Files.size(dirObj))
+                                .replace(',', ' ');
+                        dirItemInfo = String.format("%s\t%5s\t%10s %s", formattedDate, "", strFileSize, fileName);
+                    }
+                    output.println(dirItemInfo);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
         public void alert(String message) {
             output.println(message);
+        }
+
+        public static String formatDateTime(FileTime fileTime) {
+
+            LocalDateTime localDateTime = fileTime
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime();
+
+            return localDateTime.format(DATE_FORMATTER);
         }
     }
 

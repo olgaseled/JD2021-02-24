@@ -19,7 +19,11 @@ public class TaskC {
             try {
                 terminal.process(commandStr);
             } catch (TerminalException e) {
-                terminal.alert(e.getMessage());
+                try {
+                    terminal.alert(e.getMessage());
+                } catch (TerminalException terminalException) {
+                    terminalException.printStackTrace();
+                }
             }
         }
     }
