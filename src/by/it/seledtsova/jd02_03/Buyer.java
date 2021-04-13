@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd02_02;
+package by.it.seledtsova.jd02_03;
 
 /*
 Напишите программу, моделирующую поток покупателей Buyerв магазине.
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
+
+    private QueueBuyers queueBuyers;
 
     private final Object MONITOR;
 
@@ -24,10 +26,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
 
-    public Buyer(int number) {
+    public Buyer(int number, QueueBuyers queueBuyers) {
         super("Buyer №" + number + " ");
+        this.queueBuyers=queueBuyers;
         MONITOR=this;
-        Manager.newCustomer();
+        Manager.addBuyer();
     }
 
 
@@ -70,7 +73,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         List<Integer> basketProduct=new ArrayList<>();
         int pause = Util.getRandom(500, 2000); //
         Util.sleep(pause);
-        int howMuchProducts=Util.getRandom(1,4);
+        int howMuchProducts= Util.getRandom(1,4);
         for (int product = 0; product < basketProduct.size(); product++) {
             basketProduct.add(howMuchProducts);
         }
@@ -81,7 +84,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goToQueue() { // добавляем в очередь
         synchronized (MONITOR) {
-            QueueBuyers.add(this); // покупатель взял свой монитор
+            queueBuyers.add(this); // покупатель взял свой монитор. Теперь мы обращаемся не к классу , а к экземпляру
             System.out.println(this+" покупатель встал в очередь");
             waiting = true;
             while (waiting) { // пока мы не в движении , мы будем ждать

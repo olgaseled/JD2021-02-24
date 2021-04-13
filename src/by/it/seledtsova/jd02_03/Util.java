@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd02_02;
+package by.it.seledtsova.jd02_03;
 
 
 import java.util.concurrent.ThreadLocalRandom;
