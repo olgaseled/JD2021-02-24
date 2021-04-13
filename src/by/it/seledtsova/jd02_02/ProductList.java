@@ -13,7 +13,7 @@ public class ProductList   {
     static  Map<String, Double> basketProduct= new HashMap<>();
 
 
-        public ProductList() {
+        public void ProductList() {
         basketProduct.put("Milk", 2.15);
         basketProduct.put("Bread", 1.85);
         basketProduct.put("Cheese", 3.35);
