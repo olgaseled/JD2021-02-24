@@ -1,21 +1,21 @@
-package by.it.papruga.jd02_02;
+package by.it.papruga.jd02_03;
 
 public class Cashier implements Runnable, ICashier {
 
     private final int number;
+    private Context context;
     private boolean waiting = false;
     public Basket basket = new Basket();
     static final Object MONITOR = new Object();
 
-    public Cashier(int number) {
+    public Cashier(int number, Context context) {
         this.number = number;
+        this.context = context;
     }
-
 
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
     }
-
 
     @Override
     public void run() {
@@ -28,7 +28,7 @@ public class Cashier implements Runnable, ICashier {
     @Override
     public void goToCashierQueue() {
 
-        QueueCashiers.add(this);
+        context.getQueueCashiers().add(this);
         this.setWaiting(true);
         this.waiting();
         synchronized (this) {
@@ -39,7 +39,6 @@ public class Cashier implements Runnable, ICashier {
                     e.printStackTrace();
                 }
         }
-
     }
 
     @Override
@@ -59,8 +58,8 @@ public class Cashier implements Runnable, ICashier {
     @Override
     public void startService() {
 
-        while (!Manager.storeIsClosed()){
-            Customer customer = QueueCustomers.pull();
+        while (context.getManager().getCountCustomerOut() != Config.PLAN){
+            Customer customer = context.getQueueCustomers().pull();
             if (customer!=null){
                 System.out.println(this+"start service for "+customer);
                 int timeout = Util.getRandom(500, 2000);
@@ -75,11 +74,13 @@ public class Cashier implements Runnable, ICashier {
                 }
             }
             else {
-                break;
+                Util.sleep(5);
+                if (context.getManager().getCountCustomerOut() == Config.PLAN)
+                {
+                    break;
+                }
             }
-
         }
-
     }
 
     @Override

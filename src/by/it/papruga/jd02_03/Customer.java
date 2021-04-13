@@ -1,8 +1,12 @@
-package by.it.papruga.jd02_02;
+package by.it.papruga.jd02_03;
+
+import java.util.concurrent.Semaphore;
 
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
     private boolean waiting = false;
+
+    private final Context context;
 
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
@@ -12,10 +16,13 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return waiting;
     }
 
-    public Customer(int number) {
+    private static Semaphore semaphore = new Semaphore(Config.SHOPPING_ROOM_CAPACITY);
+
+    public Customer(int number, Context context) {
 
         super("Customer #" + number + " ");
-        Manager.newCustomer();
+        this.context = context;
+        context.getManager().newCustomer();
 
     }
 
@@ -25,10 +32,18 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public void run() {
         enterToMarket();
         takeBasket();
-        chooseGoods();
+        try {
+            semaphore.acquire();
+            chooseGoods();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
         goToQueue();
         goOut();
-        Manager.completeCustomer();
+        context.getManager().completeCustomer();
     }
 
     @Override
@@ -41,12 +56,12 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void goToQueue() {
 
-        QueueCustomers.add(this);
+        context.getQueueCustomers().add(this);
         System.out.println(this + "add to Queue");
 
-        if (QueueCashiers.getCashiersSize() > 0 &&  Manager.getCountQueueIn() % 5 == 0)
+        if (context.getQueueCashiers().getCashiersSize() > 0 &&  context.getManager().getCountQueueIn() % 5 == 0)
         {
-            Cashier cashier = QueueCashiers.pull();
+            Cashier cashier = context.getQueueCashiers().pull();
             synchronized (cashier){
                 cashier.notify();
                 cashier.setWaiting(false);
@@ -82,8 +97,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
             basket.put(ListGoods.randomGood());
 
         }
-
-      //  System.out.println(this + "choose:" + basket);
 
         putGoodsToBasket();
 

@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_01;
+package by.it.papruga.jd02_03;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,17 +19,16 @@ public class Util {
 
     }
 
-    static void sleep(double timeout) {
+    static void sleep(int timeout) {
 
         try {
-            Thread.sleep((long) (timeout / Config.K_SPEED));
+            Thread.sleep(timeout / Config.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
     }
-
-
 
 
 }
