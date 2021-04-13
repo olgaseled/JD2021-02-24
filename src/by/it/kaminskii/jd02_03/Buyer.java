@@ -3,23 +3,32 @@ package by.it.kaminskii.jd02_03;/* created by Kaminskii Ivan
 
 
 import java.util.StringJoiner;
+import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-    private final Object MONITOR_BUYER;
-    boolean waiting = false;
 
-    public Buyer(int whichOne) {
-        super("Buyer№" + whichOne + " ");
-        MONITOR_BUYER = this;
-        Manager.newBuyer();
-    }
+private BuyerQueue buyerQueue;
+private Semaphore sem;
+
+
+    private final Object MONITOR_BUYER;
+
+    private boolean waiting = false;
 
     public Object getMONITOR() {
         return MONITOR_BUYER;
     }
 
-    public void setSomeWaiting(boolean waiting) {
+    public void setWaiting(boolean waiting) {
         this.waiting = waiting;
+    }
+
+     Buyer(Semaphore sem, int whichOne, BuyerQueue buyerQueue) {
+        super("Buyer№" + whichOne + " ");
+        this.buyerQueue = buyerQueue;
+        this.sem=sem;
+        MONITOR_BUYER = this;
+        Manager.newBuyer();
     }
 
     //    Customer(int number) {
@@ -34,7 +43,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         putGoodsToBasket();
         goToQueue();
         leavingTheMarket();
-        Manager.marketIsClosed();
+        Manager.completeBuyer();
     }
 
     @Override
@@ -44,7 +53,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.println( this + "take basket");
+        System.out.println(this + "take basket");
         int sleepTime = Helper.randomValue(500, 2000);
         Helper.sleep(sleepTime);
     }
@@ -72,13 +81,15 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goToQueue() {
-        BuyerQueue.buyerAdd(this);
-        waiting = true;
-        while (waiting) {
-            try {
-                MONITOR_BUYER.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        synchronized (MONITOR_BUYER) {
+            buyerQueue.add(this);
+            waiting = true;
+            while (waiting) {
+                try {
+                    MONITOR_BUYER.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

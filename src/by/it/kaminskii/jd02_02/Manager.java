@@ -6,9 +6,7 @@ public class Manager {
     private static int buyerOut = 0;
 
     static void newBuyer() {
-        synchronized (Manager.class) {
             buyerIn++;
-        }
     }
 
     static boolean marketIsOpened(){

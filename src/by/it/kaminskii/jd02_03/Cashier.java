@@ -1,30 +1,35 @@
 package by.it.kaminskii.jd02_03;/* created by Kaminskii Ivan
  */
 
-public class Cashier implements Runnable{
+public class Cashier implements Runnable {
+
+private BuyerQueue buyerQueue;
+
     private String name;
 
-    public Cashier(int number) {
+    public Cashier(int number, BuyerQueue buyerQueue) {
         name = "\tCashier #" + number + " ";
+        this.buyerQueue = buyerQueue;
     }
 
     @Override
     public void run() {
         System.out.println(this + "opened");
         while (!Manager.marketIsClosed()) {
-            Buyer buyer = BuyerQueue.buyerPull();
+            Buyer buyer = buyerQueue.pull();
             if (buyer != null) {
-
+                synchronized (buyer.getMONITOR()) {
                     System.out.println(this + "started service " + buyer);
-                    int timeout = Helper.randomValue(2000,5000);
+                    int timeout = Helper.randomValue(2000, 5000);
                     Helper.sleep(timeout);
                     System.out.println(this + "finished service " + buyer);
-                    buyer.setSomeWaiting(false);
+                    buyer.setWaiting(false);
                     buyer.notify();
+                }
             } else {
-                //need waiting
                 Helper.sleep(1);
             }
+
         }
 
         System.out.println(this + "closed");

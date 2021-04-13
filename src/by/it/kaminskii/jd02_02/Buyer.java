@@ -34,6 +34,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         choosePurchase();
         putGoodsToBasket();
+        goToQueue();
         leavingTheMarket();
     }
 
