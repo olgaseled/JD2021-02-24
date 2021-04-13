@@ -1,7 +1,5 @@
 package by.it.khrolovich.jd02_02;
 
-import by.it.khrolovich.jd02_01.ListGoods;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +10,7 @@ public class Store {
 
     public static void main(String[] args) {
         priceList = new ListGoods();
+
         //List<Customer> customers = new ArrayList<>(120);//список покупателей
         List<Thread> threads = new ArrayList<>(120);//список покупателей
 

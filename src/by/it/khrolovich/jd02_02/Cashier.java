@@ -15,18 +15,22 @@ public class Cashier implements Runnable{
             if(customer!= null) {
 
                 synchronized (customer.getMONITOR()) {
-                    //никакой другой не может  перехватить?
+                    //никакой другой не может  перехватить
                     //можно посылать notify
 
-                    System.out.println(this + " started service");
+                    System.out.println(this + " started service for "+customer);
                     int timeout = Util.getRandom(2000, 5000);
                     Util.Sleep(timeout);
-                    System.out.println(this + " finished service");
+                    double sumOfBill  = customer.getBasket().showContent();
+                    System.out.println(customer.getName()+": sum of bill = "+sumOfBill);
+                    System.out.println(this + " finished service for "+customer);
                     customer.setWaiting(false);
                     customer.notify();
                 }
             }else{
-                Util.Sleep(1);//должно быть правильное ожидание
+                Util.Sleep(1);//TODO должно быть правильное ожидание
+                //должен также перейти в wait(), как покупатель в очереди.
+                // Но его должен разбудить покупатель из очереди или очередь - посылают notify
             }
         }
 

@@ -16,6 +16,10 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return MONITOR;
     }
 
+    public Basket getBasket() {
+        return basket;
+    }
+
     public Customer(int numberCustomer){
         super("Customer №"+numberCustomer+" ");
         MONITOR = this;
@@ -27,8 +31,8 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
         enterToMarket();
         takeBasket();//покупатель взял корзину
-        goToQueue();//покупатель идет в очередь
         chooseGoods();//выбрал товар
+        goToQueue();//покупатель идет в очередь
         goOut();
 
         Manager.completeCustomer();
@@ -76,7 +80,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
             while(waiting){
                 try {
                     MONITOR.wait();//висит, не получает кванты времени
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -84,7 +87,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         }
     }
 
-    @Override
+     @Override
     public void putGoodsToBasket() {
         Good good = ListGoods.randomGood();
         basket.put(good);
