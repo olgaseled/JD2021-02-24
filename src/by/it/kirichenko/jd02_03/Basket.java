@@ -1,4 +1,4 @@
-package by.it.kirichenko.jd02_02;
+package by.it.kirichenko.jd02_03;
 
 import java.util.HashMap;
 import java.util.Map;
