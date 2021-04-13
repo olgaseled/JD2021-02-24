@@ -45,8 +45,6 @@ public class Store {
         }
 
 
-
-
         System.out.println("Store closed");
 
     }

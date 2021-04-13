@@ -7,7 +7,7 @@ public class QueueCustomers {
 
 
     private final BlockingDeque<Customer> customers =
-            new LinkedBlockingDeque<>(Config.Q_LEN);
+            new LinkedBlockingDeque<>(Config.QUEUE_LEN);
 
     void add(Customer customer){
         try {

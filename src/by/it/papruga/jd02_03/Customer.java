@@ -1,5 +1,7 @@
 package by.it.papruga.jd02_03;
 
+import java.util.concurrent.Semaphore;
+
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
     private boolean waiting = false;
@@ -13,6 +15,8 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public boolean isWaiting() {
         return waiting;
     }
+
+    private static Semaphore semaphore = new Semaphore(Config.SHOPPING_ROOM_CAPACITY);
 
     public Customer(int number, Context context) {
 
@@ -28,7 +32,15 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public void run() {
         enterToMarket();
         takeBasket();
-        chooseGoods();
+        try {
+            semaphore.acquire();
+            chooseGoods();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
         goToQueue();
         goOut();
         context.getManager().completeCustomer();
@@ -47,9 +59,9 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         context.getQueueCustomers().add(this);
         System.out.println(this + "add to Queue");
 
-        if (QueueCashiers.getCashiersSize() > 0 &&  context.getManager().getCountQueueIn() % 5 == 0)
+        if (context.getQueueCashiers().getCashiersSize() > 0 &&  context.getManager().getCountQueueIn() % 5 == 0)
         {
-            Cashier cashier = QueueCashiers.pull();
+            Cashier cashier = context.getQueueCashiers().pull();
             synchronized (cashier){
                 cashier.notify();
                 cashier.setWaiting(false);
@@ -85,8 +97,6 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
             basket.put(ListGoods.randomGood());
 
         }
-
-      //  System.out.println(this + "choose:" + basket);
 
         putGoodsToBasket();
 

@@ -6,4 +6,6 @@ public interface IUseBasket {
 
     void putGoodsToBasket();    //положил выбранный товар в корзину
 
+    String showBasket();        //показал содержимое корзины
+
 }

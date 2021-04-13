@@ -1,24 +1,25 @@
 package by.it.papruga.jd02_03;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueueCashiers {
 
-    private static final Deque<Cashier> cashiers = new LinkedList<>();
+    private final BlockingDeque<Cashier> cashiers
+            = new LinkedBlockingDeque<>(Config.CASHIERS_RESERVE);
 
-    static synchronized void add(Cashier cashier){
+    void add(Cashier cashier){
 
-        cashiers.addLast(cashier);
-
+        try {
+            cashiers.putLast(cashier);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    static synchronized Cashier pull(){
+    Cashier pull(){ return cashiers.pollFirst(); }
 
-        return cashiers.pollFirst();
-    }
-
-    public static int getCashiersSize() {
+    public int getCashiersSize() {
         return cashiers.size();
     }
 }

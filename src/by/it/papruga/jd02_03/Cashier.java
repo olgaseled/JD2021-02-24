@@ -13,11 +13,9 @@ public class Cashier implements Runnable, ICashier {
         this.context = context;
     }
 
-
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
     }
-
 
     @Override
     public void run() {
@@ -30,7 +28,7 @@ public class Cashier implements Runnable, ICashier {
     @Override
     public void goToCashierQueue() {
 
-        QueueCashiers.add(this);
+        context.getQueueCashiers().add(this);
         this.setWaiting(true);
         this.waiting();
         synchronized (this) {
@@ -41,7 +39,6 @@ public class Cashier implements Runnable, ICashier {
                     e.printStackTrace();
                 }
         }
-
     }
 
     @Override
@@ -61,7 +58,7 @@ public class Cashier implements Runnable, ICashier {
     @Override
     public void startService() {
 
-        while (!context.getManager().storeIsClosed()){
+        while (context.getManager().getCountCustomerOut() != Config.PLAN){
             Customer customer = context.getQueueCustomers().pull();
             if (customer!=null){
                 System.out.println(this+"start service for "+customer);
@@ -77,11 +74,13 @@ public class Cashier implements Runnable, ICashier {
                 }
             }
             else {
-                break;
+                Util.sleep(5);
+                if (context.getManager().getCountCustomerOut() == Config.PLAN)
+                {
+                    break;
+                }
             }
-
         }
-
     }
 
     @Override

@@ -15,6 +15,9 @@ public class ListGoods {
         map.put(new Good("Milk"), 2.3);
         map.put(new Good("Sugar"), 1.5);
         map.put(new Good("Salt"), 0.5);
+        map.put(new Good("Beer"), 2.5);
+        map.put(new Good("Cola"), 1.5);
+        map.put(new Good("Meat"), 5.0);
     }
 
 

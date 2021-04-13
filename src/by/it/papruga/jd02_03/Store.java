@@ -9,13 +9,14 @@ public class Store {
     public static void main(String[] args) {
 
         QueueCustomers queueCustomers = new QueueCustomers();
+        QueueCashiers queueCashiers = new QueueCashiers();
         Manager manager = new Manager();
-        Context context = new Context(queueCustomers, manager);
-
         ListGoods listGoods = new ListGoods();
-        ExecutorService threadCashier = Executors.newFixedThreadPool(5);
+        Context context = new Context(queueCustomers, queueCashiers, manager);
 
-        for (int i = 1; i <= 5; i++) {
+        ExecutorService threadCashier = Executors.newFixedThreadPool(Config.CASHIERS_RESERVE);
+
+        for (int i = 1; i <= Config.CASHIERS_RESERVE; i++) {
             Cashier cashier = new Cashier(i, context);
             threadCashier.execute(cashier);
         }
@@ -37,7 +38,7 @@ public class Store {
         threadCashier.shutdown();
 
         try {
-            while (!threadCashier.awaitTermination(1, TimeUnit.HOURS)) {
+            while (!threadCashier.awaitTermination(1, TimeUnit.SECONDS)) {
                 System.out.println("wow");
             }
         } catch (InterruptedException e) {
