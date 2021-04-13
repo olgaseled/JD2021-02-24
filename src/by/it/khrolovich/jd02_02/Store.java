@@ -29,7 +29,7 @@ public class Store {
 
                 int count = Util.getRandom(0, 2);
                 for (int j = 0; j < count && Manager.storeIsOpened(); j++) {//если 99 и добавилось 2
-                    // если нет проверки Manager.storeIsOpened() , то проскакивает больше покупателей//ЕЩВЩ
+                    // если нет проверки Manager.storeIsOpened() , то проскакивает больше покупателей
                     numberCustomer++;
                     Customer customer = new Customer(numberCustomer);
                     //customers.add(customer);

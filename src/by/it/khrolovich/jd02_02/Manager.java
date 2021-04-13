@@ -24,7 +24,7 @@ public class Manager {
         //просто чтение, можно
     }
 
-    static boolean storeIsClosed(){//люди могут заходить
+    static boolean storeIsClosed(){
         //return countCustomerOut>=Config.PLAN;
         return countCustomerOut==Config.PLAN;
     }
