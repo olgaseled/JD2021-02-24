@@ -7,7 +7,7 @@ public interface IPriceList {
 
     List<String> getProductsList();
 
-    <T> T getCurrency();
+    StoreCurrency getCurrency();
 
     double getCostByName(String product);
 }

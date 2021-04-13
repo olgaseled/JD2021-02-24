@@ -10,13 +10,18 @@ public class QueueCustomers {
 
 
     static synchronized void add(Customer customer){
+
         customers.addLast(customer);
+        Manager.queueIn();
     }
 
     static synchronized Customer pull(){
+
         return customers.pollFirst();
     }
 
 
-
+    public static int getCustomersSize() {
+        return customers.size();
+    }
 }

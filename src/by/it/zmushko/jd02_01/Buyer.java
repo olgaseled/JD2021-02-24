@@ -1,7 +1,7 @@
 package by.it.zmushko.jd02_01;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-
+    
     public Buyer(int name) {
         super("Name " + name);
     }
@@ -23,7 +23,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public void chooseItems() {
         System.out.println(this.getName() + " Start choose ");
         putGoodsToBasket();
-        System.out.print(this.getName() + " End choose ");
+        System.out.println(this.getName() + " End choose ");
     }
 
     @Override

@@ -19,16 +19,17 @@ public class Util {
 
     }
 
-    static void sleep(int timeout) {
+    static void sleep(double timeout) {
 
         try {
-            Thread.sleep(timeout / Config.K_SPEED);
+            Thread.sleep((long) (timeout / Config.K_SPEED));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
     }
+
+
 
 
 }
