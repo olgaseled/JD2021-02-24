@@ -1,18 +1,33 @@
 package by.it.voitsekhovskiy.jd02_02;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
-    final private Integer num;
-    Boolean pensioner = false;
     private double K_SPEED = 1;
+    final private Integer num; // номер покупателя
+    Boolean pensioner = false;
     private boolean waiting = false;
     private final Object MONITOR;
+    private double totalCheck = 0.00;
+
+    public double getTotalCheck() {
+        return totalCheck;
+    }
+
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
     }
+
     public Buyer(int num) {
         this.num = num;
         Manager.addGoInBuyer();
         MONITOR = this;
+    }
+
+    public Object getMONITOR() {
+        return MONITOR;
+    }
+
+    public Integer getNum() {
+        return num;
     }
 
     @Override
@@ -49,23 +64,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         for (int i = 0; i < countGoods; i++) {
             String nameElement = Assortment.getRandomElement();
             Double valueOfElement = Assortment.assortment.get(nameElement);
+            totalCheck = totalCheck + valueOfElement;
             System.out.printf("Buyer #%d put %s with price %s\n", num, nameElement, valueOfElement);
             Util.sleep((int) (Util.getRandom(500, 2000) * K_SPEED));
         }
         System.out.printf("Buyer #%d finish choose goods\n", num);
     }
 
-    @Override
-    public void goOut() {
-        System.out.printf("Buyer #%d go out\n", num);
-        Manager.addGoOutBuyer();
-    }
-
     private void goToQueue() {
         synchronized (MONITOR) {
             System.out.printf("Buyer #%d go to queue\n", num);
             CheckoutQueue.addBuyerInQueue(this);
-            waiting = true;
+            waiting = true; // зачем создавать флаг, если у каждого объекта свой монитор
             while (waiting) {
                 try {
                     MONITOR.wait();
@@ -76,17 +86,15 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         }
     }
 
+    @Override
+    public void goOut() {
+        System.out.printf("Buyer #%d go out\n", num);
+        Manager.addGoOutBuyer();
+    }
+
     private void isPensioner() {
         if (pensioner) {
             K_SPEED = 1.5;
         }
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public Object getMONITOR() {
-        return MONITOR;
     }
 }

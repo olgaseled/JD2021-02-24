@@ -11,8 +11,8 @@ public class Store {
         System.out.println("Store opened");
 
         for (int i = 1; i <= Config.CASHIER; i++) {
-            Thread thread = new Thread(new Cashier(i));
-            thread.start();
+            Thread cashier = new Thread(new Cashier(i));
+            cashier.start();
         }
 
         while (Manager.isOpenedStore()) {
@@ -35,6 +35,8 @@ public class Store {
             }
         }
 
+        Cashier.wakeUpAllCashier();
+        Util.sleep(1000);
         System.out.println("Store closed");
     }
 }

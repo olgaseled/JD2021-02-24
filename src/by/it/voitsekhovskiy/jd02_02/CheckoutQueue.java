@@ -9,8 +9,8 @@ public class CheckoutQueue {
     static Deque<Buyer> queueOfBuyers = new LinkedList<>();
 
     static void addBuyerInQueue(Buyer buyer) {
-        wakeUpCashier();
         synchronized (monitorQueue) {
+            Cashier.wakeUpCashier();
             queueOfBuyers.addLast(buyer);
         }
     }
@@ -18,14 +18,6 @@ public class CheckoutQueue {
     static Buyer getFirstBuyerInQueue() {
         synchronized (monitorQueue) {
             return queueOfBuyers.pollFirst();
-        }
-    }
-
-    static void wakeUpCashier() {
-        synchronized (Cashier.getCashierMonitor()) {
-            if(queueOfBuyers.size() % 5 == 0) {
-                Cashier.getCashierMonitor().notify();
-            }
         }
     }
 }
