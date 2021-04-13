@@ -1,26 +1,26 @@
 package by.it.maksimova.jd02_03;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Manager {
 
-    private volatile static int numberOfCustomersInShop = 0;
-    private volatile static int numberOfCustomersOutShop = 0;
+    private final AtomicInteger numberOfBuyersInShop = new AtomicInteger(0);
+    private final AtomicInteger numberOfBuyersOutShop = new AtomicInteger(0);
 
-    static synchronized void newCustomer() {
-        numberOfCustomersInShop++;
+    void newBuyer() {
+        numberOfBuyersInShop.getAndIncrement();
     }
 
-    static void completeCustomer() {
-        synchronized (Manager.class) {
-            numberOfCustomersOutShop++;
-        }
+    void completeBuyer() {
+        numberOfBuyersOutShop.getAndIncrement();
     }
 
-    static boolean shopIsOpened() {
-        return  numberOfCustomersInShop!= Configuration.PLAN;
+    boolean shopIsOpened() {
+        return numberOfBuyersInShop.get() != Configuration.PLAN;
     }
 
-    static boolean shopIsClosed() {
-        return numberOfCustomersOutShop == Configuration.PLAN;
+    boolean shopIsClosed() {
+        return numberOfBuyersOutShop.get() == Configuration.PLAN;
     }
 
 }

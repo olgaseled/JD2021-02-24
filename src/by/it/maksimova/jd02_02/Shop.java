@@ -9,7 +9,7 @@ public class Shop {
 
         List<Thread> threads = new ArrayList<>(120);
 
-        for (int i = 1; i < 2; i++) {
+        for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier, cashier.toString());
             threads.add(thread);

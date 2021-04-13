@@ -3,7 +3,7 @@ package by.it.maksimova.jd02_03;
 public class Buyer extends Thread implements IBuyer {
 
     private final Object MONITOR;
-
+private final Context context;
     public Object getMONITOR() {
         return MONITOR;
     }
@@ -14,10 +14,13 @@ public class Buyer extends Thread implements IBuyer {
         this.waiting = waiting;
     }
 
-    public Buyer(int number) {
+    public Buyer(int number, Context context) {
+
         super("Buyer " + number + " ");
         MONITOR = this;
-        Manager.newCustomer();
+        this.context=context;
+        context.getManager().newBuyer();
+
     }
 
     @Override
@@ -26,7 +29,7 @@ public class Buyer extends Thread implements IBuyer {
         chooseGoods();
         goToQueue();
         goOut();
-        Manager.completeCustomer();
+        context.getManager().completeBuyer();
     }
 
     @Override
@@ -45,7 +48,7 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void goToQueue() {
         synchronized (MONITOR) {
-            BuyersInQueue.add(this);
+            context.getQueueOfBuyers().add(this);
             waiting = true;
             while (waiting) {
                 try {

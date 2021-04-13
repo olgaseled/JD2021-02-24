@@ -1,35 +1,42 @@
 package by.it.maksimova.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Shop {
 
     public static void main(String[] args) {
 
-        List<Thread> threads = new ArrayList<>(120);
+        QueueOfBuyers queueOfBuyers = new QueueOfBuyers();
+        Manager manager = new Manager();
+        Context context = new Context(queueOfBuyers, manager);
+        ExecutorService threadCashier = Executors.newFixedThreadPool(5);
 
-        for (int i = 1; i < 2; i++) {
-            Cashier cashier = new Cashier(i);
-            Thread thread = new Thread(cashier, cashier.toString());
-            threads.add(thread);
-            thread.start();
+
+        for (int i = 1; i <= 2; i++) {
+            Cashier cashier = new Cashier(i, context);
+            threadCashier.execute(new Cashier(i,context));
         }
+
 
         System.out.println("Shop opened");
         int numberOfBuyers = 0;
-        while (Manager.shopIsOpened()) {
+        while (context.getManager().shopIsOpened()) {
             int randomNumber = Utils.getRandom(2);
-            for (int i = 0; i < randomNumber && Manager.shopIsOpened(); i++) {
-                Buyer buyer = new Buyer(++numberOfBuyers);
-                threads.add(buyer);
+            for (int i = 0; i < randomNumber && context.getManager().shopIsOpened(); i++) {
+                Buyer buyer = new Buyer(++numberOfBuyers, context);
                 buyer.start();
             }
             Utils.sleep(1000);
         }
-        for (Thread thread : threads) {
+
+        threadCashier.shutdown(); //больше потоков не будет
+        for (; ; ) {
             try {
-                thread.join();
+                if (threadCashier.awaitTermination(10, TimeUnit.DAYS)) {
+                    break;
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

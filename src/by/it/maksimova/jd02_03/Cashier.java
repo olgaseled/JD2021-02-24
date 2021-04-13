@@ -2,18 +2,20 @@ package by.it.maksimova.jd02_03;
 
 public class Cashier implements Runnable {
 
-    private String name;
 
-    public Cashier(int number) {
+    private String name;
+    private Context context;
+    public Cashier(int number, Context context) {
         name ="\tCashier №" + number+" ";
+        this.context=context;
     }
 
     @Override
     public void run() {
         System.out.println(this + "started to work");
 
-        while (!Manager.shopIsClosed()) {
-            Buyer buyer = BuyersInQueue.poll();
+        while (!context.getManager().shopIsClosed()) {
+            Buyer buyer = context.getQueueOfBuyers().poll();
             if (buyer != null) {
                 synchronized (buyer.getMONITOR()) {
                     System.out.println(this + "started service for " + buyer);
