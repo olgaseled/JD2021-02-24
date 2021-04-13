@@ -19,6 +19,8 @@ import java.util.Arrays;
 public class TaskA {
 
 
+    public static final String MATRIX_TXT = "matrix.txt";
+
     public static void main(String[] args) {
         int[][] matrix = new int[6][4];
         fillRandomMatrix(matrix);
@@ -39,7 +41,7 @@ public class TaskA {
         }
         matrix[0][0] = -15;
         matrix[1][1] = 15;
-        String fileName = getPath(TaskA.class) + "matrix.txt";
+        String fileName = getPath(TaskA.class) + MATRIX_TXT; // ctrl-alt-C - переменную в костанту
         // writeArray
         try (PrintWriter out = new PrintWriter(fileName)
         ) {
