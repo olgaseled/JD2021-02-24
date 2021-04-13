@@ -22,9 +22,9 @@ public class SuperMarket extends ProductList {
 
           int countBuyers = 0; // счетчик покупателей
 
-          while (Manager.storeIsOpened()) {
+          while (Manager.marketIsOpened()) {
               int count = Util.getRandom(2);
-              for (int i = 0; i < count && Manager.storeIsOpened(); i++) {
+              for (int i = 0; i < count && Manager.marketIsOpened(); i++) {
                   Buyer buyer = new Buyer(++countBuyers);
                   threads.add(buyer);
                   buyer.start();
@@ -32,7 +32,7 @@ public class SuperMarket extends ProductList {
             Util.sleep(1000);
         }
 
-        for (Thread thread : threads) {
+        for (Thread thread : threads) { // ожидаем потоки , а не покупателей
             try {
                 thread.join();
             } catch (InterruptedException e) {

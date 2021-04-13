@@ -7,7 +7,7 @@ public class Good {
         this.nameOfGood = nameOfGood;
     }
 
-    Good toLowerCase(Good uneditedGood) {
+    static Good toLowerCase(Good uneditedGood) {
         String goodToLowerCase = uneditedGood.toString().toLowerCase();
         return new Good(goodToLowerCase);
     }
