@@ -14,7 +14,7 @@ public class Store {
         //List<Customer> customers = new ArrayList<>(120);//список покупателей
         List<Thread> threads = new ArrayList<>(120);//список покупателей
 
-        for (int i=1;i<=2;i++){
+        for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier, cashier.toString());
             threads.add(thread);//TODO
@@ -23,7 +23,7 @@ public class Store {
 
         System.out.println("Store opened");
         int numberCustomer = 0;
-        while(Manager.storeIsOpened()) {
+        while (Manager.storeIsOpened()) {
             for (int i = 0; i < Config.FINAL_TIME; i++) {
 
                 int count = Util.getRandom(0, 2);
@@ -47,7 +47,7 @@ public class Store {
             }
         }*/
 
-         for (Thread thread: threads) {
+        for (Thread thread : threads) {
             try {
                 thread.join();
             } catch (InterruptedException e) {

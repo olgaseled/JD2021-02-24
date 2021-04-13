@@ -7,11 +7,13 @@ import java.util.HashMap;
 public class ListGoods {
     //static HashMap<String,Double> price = new HashMap<>();
     //здесь static . Если нет, то в конструкторе заполняем
-    static HashMap<Good, Double> price = new HashMap<>();{
-        price.put(new Good("apple"),4.0);
-        price.put(new Good("tomato"),5.0);
-        price.put(new Good("cucumber"),3.0);
-        price.put(new Good("egg"),2.0);
+    static HashMap<Good, Double> price = new HashMap<>();
+
+    {
+        price.put(new Good("apple"), 4.0);
+        price.put(new Good("tomato"), 5.0);
+        price.put(new Good("cucumber"), 3.0);
+        price.put(new Good("egg"), 2.0);
     }
 
     /*//constructor

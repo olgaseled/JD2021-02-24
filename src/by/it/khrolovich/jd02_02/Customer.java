@@ -20,11 +20,12 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return basket;
     }
 
-    public Customer(int numberCustomer){
-        super("Customer №"+numberCustomer+" ");
+    public Customer(int numberCustomer) {
+        super("Customer №" + numberCustomer + " ");
         MONITOR = this;
         Manager.newCustomer();//посчитается в момент рождения покупателя
     }
+
     @Override
     public void run() {
         //Manager.newCustomer();//здесь нельзя считать. Покупатель существует
@@ -40,7 +41,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        System.out.println(this+" entered to the Store");
+        System.out.println(this + " entered to the Store");
     }
 
     @Override
@@ -58,7 +59,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void goOut() {
-        System.out.println(this +"go out from the Store");
+        System.out.println(this + "go out from the Store");
     }
 
     @Override
@@ -69,7 +70,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.println(this+"take the basket");
+        System.out.println(this + "take the basket");
     }
 
     @Override
@@ -77,7 +78,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         synchronized (MONITOR) {
             QueueCustomer.add(this);//добавляет сам себя
             waiting = true;
-            while(waiting){
+            while (waiting) {
                 try {
                     MONITOR.wait();//висит, не получает кванты времени
                 } catch (InterruptedException e) {
@@ -87,7 +88,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         }
     }
 
-     @Override
+    @Override
     public void putGoodsToBasket() {
         Good good = ListGoods.randomGood();
         basket.put(good);
