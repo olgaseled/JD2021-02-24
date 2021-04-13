@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
+    private QueueBuyers queueBuyers;
+
     private final Object MONITOR;
 
     private boolean waiting = false; // поле ожидания
@@ -24,10 +26,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
 
-    public Buyer(int number) {
+    public Buyer(int number, QueueBuyers queueBuyers) {
         super("Buyer №" + number + " ");
+        this.queueBuyers=queueBuyers;
         MONITOR=this;
-        Manager.newCustomer();
+        Manager.addBuyer();
     }
 
 
@@ -81,7 +84,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goToQueue() { // добавляем в очередь
         synchronized (MONITOR) {
-            QueueBuyers.add(this); // покупатель взял свой монитор
+            queueBuyers.add(this); // покупатель взял свой монитор. Теперь мы обращаемся не к классу , а к экземпляру
             System.out.println(this+" покупатель встал в очередь");
             waiting = true;
             while (waiting) { // пока мы не в движении , мы будем ждать

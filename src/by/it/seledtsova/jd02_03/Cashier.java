@@ -4,15 +4,17 @@ public class Cashier implements Runnable{   // интерфейс Runnnable с �
 
     private String name; // имя нашего кассира
 
-    public Cashier(int number) {
+    private QueueBuyers queueBuyers;
+    public Cashier(int number, QueueBuyers queueBuyers) {
         name="\tCashier №" + number+" ";
+        this.queueBuyers=queueBuyers;
     }
 
     @Override
     public void run() { //
         System.out.println(this+"opened"); // кассир открыл кассу
         while (!Manager.marketIsClosed()) { // пока магаз октрыт , кассиры работают
-            Buyer buyer = QueueBuyers.poll();
+            Buyer buyer = queueBuyers.poll();
             if (buyer != null) {
                 synchronized (buyer.getMONITOR()) {
                     System.out.println(this + "started service " + buyer);

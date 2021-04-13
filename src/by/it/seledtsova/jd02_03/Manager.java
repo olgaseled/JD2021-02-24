@@ -1,29 +1,34 @@
 package by.it.seledtsova.jd02_03;
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 class Manager {
+    // Atomic = ссылка на какой-то атомарный счетчик, в нашем случае он статический.
+    // Их желательно писать final, чтобы ссылка никуда не убежала
+    // volatile and synchranize  убрали
 
-    private volatile static int buyersInMarket = 0; // покупатели  в магазине
-    private volatile static int buyersOutMarket = 0; // покупатели  вне магазине
+    private  static final AtomicInteger buyersInMarket = new AtomicInteger(0); // избавились от volatile, создали atomic
+    private static final AtomicInteger buyersOutMarket =new AtomicInteger(0);//0 присвоить нельзя, только через конструктор
 
-    static synchronized void newCustomer() { // увеличиваем счетчик наших вошедших покупателей
-        buyersInMarket++;
+
+    static void addBuyer(){ //заменили ++
+        buyersInMarket.getAndIncrement();
     }
 
-    static void completeBuyer() { // увеличиваем вышедших покупателей.
-        synchronized (Manager.class) {
-            buyersOutMarket++;
+    static void completeBuyer() {
+          buyersOutMarket.getAndIncrement(); // заменили ++
         }
-    }
+
 
     static boolean marketIsOpened() { // количество внутри + выведших < план (100)
         //countCustomerIn<Config.PLAN; //prod
-        return buyersInMarket != Configuration.PLAN; //не 100, а или больше, или меньше
+        return buyersInMarket.get() != Configuration.PLAN; //не 100, а или больше, или меньше
     }
 
     static boolean marketIsClosed() {  //
         // countCustomerOut>=Config.PLAN; //prod
-        return buyersOutMarket == Configuration.PLAN; //операция только читает поле , здесь синхранизация необязательна.
+        return buyersOutMarket.get() == Configuration.PLAN; //операция только читает поле , здесь синхранизация необязательна.
                                                     // тк переменная volatile
     }
 }
