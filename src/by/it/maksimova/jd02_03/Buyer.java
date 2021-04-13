@@ -1,4 +1,4 @@
-package by.it.maksimova.jd02_02;
+package by.it.maksimova.jd02_03;
 
 public class Buyer extends Thread implements IBuyer {
 

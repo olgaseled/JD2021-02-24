@@ -1,6 +1,6 @@
 package by.it.maksimova.jd02_01;
 
-public class Buyer extends Thread implements IBuyer {
+public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     public Buyer(int number) {
         super("Buyer " + number+" ");
@@ -21,8 +21,8 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void chooseGoods() {
         System.out.println(this + "started choosing goods");
-        int timeForChoosingGoods = Utils.getRandom(500, 2000);
-        Utils.sleep(timeForChoosingGoods);
+        int timeout = Utils.getRandom(500, 2000);
+        Utils.sleep(timeout);
         System.out.println(this + "finished choosing goods");
     }
 
@@ -34,6 +34,19 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public String toString() {
         return this.getName();
+    }
+
+    @Override
+    public void takeBasket() {
+        System.out.println(this + "took a Basket");
+        int timeout = Utils.getRandom(500, 2000);
+        Utils.sleep(timeout);
+    }
+
+    @Override
+    public void putGoodsToBasket() {
+        System.out.println(this + "put products in Basket");
+
     }
 }
 
