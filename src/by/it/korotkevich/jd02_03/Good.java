@@ -1,4 +1,4 @@
-package by.it.korotkevich.jd02_01;
+package by.it.korotkevich.jd02_03;
 
 public class Good {
     final String nameOfGood;
