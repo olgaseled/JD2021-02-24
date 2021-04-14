@@ -9,11 +9,23 @@ import java.util.regex.Pattern;
 class Parser {
 
     Var evaluate(String statement) throws CalcException {
-        statement = statement.replaceAll("\\s+", "");
+        Matcher matcher;
+        StringBuilder matchedGroup = new StringBuilder(statement);
+        while (
+                (matcher = Pattern.compile(Patterns.PRIORITY_GROUP).matcher(matchedGroup))
+                .find()
+        ) {
+            int start = matcher.start();
+            int end = matcher.end();
+            Var groupResult = evaluate(matchedGroup.substring(start + 1, end - 1));
+            matchedGroup.replace(start, end, groupResult.toString());
+        }
+
+        String singleStatement = matchedGroup.toString().replaceAll("\\s+", "");
         ArrayList<String> operands =
-                new ArrayList<>(Arrays.asList(statement.split(Patterns.OPERATION)));
+                new ArrayList<>(Arrays.asList(singleStatement.split(Patterns.OPERATION)));
         ArrayList<String> operators = new ArrayList<>();
-        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(statement);
+        matcher = Pattern.compile(Patterns.OPERATION).matcher(singleStatement);
         while (matcher.find()) {
             operators.add(matcher.group());
         }
