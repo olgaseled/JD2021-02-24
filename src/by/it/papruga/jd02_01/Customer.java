@@ -8,6 +8,10 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     }
 
+    boolean pensioneer = false;
+
+    double slowRatio = Config.K_SLOW_RATIO;
+
     private Basket basket = new Basket();
 
     @Override
@@ -30,7 +34,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
         System.out.println(this + "started choose goods");
         int timeout = Util.getRandom(500, 2000);
-        Util.sleep(timeout);
+        Util.sleep(timeout*slowRatio);
 
         int goodsCount = Util.getRandom(1, 4);
 
@@ -60,7 +64,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
         System.out.println(this + "take basket");
         int timeout = Util.getRandom(500, 2000);
-        Util.sleep(timeout);
+        Util.sleep(timeout*slowRatio);
 
     }
 
@@ -69,7 +73,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
         System.out.println(this + "put goods to basket");
         int timeout = Util.getRandom(500, 2000);
-        Util.sleep(timeout);
+        Util.sleep(timeout*slowRatio);
 
     }
 

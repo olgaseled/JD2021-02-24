@@ -13,6 +13,7 @@ public class TaskA2 {
 
     public static Set<Integer> getCross(Set<Integer> a, Set<Integer> b) {
         Set<Integer> result = new HashSet<>();
+        //noinspection ForLoopReplaceableByForEach
         for (Iterator<Integer> it = a.iterator(); it.hasNext(); ) {
             Integer currentElem = it.next();
             if (b.contains(currentElem)) {
