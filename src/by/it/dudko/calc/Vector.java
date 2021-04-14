@@ -2,6 +2,8 @@ package by.it.dudko.calc;
 
 import java.util.Arrays;
 
+import static by.it.dudko.calc.Utils.castAsVectorOfDoubles;
+
 public class Vector extends Var {
 
     private final double[] value;
@@ -22,15 +24,6 @@ public class Vector extends Var {
         this.value = castAsVectorOfDoubles(strVector);
     }
 
-    private double[] castAsVectorOfDoubles(String strVector) {
-        strVector = Utils.trimBraces(strVector);
-        String[] strVectorItems = Utils.splitToRowItems(strVector);
-        double[] vector = new double[strVectorItems.length];
-        for (int i = 0; i < strVectorItems.length; i++) {
-            vector[i] = Double.parseDouble(strVectorItems[i]);
-        }
-        return vector;
-    }
 
     @Override
     public String toString() {
@@ -38,7 +31,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double addendum = ((Scalar) other).getValue();
             double[] sum = new double[this.getValue().length];
@@ -50,7 +43,7 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                return null; //TODO incompatible vectors
+                throw new CalcException("incompatible vectors");
             }
             double[] sum = new double[secondVector.length];
             for (int i = 0; i < sum.length; i++) {
@@ -62,14 +55,14 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return this.add(other.mul(new Scalar(-1)));
         }
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                return null; //TODO incompatible vectors
+                throw new CalcException("incompatible vectors");
             }
             double[] subtraction = new double[secondVector.length];
             for (int i = 0; i < subtraction.length; i++) {
@@ -81,7 +74,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double multiplier = ((Scalar) other).getValue();
             double[] multiplication = new double[this.getValue().length];
@@ -93,7 +86,7 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                return null; //TODO incompatible vectors
+                throw new CalcException("incompatible vectors");
             }
             double multiplication = 0;
             for (int i = 0; i < secondVector.length; i++) {
@@ -105,7 +98,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double divisor = ((Scalar) other).getValue();
             double[] quotient = new double[this.getValue().length];
