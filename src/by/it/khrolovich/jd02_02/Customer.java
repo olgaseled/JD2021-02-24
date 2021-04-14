@@ -16,19 +16,24 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return MONITOR;
     }
 
-    public Customer(int numberCustomer){
-        super("Customer №"+numberCustomer+" ");
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public Customer(int numberCustomer) {
+        super("Customer №" + numberCustomer + " ");
         MONITOR = this;
         Manager.newCustomer();//посчитается в момент рождения покупателя
     }
+
     @Override
     public void run() {
         //Manager.newCustomer();//здесь нельзя считать. Покупатель существует
 
         enterToMarket();
         takeBasket();//покупатель взял корзину
-        goToQueue();//покупатель идет в очередь
         chooseGoods();//выбрал товар
+        goToQueue();//покупатель идет в очередь
         goOut();
 
         Manager.completeCustomer();
@@ -36,7 +41,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        System.out.println(this+" entered to the Store");
+        System.out.println(this + " entered to the Store");
     }
 
     @Override
@@ -54,7 +59,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void goOut() {
-        System.out.println(this +"go out from the Store");
+        System.out.println(this + "go out from the Store");
     }
 
     @Override
@@ -65,7 +70,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.println(this+"take the basket");
+        System.out.println(this + "take the basket");
     }
 
     @Override
@@ -73,10 +78,9 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         synchronized (MONITOR) {
             QueueCustomer.add(this);//добавляет сам себя
             waiting = true;
-            while(waiting){
+            while (waiting) {
                 try {
                     MONITOR.wait();//висит, не получает кванты времени
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

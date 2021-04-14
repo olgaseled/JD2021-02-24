@@ -2,7 +2,7 @@ package by.it.maksimova.jd02_01;
 
 public class Configuration {
 
-    static final int K_SPEED=1000;
+    static final int K_SPEED = 1000;
     static final int FINAL_TIME = 120;
 
 }
