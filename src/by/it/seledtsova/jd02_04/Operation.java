@@ -1,4 +1,4 @@
-package by.it.seledtsova.calt;
+package by.it.seledtsova.jd02_04;
 
 interface Operation{
     Var add(Var other) throws CaltExeption; // добавили интерфейс с задания

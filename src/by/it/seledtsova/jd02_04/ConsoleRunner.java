@@ -1,4 +1,4 @@
-package by.it.seledtsova.calt;
+package by.it.seledtsova.jd02_04;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class ConsoleRunner {
         Scanner scanner=new Scanner(System.in);
         String line; // будем читать строку
 
-        Parsel parser=new Parsel(); // будем передавать вычисления
+        Parser parser=new Parser(); // будем передавать вычисления
         Printer printer=new Printer(); // будем передавать их результат
 
        while (!(line=scanner.nextLine()).equals("end")) { // до тех пор, пока это выражение НЕ разняеся end , мы их будм читать

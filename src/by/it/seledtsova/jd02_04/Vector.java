@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd01_09;
+package by.it.seledtsova.jd02_04;
 
 import java.util.Arrays;
 
@@ -46,7 +46,8 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+
+    public Var add(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -55,17 +56,22 @@ public class Vector extends Var {
             return new Vector(res);
         } else if (other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length); // если к вектору прибавляется тоже вектор
-            double[] secondVector=((Vector) other).value;
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] + ((Vector) other).value[i];
+            double[] secondVector = ((Vector) other).value;
+            if (secondVector.length == res.length) {
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = res[i] + ((Vector) other).value[i];
+                }
+                return new Vector(res);
             }
-            return new Vector(res);
         }
-        return super.add(other); //к вектору прибавить матрицу нельзя. поэтому будет сообщение об ошибке
-    }
+            throw new CaltExeption("операция невозможна"); //к вектору прибавить матрицу нельзя. поэтому будет сообщение об ошибке
+        }
+
+
+
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -73,50 +79,61 @@ public class Vector extends Var {
             }
             return new Vector(res);
         } else if (other instanceof Vector) {
-            double[] res = Arrays.copyOf(value, value.length);
-            double[] secondVector=((Vector) other).value;
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] - ((Vector) other).value[i];
+            double[] res = Arrays.copyOf(this.value, this.value.length);
+            double[] secondVector = ((Vector) other).value;
+            if (res.length == secondVector.length) {
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = res[i] - ((Vector) other).value[i];
+                }
+                return new Vector(res);
             }
-            return new Vector(res);
         }
         return super.sub(other);
     }
 
+
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other)  throws CaltExeption {
         if (other instanceof Scalar) {
-            double[] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++) {
+            double[] res = Arrays.copyOf(this.value, this.value.length);
+            for (int i = 0; i < this.value.length; i++) {
                 res[i] = res[i] * ((Scalar) other).getValue();
             }
             return new Vector(res);
         } else if (other instanceof Vector) {
-            double sum=0;
-            double[] secondVector=((Vector) other).value;
-            if (secondVector.length==value.length)
-            for (int i = 0; i < value.length ; i++) {
-              sum+=value[i]*((Vector)other).value[i];
+            double sum = 0;
+            double[] secondVector = ((Vector) other).value;
+            if (secondVector.length == value.length) {
+                for (int i = 0; i < value.length; i++) {
+                    sum += this.value[i] * ((Vector) other).value[i];
                 }
-                return new Scalar(sum);
             }
-            return super.sub(other);
+            return new Scalar(sum);
         }
+        return super.mul(other);
+    }
+
 
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
+            if (((Scalar)other).getValue()==0){
+                throw new CaltExeption("деление на ноль!");
+            }
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] / ((Scalar) other).getValue();
             }
             return new Vector(res);
         }
-            return super.div(other);
+        return super.div(other);
 
-        }
     }
+}
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-package by.it.seledtsova.calt;
+package by.it.seledtsova.jd02_04;
 
 public class Scalar extends Var {  // мы создали двух потомков и он наследуется от класca var
 
