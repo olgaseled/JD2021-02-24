@@ -1,4 +1,4 @@
-package by.it.runcov.calc;
+package by.it.runcov.jd02_04;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
