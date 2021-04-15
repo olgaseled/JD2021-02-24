@@ -1,4 +1,4 @@
-package by.it.kaminskii.jd02_02;/* created by Kaminskii Ivan
+package by.it.kaminskii.jd02_03;/* created by Kaminskii Ivan
  */
 
 import java.util.LinkedList;
@@ -8,11 +8,13 @@ public class Basket extends Thread {
     static final Object monitor = new Object();
 
     static List<String> basketGoods() {
+        synchronized (monitor) {
             List<String> basket = new LinkedList<>();
             for (String key : Good.price().keySet()) {
                 basket.add(key);
             }
             return basket;
+        }
     }
 }
 
