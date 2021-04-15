@@ -1,38 +1,49 @@
 package by.it.korotkevich.jd02_02;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 class Cashier implements Runnable {
     private String name;
 
-    Cashier(int number) {
+    private Context context;
+
+    Cashier(int number, Context context) {
         name = "\tCashier #" + number + " ";
+        this.context = context;
     }
 
     @Override
     public void run() {
         System.out.println(this + "started service.");
-        Map<Good, Double> priceList = GoodsList.getPriceList();
-        while (!Manager.storeIsClosed()) {
-            Customer customer = QueueOfCustomers.poll();
+        while (!context.getManager().storeIsClosed()) {
+            Customer customer = context.getQueueOfCustomers().poll();
             if (customer != null) {
                 synchronized (customer.getMONITOR()) {
                     System.out.println(this + "is serving " + customer);
-                    List<Good> basketContents = Basket.getBasketContents();
-                    for (Good basketContent : basketContents) {
-                        System.out.println(this+"has added "+basketContent+" to the check. It costs "
-                                +priceList.get(basketContent));
-                    }
+                    int timeout = Util.getRandom(2000, 5000);
+                    Util.sleep(timeout);
+                    printCustomerCheck(customer.basket, customer);
                     System.out.println(this + "finished serving " + customer);
                     customer.setWaiting(false);
                     customer.notify();
                 }
             } else {
+                Thread.onSpinWait();
                 Util.sleep(1);
             }
         }
         System.out.println(this + "closed");
+    }
+
+    private void printCustomerCheck(Basket basket, Customer customer) {
+        ArrayList<Good> basketContents = basket.getBasketContents();
+        double fullPrice = 0;
+        for (Good good : basketContents) {
+            System.out.println(this + "adds " + good + " to the check. It costs: "
+                    + GoodsList.priceList.get(good) + ".");
+            fullPrice += GoodsList.priceList.get(good);
+        }
+        System.out.printf("\tTotal check sum for %s is: %.2f\n", customer, fullPrice);
     }
 
     @Override
