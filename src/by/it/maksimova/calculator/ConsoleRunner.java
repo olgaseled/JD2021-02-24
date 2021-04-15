@@ -7,15 +7,24 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
-        for (; ; ) { // значит while (true)
+        VarRepository.load();
+        for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
-                Var resultVar = parser.evaluate(expression);
-                printer.print(resultVar);
+                try {
+                    Var resultVar = parser.evaluate(expression);
+                    printer.print(resultVar);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
             } else {
+                try {
+                    VarRepository.save(Var.vars);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
                 break;
             }
         }
-
     }
 }
