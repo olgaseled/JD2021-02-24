@@ -4,10 +4,16 @@ Liauchuk Aliaksandr*/
 
 import java.io.*;
 
+/**
+ * the file should have
+ * 2 single-line and 2 multi-line comments,
+ * and javaDoc
+ */
+
 public class TaskB1 extends Conditions {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {//start of the program execution
         String roadToJava = FileNameHelper.getFilePath(JAVA_TASK, TaskB.class);
         String roadToTxt = FileNameHelper.getFilePath(TXT_TASK, TaskB.class);
         StringBuffer[] strBuf = new StringBuffer[MAX];
@@ -18,7 +24,7 @@ public class TaskB1 extends Conditions {
     }
 
     private static void saveCodeToTxtFile(String roadToTxt, StringBuffer[] strBuf, int temp) {
-        try (PrintWriter outCode = new PrintWriter(roadToTxt)) {
+        try (PrintWriter outCode = new PrintWriter(roadToTxt)) {//writing code to a txt file
             for (int i = 0; i < temp; i++) {
                 outCode.print(strBuf[i]);
             }
@@ -28,14 +34,16 @@ public class TaskB1 extends Conditions {
     }
 
     private static void printCodeToConsole(StringBuffer[] strBuf, int temp) {
-        for (int i = 0; i < temp; i++) {
+        for (int i = 0; i < temp; i++) { /*writing code
+                                          in console*/
             String code = strBuf[i].toString();
             System.out.println(code);
         }
     }
 
 
-    private static void delComments(StringBuffer[] strBuf, int temp) {
+    private static void delComments(StringBuffer[] strBuf, int temp) {/*Delete
+                                                                      comments*/
         for (int i = 0; i < temp; i++) {
             if (strBuf[i].toString().contains("/*") && !strBuf[i].toString().contains("*/")) {
                 delJavaDocComments(strBuf[i]);
