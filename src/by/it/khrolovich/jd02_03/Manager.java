@@ -5,6 +5,7 @@ public class Manager {
     private static int countCustomerIn = 0;
     private static int countCustomerOut = 0;
 
+
     static synchronized void newCustomer() {
         countCustomerIn++;
         //неатомарная операция

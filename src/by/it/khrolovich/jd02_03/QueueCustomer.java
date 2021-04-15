@@ -1,22 +1,26 @@
 package by.it.khrolovich.jd02_03;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
 
 public class QueueCustomer {
 
-    private static final Object MONITOR_QUEUE = new Object();
-    private static Deque<Customer> customers = new LinkedList<>();//очередь не потокобезопасна!
+    private BlockingDeque<Customer> customers;//blocking queue
 
-    static void add(Customer customer) {
-        synchronized (MONITOR_QUEUE) {
-            customers.addLast(customer);
-        }
+    public QueueCustomer(int maxCapacity) {
+        customers=  new LinkedBlockingDeque<>(maxCapacity);
     }
 
-    static Customer poll() {
-        synchronized (MONITOR_QUEUE) {
-            return customers.poll();
+    void add(Customer customer) {
+            customers.addLast(customer);
+    }
+
+    Customer poll() {
+        try {
+            return customers.poll(100, TimeUnit.MICROSECONDS);//wait before poll from queue
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
