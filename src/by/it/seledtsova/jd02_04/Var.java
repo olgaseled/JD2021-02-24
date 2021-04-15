@@ -9,12 +9,8 @@ abstract class Var implements Operation { // cлово abstract (модифик�
                     //так как этот класс не используется нигде больше
                     //implement Operation означает, что наша переменная реализует нтерфейс Operation
 
-    private static Map<String,Var> vars=new HashMap<>();
 
-    static Var saveVar(String name, Var var) {
-        vars.put(name, var);
-        return var;
-    }
+
 
 
     @Override   // code - generate - implement openation. в каждом из них напишем,
@@ -44,22 +40,6 @@ abstract class Var implements Operation { // cлово abstract (модифик�
     }                                  //а в object  сказано,  метод  toString возвращает String и он public,
 
     protected abstract double[] getValues();
-
-
-    //задание jd0_09
-static Var createVar (String operand)   throws CaltExeption { // принимает не вход строку внутри оперант
-    operand=operand.trim().replace("\\s+",""); // оперант очи-ся от пробелом. они замен. пустой строкой
-    if (operand.matches(Patterns.SCALAR)) //оперант сообветствует регул выраж скаляра.то вернется новый скаляр в контсруктор
-        return new Scalar(operand);
-    else if (operand.matches(Patterns.VECTOR))
-        return new Vector(operand);
-    else if (operand.matches(Patterns.MATRIX))
-        return new Matrix(operand);
-    else if (vars.containsKey(operand))
-        return vars.get(operand);
-    throw new CaltExeption("Невозможно создать переменную "+operand);
-    // если не один из if не сработает , вернется null
-}
 
 }
 

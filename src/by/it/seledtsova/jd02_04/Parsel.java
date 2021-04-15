@@ -8,11 +8,11 @@ public class Parsel { // принемает на вход некое значе�
         //2.0*2.0
         String[] operand=expression.split(Patterns.OPERATION); // разделяет наше выражени на две части в соотвествии с паттерном операции
 
-        Var two= Var.createVar(operand[1]); // вторая переменная
+        Var two= VarCreator.createVar(operand[1]); // вторая переменная
         if (expression.contains("=")) {
-            Var.saveVar(operand [0], two);
+            VarCreator.saveVar(operand [0], two);
         }
-        Var one= Var.createVar(operand[0]); // первая переменная
+        Var one= VarCreator.createVar(operand[0]); // первая переменная
         if (one==null || two==null)  // если кто-либо равен нулю
            // return null; //TODO create error
             throw new CaltExeption("Opps error");
