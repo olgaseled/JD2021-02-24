@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import static by.it.dudko.calc.Utils.castAsVectorOfDoubles;
 
+
 public class Vector extends Var {
 
     private final double[] value;

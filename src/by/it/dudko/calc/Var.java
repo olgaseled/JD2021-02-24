@@ -16,7 +16,7 @@ abstract class Var implements Operation {
         return value;
     }
 
-    static Var load(String key) {
+    public static Var load(String key) {
         return vars.get(key);
     }
 

@@ -4,6 +4,7 @@ import java.util.StringJoiner;
 
 import static by.it.dudko.calc.Utils.*;
 
+
 public class Matrix extends Var {
 
     private final double[][] value;
@@ -18,6 +19,10 @@ public class Matrix extends Var {
 
     public Matrix(String strMatrix) {
         this.value = castAsMatrixOfDoubles(strMatrix);
+    }
+
+    public double[][] getValue() {
+        return value;
     }
 
     @Override
@@ -46,7 +51,7 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.add(this);
+        return super.add(other);
     }
 
     @Override
@@ -68,7 +73,7 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.sub(this);
+        return super.sub(other);
     }
 
     @Override
@@ -105,7 +110,7 @@ public class Matrix extends Var {
             if (left[0].length != right.length) {
                 throw new CalcException("incompatible matrices exception");
             }
-            double[] result = new double[right.length];
+            double[] result = new double[left.length];
             for (int i = 0; i < left.length; i++) {
                 for (int j = 0; j < right.length; j++) {
                     result[i] += left[i][j] * right[j];
@@ -113,7 +118,7 @@ public class Matrix extends Var {
             }
             return new Vector(result);
         }
-        return super.div(other);
+        return super.mul(other);
     }
 
     @Override

@@ -21,7 +21,7 @@ class Parser {
             matchedGroup.replace(start, end, groupResult.toString());
         }
 
-        String singleStatement = matchedGroup.toString().replaceAll("\\s+", "");
+        String singleStatement = matchedGroup.toString().replaceAll(Patterns.SAFE_SPACES,"");
         ArrayList<String> operands =
                 new ArrayList<>(Arrays.asList(singleStatement.split(Patterns.OPERATION)));
         ArrayList<String> operators = new ArrayList<>();
