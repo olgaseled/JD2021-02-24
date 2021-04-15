@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
+         Scanner scanner=new Scanner(System.in);
         String line; // будем читать строку
 
         Parser parser=new Parser(); // будем передавать вычисления
         Printer printer=new Printer(); // будем передавать их результат
+
 
        while (!(line=scanner.nextLine()).equals("end")) { // до тех пор, пока это выражение НЕ разняеся end , мы их будм читать
            try {
