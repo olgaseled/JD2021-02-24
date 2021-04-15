@@ -55,23 +55,24 @@ public class ParserTest {
         double[] excpected = {5, 7, 9};
         assertArrayEquals(excpected, actual, 1e-5);
 
-    //C=B+(A*2)(выведет на экран 40.15).
-        Vector vector1 = (Vector) parser.calc("C=B+(A*2)");
+
+        Vector vector1 = (Vector) parser.calc("C={1,2,3}*5");
         double[] actual1 = vector1.getValue();
-        double[] excpected1 = {40.15};
+        double[] excpected1 = {5,10,15};
         assertArrayEquals(excpected1, actual1, 1e-5);
 
-         
-    //D=((C-0.15)-20)/(7-5) (выведет на экран 10)
-        Vector vector2 = (Vector) parser.calc("D=((C-0.15)-20)/(7-5)");
+
+        Vector vector2 = (Vector) parser.calc("D={27,15,21}/3.0");
         double[] actual2 = vector2.getValue();
-        double[] excpected2 = {10};
+        double[] excpected2 = {9,5,7};
         assertArrayEquals(excpected2, actual2, 1e-5);
-    //E={2,3}*(D/2) (выведет на экран {10,15} )
-        Vector vector3 = (Vector) parser.calc("E={2,3}*(D/2)");
+
+        Vector vector3 = (Vector) parser.calc("E={1,2,3}+7");
         double[] actual3 = vector3.getValue();
-        double[] excpected3 = {10.15};
+        double[] excpected3 = {8,9,10};
         assertArrayEquals(excpected3, actual3, 1e-5);
+
+
 
     }
 
