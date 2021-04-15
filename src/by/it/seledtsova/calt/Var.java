@@ -19,28 +19,24 @@ abstract class Var implements Operation { // cлово abstract (модифик�
 
     @Override   // code - generate - implement openation. в каждом из них напишем,
                 // что возвращает этот метод  null, а операция не возможно
-    public Var add(Var other) {
-        System.out.println("Операция сложения"+this+"+"+other+" невоможна");
-        return null;
-    }
+    public Var add(Var other) throws CaltExeption {
+        throw new CaltExeption("Операция сложения"+this+"+"+other+" невоможна");
+      }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания"+this+"-"+other+" невоможна");
-        return null;
-    }
+    public Var sub(Var other) throws CaltExeption { // теперь при ошибках они будут выбрасываться наверх, а не печ в консоле
+        throw new CaltExeption ("Операция вычитания"+this+"-"+other+" невоможна");
+         }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения"+this+"*"+other+" невоможна");
-        return null;
-    }
+    public Var mul(Var other) throws CaltExeption {
+        throw new CaltExeption ("Операция умножения"+this+"*"+other+" невоможна");
+          }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления"+this+"/"+other+" невоможна");
-        return null;
-    }
+    public Var div(Var other) throws CaltExeption {
+        throw new CaltExeption ("Операция деления"+this+"/"+other+" невоможна");
+          }
 
     @Override
     public String toString() {    //здесь мы не можешь снять модификатор public,
@@ -51,7 +47,7 @@ abstract class Var implements Operation { // cлово abstract (модифик�
 
 
     //задание jd0_09
-static Var createVar (String operand) { // принимает не вход строку внутри оперант
+static Var createVar (String operand)   throws CaltExeption { // принимает не вход строку внутри оперант
     operand=operand.trim().replace("\\s+",""); // оперант очи-ся от пробелом. они замен. пустой строкой
     if (operand.matches(Patterns.SCALAR)) //оперант сообветствует регул выраж скаляра.то вернется новый скаляр в контсруктор
         return new Scalar(operand);
@@ -61,7 +57,7 @@ static Var createVar (String operand) { // принимает не вход ст
         return new Matrix(operand);
     else if (vars.containsKey(operand))
         return vars.get(operand);
-    return null; // TODO generate Some Error
+    throw new CaltExeption("Невозможно создать переменную "+operand);
     // если не один из if не сработает , вернется null
 }
 

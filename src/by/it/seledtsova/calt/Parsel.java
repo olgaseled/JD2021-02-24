@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parsel { // принемает на вход некое значение
-    Var calc (String expression) { //метод калк будет вычислять выражение на вход он принемает строку
+    Var calc (String expression) throws CaltExeption { //метод калк будет вычислять выражение на вход он принемает строку
         //2.0*2.0
         String[] operand=expression.split(Patterns.OPERATION); // разделяет наше выражени на две части в соотвествии с паттерном операции
 
