@@ -32,15 +32,30 @@ public class ParserTest {
         expected = 25.55;
         assertEquals(expected, actual, 1e-10);
 
-        actualVar = parser.analyze("B=A*3.5");
-        actual = Double.parseDouble(actualVar.toString());
-        expected = 25.55;
-        assertEquals(expected, actual, 1e-10);
+//        actualVar = parser.analyze("B1=B+0.11*-5");
+//        actual = Double.parseDouble(actualVar.toString());
+//        expected = 25;
+//        assertEquals(expected, actual, 1e-10);
 
         actualVar = parser.analyze("B=A*3.5");
         actual = Double.parseDouble(actualVar.toString());
         expected = 25.55;
         assertEquals(expected, actual, 1e-10);
+
+        // Вариант B
+
+        actualVar = parser.analyze("B=A*3.5");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 25.55;
+        assertEquals(expected, actual, 1e-10);
+
+
+        actualVar = parser.analyze("B=A*3.5");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 25.55;
+        assertEquals(expected, actual, 1e-10);
+
+
     }
 
 }
