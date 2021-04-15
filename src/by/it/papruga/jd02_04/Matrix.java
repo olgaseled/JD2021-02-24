@@ -13,6 +13,10 @@ public class Matrix extends Var {
         this.value = value;
     }
 
+    public double[][] getValue() {
+        return value;
+    }
+
     Matrix(Matrix otherMatrix) {
 
         this.value = otherMatrix.value;
