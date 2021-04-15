@@ -1,7 +1,6 @@
 package by.it.seledtsova.jd02_04;
 
 
-
 import java.util.Objects;
 
 class VarCreator {

@@ -2,7 +2,7 @@ package by.it.seledtsova.jd02_04;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 
 // нажать alt insert
 // все наши переменные наследуется от нашего var
