@@ -107,86 +107,48 @@ public class ParserTest {
 
         Var actualVar;
         Var expectedVar;
-        String actual;
-        String expected;
 
         actualVar = parser.evaluate("ADD_V1 = {2.2, 4.0, -8.0} + 3.3");
         expectedVar = VarCreator.createVar("{5.5, 7.3, -4.7}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("ADD_V2 = {2.2, 4.0, -8.0} + {7.1, -6.6, 0}");
         expectedVar = VarCreator.createVar("{9.3, -2.6, -8}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("ADD_V3 = {7.1, -6.6, 0} + {2.2, 4.0, -8.0}");
         expectedVar = VarCreator.createVar("{9.3, -2.6, -8}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         exception.expect(CalcException.class);
         exception.expectMessage("ERROR:");
         parser.evaluate("ADD_V4 = {7.1, -6.6, 0} + {2.2, 4.0}");
 
-
         actualVar = parser.evaluate("SUB_V1 = {2.2, 4.0, -8.0} - 3.3");
         expectedVar = VarCreator.createVar("{-1.1, 0.7, -11.3}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("SUB_V2 = {2.2, 4.0, -8.0} - {7.1, -6.6, 0}");
         expectedVar = VarCreator.createVar("{-4.9, 10.6, -8}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("SUB_V3 = {7.1, -6.6, 0} - {2.2, 4.0, -8.0}");
         expectedVar = VarCreator.createVar("{4.9, -10.6, 8}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
-
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         exception.expect(CalcException.class);
         exception.expectMessage("ERROR:");
         parser.evaluate("SUB_V4 = {7.1, -6.6, 0} - {2.2, 4.0}");
 
-
         actualVar = parser.evaluate("MUL_V1 = {4.9, -10.6, 8} * 12.55");
         expectedVar = VarCreator.createVar("{61.495, -133.03, 100.4}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("MUL_V2 = {4.9, -10.6, 8} * {{1.8, 2, -1.5, 2.9}," +
                 "{3, 0, 4.333, -2.25}," +
                 "{2.9, 3, 3.03, 5.45}}");
         expectedVar = VarCreator.createVar("{0.22, 33.8, -29.0398, 81.66}");
-        assertArrayEquals(
-                ((Vector) actualVar).getValue(),
-                ((Vector) expectedVar).getValue(),
-                1e-10
-        );
-
+        assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         exception.expect(CalcException.class);
         exception.expectMessage("ERROR:");
@@ -194,6 +156,137 @@ public class ParserTest {
                 "{3, 0, 4.333, -2.25}}");
 
     }
+
+    private void assertVectorsAreEqual(Vector actualVar, Vector expectedVar) {
+        assertArrayEquals(
+                actualVar.getValue(),
+                expectedVar.getValue(),
+                1e-10
+        );
+    }
+
+
+    @Test
+    public void matrixTest() throws CalcException {
+
+        /*
+            Для каждого типа операции с векторами реализован соответствующий тест JUnit (на входе
+            парсера – строка ввода выражения, на выходе – строка вывода результата).
+            ADD_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} + 3.3
+                выведет {{5.5, 7.3, -4.7},{10.4, -3.3, 3.3}}
+            ADD_V2 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +
+                {{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}} выведет {{7.7, 11.3, -12.7}, {17.5, -9.9, -3.3}}
+            ADD_V3 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +
+                {9.3, -2.6, -8} выведет ERROR:
+            ADD_V4 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +
+                {{5.5, 7.3, -4.7},{10.4, -3.3, -3.3}, {7.1, -6.6, 0}} выведет ERROR:
+
+            SUB_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} - 3.3
+                выведет {{-1.1, 0.7, -11.3}, {3.8, -9.9, -3.3}}
+            SUB_V2 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} -
+                {{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}} выведет {{-3.3, -3.3, -3.3}, {-3.3, -3.3, 3.3}}
+            SUB_V3 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} -
+                {5.5, 7.3, -4.7} выведет ERROR:
+            SUB_V4 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} -
+                {{5.5, 7.3, -4.7},{10.4, -3.3, -3.3}, {7.1, -6.6, 0}} выведет ERROR:
+
+            MUL_V1 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * 6.33
+                выведет {{13.926, 25.32}, {44.943, -41.778}, {-20.889, 20.889}}
+            MUL_V2 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {2.2, 4.0}
+                выведет {20.84, -10.78, 5.94}
+            MUL_V3 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {2.2, 4.0, 3.5}
+                выведет ERROR:
+            MUL_V4 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {{20.84, -10.78, 5.94}, {5.5, 7.3, -4.7}}
+                выведет {{67.848, 5.484, -5.732}, {111.664, -124.718, 73.194}, {-50.622, 59.664, -35.112}}
+            MUL_V5 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {{20.84, -10.78}, {5.5, 7.3}, {7.1, -6.6}}
+                выведет ERROR:
+         */
+
+        Var actualVar;
+        Var expectedVar;
+
+        // SUM
+        actualVar = parser.evaluate("ADD_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} + 3.3");
+        expectedVar = VarCreator.createVar("{{5.5, 7.3, -4.7},{10.4, -3.3, 3.3}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        actualVar = parser.evaluate("{{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +" +
+                "{{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}}");
+        expectedVar = VarCreator.createVar("{{7.7, 11.3, -12.7}, {17.5, -9.9, -3.3}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("ADD_V3 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} + {9.3, -2.6, -8}");
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("ADD_V4 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +" +
+                "{{5.5, 7.3, -4.7},{10.4, -3.3, -3.3}, {7.1, -6.6, 0}}");
+
+        // SUBTRACTION
+        actualVar = parser.evaluate("SUB_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} - 3.3");
+        expectedVar = VarCreator.createVar("{{-1.1, 0.7, -11.3}, {3.8, -9.9, -3.3}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        actualVar = parser.evaluate("SUB_V2 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} -" +
+                "{{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}}");
+        expectedVar = VarCreator.createVar("{{-3.3, -3.3, -3.3}, {-3.3, -3.3, 3.3}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("{{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} - {5.5, 7.3, -4.7}");
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("{{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} - " +
+                "{{5.5, 7.3, -4.7},{10.4, -3.3, -3.3}, {7.1, -6.6, 0}}");
+
+        // MULTIPLICATION
+
+        actualVar = parser.evaluate("MUL_V1 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * 6.33");
+        expectedVar = VarCreator.createVar("{{13.926, 25.32}, {44.943, -41.778}, {-20.889, 20.889}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        actualVar = parser.evaluate("MUL_V2 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {2.2, 4.0}");
+        expectedVar = VarCreator.createVar("{20.84, -10.78, 5.94}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("MUL_V3 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {2.2, 4.0, 3.5}");
+
+        actualVar = parser.evaluate("MUL_V4 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * " +
+                "{{20.84, -10.78, 5.94}, {5.5, 7.3, -4.7}}");
+        expectedVar = VarCreator.createVar("{{67.848, 5.484, -5.732}, {111.664, -124.718, 73.194}, " +
+                "{-50.622, 59.664, -35.112}}");
+        assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
+
+        exception.expect(CalcException.class);
+        exception.expectMessage("ERROR:");
+        parser.evaluate("MUL_V5 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * " +
+                "{{20.84, -10.78}, {5.5, 7.3}, {7.1, -6.6}}");
+
+    }
+
+    private void assertMatricesAreEqual(Matrix actualVar, Matrix expectedVar) {
+        int rowsLength;
+        Vector actualItem;
+        Vector expectedItem;
+        rowsLength = actualVar.getValue().length;
+        for (int i = 0; i < rowsLength; i++) {
+            actualItem = new Vector(actualVar.getValue()[i]);
+            expectedItem = new Vector(expectedVar.getValue()[i]);
+            assertArrayEquals(
+                    actualItem.getValue(),
+                    expectedItem.getValue(),
+                    1e-10
+            );
+        }
+    }
+
+
 
     @After
     public void dumpVars() throws Exception {
