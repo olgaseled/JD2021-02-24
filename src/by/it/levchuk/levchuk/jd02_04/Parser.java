@@ -10,13 +10,13 @@ public class Parser {
 
     Var analyze(String expression) throws CalcException {
 
-        Matcher bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
-        while (bracketsMatcher.find()) {
-            String group = bracketsMatcher.group();
-            String bracketsExpressionResult = String.valueOf(analyze(group.substring(1, group.length() - 1)));
-            expression = bracketsMatcher.replaceFirst(bracketsExpressionResult);
-            bracketsMatcher.reset();
-            bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        Matcher parenthesesMatcher = Pattern.compile(Patterns.PARENTHESES).matcher(expression);
+        while (parenthesesMatcher.find()) {
+            String group = parenthesesMatcher.group();
+            String ResultExpressionWithoutParentheses = String.valueOf(analyze(group.substring(1, group.length() - 1)));
+            expression = parenthesesMatcher.replaceFirst(ResultExpressionWithoutParentheses);
+            parenthesesMatcher.reset();
+            parenthesesMatcher = Pattern.compile(Patterns.PARENTHESES).matcher(expression);
         }
 
         ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
@@ -58,7 +58,7 @@ public class Parser {
             throw new CalcException("The something stupid ");
         }
 
-        private static final Map<String, Integer> pr = Map.of(
+        private static final Map<String, Integer> priority = Map.of(
                 "=", 0,
                 "+", 1,
                 "-", 1,
@@ -70,7 +70,7 @@ public class Parser {
         int index = -1;
         int best = -1;
         for (int i = 0; i < operations.size(); i++) {
-            int currentPr = pr.get(operations.get(i));
+            int currentPr = priority.get(operations.get(i));
             if (currentPr>best){
                 index = i;
                 best = currentPr;
