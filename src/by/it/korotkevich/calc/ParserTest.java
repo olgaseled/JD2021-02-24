@@ -2,6 +2,7 @@ package by.it.korotkevich.calc;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ParserTest {
@@ -35,5 +36,20 @@ public class ParserTest {
         actual = Double.parseDouble(actualVar.toString());
         expected = 2.65;
         assertEquals(expected, actual, 1e-10);
+
+        actualVar = parser.evaluate("C=B+(A*2)");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 40.15;
+        assertEquals(expected, actual, 1e-10);
+
+        actualVar = parser.evaluate("D=((C-0.15)-20)/(7-5)");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 10;
+        assertEquals(expected, actual, 1e-10);
+
+        actualVar = parser.evaluate("E={2,3}*(D/2)");
+        String actualVector = actualVar.toString();
+        String expectedVector = "{10.0, 15.0}";
+        assertEquals(expectedVector, actualVector);
     }
 }

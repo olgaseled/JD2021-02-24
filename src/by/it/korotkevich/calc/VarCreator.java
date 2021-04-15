@@ -8,15 +8,15 @@ class VarCreator {
     }
 
     static Var build(String strVar) throws CalcException {
-        strVar.replaceAll("\\s+", "");
-        if (strVar.matches(Patterns.SCALAR)) {
-            return new Scalar(strVar);
-        } else if (strVar.matches(Patterns.VECTOR)) {
-            return new Vector(strVar);
-        } else if (strVar.matches(Patterns.MATRIX)) {
-            return new Matrix(strVar);
-        } else if (Var.vars.containsKey(strVar)) {
-            Var var = Var.vars.get(strVar);
+        String strVarNoSpaces = strVar.replaceAll("\\s+", "");
+        if (strVarNoSpaces.matches(Patterns.SCALAR)) {
+            return new Scalar(strVarNoSpaces);
+        } else if (strVarNoSpaces.matches(Patterns.VECTOR)) {
+            return new Vector(strVarNoSpaces);
+        } else if (strVarNoSpaces.matches(Patterns.MATRIX)) {
+            return new Matrix(strVarNoSpaces);
+        } else if (Var.vars.containsKey(strVarNoSpaces)) {
+            Var var = Var.vars.get(strVarNoSpaces);
             if (Objects.nonNull(var)){
                 return var;
             }

@@ -9,6 +9,15 @@ import java.util.regex.Pattern;
 class Parser {
 
     Var evaluate(String expression) throws CalcException {
+
+        Matcher bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        while (bracketsMatcher.find()) {
+            String group = bracketsMatcher.group();
+            String bracketsExpressionResult = String.valueOf(evaluate(group.substring(1, group.length() - 1)));
+            expression = bracketsMatcher.replaceFirst(bracketsExpressionResult);
+            bracketsMatcher.reset();
+            bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        }
         ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         ArrayList<String> operations = new ArrayList<>();
