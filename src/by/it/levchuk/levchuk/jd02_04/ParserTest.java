@@ -37,9 +37,9 @@ public class ParserTest {
 //        expected = 25;
 //        assertEquals(expected, actual, 1e-10);
 
-        actualVar = parser.analyze("B=A*3.5");
+        actualVar = parser.analyze("B2=A/2-1");
         actual = Double.parseDouble(actualVar.toString());
-        expected = 25.55;
+        expected = 2.65;
         assertEquals(expected, actual, 1e-10);
 
         // Вариант B
