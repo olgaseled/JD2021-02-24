@@ -110,7 +110,7 @@ public class Matrix extends Var {
             if (left[0].length != right.length) {
                 throw new CalcException("incompatible matrices exception");
             }
-            double[] result = new double[right.length];
+            double[] result = new double[left.length];
             for (int i = 0; i < left.length; i++) {
                 for (int j = 0; j < right.length; j++) {
                     result[i] += left[i][j] * right[j];
