@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.calc;
+package by.it.levchuk.levchuk.jd02_04;
 
 import java.util.Arrays;
 
@@ -107,5 +107,9 @@ public class Vector extends Var {
         return Arrays.toString(value)
                 .replace("[", "{")
                 .replace("]", "}");
+    }
+
+    public double[] getValue() {
+        return value;
     }
 }

@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.calc;
+package by.it.levchuk.levchuk.jd02_04;
 
 interface Operation {
     Var add(Var other) throws CalcException;

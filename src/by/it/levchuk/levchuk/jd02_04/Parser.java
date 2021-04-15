@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.calc;
+package by.it.levchuk.levchuk.jd02_04;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,16 @@ import java.util.regex.Pattern;
 public class Parser {
 
     Var analyze(String expression) throws CalcException {
+
+        Matcher parenthesesMatcher = Pattern.compile(Patterns.PARENTHESES).matcher(expression);
+        while (parenthesesMatcher.find()) {
+            String group = parenthesesMatcher.group();
+            String ResultExpressionWithoutParentheses = String.valueOf(analyze(group.substring(1, group.length() - 1)));
+            expression = parenthesesMatcher.replaceFirst(ResultExpressionWithoutParentheses);
+            parenthesesMatcher.reset();
+            parenthesesMatcher = Pattern.compile(Patterns.PARENTHESES).matcher(expression);
+        }
+
         ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         ArrayList<String> operations = new ArrayList <>();
@@ -45,10 +55,10 @@ public class Parser {
                 case "/":
                     return leftVar.div(rightVar);
             }
-            throw new CalcException("The something stupid ");
+            throw new CalcException("Какая-то дичь ");
         }
 
-        private static final Map<String, Integer> pr = Map.of(
+        private static final Map<String, Integer> priority = Map.of(
                 "=", 0,
                 "+", 1,
                 "-", 1,
@@ -60,7 +70,7 @@ public class Parser {
         int index = -1;
         int best = -1;
         for (int i = 0; i < operations.size(); i++) {
-            int currentPr = pr.get(operations.get(i));
+            int currentPr = priority.get(operations.get(i));
             if (currentPr>best){
                 index = i;
                 best = currentPr;
