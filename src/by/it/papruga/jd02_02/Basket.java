@@ -45,6 +45,7 @@ public class Basket {
 
         for (Good good : list) {
 
+
             sb.append("\n" + good + "\t" + ListGoods.getPrice(good) +"$");
         }
 
