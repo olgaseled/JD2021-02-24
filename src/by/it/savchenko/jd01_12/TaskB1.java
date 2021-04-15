@@ -25,7 +25,7 @@ public class TaskB1 {
                 }
             }
             map.remove("");
-            System.out.println(map);
         }
+        System.out.println(map);
     }
 }
