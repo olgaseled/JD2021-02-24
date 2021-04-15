@@ -32,10 +32,10 @@ public class ParserTest {
         expected = 25.55;
         assertEquals(expected, actual, 1e-10);
 
-//        actualVar = parser.analyze("B1=B+0.11*-5");
-//        actual = Double.parseDouble(actualVar.toString());
-//        expected = 25;
-//        assertEquals(expected, actual, 1e-10);
+        actualVar = parser.analyze("B1=B+0.11*-5");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 25;
+        assertEquals(expected, actual, 1e-10);
 
         actualVar = parser.analyze("B2=A/2-1");
         actual = Double.parseDouble(actualVar.toString());
@@ -44,18 +44,24 @@ public class ParserTest {
 
         // Вариант B
 
-        actualVar = parser.analyze("B=A*3.5");
+//• C=B+(A*2) (выведет на экран 40.15).
+//• D=((C-0.15)-20)/(7-5) (выведет на экран 10)
+//• E={2,3}*(D/2) (выведет на экран {10,15} ).
+
+        actualVar = parser.analyze("C=B+(A*2)");
         actual = Double.parseDouble(actualVar.toString());
-        expected = 25.55;
+        expected = 40.15;
         assertEquals(expected, actual, 1e-10);
 
-
-        actualVar = parser.analyze("B=A*3.5");
+        actualVar = parser.analyze("D=((C-0.15)-20)/(7-5)");
         actual = Double.parseDouble(actualVar.toString());
-        expected = 25.55;
+        expected = 10;
         assertEquals(expected, actual, 1e-10);
 
-
+        actualVar = parser.analyze("E={2,3}*(D/2)");
+        String actualVector = actualVar.toString();
+        String expectedVector = "{10, 15}";
+        assertEquals(expectedVector, actualVector);
     }
 
 }

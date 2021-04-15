@@ -9,15 +9,15 @@ public class VarCreator {
 
     static Var build(String strVar) throws CalcException {
 
-        strVar = strVar.replaceAll("\\s+", "");
-        if (strVar.matches(Patterns.SCALAR)) {
-            return new Scalar(strVar);
-        } else if (strVar.matches(Patterns.VECTOR)) {
-            return new Vector(strVar);
-        } else if (strVar.matches(Patterns.MATRIX)) {
-            return new Matrix(strVar);
-        } else {
-            Var var =  Var.loading(strVar);
+        String strVarNew = strVar.replaceAll("\\s+", "");
+        if (strVarNew.matches(Patterns.SCALAR)) {
+            return new Scalar(strVarNew);
+        } else if (strVarNew.matches(Patterns.VECTOR)) {
+            return new Vector(strVarNew);
+        } else if (strVarNew.matches(Patterns.MATRIX)) {
+            return new Matrix(strVarNew);
+        } else if (Var.vars.containsKey(strVarNew)) {
+            Var var = Var.vars.get(strVarNew);
             if (Objects.nonNull(var)) {
                 return var;
             }
