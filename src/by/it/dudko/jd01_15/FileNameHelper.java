@@ -7,12 +7,12 @@ public class FileNameHelper {
     private static final String USER_DIR = "user.dir";
     private static final String SRC = "src";
 
-    public FileNameHelper() {
+    private FileNameHelper() {
     }
 
     public static String getFullPath(String target, Class<?> struct) {
         String classRelPath = struct.getName()
-                .replace(struct.getSimpleName(), "")
+                .replace("." + struct.getSimpleName(), "")
                 .replace(".", File.separator);
         StringJoiner classFullPath = new StringJoiner(File.separator);
         return classFullPath

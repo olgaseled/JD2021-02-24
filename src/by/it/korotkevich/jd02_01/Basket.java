@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    //перенести всё что связано с корзиной из класса клиент
 
 
     static void putGoodsToBasket(Customer customerName, int goodsAmount) {
@@ -13,7 +12,7 @@ public class Basket {
             Util.sleep(Util.getRandom(500, 2000));
             Good oneGood = GoodsList.getAGood();
             basketContents.add(oneGood);
-            System.out.println(customerName + "puts " + oneGood.toLowerCase(oneGood) + " inside his basket.");
+            System.out.println(customerName + "puts " + Good.toLowerCase(oneGood) + " inside his basket.");
         }
     }
 }

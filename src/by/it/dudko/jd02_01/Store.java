@@ -21,13 +21,11 @@ public class Store {
         int nth = Config.NTH_PENSIONER; // short alias
         int newCustomers;
         for (int second = 0; second < Config.MEASURE_TIME; second++) {
-            // int newCustomers = CustomerUtil.getRandom(Config.MAX_CAPACITY_PER_SECOND);
             int sec = second % 60;
             int needCount = 10 + (sec < 30 ? sec : 60 - sec);
             if (needCount > customersInStore) {
                 int delta = needCount - customersInStore;
                 newCustomers = CustomerUtil.getRandom(delta - 1, delta + 1);
-                // System.out.printf("t=%-3d sec=%-2d n=%-2d in=%-2d\n", second, sec, needCount, customersInStore);
                 for (int i = 0; i < newCustomers; i++) {
                     Customer customer = CustomerUtil.getRandom(1, nth) < nth
                             ? new Customer(++customerId)

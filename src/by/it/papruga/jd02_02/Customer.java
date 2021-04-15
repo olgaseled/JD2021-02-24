@@ -8,6 +8,10 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         this.waiting = waiting;
     }
 
+    public boolean isWaiting() {
+        return waiting;
+    }
+
     public Customer(int number) {
 
         super("Customer #" + number + " ");
@@ -38,14 +42,21 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public void goToQueue() {
 
         QueueCustomers.add(this);
-
         System.out.println(this + "add to Queue");
+
+        if (QueueCashiers.getCashiersSize() > 0 &&  Manager.getCountQueueIn() % 5 == 0)
+        {
+            Cashier cashier = QueueCashiers.pull();
+            synchronized (cashier){
+                cashier.notify();
+                cashier.setWaiting(false);
+            }
+
+        }
 
         waiting = true;
         synchronized (this) {
-
             while (waiting)
-
             try {
                 this.wait();
             } catch (InterruptedException e) {
