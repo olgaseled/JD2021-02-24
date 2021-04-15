@@ -1,22 +1,31 @@
 package by.it.levchuk.levchuk.calc;
 
-//public class VarCreator {
+import java.util.Objects;
 
-   // private VarCreator() {
-   // }
+public class VarCreator {
 
-   // static Var buld(String strVar){
+    private VarCreator() {
+    }
 
-       // strVar = strVar
-     //   if (strVar.matches(Patterns.SCALAR)){
-       //     return new Scalar(strVar);
-       // }
-        //else if (strVar.matches(Patterns.VECTOR)) {
-        //    return new Vector(strVar);
-       // }
-       // else if (strVar.matches(Pattern.MATRIX)) {
-           // return new Scalar(strVar);
-      //  }
+    static Var build(String strVar) throws CalcException {
+
+        strVar = strVar.replaceAll("\\s+", "");
+        if (strVar.matches(Patterns.SCALAR)) {
+            return new Scalar(strVar);
+        } else if (strVar.matches(Patterns.VECTOR)) {
+            return new Vector(strVar);
+        } else if (strVar.matches(Patterns.MATRIX)) {
+            return new Matrix(strVar);
+        } else {
+            Var var =  Var.loading(strVar);
+            if (Objects.nonNull(var)) {
+                return var;
+            }
+        }
+        throw new CalcException("Неизвестная переменная или выражение: " + strVar);
+    }
+}
+
 
 
 

@@ -1,31 +1,72 @@
 package by.it.levchuk.levchuk.calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    Var calc(String expression) {
-        String[] operand = expression.split(Patterns.OPERATION);
-        Var one = Var.createVar(operand[0]);
-        Var two = Var.createVar(operand[1]);
-        if (one == null || two == null)
-            return null;
-        Pattern p = Pattern.compile(Patterns.OPERATION);
-        Matcher m = p.matcher(expression);
-        if (m.find()) {
-            String opertion = m.group();
-            switch (opertion) {
+    Var analyze(String expression) throws CalcException {
+        ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
+        ArrayList<String> operations = new ArrayList <>();
+        while (matcher.find()) {
+            operations.add(matcher.group());
+        }
+        while (operations.size() > 0) {
+            int index = getIndex(operations);
+            String operation = operations.remove(index);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            Var result = oneOperation(left, operation, right);
+            operands.add(index, result.toString());
+        }
+
+        return VarCreator.build(operands.get(0));
+    }
+
+    private Var oneOperation(String left, String operation, String right) throws CalcException {
+        Var rightVar = VarCreator.build(right);
+        if (operation.equals("=")){
+            return Var.save(left,rightVar);
+        }
+        Var leftVar = VarCreator.build(left);
+
+
+            switch (operation) {
                 case "+":
-                    return one.add(two);
+                    return leftVar.add(rightVar);
                 case "-":
-                    return one.sub(two);
+                    return leftVar.sub(rightVar);
                 case "*":
-                    return one.mul(two);
+                    return leftVar.mul(rightVar);
                 case "/":
-                    return one.div(two);
+                    return leftVar.div(rightVar);
+            }
+            throw new CalcException("The something stupid ");
+        }
+
+        private static final Map<String, Integer> pr = Map.of(
+                "=", 0,
+                "+", 1,
+                "-", 1,
+                "*", 2,
+                "/", 2
+        );
+
+    private int getIndex(ArrayList<String> operations) {
+        int index = -1;
+        int best = -1;
+        for (int i = 0; i < operations.size(); i++) {
+            int currentPr = pr.get(operations.get(i));
+            if (currentPr>best){
+                index = i;
+                best = currentPr;
             }
         }
-        return null;  // stub
+        return index;
     }
 }
+
