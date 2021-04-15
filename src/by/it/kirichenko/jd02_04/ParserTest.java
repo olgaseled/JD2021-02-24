@@ -1,4 +1,4 @@
-package by.it.kirichenko.calc;
+package by.it.kirichenko.jd02_04;
 
 
 import org.junit.Before;
