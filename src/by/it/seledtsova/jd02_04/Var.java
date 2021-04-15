@@ -51,26 +51,6 @@ abstract class Var implements Operation { // cлово abstract (модифик�
 
     protected abstract double[] getValues();
 
-
-    //задание jd0_09
-    static Var createVar(String operand) throws CaltExeption { // принимает не вход строку внутри оперант
-        operand = operand.replaceAll("\\s+", ""); // оперант очи-ся от пробелом. они замен. пустой строкой
-        if (operand.matches(Patterns.SCALAR)) {//оперант сообветствует регул выраж скаляра.то вернется новый скаляр в контсруктор
-            return new Scalar(operand);
-        } else if (operand.matches(Patterns.VECTOR)) {
-            return new Vector(operand);
-        } else if (operand.matches(Patterns.MATRIX)) {
-            return new Matrix(operand);
-        } else {
-            Var var = Var.load(operand);
-            if (Objects.nonNull(var)) {
-                return var;
-            }
-        }
-        throw new CaltExeption("Невозможно создать переменную " + operand);
-        // если не один из if не сработает , вернется null
-    }
-
-}
+   }
 
 

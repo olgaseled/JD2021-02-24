@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parsel { // принемает на вход некое значение
+public class Parser { // принемает на вход некое значение
 
     private static final Map<String, Integer> priorityMap = new HashMap<>() {
         {
@@ -27,39 +27,38 @@ public class Parsel { // принемает на вход некое значе�
             operations.add(matcher.group());
         }
         while (operations.size() > 0) { // повторяя пока есть операции в массиве
-            int index = getIndex(operations);
+            int index = getIndex((ArrayList<String>) operations);
             String left = operands.remove(index); // я извлекаю из массива перед * 2 , левую часть
             String right = operands.remove(index); // извлекаю после * 2 . правую часть
             String operation = operations.remove(index);    // сама операция между ними. лежит в массиве
             Var result = calcOneOperation(left, operation, right);   // делаю одно действие , передаем туда левую ,операцию, а потом правую части
             operands.add(index, result.toString()); // размещаю результат в массив (вместо 2*2 будет 4)
         }
-        return Var.createVar(operands.get(0));// когда все посчитается, результат будет лежать в елементе [0]
+        return VarCreator.calc(operands.get(0));// когда все посчитается, результат будет лежать в елементе [0]
     }                           // чтобы обратно получить из строки переменную вызываю Var.createVar(operands.get(0)) (выше преобразовывали в строку)
 
-    private int getIndex(List<String> operations) {
+    private int getIndex(ArrayList<String> operations) {
         int index = -1;
         int priority = -1;
-        for (int i = 0, operationsSize = operations.size(); i < operationsSize; i++) {
-            String operation = operations.get(i);
-            if (priority < priorityMap.get(operation)) {
+        for (int i = 0; i < operations.size(); i++) {
+            int currentPr = priorityMap.get(operations.get(i));
+            if (currentPr > priority) {
                 index = i;
-                priority = priorityMap.get(operation);
+                priority = currentPr;
             }
         }
-
-        return index; // заглушка
+        return index;
     }
 
 
     Var calcOneOperation(String leftStr, String operation, String rightStr) throws CaltExeption { //метод калк будет вычислять выражение на вход он принемает строку
 
 
-        Var right = Var.createVar(rightStr); // вторая переменная
+        Var right = VarCreator.calc(rightStr); // вторая переменная
         if (operation.equals("=")) {
             return Var.saveVar(leftStr, right);
         }
-        Var left = Var.createVar(leftStr); // первая переменная
+        Var left = VarCreator.calc(leftStr); // первая переменная
         switch (operation) { // если наша операция соответствует одному из 4-х случаев
             case "+":
                 return left.add(right); // то матрица, скаляр или вектор +-*/ матрицу, скаляр или вектор
