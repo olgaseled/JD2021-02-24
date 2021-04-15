@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_04;
 
 import java.util.Arrays;
 import java.util.StringJoiner;

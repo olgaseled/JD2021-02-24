@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_04;
 
 public interface Operation {
     Var add(Var other) throws CalcException;

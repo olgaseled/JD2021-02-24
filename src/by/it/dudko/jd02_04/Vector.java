@@ -1,8 +1,8 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_04;
 
 import java.util.Arrays;
 
-import static by.it.dudko.calc.Utils.castAsVectorOfDoubles;
+import static by.it.dudko.jd02_04.Utils.castAsVectorOfDoubles;
 
 
 public class Vector extends Var {

@@ -1,8 +1,8 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_04;
 
 import java.util.StringJoiner;
 
-import static by.it.dudko.calc.Utils.*;
+import static by.it.dudko.jd02_04.Utils.*;
 
 
 public class Matrix extends Var {
