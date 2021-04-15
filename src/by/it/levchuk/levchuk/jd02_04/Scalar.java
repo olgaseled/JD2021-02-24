@@ -40,7 +40,7 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).value;
             if (secondScalar == 0) {
-                throw new CalcException("division by zero");
+                throw new CalcException("деление на ноль");
             }
             return new Scalar(this.value / secondScalar);
         }
@@ -51,7 +51,7 @@ class Scalar extends Var {
 
     Scalar(String strValue) { this.value = Double.parseDouble(strValue); }
 
-    Scalar(Scalar otherScalar) { this.value = otherScalar.value; }
+    //Scalar(Scalar otherScalar) { this.value = otherScalar.value; }
 
 
     @Override

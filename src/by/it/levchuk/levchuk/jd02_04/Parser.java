@@ -55,7 +55,7 @@ public class Parser {
                 case "/":
                     return leftVar.div(rightVar);
             }
-            throw new CalcException("The something stupid ");
+            throw new CalcException("Какая-то дичь ");
         }
 
         private static final Map<String, Integer> priority = Map.of(

@@ -16,7 +16,7 @@ public class ParserTest {
 
     @Test
     public void scalarTest() throws CalcException {
-//
+
 // A=2+5.3 (выведет на экран 7.3)
 //• B=A*3.5 (выведет на экран 25.55)
 //• B1=B+0.11*-5  (выведет на экран 25)
@@ -58,10 +58,9 @@ public class ParserTest {
         expected = 10;
         assertEquals(expected, actual, 1e-10);
 
-        actualVar = parser.analyze("E={2,3}*(D/2)");
-        String actualVector = actualVar.toString();
-        String expectedVector = "{10, 15}";
-        assertEquals(expectedVector, actualVector);
+        Vector actVector = (Vector) parser.analyze("E={2,3}*(D/2)");
+        double[] actualVector = actVector.getValue();
+        double[] expectedVector = {10, 15};
+        assertArrayEquals(expectedVector, actualVector, 1e-10);
     }
-
 }

@@ -108,4 +108,8 @@ public class Vector extends Var {
                 .replace("[", "{")
                 .replace("]", "}");
     }
+
+    public double[] getValue() {
+        return value;
+    }
 }
