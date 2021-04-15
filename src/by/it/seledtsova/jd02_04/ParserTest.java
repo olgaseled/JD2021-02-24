@@ -1,36 +1,41 @@
 package by.it.seledtsova.jd02_04;
 
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class ParserTest {
-    private Parser parser;
+
+    private Parsel parser;
 
     @Before
     public void setUp() throws Exception {
-        parser=new Parser();
+        parser=new Parsel();
     }
 
- 
+
 
     @Test
-    public void scalarTest() throws CaltExeption{
+    public void scalarTest() throws CaltExeption {
 
-        // A=2+5.3 (выведетна экран 7.3)
-        Var actualVar1=parser.calc ("A=2+5.3");
+        // A=2+5.3 (выведет на экран 7.3)
+        Var actualVar1=parser.calc ("A=2+5.3"); // будем вводить
         double actual1=Double.parseDouble(actualVar1.toString());
-        double expected1=7.3;
-       assertEquals(expected1,actual1,1e-5);
+        double expected1=7.3; // ожидаем
+       assertEquals(expected1,actual1,1e-5);  // дельта , так как числа double
 
-        // B=A*3.5 (выведетна экран 25.55)
+        // B=A*3.5 (выведет на экран 25.55)
         Var actualVar2=parser.calc ("B=A*3.5");
         double actual2=Double.parseDouble(actualVar2.toString());
         double expected2=25.55;
         assertEquals(expected2,actual2,1e-5);
 
-        // B1=B+0.11*-5 (выведетна экран 25)
+        // B1=B+0.11*-5 (выведет на экран 25)
         Var actualVar3=parser.calc ("B1=B+0.11*-5");
         double actual3=Double.parseDouble(actualVar3.toString());
         double expected3=25;
@@ -43,4 +48,28 @@ public class ParserTest {
         assertEquals(expected4,actual4,1e-5);
 
             }
+/*
+C=B+(A*2)(выведет на экран 40.15).
+•D=((C-0.15)-20)/(7-5) (выведет на экран 10)
+•E={2,3}*(D/2) (выведет на экран {10,15} ).
+ */
+     @Test
+    public void  vectorTest () throws CaltExeption {
+         Vector vector=(Vector) parser.calc("V={1,2,3}+{4,5,6}");
+         double [] actual=vector.getValue();
+         double [] excpected= {5,7,9};
+         assertArrayEquals(excpected,actual,1e-5);
+     }
+
+
+    @Test
+    public void  matrixTest () {
+
+    }
+
+    @After
+    public void tearDown () throws Exception {
+
+    }
+
 }

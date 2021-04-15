@@ -17,7 +17,11 @@ public class CaltExeption extends Exception { // унаследуемся от
     public CaltExeption(Throwable cause) {
         super(cause);
     }
+    /*
+    public CaltExeption (String message, Throwable cause, boolean enableSuppression, writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 
-
-
+     */
+    // cntr O
 }

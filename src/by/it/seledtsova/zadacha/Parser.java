@@ -1,11 +1,21 @@
-package by.it.seledtsova.jd02_04;
+package by.it.seledtsova.zadacha;
+/*
+import by.it.seledtsova.jd02_04.CaltExeption;
+import by.it.seledtsova.jd02_04.Patterns;
+import by.it.seledtsova.jd02_04.Var;
+import by.it.seledtsova.jd02_04.VarCreator;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+ */
+
 public class Parser { // принемает на вход некое значение
+   /*
+
+
     Var calc(String expression) throws CaltExeption { //метод калк будет вычислять выражение на вход он принемает строку
         //2.0*2.0
         String[] operand = expression.split(Patterns.OPERATION); // разделяет наше выражени на две части в соотвествии с паттерном операции
@@ -24,7 +34,7 @@ public class Parser { // принемает на вход некое значе�
             String operation = m.group(); // то наша операци находится в том, что он нашел
             switch (operation) { // если наша операция соответствует одному из 4-х случаев
                 case "+":
-                    return one.add(two); // то матрица, скаляр или вектор +-*/ матрицу, скаляр или вектор
+                    return one.add(two); // то матрица, скаляр или вектор "+*-/ матрицу, скаляр или вектор
                 case "-":
                     return one.sub(two);
                 case "*":
@@ -57,4 +67,9 @@ public class Parser { // принемает на вход некое значе�
         }
         return index;
     }
+    /*
+
+     */
+
 }
+
