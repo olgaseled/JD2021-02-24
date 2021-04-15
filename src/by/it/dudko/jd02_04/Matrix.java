@@ -21,6 +21,10 @@ public class Matrix extends Var {
         this.value = castAsMatrixOfDoubles(strMatrix);
     }
 
+    public double[][] getValue() {
+        return value;
+    }
+
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
@@ -47,7 +51,7 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.add(this);
+        return super.add(other);
     }
 
     @Override
@@ -69,7 +73,7 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.sub(this);
+        return super.sub(other);
     }
 
     @Override
@@ -114,7 +118,7 @@ public class Matrix extends Var {
             }
             return new Vector(result);
         }
-        return super.div(other);
+        return super.mul(other);
     }
 
     @Override
