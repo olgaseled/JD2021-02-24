@@ -35,7 +35,7 @@ public class  Matrix extends Var {
     }
 
     @Override
-        public Var add(Var other) {
+        public Var add(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double[] [] res = new double[arrayValues.length][0];
             for (int i = 0; i < res.length; i++) {
@@ -69,7 +69,7 @@ public class  Matrix extends Var {
             }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
             for (int i = 0; i < res.length; i++) {
@@ -94,7 +94,7 @@ public class  Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(arrayValues, arrayValues.length);
             for (int i = 0; i < res.length; i++) {

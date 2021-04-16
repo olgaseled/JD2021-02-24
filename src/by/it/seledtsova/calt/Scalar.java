@@ -9,7 +9,7 @@ public class Scalar extends Var {  // мы создали двух потомк�
     }
 
     @Override
-    public Var add(Var other) { // по умолчанию вставляяется поведение предка.но нам нкжно его изменить
+    public Var add(Var other) throws CaltExeption { // по умолчанию вставляяется поведение предка.но нам нкжно его изменить
         if (other instanceof Scalar) {  //  если other  является скаляром, то у нас операция скаляр + скаляр
         double sum = this.value + ((Scalar) other).value; // мы получили значение суммы, но должны первуть переменную типа вар
         return new Scalar(sum);
@@ -21,7 +21,7 @@ public class Scalar extends Var {  // мы создали двух потомк�
     }
 
     @Override
-    public Var sub(Var other) { //other  это вектор или матрица
+    public Var sub(Var other) throws CaltExeption { //other  это вектор или матрица
         if (other instanceof Scalar) {
             double sub=this.value-((Scalar) other).value;
             return new Scalar(sub);
@@ -32,7 +32,7 @@ public class Scalar extends Var {  // мы создали двух потомк�
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
             double mul = this.value * ((Scalar) other).value;
             return new Scalar(mul);
@@ -41,8 +41,10 @@ public class Scalar extends Var {  // мы создали двух потомк�
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CaltExeption {
         if (other instanceof Scalar) {
+            if (((Scalar) other).value==0)
+                throw new CaltExeption("Деление на ноль");
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
         }
