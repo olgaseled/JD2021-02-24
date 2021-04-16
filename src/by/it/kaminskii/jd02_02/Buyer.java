@@ -5,7 +5,8 @@ package by.it.kaminskii.jd02_02;/* created by Kaminskii Ivan
 import java.util.StringJoiner;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-    private final Object MONITOR_BUYER;
+
+    final Object MONITOR_BUYER;
     boolean waiting = false;
 
     public Buyer(int whichOne) {
@@ -16,6 +17,9 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public Object getMONITOR() {
         return MONITOR_BUYER;
     }
+
+
+
     public void setSomeWaiting(boolean waiting) {
         this.waiting = waiting;
     }
@@ -30,6 +34,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         choosePurchase();
         putGoodsToBasket();
+        goToQueue();
         leavingTheMarket();
     }
 

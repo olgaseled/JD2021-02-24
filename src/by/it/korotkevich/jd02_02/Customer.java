@@ -1,13 +1,16 @@
 package by.it.korotkevich.jd02_02;
 
-import by.it._classwork_.jd02_02.QueueCustomers;
-import by.it._examples_.jd01_07.bean.Run;
+import java.util.concurrent.Semaphore;
 
 class Customer extends Thread implements ICustomer, IUseBasket {
 
     private final Object MONITOR;
 
     private boolean waiting = false;
+
+    Basket basket = new Basket();
+
+    private final Context context;
 
     Object getMONITOR() {
         return MONITOR;
@@ -17,10 +20,11 @@ class Customer extends Thread implements ICustomer, IUseBasket {
         this.waiting = waiting;
     }
 
-    Customer(int number) {
+    Customer(int number, Context context) {
         super("Customer #" + number + " ");
         MONITOR = this;
-        Manager.newCustomer();
+        this.context = context;
+        context.getManager().newCustomer();
     }
 
 
@@ -32,7 +36,7 @@ class Customer extends Thread implements ICustomer, IUseBasket {
         putGoodsToBasket();
         joinQueue();
         goOut();
-        Manager.servedCustomer();
+        context.getManager().servedCustomer();
     }
 
     @Override
@@ -56,14 +60,15 @@ class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void putGoodsToBasket() {
         int goodsAmount = Util.getRandom(1, 4);
-        Basket.putGoodsToBasket(this, goodsAmount);
+        basket.putGoodsToBasket(this, goodsAmount);
     }
 
     private void joinQueue() {
         synchronized (MONITOR) {
-            QueueOfCustomers.add(this);
+            context.getQueueOfCustomers().add(this);
+            System.out.println(this + "joined the queue.");
             waiting = true;
-            while (waiting){
+            while (waiting) {
                 try {
                     MONITOR.wait();
                 } catch (InterruptedException e) {
