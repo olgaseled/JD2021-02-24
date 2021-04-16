@@ -13,15 +13,19 @@ public class ParserTest {
     public void setUp() throws Exception {
         parser = new Parser();
     }
+    Var actualVar;
+    double actual;
+    double expected;
+
   //  A=2+5.3 (выведет на экран 7.3)
      //       • B=A*3.5 (выведет на экран 25.55)
       //      • B1=B+0.11*-5 (выведет на экран 25)
        //     • B2=A/2-1 (выведет на экран 2.65)
     @Test
     public void scalarTest() throws CalcException {
-        Var actualVar = parser.evaluate("A=2+5.3");
-        double actual = Double.parseDouble(actualVar.toString());
-        double expected = 7.3;
+        actualVar = parser.evaluate("A=2+5.3");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 7.3;
         assertEquals(expected, actual, 1e-10);
 
         actualVar = parser.evaluate("B=A*3.5");
@@ -38,21 +42,6 @@ public class ParserTest {
         actual = Double.parseDouble(actualVar.toString());
         expected = 2.65;
         assertEquals(expected, actual, 1e-10);
-
-        actualVar = parser.evaluate("C=B+(A*2)");
-        actual = Double.parseDouble(actualVar.toString());
-        expected = 40.15;
-        assertEquals(expected, actual, 1e-10);
-
-        actualVar = parser.evaluate("D=((C-0.15)-20)/(7-5)");
-        actual = Double.parseDouble(actualVar.toString());
-        expected = 10;
-        assertEquals(expected, actual, 1e-10);
-
-        actualVar = parser.evaluate("E={2,3}*(D/2)");
-        String actualStr = actualVar.toString();
-        String expectedVec = "{10.0, 15.0}";
-        assertEquals(expectedVec, actualStr);
     }
 
     //C=B+(A*2) (выведет на экран 40.15)
@@ -61,21 +50,33 @@ public class ParserTest {
     @Test
     public void vectorTest() throws CalcException {
 
-        Var actualVar = parser.evaluate("C=B+(A*2)");
-        double actual = Double.parseDouble(actualVar.toString());
-        double expected = 40.15;
+        actualVar = parser.evaluate("C=25.55+(7.3*2)");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 40.15;
         assertEquals(expected, actual, 1e-10);
 
-        /*actualVar = parser.evaluate("D=((C-0.15)-20)/(7-5)");
+        actualVar = parser.evaluate("D=((40.15-0.15)-20)/(7-5)");
         actual = Double.parseDouble(actualVar.toString());
         expected = 10;
         assertEquals(expected, actual, 1e-10);
 
-        actualVar = parser.evaluate("E={2,3}*(D/2)");
-        actual = Double.parseDouble(actualVar.toString());
-        String expectedVec = "{10,15}";
-        assertEquals(expectedVec, actual, 1e-10);
-*/
+        actualVar = parser.evaluate("E={2,3}*(10/2)");
+        String actualStr = actualVar.toString();
+        String expectedVec = "{10.0, 15.0}";
+        assertEquals(expectedVec, actualStr);
+    }
+
+    @Test
+    public void matrixTest() throws CalcException {
+        actualVar = parser.evaluate("M1={{1,2,3},{4,5,6}}*5");
+        String actualMatrix = actualVar.toString();
+        String expectedMatrix = "{{5.0, 10.0, 15.0}, {20.0, 25.0, 30.0}}";
+        assertEquals(expectedMatrix, actualMatrix);
+
+        actualVar = parser.evaluate("M1={1,2,3,4,5,6}+5");
+        actualMatrix = actualVar.toString();
+        expectedMatrix = "{6.0, 7.0, 8.0, 9.0, 10.0, 11.0}";
+        assertEquals(expectedMatrix, actualMatrix);
     }
 
 }
