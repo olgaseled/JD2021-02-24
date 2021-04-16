@@ -4,6 +4,7 @@ import java.util.StringJoiner;
 
 import static by.it.dudko.calc.Utils.*;
 
+
 public class Matrix extends Var {
 
     private final double[][] value;
@@ -20,8 +21,12 @@ public class Matrix extends Var {
         this.value = castAsMatrixOfDoubles(strMatrix);
     }
 
+    public double[][] getValue() {
+        return value;
+    }
+
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] result = copyMatrix(this.value);
             double addendum = ((Scalar) other).getValue();
@@ -37,7 +42,7 @@ public class Matrix extends Var {
             double[][] result = copyMatrix(this.value);
             if (result.length != addendum.length ||
                     result[0].length != addendum[0].length) {
-                return null; // TODO add incompatible matrices exception
+                throw new CalcException("incompatible matrices exception");
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -46,17 +51,21 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.add(this);
+        return super.add(other);
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             return this.add(other.mul(new Scalar("-1")));
         }
         if (other instanceof Matrix) {
             double[][] result = copyMatrix(this.value);
             double[][] subtraction = ((Matrix) other).value;
+            if (result.length != subtraction.length ||
+                    result[0].length != subtraction[0].length) {
+                throw new CalcException("incompatible matrices exception");
+            }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result[i][j] -= subtraction[i][j];
@@ -64,11 +73,11 @@ public class Matrix extends Var {
             }
             return new Matrix(result);
         }
-        return other.sub(this);
+        return super.sub(other);
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] result = copyMatrix(this.value);
             double multiplier = ((Scalar) other).getValue();
@@ -83,7 +92,7 @@ public class Matrix extends Var {
             double[][] left = this.value;
             double[][] right = ((Matrix) other).value;
             if (left[0].length != right.length) {
-                return null; // TODO add incompatible matrices exception
+                throw new CalcException("incompatible matrices exception");
             }
             double[][] result = new double[left.length][right[0].length];
             for (int i = 0; i < left.length; i++) {
@@ -99,9 +108,9 @@ public class Matrix extends Var {
             double[][] left = this.value;
             double[] right = ((Vector) other).getValue();
             if (left[0].length != right.length) {
-                return null; // TODO add incompatible matrices exception
+                throw new CalcException("incompatible matrices exception");
             }
-            double[] result = new double[right.length];
+            double[] result = new double[left.length];
             for (int i = 0; i < left.length; i++) {
                 for (int j = 0; j < right.length; j++) {
                     result[i] += left[i][j] * right[j];
@@ -109,11 +118,11 @@ public class Matrix extends Var {
             }
             return new Vector(result);
         }
-        return super.div(other);
+        return super.mul(other);
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         return super.div(other);
     }
 
@@ -124,29 +133,6 @@ public class Matrix extends Var {
             stringJoiner.add(stringifyArray(item));
         }
         return stringJoiner.toString();
-    }
-
-
-    private double[][] castAsMatrixOfDoubles(String strMatrix) {
-        final int m, n;
-        strMatrix = trimBraces(strMatrix);
-        String[] strMatrixRows = splitToMatrixRows(strMatrix);
-        m = strMatrixRows.length;
-        n = splitToRowItems(trimBraces(strMatrixRows[0])).length;
-        double[][] matrix = new double[m][n];
-
-        for (int i = 0; i < m; i++) {
-            String strMatrixRow = trimBraces(strMatrixRows[i]);
-            String[] matrixRow = splitToRowItems(strMatrixRow);
-            if (n != matrixRow.length) {
-                System.out.println("Provided matrix has various row length");
-                continue;
-            }
-            for (int j = 0; j < n; j++) {
-                matrix[i][j] = Double.parseDouble(matrixRow[j]);
-            }
-        }
-        return matrix;
     }
 
 }

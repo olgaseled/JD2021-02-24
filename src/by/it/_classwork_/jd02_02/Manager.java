@@ -2,26 +2,26 @@ package by.it._classwork_.jd02_02;
 
 class Manager {
 
-    private volatile static int COUNT_BUYER_IN = 0;
-    private volatile static int COUNT_BUYER_OUT = 0;
+    private volatile static int countCustomerIn = 0;
+    private volatile static int countCustomerOut = 0;
 
     static synchronized void newCustomer() {
-        COUNT_BUYER_IN++;
+        countCustomerIn++;
     }
 
     static void completeCustomer() {
         synchronized (Manager.class) {
-            COUNT_BUYER_OUT++;
+            countCustomerOut++;
         }
     }
 
     static boolean storeIsOpened() {
         //countCustomerIn<Config.PLAN; //prod
-        return COUNT_BUYER_IN != Config.PLAN; //dev
+        return countCustomerIn != Config.PLAN; //dev
     }
 
     static boolean storeIsClosed() {
         // countCustomerOut>=Config.PLAN; //prod
-        return COUNT_BUYER_OUT == Config.PLAN; //dev
+        return countCustomerOut == Config.PLAN; //dev
     }
 }

@@ -27,7 +27,6 @@ public class Cashier implements Runnable {
                 }
             } else {
                 //need waiting
-                Thread.onSpinWait();
                 Util.sleep(1);
             }
         }

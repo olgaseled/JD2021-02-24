@@ -5,14 +5,25 @@ import java.util.Scanner;
 public class ConsoleRunner {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String line;
-
         Parser parser = new Parser();
-
         Printer printer = new Printer();
-        while (!(line = scanner.nextLine()).equals("end")) {
-            Var result = parser.calc(line);
-            printer.print(result);
+        for (; ; ) {
+            String exspression = scanner.nextLine();
+            if (!exspression.equals("end")) {
+                try {
+                    Var resultVar = parser.analyze(exspression);
+                    printer.print(resultVar);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
+            } else {
+                try {
+                    VarRepository.save(Var.vars);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
+                break;
+            }
         }
     }
 }

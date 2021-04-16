@@ -1,6 +1,5 @@
 package by.it.runcov.jd01_05;
 
-import static java.lang.Math.*;
 
 public class TaskB {
 
@@ -10,14 +9,30 @@ public class TaskB {
     }
 
     private static void step1() {
-        for (double a = 0; a <= 2; a = a + 0.2) {
+        for (double a = 1; a <= 2; a = a + 0.2) {
+            double y = 0;
             for (double x = 1; x <= 6; x++) {
-                double y = ((pow(7, a)) - cos(x));
-                System.out.printf("a=%2.2f y = %g\n", a, y);
+                y += Math.pow(7, a) - Math.cos(x);
+                System.out.printf("a=%3.2f y = %g\n", a, y);
             }
         }
     }
 
     private static void step2() {
+        for (double x = -5.5; x < 2; x = x + 0.5) {
+            double a = 0;
+            if (x / 2 > -2 && x / 2 <= -1) {
+                a = Math.log10(Math.sin(x * x) + 2.74);
+                System.out.printf("x/2=%5.2f a = %-10f\n", x / 2, a);
+            } else if (x / 2 > -1 && x / 2 < 0.2) {
+                a = Math.log10(Math.cos(x * x) + 2.74);
+                System.out.printf("x/2=%5.2f a = %-10f\n", x / 2, a);
+            } else if (x / 2 == 0.2) {
+                a = Math.log10(Math.cos(x * x) / Math.sin(x * x) + 2.74);
+                System.out.printf("x/2=%5.2f a = %-10.8f\n", x / 2, a);
+            } else {
+                System.out.printf("x/2=%5.2f вычисления не определены\n", x / 2);
+            }
+        }
     }
 }

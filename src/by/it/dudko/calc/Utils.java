@@ -31,4 +31,36 @@ class Utils {
         }
         return copyMatrix;
     }
+
+    static double[][] castAsMatrixOfDoubles(String strMatrix) {
+        final int m, n;
+        strMatrix = trimBraces(strMatrix);
+        String[] strMatrixRows = splitToMatrixRows(strMatrix);
+        m = strMatrixRows.length;
+        n = splitToRowItems(trimBraces(strMatrixRows[0])).length;
+        double[][] matrix = new double[m][n];
+
+        for (int i = 0; i < m; i++) {
+            String strMatrixRow = trimBraces(strMatrixRows[i]);
+            String[] matrixRow = splitToRowItems(strMatrixRow);
+            if (n != matrixRow.length) {
+                System.out.println("Provided matrix has various row length");
+                continue;
+            }
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = Double.parseDouble(matrixRow[j]);
+            }
+        }
+        return matrix;
+    }
+
+    static double[] castAsVectorOfDoubles(String strVector) {
+        strVector = Utils.trimBraces(strVector);
+        String[] strVectorItems = Utils.splitToRowItems(strVector);
+        double[] vector = new double[strVectorItems.length];
+        for (int i = 0; i < strVectorItems.length; i++) {
+            vector[i] = Double.parseDouble(strVectorItems[i]);
+        }
+        return vector;
+    }
 }
