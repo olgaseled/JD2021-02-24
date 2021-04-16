@@ -1,18 +1,34 @@
 package by.it.kaminskii.calc;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract class Var implements Operation {
+
+    private static final Map<String, Var> vars = new HashMap<>();
+
+    static Var saveVar(String name, Var var) {
+        vars.put(name, var);
+        return var;
+    }
+
 
     static Var creatVar(String operand) {
         operand = operand.trim().replaceAll("\\s", "");
+//        try {
         if (operand.matches(Patterns.SCALAR))
             return new Scalar(operand);
         else if (operand.matches(Patterns.VECTOR))
             return new Vector(operand);
         else if (operand.matches(Patterns.MATRIX))
             return new Matrix(operand);
-        else
-            return null;//TODO error
+        else if (vars.containsKey(operand))
+            return vars.get(operand);
+//        } catch (Exception e) {
+//            throw  new RuntimeException("не в этот раз");
+//        }
+        return null;
     }
 
 

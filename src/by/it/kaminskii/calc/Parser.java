@@ -1,13 +1,23 @@
 package by.it.kaminskii.calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+
     Var calc(String expression) {
+        expression=expression.replaceAll("\\s","");
+        ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         String[] operand = expression.split(Patterns.OPERATION);
+        Var two = Var.creatVar(operands.get(1));
+        if(operands.contains("=")){
+            return Var.saveVar(operands.get(0), two);
+        }
+
         Var one = Var.creatVar(operand[0]);
-        Var two = Var.creatVar(operand[1]);
         if (one == null || two == null)
             return null;//TODO error
         Pattern p = Pattern.compile(Patterns.OPERATION);

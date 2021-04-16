@@ -3,7 +3,8 @@ package by.it.kaminskii.calc;
 import java.util.Arrays;
 
 class Vector extends Var {
-    private double[] value;
+
+    private final double[] value;
 
     public double[] getValue() {
         return value;
@@ -89,8 +90,7 @@ class Vector extends Var {
     }
 
     Vector(String strVector) {
-        strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");
-        ;
+        strVector = strVector.replaceAll("\\{|}|", "").replaceAll(" ", "");
         String[] v = strVector.split(",");
         value = new double[v.length];
         for (int i = 0; i < v.length; i++) {
