@@ -1,33 +1,32 @@
 package by.it.khrolovich.jd02_03;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Manager {
 
-    private static int countCustomerIn = 0;
-    private static int countCustomerOut = 0;
+    private static final AtomicInteger countCustomerIn = new AtomicInteger(0);
+    private static final AtomicInteger countCustomerOut = new AtomicInteger(0);
+    //убираем статик
 
-
-    static synchronized void newCustomer() {
-        countCustomerIn++;
+    static void newCustomer() {
+        countCustomerIn.getAndIncrement();
         //неатомарная операция
     }
 
-    static void completeCustomer(){
-        synchronized (Manager.class) {//то же самое, чтов методе newCustomer
-            countCustomerOut++;
-        }
-        //static - один единственный
-        //если 3 магазина запускать. Нельзя расценивать как один объект static
+    static void completeCustomer() {
+        countCustomerOut.getAndIncrement();
     }
-    static boolean storeIsOpened(){//люди могут заходить
+
+    static boolean storeIsOpened() {//люди могут заходить
 
         //return countCustomerIn<=Config.PLAN;//production
-        return countCustomerIn!= Config.PLAN;//dev разработка
+        return countCustomerIn.get() != Config.PLAN;//dev разработка
         //просто чтение, можно
     }
 
-    static boolean storeIsClosed(){
+    static boolean storeIsClosed() {
         //return countCustomerOut>=Config.PLAN;
-        return countCustomerOut==Config.PLAN;
+        return countCustomerOut.get() == Config.PLAN;
     }
 
 }

@@ -2,8 +2,10 @@ package by.it.khrolovich.jd02_03;
 
 public class Cashier implements Runnable {
     private String name;
+    private QueueCustomer queueCustomer;
 
-    public Cashier(int number) {
+    public Cashier(int number,QueueCustomer queueCustomer) {
+        this.queueCustomer = queueCustomer;
         this.name = "\tCashier #" + number + " ";
     }
 
@@ -11,7 +13,7 @@ public class Cashier implements Runnable {
     public void run() {
         System.out.println(this + "opened");
         while (!Manager.storeIsClosed()) {
-            Customer customer = QueueCustomer.poll();
+            Customer customer = queueCustomer.poll();
             if (customer != null) {
 
                 synchronized (customer.getMONITOR()) {

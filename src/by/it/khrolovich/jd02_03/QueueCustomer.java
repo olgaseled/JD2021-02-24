@@ -13,15 +13,23 @@ public class QueueCustomer {
     }
 
     void add(Customer customer) {
-            customers.addLast(customer);
+        try {
+            customers.putLast(customer);//добавился в конец или заблокировался
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     Customer poll() {
         try {
-            return customers.poll(100, TimeUnit.MICROSECONDS);//wait before poll from queue
+            return customers.pollFirst(100, TimeUnit.MICROSECONDS);//wait before poll from queue
+            // неблолкирующая операция.
+            // Или вернут null, или customer. И зависание. Получает покупателя или мгновенно, или с ожиданием
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        //throw new RuntimeException("!");//До этой точки метод не дойдет, поток ниоткуда не прерывается
+        //Неожиданное завершение потока
     }
 
 }

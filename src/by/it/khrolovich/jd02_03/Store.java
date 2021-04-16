@@ -1,7 +1,5 @@
 package by.it.khrolovich.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -10,13 +8,16 @@ public class Store {
 
     public static ListGoods priceList;
 
-
     public static void main(String[] args) {
+        QueueCustomer queueCustomer = new QueueCustomer(Config.Q_LEN);
+        //Manager manager = new Manager();
+        //Context context = new Context(queueCustomers, manager);
+
         priceList = new ListGoods();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
         for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i);
+            Cashier cashier = new Cashier(i,queueCustomer);
             threadPool.execute(cashier);
         }
 
@@ -28,7 +29,7 @@ public class Store {
                 int count = Util.getRandom(0, 2);
                 for (int j = 0; j < count && Manager.storeIsOpened(); j++) {
                     numberCustomer++;
-                    Customer customer = new Customer(numberCustomer);
+                    Customer customer = new Customer(numberCustomer,queueCustomer);
                     threadPool.execute(customer);
                 }
                 Util.Sleep(1000);

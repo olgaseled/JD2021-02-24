@@ -2,6 +2,7 @@ package by.it.khrolovich.jd02_03;
 
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
+    private QueueCustomer queueCustomer;
     //int number;//номер покупателя
     private Basket basket = new Basket();//его личная корзинка
 
@@ -20,8 +21,9 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return basket;
     }
 
-    public Customer(int numberCustomer) {
+    public Customer(int numberCustomer,QueueCustomer queueCustomer) {
         super("Customer №" + numberCustomer + " ");
+        this.queueCustomer = queueCustomer;
         MONITOR = this;
         Manager.newCustomer();//посчитается в момент рождения покупателя
     }
@@ -76,7 +78,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void goToQueue() {
         synchronized (MONITOR) {
-            QueueCustomer.add(this);//добавляет сам себя
+            queueCustomer.add(this);//добавляет сам себя
             waiting = true;
             while (waiting) {
                 try {
