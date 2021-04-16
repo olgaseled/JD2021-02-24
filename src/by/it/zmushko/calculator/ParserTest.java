@@ -37,4 +37,14 @@ public class ParserTest {
         assertEquals(expected, actual, 1e-10);
 
     }
+
+    @Test
+    public void vectorTest() throws CalcException {
+        Var actualVar = parser.evaluate("C=B+(A*2)");
+        double actual = Double.parseDouble(actualVar.toString());
+        double expected = 40.15;
+        assertEquals(expected, actual, 1e-10);
+
+    }
+
 }
