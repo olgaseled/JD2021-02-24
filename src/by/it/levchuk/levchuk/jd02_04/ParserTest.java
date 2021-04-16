@@ -10,7 +10,7 @@ public class ParserTest {
     private Parser parser;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         parser = new Parser();
     }
 
