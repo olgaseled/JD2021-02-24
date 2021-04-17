@@ -66,10 +66,20 @@ public class ParserTest {
 
     @Test
     public void analyzeMatrixTest() throws CalcException {
-        Matrix matrix = (Matrix) parser.analyze("{{1,2},{8,3}}*{{1,2},{8,3}}");
-        double[][] actualMatrix = matrix.getValue();
-        double[][] expectedMatrix = {{17.0, 8.0}, {32.0, 25.0}};
-        assertEquals(actualMatrix, expectedMatrix);
+        Matrix matrixAdd = (Matrix) parser.analyze("{{1,2},{3,4}}+{{1,2},{3,4}}");
+        double[][] actualMatrixAdd = matrixAdd.getValue();
+        double[][] expectedMatrixAdd = {{2, 4}, {6, 8}};
+        assertArrayEquals(expectedMatrixAdd,actualMatrixAdd);
+
+        Matrix matrixSub = (Matrix) parser.analyze("{{5,6},{7,8}}-{{1,2},{3,4}}");
+        double[][] actualMatrixSub = matrixSub.getValue();
+        double[][] expectedMatrixSub = {{4, 4}, {4, 4}};
+        assertEquals(actualMatrixSub, expectedMatrixSub);
+
+        Matrix matrixMul = (Matrix) parser.analyze("{{1,2},{3,4}}*{{1,2},{3,4}}");
+        double[][] actualMatrixMul = matrixMul.getValue();
+        double[][] expectedMatrixMul = {{7, 10}, {15, 22}};
+        assertArrayEquals(expectedMatrixMul,actualMatrixMul);
     }
 
     @After
