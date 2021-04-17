@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 public class Matrix extends Var {
 
-    final private double[][] value;
+    private final double[][] value;
+
     Matrix(double[][] value) {
         this.value = value;
     }
@@ -51,7 +52,6 @@ public class Matrix extends Var {
         } else this.value = null;
     }
 
-
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
@@ -82,7 +82,7 @@ public class Matrix extends Var {
 
     @Override
     public Var sub(Var other) throws CalcException {
-        if (other instanceof Scalar){
+        if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res.length; j++) {
@@ -90,7 +90,7 @@ public class Matrix extends Var {
                 }
             }
             return new Matrix(res);
-        }else if (other instanceof Vector)
+        } else if (other instanceof Vector)
             return super.sub(other);
         else if (other instanceof Matrix) {
             if (this.value.length == ((Matrix) other).value.length) {
@@ -105,7 +105,7 @@ public class Matrix extends Var {
                 }
                 return new Matrix(res);
             } else return super.sub(other);
-        }else return super.sub(other);
+        } else return super.sub(other);
     }
 
     @Override
