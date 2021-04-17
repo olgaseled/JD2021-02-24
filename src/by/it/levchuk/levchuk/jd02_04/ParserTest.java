@@ -80,6 +80,11 @@ public class ParserTest {
         double[][] actualMatrixMul = matrixMul.getValue();
         double[][] expectedMatrixMul = {{7, 10}, {15, 22}};
         assertArrayEquals(expectedMatrixMul, actualMatrixMul);
+
+        Matrix matrixMulScalar = (Matrix) parser.analyze("{{1,2},{3,4}}*2");
+        double[][] actualMatrixMulScalar = matrixMulScalar.getValue();
+        double[][] expectedMatrixMulScalar = {{2, 4}, {6, 8}};
+        assertArrayEquals(expectedMatrixMulScalar, actualMatrixMulScalar);
     }
 
     @After
