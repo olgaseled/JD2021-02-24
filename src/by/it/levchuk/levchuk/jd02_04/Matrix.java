@@ -6,34 +6,13 @@ import java.util.Arrays;
 
 public class Matrix extends Var {
 
-    private final double[][] value;
+    final private double[][] value;
+    Matrix(double[][] value) {
+        this.value = value;
+    }
 
-    @Override
-    public Var add(Var other) throws CalcException {
-        if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res.length; j++) {
-                    res[i][j] = res[i][j] + ((Scalar) other).getValue();
-                }
-            }
-            return new Matrix(res);
-        } else if (other instanceof Vector)
-            return super.add(other);
-        else if (other instanceof Matrix) {
-            if (this.value.length == ((Matrix) other).value.length) {
-                double[][] res = new double[value.length][0];
-                for (int i = 0; i < value.length; i++) {
-                    res[i] = Arrays.copyOf(value[i], value[i].length);
-                }
-                for (int i = 0; i < res.length; i++) {
-                    for (int j = 0; j < res.length; j++) {
-                        res[i][j] = res[i][j] + ((Matrix) other).value[i][j];
-                    }
-                }
-                return new Matrix(res);
-            } else return super.add(other);
-        } else return super.add(other);
+    public double[][] getValue() {
+        return value;
     }
 
     public Matrix(String strMatrix) {
@@ -70,6 +49,35 @@ public class Matrix extends Var {
             }
             this.value = mas;
         } else this.value = null;
+    }
+
+
+    @Override
+    public Var add(Var other) throws CalcException {
+        if (other instanceof Scalar) {
+            double[][] res = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res.length; j++) {
+                    res[i][j] = res[i][j] + ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        } else if (other instanceof Vector)
+            return super.add(other);
+        else if (other instanceof Matrix) {
+            if (this.value.length == ((Matrix) other).value.length) {
+                double[][] res = new double[value.length][0];
+                for (int i = 0; i < value.length; i++) {
+                    res[i] = Arrays.copyOf(value[i], value[i].length);
+                }
+                for (int i = 0; i < res.length; i++) {
+                    for (int j = 0; j < res.length; j++) {
+                        res[i][j] = res[i][j] + ((Matrix) other).value[i][j];
+                    }
+                }
+                return new Matrix(res);
+            } else return super.add(other);
+        } else return super.add(other);
     }
 
     @Override
@@ -157,18 +165,6 @@ public class Matrix extends Var {
         return Arrays.deepToString(value)
                 .replace('[', '{')
                 .replace(']', '}');
-    }
-
-    @Override
-    public double[][] getValue() {
-        return new double[0][];
-    }
-
-    public Matrix(double[][] value) {
-        this.value = new double[value.length][0];
-        for (int i = 0; i < value.length; i++) {
-            this.value[i] = Arrays.copyOf(value[i], value[i].length);
-        }
     }
 }
 
