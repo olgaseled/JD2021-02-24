@@ -50,18 +50,19 @@ public class ParserTest {
 
     @Test
     public void vectorTest() throws CaltExeption {
+        //C=B+(A*2)(выведет на экран 40.15).
         Vector vector = (Vector) parser.calc("V={1,2,3}+{4,5,6}");
         double[] actual = vector.getValue();
         double[] excpected = {5, 7, 9};
         assertArrayEquals(excpected, actual, 1e-5);
 
-
+//D=((C-0.15)-20)/(7-5) (выведет на экран 10)
         Vector vector1 = (Vector) parser.calc("C={1,2,3}*5");
         double[] actual1 = vector1.getValue();
         double[] excpected1 = {5,10,15};
         assertArrayEquals(excpected1, actual1, 1e-5);
 
-
+ //E={2,3}*(D/2) (выведет на экран {10,15} ).
         Vector vector2 = (Vector) parser.calc("D={27,15,21}/3.0");
         double[] actual2 = vector2.getValue();
         double[] excpected2 = {9,5,7};
