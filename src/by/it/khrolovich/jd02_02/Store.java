@@ -23,6 +23,8 @@ public class Store {
 
         System.out.println("Store opened");
         int numberCustomer = 0;
+        int counterForPensionner = 0;
+        int intervalForPensioneer = Util.getRandom(3, 5);
         while (Manager.storeIsOpened()) {
             for (int i = 0; i < Config.FINAL_TIME; i++) {
 
@@ -30,9 +32,18 @@ public class Store {
                 for (int j = 0; j < count && Manager.storeIsOpened(); j++) {//если 99 и добавилось 2
                     // если нет проверки Manager.storeIsOpened() , то проскакивает больше покупателей
                     numberCustomer++;
-                    Customer customer = new Customer(numberCustomer);
-                    //customers.add(customer);
-                    threads.add(customer);
+                    counterForPensionner++;
+
+                   Customer customer;
+                    if (counterForPensionner == intervalForPensioneer) {
+                        customer = new Customer(numberCustomer, true);
+                        counterForPensionner = 0;
+                        intervalForPensioneer =Util.getRandom(3, 5);
+                    } else {
+                        customer = new Customer(numberCustomer, false);
+                    }
+
+                   threads.add(customer);
                     customer.start();
                 }
                 Util.Sleep(1000);
