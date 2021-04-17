@@ -48,8 +48,22 @@ public class Matrix extends Var {
             return new Matrix(res);
         }else if (other instanceof Vector)
             return super.sub(other);
-
-        return super.sub(other);
+        else if (other instanceof Vector)
+            return super.add(other);
+        else if (other instanceof Matrix) {
+            if (this.value.length == ((Matrix) other).value.length) {
+                double[][] res = new double[value.length][0];
+                for (int i = 0; i < value.length; i++) {
+                    res[i] = Arrays.copyOf(value[i], value[i].length);
+                }
+                for (int i = 0; i < res.length; i++) {
+                    for (int j = 0; j < res.length; j++) {
+                        res[i][j] = res[i][j] - ((Matrix) other).value[i][j];
+                    }
+                }
+                return new Matrix(res);
+            } else return super.sub(other);
+        }else return super.sub(other);
     }
 
     @Override
