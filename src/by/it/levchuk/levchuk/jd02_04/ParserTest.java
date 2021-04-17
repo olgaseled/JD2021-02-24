@@ -41,23 +41,23 @@ public class ParserTest {
         actual = Double.parseDouble(actualVar.toString());
         expected = 2.65;
         assertEquals(expected, actual, 1e-10);
+    }
 
+    @Test
 // C=B+(A*2) (выведет на экран 40.15).
 // D=((C-0.15)-20)/(7-5) (выведет на экран 10)
-
-        actualVar = parser.analyze("C=B+(A*2)");
-        actual = Double.parseDouble(actualVar.toString());
-        expected = 40.15;
+// E={2,3}*(D/2) (выведет на экран {10,15} )
+    public void analyzeVector() throws CalcException {
+        Var actualVar = parser.analyze("C=B+(A*2)");
+        double actual = Double.parseDouble(actualVar.toString());
+        double expected = 40.15;
         assertEquals(expected, actual, 1e-10);
 
         actualVar = parser.analyze("D=((C-0.15)-20)/(7-5)");
         actual = Double.parseDouble(actualVar.toString());
         expected = 10;
         assertEquals(expected, actual, 1e-10);
-    }
 
-    @Test
-    public void analyzeVector() throws CalcException {
         Vector actVector = (Vector) parser.analyze("E={2,3}*(D/2)");
         double[] actualVector = actVector.getValue();
         double[] expectedVector = {10, 15};
