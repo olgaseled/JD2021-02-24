@@ -46,7 +46,8 @@ public class Matrix extends Var {
                 }
             }
             return new Matrix(res);
-        }
+        }else if (other instanceof Vector)
+            return super.sub(other);
 
         return super.sub(other);
     }
