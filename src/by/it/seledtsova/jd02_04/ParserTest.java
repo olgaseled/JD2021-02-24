@@ -50,34 +50,28 @@ public class ParserTest {
 
     @Test
     public void vectorTest() throws CaltExeption {
-        //C=B+(A*2)(выведет на экран 40.15).
-        Vector vector = (Vector) parser.calc("V={1,2,3}+{4,5,6}");
-        double[] actual = vector.getValue();
-        double[] excpected = {5, 7, 9};
-        assertArrayEquals(excpected, actual, 1e-5);
+
+//C=B+(A*2)(выведет на экран 40.15).
+        Var actualVar5 = parser.calc("C=25.55+(7.3*2)");
+        double actual5 = Double.parseDouble(actualVar5.toString());
+        double expected5 = 40.15;
+        assertEquals(expected5, actual5, 1e-5);
 
 //D=((C-0.15)-20)/(7-5) (выведет на экран 10)
-        Vector vector1 = (Vector) parser.calc("C={1,2,3}*5");
-        double[] actual1 = vector1.getValue();
-        double[] excpected1 = {5,10,15};
-        assertArrayEquals(excpected1, actual1, 1e-5);
+        Var actualVar6 = parser.calc("D=((40.15-0.15)-20)/(7-5)");
+        double actual6 = Double.parseDouble(actualVar6.toString());
+        double expected6 = 10;
+        assertEquals(expected6, actual6, 1e-5);
 
- //E={2,3}*(D/2) (выведет на экран {10,15} ).
-        Vector vector2 = (Vector) parser.calc("D={27,15,21}/3.0");
-        double[] actual2 = vector2.getValue();
-        double[] excpected2 = {9,5,7};
-        assertArrayEquals(excpected2, actual2, 1e-5);
-
-        Vector vector3 = (Vector) parser.calc("E={1,2,3}+7");
+ //E={2,3}*(D/2) (выведет на экран {10,15} )
+        Vector vector3 = (Vector) parser.calc("E={2,3}*(10/2)");
         double[] actual3 = vector3.getValue();
-        double[] excpected3 = {8,9,10};
+        double[] excpected3 = {10,15};
         assertArrayEquals(excpected3, actual3, 1e-5);
-
-
-
     }
 
-   @Test
+
+    @Test
     public void matrixTest() {
 
     }
