@@ -38,6 +38,10 @@ public class Matrix extends Var {
 
     @Override
     public Var sub(Var other) throws CalcException {
+        if (other instanceof Scalar){
+
+        }
+
         return super.sub(other);
     }
 
