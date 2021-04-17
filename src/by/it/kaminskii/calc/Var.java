@@ -1,6 +1,8 @@
 package by.it.kaminskii.calc;
 
 
+import by.it._classwork_.calc.CalcException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ abstract class Var implements Operation {
     }
 
 
-    static Var creatVar(String operand) {
+    static Var creatVar(String operand) throws CalcExeption {
         operand = operand.trim().replaceAll("\\s", "");
 //        try {
         if (operand.matches(Patterns.SCALAR))
@@ -25,35 +27,28 @@ abstract class Var implements Operation {
             return new Matrix(operand);
         else if (vars.containsKey(operand))
             return vars.get(operand);
-//        } catch (Exception e) {
-//            throw  new RuntimeException("не в этот раз");
-//        }
-        return null;
+        throw new CalcExeption("Невозможно создать " + operand);
     }
 
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения " + this + "+" + other + " невозможна");
-        return null;
+    public Var add(Var other) throws CalcExeption {
+        throw new CalcExeption("Операция сложения " + this + "+" + other + " невозможна");
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания " + this + "-" + other + " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcExeption {
+        throw new CalcExeption("Операция вычитания " + this + "-" + other + " невозможна");
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения " + this + "*" + other + " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcExeption {
+        throw new CalcExeption("Операция умножения " + this + "*" + other + " невозможна");
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления " + this + "/" + other + " невозможна");
-        return null;
+    public Var div(Var other) throws CalcExeption {
+        throw new CalcExeption("Операция деления " + this + "/" + other + " невозможна");
     }
 
     @Override

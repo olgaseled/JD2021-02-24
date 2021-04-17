@@ -1,5 +1,7 @@
 package by.it.kaminskii.calc;
 
+
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -12,7 +14,16 @@ public class ConsoleRunner {
 
 
         while (!(line = scanner.nextLine()).equals("end")) {
-            Var result = parser.calc(line);
+            Var result = null;
+            try {
+                result = parser.calc(line);
+            } catch (CalcExeption e) {
+                try {
+                    throw new CalcExeption((e));
+                } catch (CalcExeption calcExeption) {
+                    calcExeption.printStackTrace();
+                }
+            }
             printer.print(result);
         }
     }
