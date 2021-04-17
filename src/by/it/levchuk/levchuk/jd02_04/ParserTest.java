@@ -20,7 +20,7 @@ public class ParserTest {
 // B=A*3.5 (выведет на экран 25.55)
 // B1=B+0.11*-5  (выведет на экран 25)
 // B2=A/2-1 (выведет на экран 2.65)
-    public void analyze() throws CalcException {
+    public void analyzeScalarTest() throws CalcException {
 
         Var actualVar = parser.analyze("A=2+5.3");
         double actual = Double.parseDouble(actualVar.toString());
@@ -47,7 +47,7 @@ public class ParserTest {
 // C=B+(A*2) (выведет на экран 40.15).
 // D=((C-0.15)-20)/(7-5) (выведет на экран 10)
 // E={2,3}*(D/2) (выведет на экран {10,15} )
-    public void analyzeVector() throws CalcException {
+    public void analyzeVectorTest() throws CalcException {
         Var actualVar = parser.analyze("C=B+(A*2)");
         double actual = Double.parseDouble(actualVar.toString());
         double expected = 40.15;
