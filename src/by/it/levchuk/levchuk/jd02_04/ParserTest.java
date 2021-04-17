@@ -69,7 +69,7 @@ public class ParserTest {
         Matrix matrixAdd = (Matrix) parser.analyze("{{1,2},{3,4}}+{{1,2},{3,4}}");
         double[][] actualMatrixAdd = matrixAdd.getValue();
         double[][] expectedMatrixAdd = {{2, 4}, {6, 8}};
-        assertArrayEquals(expectedMatrixAdd,actualMatrixAdd);
+        assertArrayEquals(expectedMatrixAdd, actualMatrixAdd);
 
         Matrix matrixSub = (Matrix) parser.analyze("{{5,6},{7,8}}-{{1,2},{3,4}}");
         double[][] actualMatrixSub = matrixSub.getValue();
@@ -79,7 +79,7 @@ public class ParserTest {
         Matrix matrixMul = (Matrix) parser.analyze("{{1,2},{3,4}}*{{1,2},{3,4}}");
         double[][] actualMatrixMul = matrixMul.getValue();
         double[][] expectedMatrixMul = {{7, 10}, {15, 22}};
-        assertArrayEquals(expectedMatrixMul,actualMatrixMul);
+        assertArrayEquals(expectedMatrixMul, actualMatrixMul);
     }
 
     @After
