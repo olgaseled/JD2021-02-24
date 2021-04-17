@@ -64,6 +64,14 @@ public class ParserTest {
         assertArrayEquals(expectedVector, actualVector, 1e-10);
     }
 
+//    @Test
+//    public void analyzeMatrixTest() throws CalcException {
+//        Matrix matrix = (Matrix) parser.analyze("{{1,2},{8,3}}*{{1,2},{8,3}}");
+//        double[][] actualMatrix = matrix.getValue();
+//        double[][] expectedMatrix = {{17.0, 8.0}, {32.0, 25.0}};
+//        assertEquals(actualMatrix, expectedMatrix);
+//    }
+
     @After
     public void tearDown() throws Exception {
     }
