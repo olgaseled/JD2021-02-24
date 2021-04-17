@@ -33,7 +33,7 @@ public class Matrix extends Var {
                 }
                 return new Matrix(res);
             } else return super.add(other);
-        } return super.sub(other);
+        } else return super.add(other);
     }
 
     @Override
