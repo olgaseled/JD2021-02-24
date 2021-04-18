@@ -36,29 +36,37 @@ public class ParserTest {
         assertEquals(expected, actual, 1e-5);
 
 
+    }
+
+    @Test
+    public void Brackets() throws CalcException {
+
+        Var actualVar = parser.evaluate("C=B+(A*2)");
+        double actual = Double.parseDouble(actualVar.toString());
+        double expected = 40.15;
+        assertEquals(expected, actual, 1e-10);
+
+        actualVar = parser.evaluate("D=((C-0.15)-20)/(7-5)");
+        actual = Double.parseDouble(actualVar.toString());
+        expected = 10.0;
+        assertEquals(expected, actual, 1e-10);
+
 
     }
 
     @Test
-    public void Brackets () throws CalcException {
-
-        Var actualVar = parser.evaluate("C=B+(A*2)");
-        double  actual = Double.parseDouble(actualVar.toString());
-        double expected = 40.15;
-        assertEquals(expected, actual, 1e-10);
-
-    }
-
-@Test
-    public void Vectors () throws CalcException {
+    public void Vectors() throws CalcException {
 
 
         Vector vector = (Vector) parser.evaluate("V={1,2}+{3,4}");
         double[] actualVector = vector.getValue();
-        double[] expectedVector = {4,6};
-        assertArrayEquals(expectedVector,actualVector,1e-5);
+        double[] expectedVector = {4, 6};
+        assertArrayEquals(expectedVector, actualVector, 1e-5);
 
-
+        vector = (Vector) parser.evaluate("E={2,3}*(D/2)");
+        actualVector = vector.getValue();
+        expectedVector = new double[]{10, 15};
+        assertArrayEquals(expectedVector, actualVector, 1e-5);
 
     }
 
