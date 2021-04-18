@@ -3,3 +3,6 @@ messages.question=Хороший день, не правда ли?
 user.firstname=Александр
 user.lastname=Левчук
 user.nickname=краш-нубик
+user.i=Я слушатель курса Java
+user.teacher=Преподаватель Александр Хмелёв
+user.level=Я юниор
