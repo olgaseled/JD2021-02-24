@@ -8,7 +8,7 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             return new Scalar(this.value + ((Scalar) other).value);
         }
-        
+
         return other.add(this);
     }
 
