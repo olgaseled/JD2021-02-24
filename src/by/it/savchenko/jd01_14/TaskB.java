@@ -107,7 +107,9 @@ public class TaskB {
         }
         System.out.printf(Locale.ENGLISH, "\navg=%f\n", sum / list.size());
     }
-}
+
+    }
+
 
 
 

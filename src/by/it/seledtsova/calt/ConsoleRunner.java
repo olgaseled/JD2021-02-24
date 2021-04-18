@@ -11,9 +11,13 @@ public class ConsoleRunner {
         Printer printer=new Printer(); // будем передавать их результат
 
        while (!(line=scanner.nextLine()).equals("end")) { // до тех пор, пока это выражение НЕ разняеся end , мы их будм читать
-           Var result=parser.calc(line); // передадим вычисления в parser
-           printer.print(result); // печатаем , то что посчитали
-       }
+           try {
+              Var result = parser.calc(line); //передадим вычисления в parser
+               printer.print(result); // печатаем , то что посчитали
+           } catch (CaltExeption e) {
+               System.out.println(e.getMessage());
+           }
+                }
 
     }
 

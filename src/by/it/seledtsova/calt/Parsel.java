@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parsel { // принемает на вход некое значение
-    Var calc (String expression) { //метод калк будет вычислять выражение на вход он принемает строку
+    Var calc (String expression) throws CaltExeption { //метод калк будет вычислять выражение на вход он принемает строку
         //2.0*2.0
         String[] operand=expression.split(Patterns.OPERATION); // разделяет наше выражени на две части в соотвествии с паттерном операции
 
@@ -14,7 +14,8 @@ public class Parsel { // принемает на вход некое значе�
         }
         Var one= Var.createVar(operand[0]); // первая переменная
         if (one==null || two==null)  // если кто-либо равен нулю
-            return null; //TODO create error
+           // return null; //TODO create error
+            throw new CaltExeption("Opps error");
         Pattern p= Pattern.compile(Patterns.OPERATION); //
         Matcher m=p.matcher(expression); // матчер получается из патерна р, который передали в выражение
         if (m.find()){ // если матвер нашел что-то,
@@ -26,6 +27,7 @@ public class Parsel { // принемает на вход некое значе�
                 case "/": return one.div(two);
             }
         }
-        return null; // если ничего не вычислится, то вернется null
+        throw new CaltExeption("Opps error");
+        //return null; // если ничего не вычислится, то вернется null
     }
 }

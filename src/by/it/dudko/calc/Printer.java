@@ -8,4 +8,9 @@ class Printer {
             System.out.println(result);
         }
     }
+
+    void print(CalcException e) {
+        System.out.println(e.getMessage());
+    }
+
 }

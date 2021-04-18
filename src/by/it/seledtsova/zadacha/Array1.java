@@ -5,18 +5,32 @@ import java.util.*;
 public class Array1
 
 {
-
+/*
     public static void main(String[] args) {
-        try {
-            String testString = "This is a test string.";
-            String[] resultArray = testString.split(" ");
-            System.out.println(resultArray.length);
-        }
-        catch (Exception ex) {
-            System.out.println("exception");
+        Integer i = new Integer("10");
+        if (i.toString().intern() == i.toString().intern()) {
+            System.out.println("Равный");
+        } else {
+            System.out.println("Неравный");
         }
     }
+
+ */
+public static void main(String[] args) {
+    Integer i = new Integer("10");
+    if (i.toString() == i.toString()) {
+        System.out.println("Равный");
+    } else {
+        System.out.println("Неравный");
+    }
 }
+
+}
+
+
+
+
+
 
 
 
