@@ -7,13 +7,17 @@ import java.util.ResourceBundle;
 
 public enum Language {
     INSTANCE;
-    private String res = "by.it.levchuk.levchuk.jd02_05.resources.language";
+    private final String RESBASA = "by.it.levchuk.levchuk.jd02_05.resources.language";
 
     ResourceBundle bundle;
 
     Language() {
-        bundl=ResourceBundle.getBundle(res, Locale.getDefault());
+        setLocale(Locale.getDefault());
     }
-
-    ResourceBundle bundl;
+    public final void setLocale(Locale locale){
+        bundle=ResourceBundle.getBundle(RESBASA, locale);
+    }
+    public String get(String key){
+       return bundle.getString(key);
+    }
 }
