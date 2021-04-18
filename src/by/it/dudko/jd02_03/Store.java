@@ -1,7 +1,5 @@
 package by.it.dudko.jd02_03;
 
-import by.it.dudko.jd02_02threads.StoreUtil;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
