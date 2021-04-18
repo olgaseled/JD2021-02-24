@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
@@ -35,10 +36,30 @@ public class ParserTest {
         assertEquals(expected, actual, 1e-5);
 
 
+
     }
 
+    @Test
+    public void Brackets () throws CalcException {
+
+        Var actualVar = parser.evaluate("C=B+(A*2)");
+        double  actual = Double.parseDouble(actualVar.toString());
+        double expected = 40.15;
+        assertEquals(expected, actual, 1e-10);
+
+    }
+
+@Test
     public void Vectors () throws CalcException {
-  
+
+
+        Vector vector = (Vector) parser.evaluate("V={1,2}+{3,4}");
+        double[] actualVector = vector.getValue();
+        double[] expectedVector = {4,6};
+        assertArrayEquals(expectedVector,actualVector,1e-5);
+
+
+
     }
 
     @After

@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Vector extends Var {
+    public double[] getValue() {
+        return value;
+    }
+
     private final double[] value;
 
     Vector(double[] value) {
