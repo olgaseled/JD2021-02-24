@@ -15,30 +15,27 @@ public class Store {
 
         priceList = new ListGoods();
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(55);
+        ExecutorService threadPool = Executors.newFixedThreadPool(52);
         for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i,context);
+            Cashier cashier = new Cashier(i, context);
             threadPool.execute(cashier);
         }
 
         System.out.println("Store opened");
         int numberCustomer = 0;
         while (manager.storeIsOpened()) {
-            for (int i = 0; i < Config.FINAL_TIME; i++) {
-
-                int count = Util.getRandom(0, 2);
-                for (int j = 0; j < count && manager.storeIsOpened(); j++) {
-                    numberCustomer++;
-                    Customer customer = new Customer(numberCustomer,context);
-                    threadPool.execute(customer);
-                }
-                Util.Sleep(1000);
+            int count = Util.getRandom(0, 2);
+            for (int j = 0; j < count && manager.storeIsOpened(); j++) {
+                numberCustomer++;
+                Customer customer = new Customer(numberCustomer, context);
+                threadPool.execute(customer);
             }
+            Util.Sleep(1000);
         }
         threadPool.shutdown();//block another threads
-        while(true){
+        while (true) {
             try {
-                if(threadPool.awaitTermination(10, TimeUnit.DAYS)){
+                if (threadPool.awaitTermination(10, TimeUnit.DAYS)) {
                     break;
                 }
             } catch (InterruptedException e) {

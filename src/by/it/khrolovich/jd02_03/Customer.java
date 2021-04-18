@@ -6,7 +6,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     //private QueueCustomer queueCustomer;
     private Basket basket = new Basket();//его личная корзинка
-    private static Semaphore semaphore = new Semaphore(20);
+    private static Semaphore semaphore = new Semaphore(Config.MAX_CHOOSING_CUSTOMERS);
     private final Context context;
     private final Object MONITOR;
     private boolean waiting = false;
