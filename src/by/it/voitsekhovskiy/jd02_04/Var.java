@@ -1,4 +1,4 @@
-package by.it.voitsekhovskiy.calc;
+package by.it.voitsekhovskiy.jd02_04;
 
 import java.util.HashMap;
 import java.util.Map;
