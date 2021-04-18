@@ -1,0 +1,6 @@
+SET PATH=F:\Java\jdk-8;F:\Java\jdk-8\bin
+
+native2ascii -encoding utf-8 lang.txt ..\resources\lang.properties
+native2ascii -encoding utf-8 lang_be_BY.txt ..\resources\lang_be_BY.properties
+native2ascii -encoding utf-8 lang_ru_RU.txt ..\resources\lang_ru_RU.properties
+native2ascii -encoding utf-8 lang_en_US.txt ..\resources\lang_en_US.properties

@@ -1,0 +1,4 @@
+native2ascii -encoding UTF-8 text.txt ..\res\text.properties
+native2ascii -encoding UTF-8 text_be_BY.txt ..\res\text_be_BY.properties
+native2ascii -encoding UTF-8 text_ru_RU.txt ..\res\text_ru_RU.properties
+

@@ -19,7 +19,14 @@ public class Parser { // принемает на вход некое значе�
     public Var calc(String expression) throws CaltExeption {
         //A=2+2*2-9
         expression = expression.replaceAll("\\s+", "");
-
+        Matcher bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        while (bracketsMatcher.find()) {
+            String group = bracketsMatcher.group();
+            String ResultExpressionWithoutParentheses = String.valueOf(calc(group.substring(1, group.length() - 1)));
+            expression = bracketsMatcher.replaceFirst(ResultExpressionWithoutParentheses);
+            bracketsMatcher.reset();
+            bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        }
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION))); // получили лист оперантов
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression.replace(" ", "")); // заменили все пробелы на ""
         List<String> operations = new ArrayList<>();
@@ -52,8 +59,6 @@ public class Parser { // принемает на вход некое значе�
 
 
     Var calcOneOperation(String leftStr, String operation, String rightStr) throws CaltExeption { //метод калк будет вычислять выражение на вход он принемает строку
-
-
         Var right = VarCreator.calc(rightStr); // вторая переменная
         if (operation.equals("=")) {
             return Var.saveVar(leftStr, right);

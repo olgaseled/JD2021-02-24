@@ -8,6 +8,7 @@ public class Store {
     public static ListGoods priceList;
 
 
+
     public static void main(String[] args) {
         priceList = new ListGoods();
         List<Customer> customers = new ArrayList<>(120);//список покупателей
