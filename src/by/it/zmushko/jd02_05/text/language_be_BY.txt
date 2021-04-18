@@ -1,0 +1,4 @@
+message.hello = Прывітанне
+message.question = Ты робат?
+user.first_name = Віталя
+user.last_name = Змушко
