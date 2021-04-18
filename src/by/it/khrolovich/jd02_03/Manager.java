@@ -4,27 +4,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Manager {
 
-    private static final AtomicInteger countCustomerIn = new AtomicInteger(0);
-    private static final AtomicInteger countCustomerOut = new AtomicInteger(0);
+    private final AtomicInteger countCustomerIn = new AtomicInteger(0);
+    private final AtomicInteger countCustomerOut = new AtomicInteger(0);
     //убираем статик
 
-    static void newCustomer() {
+    void newCustomer() {
         countCustomerIn.getAndIncrement();
         //неатомарная операция
     }
 
-    static void completeCustomer() {
+    void completeCustomer() {
         countCustomerOut.getAndIncrement();
     }
 
-    static boolean storeIsOpened() {//люди могут заходить
-
+    boolean storeIsOpened() {//люди могут заходить
         //return countCustomerIn<=Config.PLAN;//production
         return countCustomerIn.get() != Config.PLAN;//dev разработка
         //просто чтение, можно
     }
 
-    static boolean storeIsClosed() {
+    boolean storeIsClosed() {
         //return countCustomerOut>=Config.PLAN;
         return countCustomerOut.get() == Config.PLAN;
     }

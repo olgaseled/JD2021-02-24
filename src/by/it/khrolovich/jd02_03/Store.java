@@ -10,26 +10,26 @@ public class Store {
 
     public static void main(String[] args) {
         QueueCustomer queueCustomer = new QueueCustomer(Config.Q_LEN);
-        //Manager manager = new Manager();
-        //Context context = new Context(queueCustomers, manager);
+        Manager manager = new Manager();
+        Context context = new Context(queueCustomer, manager);
 
         priceList = new ListGoods();
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        ExecutorService threadPool = Executors.newFixedThreadPool(55);
         for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i,queueCustomer);
+            Cashier cashier = new Cashier(i,context);
             threadPool.execute(cashier);
         }
 
         System.out.println("Store opened");
         int numberCustomer = 0;
-        while (Manager.storeIsOpened()) {
+        while (manager.storeIsOpened()) {
             for (int i = 0; i < Config.FINAL_TIME; i++) {
 
                 int count = Util.getRandom(0, 2);
-                for (int j = 0; j < count && Manager.storeIsOpened(); j++) {
+                for (int j = 0; j < count && manager.storeIsOpened(); j++) {
                     numberCustomer++;
-                    Customer customer = new Customer(numberCustomer,queueCustomer);
+                    Customer customer = new Customer(numberCustomer,context);
                     threadPool.execute(customer);
                 }
                 Util.Sleep(1000);

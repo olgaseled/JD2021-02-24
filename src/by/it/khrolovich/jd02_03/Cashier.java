@@ -2,18 +2,19 @@ package by.it.khrolovich.jd02_03;
 
 public class Cashier implements Runnable {
     private String name;
-    private QueueCustomer queueCustomer;
+    //private QueueCustomer queueCustomer;
+    private Context context;
 
-    public Cashier(int number,QueueCustomer queueCustomer) {
-        this.queueCustomer = queueCustomer;
+    public Cashier(int number,Context context) {
+        this.context = context;
         this.name = "\tCashier #" + number + " ";
     }
 
     @Override
     public void run() {
         System.out.println(this + "opened");
-        while (!Manager.storeIsClosed()) {
-            Customer customer = queueCustomer.poll();
+        while (!context.getManager().storeIsClosed()) {
+            Customer customer = context.getQueueCustomer().poll();
             if (customer != null) {
 
                 synchronized (customer.getMONITOR()) {
