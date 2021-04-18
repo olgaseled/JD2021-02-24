@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd02_05;
+package by.it.levchuk.levchuk.jd02_05.txt;
 
 /*crash-noobik
 Liauchuk Aliaksandr*/
