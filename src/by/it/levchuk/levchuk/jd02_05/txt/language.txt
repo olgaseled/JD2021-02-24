@@ -3,6 +3,6 @@ messages.question=Nice day, isn't it?
 user.firstname= My nфьу is  - Aleksandr
 user.lastname=My last name - Levchuk
 user.nickname=crash-noobik
-user.i_am=I am a student of the course Java
+user.iam=I am a student of the course Java
 user.teacher=Teacher Alexander Khmelov
 user.level=I am junior
