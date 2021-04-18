@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 public class Runner {
     public static void main(String[] args) {
+        Locale.setDefault(Locale.ENGLISH);
         Locale locale =new Locale("x");
         String res = "by.it.levchuk.levchuk.jd02_05.resources.language";
         ResourceBundle bundle = ResourceBundle.getBundle(res,locale);
