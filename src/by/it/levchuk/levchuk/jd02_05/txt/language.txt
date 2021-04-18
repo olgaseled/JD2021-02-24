@@ -1,6 +1,6 @@
 messages.welcome=Welcome!
 messages.question=Nice day, isn't it?
-user.firstname= My nфьу is  - Aleksandr
+user.firstname= My name is  - Aleksandr
 user.lastname=My last name - Levchuk
 user.nickname=crash-noobik
 user.iam=I am a student of the course Java
