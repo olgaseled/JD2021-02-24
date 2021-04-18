@@ -1,0 +1,5 @@
+messages.welcome=Вітаю!
+messages.question=Добры дзень, ці праўда?
+user.firstname=Аляксандр
+user.lastname=Ляўчук
+user.nickname=краш-нубік

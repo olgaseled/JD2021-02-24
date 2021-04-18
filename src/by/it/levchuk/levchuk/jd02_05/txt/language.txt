@@ -1,0 +1,5 @@
+messages.welcome=Welcome!
+messages.question=Nice day, isn't it?
+user.firstname=Aleksandr
+user.lastname=Levchuk
+user.nickname=crash-noobik
