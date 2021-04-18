@@ -1,7 +1,8 @@
-package by.it.zmushko.calculator;
+package by.it.zmushko.jd02_04;
 
-interface Patterns {
+public interface Patterns {
 
+    String BRACKETS = "\\([^(]+?\\)";
     String OPERATION = "(?<=[^-+*/,{=])[-+*/=]"; //минус в начале или в конце что бы не поломать
     String SCALAR = "-?[0-9]+(\\.[0-9]+)?";
     String VECTOR = "\\{" + SCALAR + "(," + SCALAR + ")*}";

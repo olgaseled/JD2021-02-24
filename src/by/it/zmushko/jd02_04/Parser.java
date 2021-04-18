@@ -1,4 +1,4 @@
-package by.it.zmushko.calculator;
+package by.it.zmushko.jd02_04;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,18 @@ import java.util.regex.Pattern;
 
 class Parser {
 
+
     Var evaluate(String expression) throws CalcException {
+
+        Matcher matchBr = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        while (matchBr.find()) {
+            String valueWithoutBrackets = String.valueOf(evaluate(matchBr.group().
+                    substring(1, matchBr.group().length() - 1))); // вычисляем выражение без скобок
+            expression = matchBr.replaceFirst(valueWithoutBrackets); //заменяем скобки на получившееся выражение
+            matchBr.reset(); // сбрасываем матчер
+            matchBr = Pattern.compile(Patterns.BRACKETS).matcher(expression); //ставим новый матчер на получившуюся строку
+        } //кайфуем
+
         ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         ArrayList<String> operations = new ArrayList<>();

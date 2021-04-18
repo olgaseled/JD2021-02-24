@@ -1,4 +1,4 @@
-package by.it.zmushko.calculator;
+package by.it.zmushko.jd02_04;
 
 import java.util.Objects;
 
@@ -21,6 +21,6 @@ class VarCreator {
                 return var;
             }
         }
-        throw new CalcException("WOW U TAKE EXCEPTION" + strVar);
+        throw new CalcException("WOW U TAKE EXCEPTION ---> " + strVar);
     }
 }

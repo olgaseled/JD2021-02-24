@@ -1,4 +1,4 @@
-package by.it.zmushko.calculator;
+package by.it.zmushko.jd02_04;
 
 import java.util.Scanner;
 
