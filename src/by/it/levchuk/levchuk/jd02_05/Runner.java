@@ -12,6 +12,7 @@ public class Runner {
         String res = "by.it.levchuk.levchuk.jd02_05.resources.language";
         ResourceBundle bundle = ResourceBundle.getBundle(res);
         bundle.getString("messages.welcome");
-
+        String s = bundle.getString("messages.welcome");
+        System.out.println(s);
     }
 }
