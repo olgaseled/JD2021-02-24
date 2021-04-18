@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ChangeLanguage {
 
-    Scanner scan = new Scanner(System.in);
+    public Scanner scan = new Scanner(System.in);
 
     public void changeLang(Language lang) {
         System.out.println(Messages.ASK_CHOOSE_LANG);

@@ -9,11 +9,10 @@ public class Runner {
         final Language lang = Language.INSTANCE;
 
         final OutMessages outAllMessages = new OutMessages();
-        for (; ;) {
+        do {
             changeLanguage.changeLang(lang);
             outAllMessages.outAllMessages(lang);
-        }
-
+        } while (!changeLanguage.scan.nextLine().equals("END"));
 
     }
 }
