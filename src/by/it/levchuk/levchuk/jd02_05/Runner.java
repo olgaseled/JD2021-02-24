@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
 
 public class Runner {
     public static void main(String[] args) {
-        new Locale("ru","RU");
+        Locale locale =new Locale("x");
         String res = "by.it.levchuk.levchuk.jd02_05.resources.language";
-        ResourceBundle bundle = ResourceBundle.getBundle(res);
+        ResourceBundle bundle = ResourceBundle.getBundle(res,locale);
         bundle.getString("messages.welcome");
         String s = bundle.getString("messages.welcome");
         System.out.println(s);
