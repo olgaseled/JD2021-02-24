@@ -1,11 +1,13 @@
-package by.it.khrolovich.jd02_02;
+package by.it.khrolovich.jd02_03;
+
+import java.util.concurrent.Semaphore;
 
 public class Customer extends Thread implements ICustomer, IUseBasket {
 
-    //int number;//номер покупателя
+    //private QueueCustomer queueCustomer;
     private Basket basket = new Basket();//его личная корзинка
-    public boolean pensioneer;
-
+    private static Semaphore semaphore = new Semaphore(20);
+    private final Context context;
     private final Object MONITOR;
     private boolean waiting = false;
 
@@ -21,28 +23,32 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return basket;
     }
 
-    public Customer(int numberCustomer, boolean pensioneer) {
+    public Customer(int numberCustomer,Context context) {
         super("Customer №" + numberCustomer + " ");
+        //this.queueCustomer = queueCustomer;
+        this.context = context;
         MONITOR = this;
-        Manager.newCustomer();//посчитается в момент рождения покупателя
-
-        this.pensioneer = pensioneer;
-        if (pensioneer) {
-            this.setName("Pensioneer-" + this.getName());
-        }
+        context.getManager().newCustomer();
     }
 
     @Override
     public void run() {
         //Manager.newCustomer();//здесь нельзя считать. Покупатель существует
-
-        enterToMarket();
-        takeBasket();//покупатель взял корзину
-        chooseGoods();//выбрал товар
+        try {
+            semaphore.acquire();
+            enterToMarket();
+            takeBasket();//покупатель взял корзину
+            chooseGoods();//выбрал товар
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
         goToQueue();//покупатель идет в очередь
         goOut();
 
-        Manager.completeCustomer();
+        context.getManager().completeCustomer();
     }
 
     @Override
@@ -82,8 +88,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     @Override
     public void goToQueue() {
         synchronized (MONITOR) {
-            QueueCustomer.add(this);//добавляет сам себя
-            System.out.println(this + "waiting in the queue");
+            context.getQueueCustomer().add(this);//добавляет сам себя
             waiting = true;
             while (waiting) {
                 try {
