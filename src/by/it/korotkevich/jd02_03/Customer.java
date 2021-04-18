@@ -27,7 +27,6 @@ class Customer extends Thread implements ICustomer, IUseBasket {
         MONITOR = this;
         this.context = context;
         context.getManager().newCustomer();
-        ;
     }
 
 

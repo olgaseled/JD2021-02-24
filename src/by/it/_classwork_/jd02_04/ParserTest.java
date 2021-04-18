@@ -30,9 +30,24 @@ public class ParserTest {
         assertEquals(expected, actual, 1e-10);
 
 
-        actualVar = parser.evaluate("B=A*3.5");
-        actual = Double.parseDouble(actualVar.toString());
-        expected = 25.55;
+
+
+    }
+
+    @Test
+    public void scalarMulTest() throws CalcException {
+
+        /*
+            A=2+5.3 (выведет на экран 7.3)
+            B=A*3.5 (выведет на экран 25.55)
+            B1=B+0.11*-5  (выведет на экран 25)
+            B2=A/2-1 (выведет на экран 2.65)
+        */
+
+
+        Var actualVar = parser.evaluate("B=A*3.5");
+        double actual = Double.parseDouble(actualVar.toString());
+        double expected = 25.55;
         assertEquals(expected, actual, 1e-10);
 
 

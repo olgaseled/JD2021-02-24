@@ -7,12 +7,12 @@ class Vector extends Var {
 
     private final double[] value;
 
-    Vector(double[] value) {
-        this.value = Arrays.copyOf(value, value.length);
+    public double[] getValue() {
+        return value;
     }
 
-    Vector(Vector vector) {
-        this(vector.value);
+    Vector(double[] value) {
+        this.value = Arrays.copyOf(value, value.length);
     }
 
     Vector(String strVector) {
