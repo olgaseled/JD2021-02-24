@@ -2,12 +2,12 @@ package by.it.savchenko.jd02_01;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-class Util {
+public class Util {
 
     private Util() {
     }
 
-    static int getRandom(int min, int max) {
+    public static int getRandom(int min, int max) {
 
         return ThreadLocalRandom
                 .current()
@@ -18,7 +18,7 @@ class Util {
         return getRandom(0, max);
     }
 
-    static void sleep(int timeout) {
+    public static void sleep(int timeout) {
         try {
             Thread.sleep(timeout / Config.K_SPEED);
         } catch (InterruptedException e) {

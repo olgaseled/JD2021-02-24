@@ -1,5 +1,7 @@
 package by.it.savchenko.jd02_02;
 
+import by.it.savchenko.jd02_01.ListProduct;
+
 class Customer extends Thread implements ICustomer {
 
     private final Object MONITOR;
@@ -58,6 +60,19 @@ class Customer extends Thread implements ICustomer {
         }
 
 
+    }
+    @Override
+    public void putGoodsToBasket()  {
+
+        int numberOfGoods = Util.getRandom(1, 4);
+        for (int i = 0; i < numberOfGoods; i++) {
+            String nameOfGood = ListProduct.getRandomProduct();
+            Double priceOfGood = ListProduct.basket.get(nameOfGood);
+            System.out.println(this + "put " + nameOfGood + " costing " + priceOfGood + " to the Basket");
+            int timeout = Util.getRandom(500, 2000);
+            Util.sleep(timeout);
+        }
+        System.out.println(this + "finished choosing goods");
     }
 
     @Override
