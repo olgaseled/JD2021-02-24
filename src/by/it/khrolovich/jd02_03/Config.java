@@ -6,4 +6,5 @@ class Config {
     static final int FINAL_TIME = 120;//2 минуты
     static final int PLAN = 100;//100 человек
     static final int Q_LEN = 30;//длина очереди
+    static final int  MAX_CHOOSING_CUSTOMERS= 20;//количество человек в зале
 }

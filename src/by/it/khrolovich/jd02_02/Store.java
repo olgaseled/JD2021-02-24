@@ -26,8 +26,6 @@ public class Store {
         int counterForPensionner = 0;
         int intervalForPensioneer = Util.getRandom(3, 5);
         while (Manager.storeIsOpened()) {
-            for (int i = 0; i < Config.FINAL_TIME; i++) {
-
                 int count = Util.getRandom(0, 2);
                 for (int j = 0; j < count && Manager.storeIsOpened(); j++) {//если 99 и добавилось 2
                     // если нет проверки Manager.storeIsOpened() , то проскакивает больше покупателей
@@ -47,8 +45,7 @@ public class Store {
                     customer.start();
                 }
                 Util.Sleep(1000);
-            }
-        }
+         }
         /*for (Customer customer : customers) {
             try {
                 customer.join();
