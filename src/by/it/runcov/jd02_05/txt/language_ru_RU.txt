@@ -1,0 +1,4 @@
+massages.welcome=Добро пожаловать!
+massages.question=Как твои дела?
+user.firstname=Тимофей
+user.lastname=Рунцов
