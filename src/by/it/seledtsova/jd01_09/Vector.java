@@ -55,6 +55,7 @@ public class Vector extends Var {
             return new Vector(res);
         } else if (other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length); // если к вектору прибавляется тоже вектор
+            double[] secondVector=((Vector) other).value;
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] + ((Vector) other).value[i];
             }
@@ -73,6 +74,7 @@ public class Vector extends Var {
             return new Vector(res);
         } else if (other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length);
+            double[] secondVector=((Vector) other).value;
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] - ((Vector) other).value[i];
             }
@@ -91,6 +93,8 @@ public class Vector extends Var {
             return new Vector(res);
         } else if (other instanceof Vector) {
             double sum=0;
+            double[] secondVector=((Vector) other).value;
+            if (secondVector.length==value.length)
             for (int i = 0; i < value.length ; i++) {
               sum+=value[i]*((Vector)other).value[i];
                 }

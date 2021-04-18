@@ -1,22 +1,22 @@
 package by.it.korotkevich.jd02_02;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueueOfCustomers {
-    private static final Object MONITOR_QUEUE = new Object();
 
-    private static Deque<Customer> customers = new LinkedList<>();
+    private ConcurrentLinkedDeque<Customer> customers = new ConcurrentLinkedDeque<>();
 
-    static void add(Customer customer) {
-        synchronized (MONITOR_QUEUE) {
-            customers.addLast(customer);
-        }
+    void add(Customer customer) {
+        customers.addLast(customer);
     }
 
-    static Customer poll() {
-        synchronized (MONITOR_QUEUE) {
-            return customers.pollFirst();
-        }
+    Customer poll() {
+        return customers.pollFirst();
+    }
+
+    int getQueueSize(){
+        return customers.size();
     }
 }

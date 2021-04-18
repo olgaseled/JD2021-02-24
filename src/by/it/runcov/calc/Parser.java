@@ -1,39 +1,79 @@
 package by.it.runcov.calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+class Parser {
 
-    @SuppressWarnings("ConstantConditions")
     Var evaluate(String expression) throws CalcException {
-        expression = expression.replaceAll("\\s+", "");
-        String[] parts = expression.split(Patterns.OPERATION, 2);
-        if (parts.length > 2) {
-            return VarCreator.build(expression);
+        Matcher brackets = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+        while (brackets.find()) {
+            String group = brackets.group();
+            String bracketsExpressionResult = String.valueOf(evaluate(group.substring(1, group.length() - 1)));
+            expression = brackets.replaceFirst(bracketsExpressionResult);
+            brackets.reset();
+            brackets = Pattern.compile(Patterns.BRACKETS).matcher(expression);
         }
-        Var rightVar = VarCreator.build(parts[1]);
-        if (expression.contains("=")) {
-            return Var.save(parts[0], VarCreator.build(parts[1]));
+        ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
+        ArrayList<String> operations = new ArrayList<>();
+        while (matcher.find()) {
+            operations.add(matcher.group());
         }
-        Var leftVar = VarCreator.build(parts[0]);
+        while (operations.size() > 0) {
+            int index = getIndex(operations);
+            String operation = operations.remove(index);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            Var result = oneOperation(left, operation, right);
+            operands.add(index, result.toString());
+        }
+        return VarCreator.build(operands.get(0));
+    }
 
-        Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
-        Matcher matcherOperation = patternOperation.matcher(expression);
-        if (matcherOperation.find()) {
-            String operation = matcherOperation.group();
+    private Var oneOperation(String left, String operation, String right) throws CalcException {
+        Var rightVar = VarCreator.build(right);
+        if (operation.equals("=")) {
+            return Var.save(left, rightVar);
+        }
+        Var leftVar = VarCreator.build(left);
 
-            switch (operation) {
-                case "+":
-                    return leftVar.add(rightVar);
-                case "-":
-                    return leftVar.sub(rightVar);
-                case "*":
-                    return leftVar.mul(rightVar);
-                case "/":
-                    return leftVar.div(rightVar);
-            }
+
+        switch (operation) {
+            case "+":
+                return leftVar.add(rightVar);
+            case "-":
+                return leftVar.sub(rightVar);
+            case "*":
+                return leftVar.mul(rightVar);
+            case "/":
+                return leftVar.div(rightVar);
         }
         throw new CalcException("The something stupid ");
     }
+
+    private static final Map<String, Integer> map = Map.of(
+            "=", 0,
+            "+", 1,
+            "-", 1,
+            "*", 2,
+            "/", 2
+    );
+
+    private int getIndex(ArrayList<String> operations) {
+        int index = -1;
+        int best = -1;
+        for (int i = 0; i < operations.size(); i++) {
+            int currentMap = map.get(operations.get(i));
+            if (currentMap > best) {
+                index = i;
+                best = currentMap;
+            }
+        }
+        return index;
+    }
 }
+
