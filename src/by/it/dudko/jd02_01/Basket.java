@@ -1,13 +1,12 @@
 package by.it.dudko.jd02_01;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Basket implements IBasket {
 
     Map<String, Double> goods;
-    List<Good> goods2;
 
     public Basket() {
         goods = new HashMap<>(Config.MAX_GOODS_IN_BASKET);
@@ -19,7 +18,11 @@ public class Basket implements IBasket {
     }
 
     @Override
-    public void removeGood(String name) {
-        goods.remove(name);
+    public Good removeGood(String name) {
+        Object removed = goods.remove(name);
+        if (Objects.isNull(removed))
+            return null;
+        else
+            return new Good(name, (double) removed, Store.getPriceList().getCurrency());
     }
 }

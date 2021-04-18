@@ -20,14 +20,7 @@ public class TaskB {
                 employeeSalary[i][quarter] = sc.nextInt();
             }
         }
-                        /*
-                        String[] employees = {"Иванов", "Петров", "Сацюк-Грабовский"};
-                        int[][] employeeSalary = {
-                                {100, 105, 108, 102},
-                                {210, 219, 211, 215},
-                                {321, 320, 329, 323}
-                                };
-                         */
+
         printSalaries(employees, employeeSalary);
         int totalPayments = getTotalPayments(employeeSalary);
         double avgQuarterSalary = getAvgQuarterSalary(employeeSalary);

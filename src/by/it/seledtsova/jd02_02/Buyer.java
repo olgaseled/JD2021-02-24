@@ -13,13 +13,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private final Object MONITOR;
 
-    private boolean waiting = false;
+    private boolean waiting = false; // поле ожидания
 
     public Object getMONITOR() {
         return MONITOR;
     }
 
-    public void setWaiting(boolean waiting) {
+    public void setWaiting(boolean waiting) { //сеттер на поле ожидания
         this.waiting = waiting;
     }
 
@@ -81,15 +81,17 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goToQueue() { // добавляем в очередь
         synchronized (MONITOR) {
-            QueueBuyers.add(this);
+            QueueBuyers.add(this); // покупатель взял свой монитор
+            System.out.println(this+" покупатель встал в очередь");
             waiting = true;
-            while (waiting) {
+            while (waiting) { // пока мы не в движении , мы будем ждать
                 try {
                     MONITOR.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            System.out.println(this+ " покупатель покинул очередь");
         }
     }
 

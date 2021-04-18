@@ -20,7 +20,16 @@ public class Store {
 
             for (int i = 0; i < count; i++) {
 
-                Customer customer = new Customer(++numberCustomer);
+                Customer customer;
+                if (numberCustomer % 4 == 0)
+                {
+                    customer = new Pensioneer(++numberCustomer);
+                }
+                else
+                {
+                    customer = new Customer(++numberCustomer);
+
+                }
                 customers.add(customer);
                 customer.start();
             }
