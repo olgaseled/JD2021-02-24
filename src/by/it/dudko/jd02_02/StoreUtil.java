@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CustomerUtil {
+public class StoreUtil {
 
-    private CustomerUtil() {
+    private StoreUtil() {
     }
 
     public static int getRandom(int min, int max) {

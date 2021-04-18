@@ -6,6 +6,12 @@ public class Config {
     static final int MAX_GOODS_IN_BASKET = 4;
     static final int NTH_PENSIONER = 4;
     static final double PENSIONERS_SLOW_RATIO = 1.5;
+    static final int CASHIER_SERVICE_MIN_TIME = 2;
+    static final int CASHIER_SERVICE_MAX_TIME = 5;
+    static final String SIGN_INFO = "\u26A0 ";
+    static final String SIGN_CASHIER_SCAN = "\u2611 ";
+    static final String SIGN_CASHIER_TOTAL = "\u2211 ";
+    static final String SIGN_CHECKPOINT = "\u231A ";
     static final String PRICE_ITEMS = "" +
             "яблоки : 2.0\n" +
             "крупа гречневая: 2.57\n" +

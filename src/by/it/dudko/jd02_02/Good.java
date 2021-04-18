@@ -1,10 +1,16 @@
 package by.it.dudko.jd02_02;
 
-public class Good {
+public class Good implements IGood {
 
     String name;
     double price;
     StoreCurrency currency;
+
+    public Good(String name, double price, StoreCurrency currency) {
+        this.name = name;
+        this.price = price;
+        this.currency = currency;
+    }
 
     public String getName() {
         return name;
@@ -14,10 +20,9 @@ public class Good {
         return price;
     }
 
-    public Good(String name, double price, StoreCurrency currency) {
-        this.name = name;
-        this.price = price;
-        this.currency = currency;
+    @Override
+    public StoreCurrency getCurrency() {
+        return currency;
     }
 
     @Override

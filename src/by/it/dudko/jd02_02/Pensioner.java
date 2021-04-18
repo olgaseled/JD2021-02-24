@@ -9,6 +9,6 @@ public class Pensioner extends Customer {
 
     @Override
     public String toString() {
-        return "elderly " + super.toString();
+        return this.getName().replace("Customer", "Customer \u262D");
     }
 }

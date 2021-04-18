@@ -7,44 +7,63 @@ public class Store {
 
     private static PriceList priceList;
 
-    static int customersInStore = 0;
-
     public static void main(String[] args) {
 
         priceList = new PriceList(Config.PRICE_ITEMS, StoreCurrency.BYN);
-        System.out.println("Price is loaded");
+        System.out.println(Config.SIGN_INFO + "\tPrice is loaded");
 
-        List<Customer> customers = new ArrayList<>();
-        System.out.println("Store is open");
+        Manager.allowEntrance(); // unlock doors
 
+        List<Thread> threads = new ArrayList<>(120);
+
+        for (int i = 1; i <= 5; i++) {
+            Cashier cashier = new Cashier(i);
+            threads.add(cashier);
+            cashier.start();
+        }
+        System.out.println(Config.SIGN_INFO + "\tStore is open");
         int customerId = 0;
         int nth = Config.NTH_PENSIONER; // short alias
         int newCustomers;
+
+
         for (int second = 0; second < Config.MEASURE_TIME; second++) {
+            if (second % 30 == 0) {
+                System.out.printf(
+                        "%s\t%02d:%02d customers in store: %d\n",
+                        Config.SIGN_CHECKPOINT,
+                        second / 60,
+                        second % 60,
+                        Manager.getCustomersInStoreNumber());
+            }
             int sec = second % 60;
             int needCount = 10 + (sec < 30 ? sec : 60 - sec);
+            int customersInStore = Manager.getCustomersInStoreNumber();
             if (needCount > customersInStore) {
                 int delta = needCount - customersInStore;
-                newCustomers = CustomerUtil.getRandom(delta - 1, delta + 1);
+                newCustomers = StoreUtil.getRandom(delta - 1, delta);
                 for (int i = 0; i < newCustomers; i++) {
-                    Customer customer = CustomerUtil.getRandom(1, nth) < nth
+                    Customer customer = StoreUtil.getRandom(1, nth) < nth
                             ? new Customer(++customerId)
                             : new Pensioner(++customerId);
-                    customers.add(customer);
+                    threads.add(customer);
                     customer.start();
                 }
             }
-            CustomerUtil.sleep(1000);
+            StoreUtil.sleep(1000);
+
         }
 
-        for (Customer customer : customers) {
+        Manager.disallowEntrance(); // lock entrance doors
+
+        for (Thread thread : threads) {
             try {
-                customer.join();
+                thread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-        System.out.println("Store is closed");
+        System.out.println(Config.SIGN_INFO + "\tStore is closed");
     }
 
     public static PriceList getPriceList() {
