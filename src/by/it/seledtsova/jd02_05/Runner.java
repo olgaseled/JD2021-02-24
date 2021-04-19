@@ -30,7 +30,7 @@ public class Runner  {
             case "be":
                 country = "BY";
                 chooseLanguage = "be";
-                break;
+               break;
             default:
                 if (args.length == 2) {
                     language.setLocale(new Locale(args[0], args[1]));
