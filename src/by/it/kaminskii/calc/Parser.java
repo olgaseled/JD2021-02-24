@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private static Pattern patternCalc;
+    private static Matcher matcherCalc;
 
 
     public static Map<String, Integer> getPriorityMap() {
@@ -21,14 +23,32 @@ public class Parser {
         }
     };
 
+    public Var find(String expression) throws CalcExeption {
+        expression = expression.replaceAll("\\s", "");
+        patternCalc = Pattern.compile(Patterns.PRIORITY);
+        matcherCalc = patternCalc.matcher(expression);
+        if (matcherCalc.find()) {
+            String testReplacements = matcherCalc.group();
+            matcherCalc = patternCalc.matcher(testReplacements);
+
+            expression.replaceAll(Patterns.PRIORITY, testReplacements);
+        }
+        return null;
+    }
+
     public Var calc(String expression) throws CalcExeption {
         //a=2+2*2-9
         expression = expression.replaceAll("\\s", "");
+        patternCalc = Pattern.compile(Patterns.PRIORITY);
+        matcherCalc = patternCalc.matcher(expression);
+        if (matcherCalc.find()) {
+            calc(matcherCalc.group().replaceAll("\\(", "").replaceAll("\\)", ""));
+        }
 
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
 
-        Pattern patternCalc = Pattern.compile(Patterns.OPERATION);
-        Matcher matcherCalc = patternCalc.matcher(expression);
+        patternCalc = Pattern.compile(Patterns.OPERATION);
+        matcherCalc = patternCalc.matcher(expression);
         List<String> operations = new ArrayList<>();
         while (matcherCalc.find()) {
             operations.add(matcherCalc.group());
@@ -41,6 +61,7 @@ public class Parser {
             Var result = calcOneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
+//        return operands.get(0);
         return Var.creatVar(operands.get(0));
     }
 

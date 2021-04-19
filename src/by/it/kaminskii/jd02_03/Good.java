@@ -4,8 +4,8 @@ package by.it.kaminskii.jd02_03;/* created by Kaminskii Ivan
 import java.util.HashMap;
 import java.util.Map;
 
-class Good extends Thread {
-    static Map<String,Double> price(){
+public class Good extends Thread {
+    public static Map<String,Double> price(){
         Map<String,Double> price = new HashMap<>(10,0.75f);
         price.put("Bread",1.5);
         price.put("Oil",6.5);
