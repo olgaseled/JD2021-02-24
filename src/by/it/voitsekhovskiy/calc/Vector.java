@@ -128,7 +128,7 @@ public class Vector extends Var {
         for (int i = 0; i < value.length; i++) {
             resultString.append(value[i]);
             if (i != value.length - 1) {
-                resultString.append(", ");
+                resultString.append(",");
             }
         }
         resultString.append("}");

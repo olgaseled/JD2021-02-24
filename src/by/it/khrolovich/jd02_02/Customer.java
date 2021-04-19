@@ -4,6 +4,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
 
     //int number;//номер покупателя
     private Basket basket = new Basket();//его личная корзинка
+    public boolean pensioneer;
 
     private final Object MONITOR;
     private boolean waiting = false;
@@ -20,10 +21,15 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
         return basket;
     }
 
-    public Customer(int numberCustomer) {
+    public Customer(int numberCustomer, boolean pensioneer) {
         super("Customer №" + numberCustomer + " ");
         MONITOR = this;
         Manager.newCustomer();//посчитается в момент рождения покупателя
+
+        this.pensioneer = pensioneer;
+        if (pensioneer) {
+            this.setName("Pensioneer-" + this.getName());
+        }
     }
 
     @Override
@@ -77,6 +83,7 @@ public class Customer extends Thread implements ICustomer, IUseBasket {
     public void goToQueue() {
         synchronized (MONITOR) {
             QueueCustomer.add(this);//добавляет сам себя
+            System.out.println(this + "waiting in the queue");
             waiting = true;
             while (waiting) {
                 try {
