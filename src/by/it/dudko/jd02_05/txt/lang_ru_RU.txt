@@ -1,0 +1,5 @@
+messages.welcome = Привет
+messages.question = Как дела?
+messages.bye = Пока
+user.first_name = Алексей
+user.last_name = Дудко

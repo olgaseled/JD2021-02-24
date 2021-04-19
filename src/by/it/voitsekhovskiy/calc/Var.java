@@ -2,6 +2,7 @@ package by.it.voitsekhovskiy.calc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 abstract class Var implements Operation {
     static Map<String, Var> vars = new HashMap<>();
@@ -9,6 +10,10 @@ abstract class Var implements Operation {
     static Var save(String key, Var value) {
         vars.put(key, value);
         return value;
+    }
+
+    static Var load(String key) {
+        return vars.get(key);
     }
 
     static void getVar() {
@@ -51,6 +56,11 @@ abstract class Var implements Operation {
             return new Vector(strExp);
         } else if (strExp.matches(Patterns.MATRIX)) {
             return new Matrix(strExp);
+        } else {
+            Var var = Var.load(strExp);
+            if(Objects.nonNull(var)) {
+                return var;
+            }
         }
         throw new CalcException("Can't define as Var!");
     }

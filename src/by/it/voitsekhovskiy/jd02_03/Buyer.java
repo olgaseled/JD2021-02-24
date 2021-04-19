@@ -4,11 +4,12 @@ import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
     private double K_SPEED = 1;
-    final private Integer num; // номер покупателя
+    final private Integer numBuyer;
     Boolean pensioner = false;
     private boolean waiting = false;
     private final Object MONITOR;
     private double totalCheck = 0.00;
+    private final Context context;
     private static final Semaphore semaphore = new Semaphore(20);
 
     public double getTotalCheck() {
@@ -19,9 +20,10 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         this.waiting = waiting;
     }
 
-    public Buyer(int num) {
-        this.num = num;
-        Manager.addGoInBuyer();
+    public Buyer(int num, Context context) {
+        this.context = context;
+        this.numBuyer = num;
+        context.getManager().addGoInBuyer();
         MONITOR = this;
     }
 
@@ -29,8 +31,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         return MONITOR;
     }
 
-    public Integer getNum() {
-        return num;
+    public Integer getNumBuyer() {
+        return numBuyer;
     }
 
     @Override
@@ -54,18 +56,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        System.out.printf("Buyer #%d entering in store\n", num);
+        System.out.printf("Buyer #%d entering in store\n", numBuyer);
     }
 
     @Override
     public void takeBasket() {
-        System.out.printf("Buyer #%d take basket\n", num);
+        System.out.printf("Buyer #%d take basket\n", numBuyer);
         Util.sleep((int) (Util.getRandom(500, 2000) * K_SPEED));
     }
 
     @Override
     public void chooseGoods() {
-        System.out.printf("Buyer #%d start choose goods\n", num);
+        System.out.printf("Buyer #%d start choose goods\n", numBuyer);
         Util.sleep((int) (Util.getRandom(500, 2000) * K_SPEED));
     }
 
@@ -76,17 +78,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             String nameElement = Assortment.getRandomElement();
             Double valueOfElement = Assortment.assortment.get(nameElement);
             totalCheck = totalCheck + valueOfElement;
-            System.out.printf("Buyer #%d put %s with price %s\n", num, nameElement, valueOfElement);
+            System.out.printf("Buyer #%d put %s with price %s\n", numBuyer, nameElement, valueOfElement);
             Util.sleep((int) (Util.getRandom(500, 2000) * K_SPEED));
         }
-        System.out.printf("Buyer #%d finish choose goods\n", num);
+        System.out.printf("Buyer #%d finish choose goods\n", numBuyer);
     }
 
-    private void goToQueue() {
+    @Override
+    public void goToQueue() {
         synchronized (MONITOR) {
-            System.out.printf("Buyer #%d go to queue\n", num);
-            CheckoutQueue.addBuyerInQueue(this);
-            waiting = true; // зачем создавать флаг, если у каждого объекта свой монитор
+            System.out.printf("Buyer #%d go to queue\n", numBuyer);
+            context.getQueueBuyers().addBuyerInQueue(this);
+            waiting = true;
             while (waiting) {
                 try {
                     MONITOR.wait();
@@ -99,11 +102,12 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goOut() {
-        System.out.printf("Buyer #%d go out\n", num);
-        Manager.addGoOutBuyer();
+        System.out.printf("Buyer #%d go out\n", numBuyer);
+        context.getManager().addGoOutBuyer();
     }
 
-    private void isPensioner() {
+    @Override
+    public void isPensioner() {
         if (pensioner) {
             K_SPEED = 1.5;
         }

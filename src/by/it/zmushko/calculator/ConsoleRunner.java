@@ -10,9 +10,8 @@ public class ConsoleRunner {
         for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
-                Var resultVar = null;
                 try {
-                    resultVar = parser.evaluate(expression);
+                    Var resultVar = parser.evaluate(expression);
                     printer.print(resultVar);
                 }
                 catch (CalcException e){
@@ -22,8 +21,5 @@ public class ConsoleRunner {
                 break;
             }
         }
-
-        Var var = VarCreator.build("{123, 4.0}");
-        printer.print(var);
     }
 }

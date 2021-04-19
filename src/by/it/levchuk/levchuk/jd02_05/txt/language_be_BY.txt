@@ -1,0 +1,8 @@
+messages.welcome=Вітаю!
+messages.question=Добры дзень, ці праўда?
+user.firstname=Аляксандр
+user.lastname=Ляўчук
+user.nickname=краш-нубік
+user.i=Я слухач курса Java
+user.teacher=Выкладчык Аляксандр Хмялёў
+user.level=Я юніёр
