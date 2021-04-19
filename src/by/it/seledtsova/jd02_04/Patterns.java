@@ -1,6 +1,8 @@
 package by.it.seledtsova.jd02_04;
 
 public class Patterns {
+
+    static final String BRACKETS="\\([^(]+?\\)"; // ПАТТЕРН ДЛЯ СКОБОК
     static final String OPERATION = "(?<=[^-+*/={,])[+=*/-]"; //смотри ниже коментарии
     static final String SCALAR = "-?[0-9]+\\.?[0-9]*";
     static final String VECTOR = "\\{((-?[0-9]+\\.?[0-9]*),?)+}";
