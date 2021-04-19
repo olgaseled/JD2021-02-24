@@ -1,5 +1,6 @@
 package by.it.levchuk.levchuk.jd02_04;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -8,6 +9,8 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         Printer printer = new Printer();
         VarRepository.loading();
+        LoggerCalc logger = LoggerCalc.LOGGING;
+        logger.setLogFile(new File(FileNameHelper.getFilePath(Settings.LOG_FILE,LoggerCalc.class)));
         for (; ; ) {
             String exspression = scanner.nextLine();
             if (!exspression.equals("end")) {
