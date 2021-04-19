@@ -1,6 +1,20 @@
 package by.it.zmushko.calculator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract class Var implements Operation {
+
+    static Map<String, Var> vars = new HashMap<>();
+
+    static Var save (String key, Var value) {
+        vars.put(key, value);
+        return value;
+    }
+
+    static Var load(String key) {
+        return vars.get(key);
+    }
 
     @Override
     public Var add(Var other) throws CalcException {

@@ -5,15 +5,13 @@ import java.util.Map;
 
 abstract class Var implements Operation {
 
-    static Map<String,Var> vars = new HashMap<>();
+    static Map<String, Var> vars = new HashMap<>();
 
-    static Var save(String key, Var value) {
-        vars.put(key, value);
+    static Var save(String key, Var value) { vars.put(key, value);
         return value;
     }
 
-    static Var loading (String key){
-        return vars.get(key);
+    static Var loading(String key) { return vars.get(key);
     }
 
     @Override
@@ -22,21 +20,22 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var sub(Var other)throws CalcException {
+    public Var sub(Var other) throws CalcException {
         throw new CalcException(String.format("Операция вычитания " + this + "-" + other + " невозможна"));
     }
 
     @Override
-    public Var mul(Var other)throws CalcException {
+    public Var mul(Var other) throws CalcException {
         throw new CalcException(String.format("Операция умножения " + this + "*" + other + " невозможна"));
     }
 
     @Override
-    public Var div(Var other)throws CalcException {
+    public Var div(Var other) throws CalcException {
         throw new CalcException(String.format("Операция деления " + this + "/" + other + " невозможна"));
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "abstract Var{}";
     }
 }

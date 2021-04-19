@@ -8,6 +8,8 @@ public interface ICustomer {
 
     void goToQueue();
 
+    void putGoodsToBasket();
+
     void goOut();            //отправился на выход(мгновенно)
 
 }

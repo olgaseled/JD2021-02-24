@@ -8,8 +8,6 @@ Hello world!
 Для автоматической проверки откройте и запустите класс Test_jd01_01
 */
 
-import java.lang.annotation.Annotation;
-
 class TaskA1 {
     public static void main(String[] args) {
         System.out.println("Hello world!");
