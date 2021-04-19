@@ -37,7 +37,7 @@ public class Runner  {
                 }
         }
         language.setLocale(new Locale(chooseLanguage,country));
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.forLanguageTag(country));
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.forLanguageTag(chooseLanguage));
 /*
         Locale en = new Locale("en","US");
         DateFormat sdEn = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, en);
