@@ -1,7 +1,6 @@
 package by.it.kaminskii.calc;
 
 
-
 import java.util.Scanner;
 
 public class ConsoleRunner {

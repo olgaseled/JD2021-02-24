@@ -87,12 +87,12 @@ class Matrix extends Var {
             }
             return new Matrix(res);
         } else if (other instanceof Vector) {
-            if (value[0].length == ((Vector) other).getValue().length || value.length == ((Vector) other).getValue().length) {
+            if (value[0].length == ((Vector) other).getVector().length || value.length == ((Vector) other).getVector().length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
                 }
-                double[] vector = ((Vector) other).getValue();
+                double[] vector = ((Vector) other).getVector();
                 double[] matrixSize = new double[res.length];
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < vector.length; j++) {
