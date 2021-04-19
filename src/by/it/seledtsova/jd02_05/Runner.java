@@ -4,15 +4,13 @@ package by.it.seledtsova.jd02_05;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class Runner implements Data {
+public class Runner  {
 
 
     public static void main(String[] args) {
-     //   Scanner scannerLocale=new Scanner(System.in);
-    //    Date date=new Date();
+
 
         Language language = Language.INSTANCE;
         Locale.setDefault(Locale.ENGLISH); // так можно конкретно указать какая locale
@@ -21,15 +19,15 @@ public class Runner implements Data {
         String country="";
         String chooseLanguage="";
         switch (scannerLocale.next()) {
-            case "1":
+            case "en":
                 country = "US";
                 chooseLanguage = "en";
                 break;
-            case "2":
+            case "ru":
                 country = "RU";
                 chooseLanguage = "ru";
                 break;
-            case "3":
+            case "be":
                 country = "BY";
                 chooseLanguage = "be";
                 break;
@@ -38,7 +36,7 @@ public class Runner implements Data {
                     language.setLocale(new Locale(args[0], args[1]));
                 }
         }
-        Locale current=new Locale(chooseLanguage,country);
+        language.setLocale(new Locale(chooseLanguage,country));
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.forLanguageTag(country));
 /*
         Locale en = new Locale("en","US");
