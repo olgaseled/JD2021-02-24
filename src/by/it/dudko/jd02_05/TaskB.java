@@ -13,11 +13,11 @@ public class TaskB {
     static Scanner sc;
     static String userLang;
     static Language lang;
-    static DateTimeFormatterBuilder formatBuilder;
+
 
     public static void main(String[] args) {
         lang = Language.INSTANCE;
-        formatBuilder = new DateTimeFormatterBuilder();
+
         sc = new Scanner(System.in);
         do {
             listenChangeLang();
@@ -63,7 +63,6 @@ public class TaskB {
     }
 
     private static void greeting(Language lang) {
-
         Date date = new Date();
         Locale currentLocale = lang.getBundleLocale();
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, currentLocale);
