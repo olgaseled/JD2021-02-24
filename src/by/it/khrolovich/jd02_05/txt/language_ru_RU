@@ -1,0 +1,5 @@
+Message.welcome = "Привет!"
+Message.question = "Как дела?"
+Message.info = "Моё имя: "
+user.first_name = "Марина"
+user.last_name = "Хролович"

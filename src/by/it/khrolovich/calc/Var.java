@@ -35,21 +35,21 @@ abstract class Var implements Operation {
     public Var sub(Var other) throws CalcException {
         //System.out.printf("Operation %s-%s is impossible", this, other);
         //return null;
-        throw new CalcException(String.format("Operation %-%s is impossible\n",this,other));
+        throw new CalcException(String.format("Operation %s-%s is impossible\n",this,other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException{
         //System.out.printf("Operation %s*%s is impossible", this, other);
         //return null;
-        throw new CalcException(String.format("Operation %*%s is impossible\n",this,other));
+        throw new CalcException(String.format("Operation %s*%s is impossible\n",this,other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
        // System.out.printf("Operation %s/%s is impossible", this, other);
         //return null;
-        throw new CalcException(String.format("Operation %/%s is impossible\n",this,other));
+        throw new CalcException(String.format("Operation %s/%s is impossible\n",this,other));
     }
 
     @Override
