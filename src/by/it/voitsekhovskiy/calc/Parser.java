@@ -64,7 +64,7 @@ public class Parser {
     }
 
     Var oneOperation(String left, String operation, String right) throws CalcException {
-        operation = operation.replace(" ", "");
+//        operation = operation.replace(" ", "");
         if (operation.equals("=")) {
             return Var.save(left, Var.createVar(right));
         }

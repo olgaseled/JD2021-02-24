@@ -1,18 +1,19 @@
-package by.it.voitsekhovskiy.jd02_05;
+package by.it.voitsekhovskiy.calc;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
- enum Language {
+enum Language {
     INSTANCE;
-    private final String BASE = "by.it.voitsekhovskiy.jd02_05.resources.language";
+
+    private final String BASE = "by/it/voitsekhovskiy/calc/resources/language";
     ResourceBundle bundle;
 
     Language() {
         setLocale(Locale.getDefault());
     }
 
-    final void setLocale(Locale locale) {
+    private void setLocale(Locale locale) {
         bundle = ResourceBundle.getBundle(BASE, locale);
     }
 

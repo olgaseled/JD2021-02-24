@@ -50,6 +50,7 @@ abstract class Var implements Operation {
     }
 
     static Var createVar(String strExp) throws CalcException {
+        strExp = strExp.replace(" ", "");
         if (strExp.matches(Patterns.SCALAR)) {
             return new Scalar(strExp);
         } else if (strExp.matches(Patterns.VECTOR)) {

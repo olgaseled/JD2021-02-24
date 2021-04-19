@@ -3,6 +3,8 @@ package by.it.voitsekhovskiy.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+    static Language language = Language.INSTANCE;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser calc = new Parser();
