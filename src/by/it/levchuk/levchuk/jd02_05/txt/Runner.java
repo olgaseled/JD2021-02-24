@@ -3,8 +3,6 @@ package by.it.levchuk.levchuk.jd02_05.txt;
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
-import by.it.levchuk.levchuk.jd02_05.Language;
-
 import java.util.Locale;
 
 public class Runner {
