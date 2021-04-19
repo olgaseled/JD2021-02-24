@@ -9,7 +9,7 @@ public class Runner {
 
         @Override
         public void run() {
-            Logger.getLogger().log(this.getName());
+            Logger.getInstanceLogger().log(this.getName());
         }
     }
 

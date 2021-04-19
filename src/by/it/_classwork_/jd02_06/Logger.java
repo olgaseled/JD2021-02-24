@@ -6,24 +6,24 @@ class Logger {
 
     private final File logFile;
 
-    private static volatile Logger logger;
+    private static volatile Logger instanceLogger;
 
     private Logger() {
         logFile = Util.getFile(Logger.class, "log.txt");
     }
 
-    public static Logger getLogger() {
-        Logger local = logger;
-        if (local == null) {
+    public static Logger getInstanceLogger() {
+        Logger localLogger = instanceLogger;
+        if (localLogger == null) {
             synchronized (Logger.class) {
-                local = logger;
-                if (local == null) {
-                    local = new Logger();
-                    logger = local;
+                localLogger = instanceLogger;
+                if (localLogger == null) {
+                    localLogger = new Logger();
+                    instanceLogger = localLogger;
                 }
             }
         }
-        return local;
+        return localLogger;
     }
 
 
