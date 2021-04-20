@@ -9,10 +9,11 @@ public class ConsoleRunner {
         Scanner scanner = new Scanner(System.in);
         VarRepository.load();
         for (; ; ) {
+            Var resultVar = null;
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
                 try {
-                    Var resultVar = parser.evaluate(expression);
+                    resultVar = parser.evaluate(expression);
                     printer.print(resultVar);
                 } catch (CalcException e) {
                     printer.print(e);
@@ -25,12 +26,14 @@ public class ConsoleRunner {
                 }
                 break;
             }
-        }
-        for (int i = 0; i < 20; i++) {
-            new Thread(() -> {
-                Logger logger = Logger.getLogger();
-                logger.log("Hi");
-            }).start();
+
+            for (int i = 0; i < 2; i++) {
+                Var finalResultVar = resultVar;
+                new Thread(() -> {
+                    Logger logger = Logger.getLogger();
+                    logger.log(finalResultVar.toString());
+                }).start();
+            }
         }
     }
 }

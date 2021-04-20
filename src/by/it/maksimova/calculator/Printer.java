@@ -11,5 +11,6 @@ public class Printer {
 
     void print(CalcException e) {
         System.out.println(e.getMessage());
+        Logger.getLogger().log(e.getMessage());
     }
 }

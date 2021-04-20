@@ -5,7 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-class Logger {
+public enum Logger {
+    INSTANCE;
     public static final String USER_DIR = "user.dir";
     public static final String SRC = "src";
 
@@ -22,7 +23,7 @@ class Logger {
             synchronized (Logger.class) {
                 localLogger = logger;
                 if (localLogger == null) {
-                    localLogger = logger = new Logger();
+                    localLogger = logger = Logger.INSTANCE;
                 }
             }
         }
