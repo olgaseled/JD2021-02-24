@@ -15,7 +15,6 @@ class Vector extends Var {
 
     Vector(String strVector) {
         strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");
-        ;
         String[] v = strVector.split(",");
         value = new double[v.length];
         for (int i = 0; i < v.length; i++) {

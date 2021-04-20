@@ -22,27 +22,27 @@ abstract class Var implements Operation {
 
     @Override
     public String toString() {
-        return "abstract Var";
+        return Language.INSTANCE.get(Messages.ABSTRACT_VAR);
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
+        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
+        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
+        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
+        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
     }
 
 }

@@ -32,7 +32,7 @@ class Utils {
         return copyMatrix;
     }
 
-    static double[][] castAsMatrixOfDoubles(String strMatrix) {
+    static double[][] castAsMatrixOfDoubles(String strMatrix) throws CalcException {
         final int m, n;
         strMatrix = trimBraces(strMatrix);
         String[] strMatrixRows = splitToMatrixRows(strMatrix);
@@ -44,8 +44,7 @@ class Utils {
             String strMatrixRow = trimBraces(strMatrixRows[i]);
             String[] matrixRow = splitToRowItems(strMatrixRow);
             if (n != matrixRow.length) {
-                System.out.println("Provided matrix has various row length");
-                continue;
+                throw new CalcException(Language.INSTANCE.get(Messages.BAD_MATRIX));
             }
             for (int j = 0; j < n; j++) {
                 matrix[i][j] = Double.parseDouble(matrixRow[j]);

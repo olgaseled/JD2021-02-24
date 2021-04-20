@@ -35,76 +35,75 @@ public class Vector extends Var {
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] = resultVector[i] + ((Scalar) other).getValue();
             }
             return new Vector(resultVector);
-        }
-        else if (other instanceof Vector) {
+        } else if (other instanceof Vector) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] = resultVector[i] + ((Vector) other).value[i];
             }
             return new Vector(resultVector);
         } else
-            return super.add(other); }
+            return super.add(other);
+    }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] = resultVector[i] - ((Scalar) other).getValue();
             }
             return new Vector(resultVector);
-        }
-        else if (other instanceof Vector) {
+        } else if (other instanceof Vector) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] = resultVector[i] - ((Vector) other).value[i];
             }
             return new Vector(resultVector);
         } else
-            return super.sub(other); }
+            return super.sub(other);
+    }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] = resultVector[i] * ((Scalar) other).getValue();
             }
             return new Vector(resultVector);
-        }
-        else if (other instanceof Vector) {
+        } else if (other instanceof Vector) {
             double sum = 0;
             for (int i = 0; i < value.length; i++) {
-                sum+= value[i] * ((Vector) other).value[i];
+                sum += value[i] * ((Vector) other).value[i];
             }
             return new Scalar(sum);
         } else
-            return super.mul(other); }
+            return super.mul(other);
+    }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] resultVector = Arrays.copyOf(value, value.length);
             for (int i = 0; i < resultVector.length; i++) {
-                resultVector[i] = resultVector[i] * (1/((Scalar) other).getValue());
+                resultVector[i] = resultVector[i] * (1 / ((Scalar) other).getValue());
             }
             return new Vector(resultVector);
-        }
-        else if (other instanceof Vector) {
+        } else if (other instanceof Vector) {
             double sum = 0;
             for (int i = 0; i < value.length; i++) {
-                sum+= value[i] / ((Vector) other).value[i];
+                sum += value[i] / ((Vector) other).value[i];
             }
             return new Scalar(sum);
         } else
-        return super.div(other);
+            return super.div(other);
     }
 
     @Override

@@ -2,7 +2,6 @@ package by.it.dudko.calc;
 
 import java.util.Arrays;
 
-import static by.it.dudko.calc.Utils.castAsVectorOfDoubles;
 
 
 public class Vector extends Var {
@@ -22,7 +21,7 @@ public class Vector extends Var {
     }
 
     public Vector(String strVector) {
-        this.value = castAsVectorOfDoubles(strVector);
+        this.value = Utils.castAsVectorOfDoubles(strVector);
     }
 
 
@@ -44,7 +43,8 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                throw new CalcException("incompatible vectors");
+                throw new CalcException(Language.INSTANCE.get(
+                        Messages.INCOMPATIBLE_VECTORS));
             }
             double[] sum = new double[secondVector.length];
             for (int i = 0; i < sum.length; i++) {
@@ -63,7 +63,7 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                throw new CalcException("incompatible vectors");
+                throw new CalcException(Language.INSTANCE.get(Messages.INCOMPATIBLE_VECTORS));
             }
             double[] subtraction = new double[secondVector.length];
             for (int i = 0; i < subtraction.length; i++) {
@@ -87,7 +87,7 @@ public class Vector extends Var {
         if (other instanceof Vector) {
             double[] secondVector = ((Vector) other).getValue();
             if (secondVector.length != this.getValue().length) {
-                throw new CalcException("incompatible vectors");
+                throw new CalcException(Language.INSTANCE.get(Messages.INCOMPATIBLE_VECTORS));
             }
             double multiplication = 0;
             for (int i = 0; i < secondVector.length; i++) {

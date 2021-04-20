@@ -1,0 +1,12 @@
+messages.welcome = Enjoy using the calculator
+messages.bye = See you again
+messages.var = abstract Var
+messages.language_changed = Translation switched to
+errors.division_by_zero = division by zero
+errors.unsupported_operation = unsupported operation
+errors.unknown_operation = unknown operation
+errors.unknown_variable_expression = unknown variable or expression
+errors.incompatible_vectors = incompatible vectors
+errors.incoherent_matrices = incompatible matrices
+errors.bad_matrix = provided matrix has various row length
+errors.repo_save_failed = saving failed

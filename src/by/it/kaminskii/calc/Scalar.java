@@ -8,7 +8,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
@@ -16,7 +16,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double odds = this.value - ((Scalar) other).value;
             return new Scalar(-1).mul(other).add(this);
@@ -25,7 +25,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double prod = this.value * ((Scalar) other).value;
             return new Scalar(prod);
@@ -33,13 +33,13 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcExeption {
 
         if (other instanceof Scalar) {
             if (((Scalar) other).value != 0) {
                 double result = this.value / ((Scalar) other).value;
                 return new Scalar(result);
-            } else return super.div(other);
+            } else throw new CalcExeption("Деление на ноль");
         } else return super.div(other);
     }
 

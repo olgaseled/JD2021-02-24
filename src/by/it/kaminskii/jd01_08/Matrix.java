@@ -3,7 +3,7 @@ package by.it.kaminskii.jd01_08;
 import java.util.Arrays;
 
 class Matrix extends by.it.kaminskii.jd01_08.Var {
-    private double[][] value;
+    private final double[][] value;
 
     @Override
     public Var add(Var other) {
@@ -95,7 +95,7 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
                 }
-                double vector[] = ((Vector) other).getValue();
+                double[] vector = ((Vector) other).getValue();
                 double[] matrixSize = new double[res.length];
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < vector.length; j++) {
@@ -159,14 +159,14 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
         String one = "";
         String two = "";
         strMatrix = strMatrix.replaceAll(" ", "");
-        String[] matr = strMatrix.split("\\},\\{");
+        String[] matr = strMatrix.split("},\\{");
         for (int i = 0; i < matr.length; i++) {
             if (i < (matr.length - 1)) one = matr[i];
             else two = matr[i];
         }
-        one = one.replaceAll("\\{|\\}", "");
+        one = one.replaceAll("[{}]", "");
         String[] oneArray = one.split(",");
-        two = two.replaceAll("\\{|\\}", "");
+        two = two.replaceAll("[{}]", "");
         String[] twoArray = two.split(",");
         String[] both = new String[(oneArray.length + twoArray.length)];
         for (int i = 0; i < oneArray.length; i++) {
@@ -186,7 +186,7 @@ class Matrix extends by.it.kaminskii.jd01_08.Var {
     public String toString() {
         StringBuilder sb2 = new StringBuilder("{");
         String delim2 = "";
-        int j = 0;
+        int j;
         for (int i = 0; i < value.length; i++) {
             sb2.append(delim2).append("{");
             for (j = 0; j < value[0].length; j++) {

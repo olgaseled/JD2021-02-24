@@ -3,7 +3,7 @@ package by.it.voitsekhovskiy.jd02_05;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum Language {
+ enum Language {
     INSTANCE;
     private final String BASE = "by.it.voitsekhovskiy.jd02_05.resources.language";
     ResourceBundle bundle;

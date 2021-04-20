@@ -3,9 +3,14 @@ package by.it.maksimova.calculator;
 import java.util.Objects;
 
 public class Printer {
-    void print (Var var) {
-        if (Objects.nonNull(var)){
+    void print(Var var) {
+        if (Objects.nonNull(var)) {
             System.out.println(var);
         }
+    }
+
+    void print(CalcException e) {
+        System.out.println(e.getMessage());
+        Logger.getLogger().log(e.getMessage());
     }
 }

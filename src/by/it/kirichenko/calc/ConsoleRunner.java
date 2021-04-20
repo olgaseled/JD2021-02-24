@@ -10,6 +10,7 @@ public class ConsoleRunner {
         VarRepository.load();
         for (; ; ) {
             String expression = scanner.nextLine();
+            new ThreadLogger(expression).start();
             if (!expression.equals("end")) {
                 try {
                     Var resultVar = parser.evaluate(expression);

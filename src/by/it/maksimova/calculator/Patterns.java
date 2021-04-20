@@ -1,11 +1,14 @@
 package by.it.maksimova.calculator;
 
-public interface Patterns {
+interface Patterns {
 
-    String OPERATION = "[-+*/]";
+    String OPERATION = "(?<=[^-+*/=,{])[-+*/=]";
     String SCALAR = "-?[0-9]+(\\.[0-9]+)?";
     String VECTOR = "\\{" + SCALAR + "(," + SCALAR + ")*}";
     String MATRIX = "\\{" + VECTOR + "(," + VECTOR + ")*}";
+
+}
+
 
     /*
     1111+1222
@@ -15,4 +18,4 @@ public interface Patterns {
     {{1,2.0}, {3,4}} * {2,3}
      */
 
-}
+

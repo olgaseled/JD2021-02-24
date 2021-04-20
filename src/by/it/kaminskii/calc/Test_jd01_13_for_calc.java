@@ -4,7 +4,7 @@ package by.it.kaminskii.calc;
 import by.it.HomeWork;
 import org.junit.Test;
 
-@SuppressWarnings("all")
+
 
 //поставьте курсор на следующую строку и нажмите Ctrl+Shift+F10
 public class Test_jd01_13_for_calc extends HomeWork {

@@ -32,7 +32,7 @@ class VarRepository {
                         .forEach(line -> {
                             try {
                                 parser.evaluate(line);
-                            } catch (CalcException  e) {
+                            } catch (CalcException e) {
                                 //stub
                             }
                         });

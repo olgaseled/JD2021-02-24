@@ -11,9 +11,15 @@ public class ChangeLanguage {
         System.out.println(Messages.ASK_CHOOSE_LANG);
         String line = scan.nextLine();
         switch (line) {
-            case "BY" -> lang.setLocale(new Locale("be", "BY"));
-            case "RU" -> lang.setLocale(new Locale("ru", "RU"));
-            default -> lang.setLocale(Locale.getDefault());
+            case "BY":
+                lang.setLocale(new Locale("be", "BY"));
+                break;
+            case "RU":
+                lang.setLocale(new Locale("ru", "RU"));
+                break;
+            default:
+                lang.setLocale(Locale.getDefault());
+                break;
         }
     }
 }

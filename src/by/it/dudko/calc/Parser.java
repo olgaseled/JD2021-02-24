@@ -8,12 +8,18 @@ import java.util.regex.Pattern;
 
 class Parser {
 
+    private final VarCreator varCreator;
+
+    public Parser(VarCreator varCreator) {
+        this.varCreator = varCreator;
+    }
+
     Var evaluate(String statement) throws CalcException {
         Matcher matcher;
         StringBuilder matchedGroup = new StringBuilder(statement);
         while (
                 (matcher = Pattern.compile(Patterns.PRIORITY_GROUP).matcher(matchedGroup))
-                .find()
+                        .find()
         ) {
             int start = matcher.start();
             int end = matcher.end();
@@ -21,7 +27,7 @@ class Parser {
             matchedGroup.replace(start, end, groupResult.toString());
         }
 
-        String singleStatement = matchedGroup.toString().replaceAll(Patterns.SAFE_SPACES,"");
+        String singleStatement = matchedGroup.toString().replaceAll(Patterns.SAFE_SPACES, "");
         ArrayList<String> operands =
                 new ArrayList<>(Arrays.asList(singleStatement.split(Patterns.OPERATION)));
         ArrayList<String> operators = new ArrayList<>();
@@ -38,7 +44,7 @@ class Parser {
             operands.add(index, result.toString());
         }
 
-        return VarCreator.createVar(operands.get(0));
+        return varCreator.createVar(operands.get(0));
     }
 
     private int getIndex(ArrayList<String> operators) {
@@ -63,11 +69,11 @@ class Parser {
     }
 
     private Var resultOperation(String left, String operator, String right) throws CalcException {
-        Var rightVar = VarCreator.createVar(right);
+        Var rightVar = varCreator.createVar(right);
         if (operator.equals("=")) {
             return Var.save(left, rightVar);
         }
-        Var leftVar = VarCreator.createVar(left);
+        Var leftVar = varCreator.createVar(left);
 
         switch (operator) {
             case "-":
@@ -79,7 +85,7 @@ class Parser {
             case "/":
                 return leftVar.div(rightVar);
         }
-        throw new CalcException("Unknown operation");
+        throw new CalcException(Language.INSTANCE.get(Messages.UNKNOWN_OPERATION));
     }
 }
 

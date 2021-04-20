@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+
+
     Var calc(String expression) {
         String[] operand = expression.split(Patterns.OPERATION);
         Var one = Var.creatVar(operand[0]);

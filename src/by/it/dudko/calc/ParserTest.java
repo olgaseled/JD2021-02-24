@@ -11,11 +11,13 @@ import static org.junit.Assert.*;
 public class ParserTest {
 
     private Parser parser;
+    private VarCreator varCreator;
 
 
     @Before
     public void setUp() {
-        parser = new Parser();
+        varCreator = new VarCreator();
+        parser = new Parser(varCreator);
         VarRepository.load();
     }
 
@@ -108,15 +110,15 @@ public class ParserTest {
         Var expectedVar;
 
         actualVar = parser.evaluate("ADD_V1 = {2.2, 4.0, -8.0} + 3.3");
-        expectedVar = VarCreator.createVar("{5.5, 7.3, -4.7}");
+        expectedVar = varCreator.createVar("{5.5, 7.3, -4.7}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("ADD_V2 = {2.2, 4.0, -8.0} + {7.1, -6.6, 0}");
-        expectedVar = VarCreator.createVar("{9.3, -2.6, -8}");
+        expectedVar = varCreator.createVar("{9.3, -2.6, -8}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("ADD_V3 = {7.1, -6.6, 0} + {2.2, 4.0, -8.0}");
-        expectedVar = VarCreator.createVar("{9.3, -2.6, -8}");
+        expectedVar = varCreator.createVar("{9.3, -2.6, -8}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         try {
@@ -126,15 +128,15 @@ public class ParserTest {
         }
 
         actualVar = parser.evaluate("SUB_V1 = {2.2, 4.0, -8.0} - 3.3");
-        expectedVar = VarCreator.createVar("{-1.1, 0.7, -11.3}");
+        expectedVar = varCreator.createVar("{-1.1, 0.7, -11.3}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("SUB_V2 = {2.2, 4.0, -8.0} - {7.1, -6.6, 0}");
-        expectedVar = VarCreator.createVar("{-4.9, 10.6, -8}");
+        expectedVar = varCreator.createVar("{-4.9, 10.6, -8}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("SUB_V3 = {7.1, -6.6, 0} - {2.2, 4.0, -8.0}");
-        expectedVar = VarCreator.createVar("{4.9, -10.6, 8}");
+        expectedVar = varCreator.createVar("{4.9, -10.6, 8}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         try {
@@ -144,14 +146,14 @@ public class ParserTest {
         }
 
         actualVar = parser.evaluate("MUL_V1 = {4.9, -10.6, 8} * 12.55");
-        expectedVar = VarCreator.createVar("{61.495, -133.03, 100.4}");
+        expectedVar = varCreator.createVar("{61.495, -133.03, 100.4}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         actualVar = parser.evaluate("MUL_V2 = {9.0, 1} *" +
                 "{{6, 2}," +
                 "{3, 7}," +
                 "{1, 0}}");
-        expectedVar = VarCreator.createVar("{56, 34, 9}");
+        expectedVar = varCreator.createVar("{56, 34, 9}");
         assertVectorsAreEqual((Vector) actualVar, (Vector) expectedVar);
 
         try {
@@ -213,12 +215,12 @@ public class ParserTest {
 
         // SUM
         actualVar = parser.evaluate("ADD_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} + 3.3");
-        expectedVar = VarCreator.createVar("{{5.5, 7.3, -4.7},{10.4, -3.3, 3.3}}");
+        expectedVar = varCreator.createVar("{{5.5, 7.3, -4.7},{10.4, -3.3, 3.3}}");
         assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
 
         actualVar = parser.evaluate("{{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} +" +
                 "{{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}}");
-        expectedVar = VarCreator.createVar("{{7.7, 11.3, -12.7}, {17.5, -9.9, -3.3}}");
+        expectedVar = varCreator.createVar("{{7.7, 11.3, -12.7}, {17.5, -9.9, -3.3}}");
         assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
 
 
@@ -238,12 +240,12 @@ public class ParserTest {
 
         // SUBTRACTION
         actualVar = parser.evaluate("SUB_V1 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} - 3.3");
-        expectedVar = VarCreator.createVar("{{-1.1, 0.7, -11.3}, {3.8, -9.9, -3.3}}");
+        expectedVar = varCreator.createVar("{{-1.1, 0.7, -11.3}, {3.8, -9.9, -3.3}}");
         assertMatricesAreEqual((Matrix) actualVar, (Matrix) expectedVar);
 
         actualVar = parser.evaluate("SUB_V2 = {{2.2, 4.0, -8.0}, {7.1, -6.6, 0}} -" +
                 "{{5.5, 7.3, -4.7}, {10.4, -3.3, -3.3}}");
-        expectedVar = VarCreator.createVar("{{-3.3, -3.3, -3.3}, {-3.3, -3.3, 3.3}}");
+        expectedVar = varCreator.createVar("{{-3.3, -3.3, -3.3}, {-3.3, -3.3, 3.3}}");
         assertMatricesAreEqual((Matrix) expectedVar, (Matrix) actualVar);
 
         try {
@@ -268,16 +270,16 @@ public class ParserTest {
         // MULTIPLICATION
 
         actualVar = parser.evaluate("MUL_V1 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * 6.33");
-        expectedVar = VarCreator.createVar("{{13.926, 25.32}, {44.943, -41.778}, {-20.889, 20.889}}");
+        expectedVar = varCreator.createVar("{{13.926, 25.32}, {44.943, -41.778}, {-20.889, 20.889}}");
         assertMatricesAreEqual((Matrix) expectedVar, (Matrix) actualVar);
 
         actualVar = parser.evaluate("MUL_V2 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * {2.2, 4.0}");
-        expectedVar = VarCreator.createVar("{20.84, -10.78, 5.94}");
+        expectedVar = varCreator.createVar("{20.84, -10.78, 5.94}");
         assertVectorsAreEqual((Vector) expectedVar, (Vector) actualVar);
 
         actualVar = parser.evaluate("MUL_V4 = {{2.2, 4.0}, {7.1, -6.6}, {-3.3, 3.3}} * " +
                 "{{20.84, -10.78, 5.94}, {5.5, 7.3, -4.7}}");
-        expectedVar = VarCreator.createVar("{{67.848, 5.484, -5.732}, {111.664, -124.718, 73.194}, " +
+        expectedVar = varCreator.createVar("{{67.848, 5.484, -5.732}, {111.664, -124.718, 73.194}, " +
                 "{-50.622, 59.664, -35.112}}");
         assertMatricesAreEqual((Matrix) expectedVar, (Matrix) actualVar);
 

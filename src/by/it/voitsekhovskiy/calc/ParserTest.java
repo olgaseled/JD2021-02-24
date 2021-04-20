@@ -5,12 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ParserTest {
-
+    private VarCreator varCreator;
     private Parser parser;
 
     @Before
     public void setUp() {
-        this.parser = new Parser();
+        VarCreator varCreator = new VarCreator();
+        this.parser = new Parser(varCreator);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class ParserTest {
      */
 
     public void vectorAssert(String exp, String expected) throws CalcException {
-        Var expectedVar = Var.createVar(expected);
+        Var expectedVar = varCreator.createVar(expected);
         Var result = parser.calc(exp);
         Assert.assertEquals(expectedVar.toString(), result.toString());
     }

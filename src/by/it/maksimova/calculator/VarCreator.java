@@ -1,12 +1,15 @@
 package by.it.maksimova.calculator;
 
+import java.util.Objects;
+
 class VarCreator {
+
 
     private VarCreator() {
     }
 
-    static Var build(String strVar) {
-         strVar = strVar.replaceAll("\\s+", "");
+    static Var build(String strVar) throws CalcException {
+        strVar = strVar.replaceAll("\\s+", "");
         if (strVar.matches(Patterns.SCALAR)) {
             return new Scalar(strVar);
         } else if (strVar.matches(Patterns.VECTOR)) {
@@ -14,7 +17,12 @@ class VarCreator {
         } else if (strVar.matches(Patterns.MATRIX)) {
             return new Matrix(strVar);
         } else {
-            return null; //TODO stub - generate error here
+            Var var = Var.load(strVar);
+            if (Objects.nonNull(var)) {
+                return var;
+            }
         }
+        throw new CalcException("Unknown variable or expression: " + strVar);
     }
 }
+

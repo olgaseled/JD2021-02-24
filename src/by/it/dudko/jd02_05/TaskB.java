@@ -1,5 +1,10 @@
 package by.it.dudko.jd02_05;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -9,8 +14,10 @@ public class TaskB {
     static String userLang;
     static Language lang;
 
+
     public static void main(String[] args) {
         lang = Language.INSTANCE;
+
         sc = new Scanner(System.in);
         do {
             listenChangeLang();
@@ -56,6 +63,10 @@ public class TaskB {
     }
 
     private static void greeting(Language lang) {
+        Date date = new Date();
+        Locale currentLocale = lang.getBundleLocale();
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, currentLocale);
+        System.out.println(dateFormat.format(date));
         System.out.printf("%s, %s %s!\n",
                 lang.get(Messages.WELCOME),
                 lang.get(User.FIRST_NAME),

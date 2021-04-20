@@ -3,14 +3,15 @@ package by.it.kaminskii.calc;
 import java.util.Arrays;
 
 class Vector extends Var {
-    private double[] value;
 
-    public double[] getValue() {
+    private final double[] value;
+
+    public double[] getVector() {
         return value;
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -24,12 +25,12 @@ class Vector extends Var {
                     res[i] += ((Vector) other).value[i];
                 }
                 return new Vector(res);
-            } else return super.add(other);
+            } else throw new CalcExeption("Разная длинна массивов");
         } else return super.add(other);
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -43,12 +44,12 @@ class Vector extends Var {
                     res[i] = res[i] - ((Vector) other).value[i];
                 }
                 return new Vector(res);
-            } else return super.sub(other);
+            } else throw new CalcExeption("Разная длинна массивов");
         } else return super.sub(other);
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -63,21 +64,24 @@ class Vector extends Var {
                     mul += res[i] * ((Vector) other).value[i];
                 }
                 return new Scalar(mul);
-            } else return super.mul(other);
+            } else throw new CalcExeption("Разная длинна массивов");
         } else return super.mul(other);
     }
 
+    //операция деления
     @Override
-    public Var div(Var other) {
-        if (other instanceof Scalar) {
+    public Var div(Var other) throws CalcExeption {
+        if (other instanceof Scalar) {    //1)вектор на скаляр
             if (((Scalar) other).getValue() != 0) {
                 double[] res = Arrays.copyOf(value, value.length);
                 for (int i = 0; i < res.length; i++) {
                     res[i] = res[i] / ((Scalar) other).getValue();
                 }
                 return new Vector(res);
-            } else return super.mul(other);
-        } else return super.mul(other);
+            }
+            else throw new CalcExeption("Деление на ноль");  //если скаляр = 0
+        }
+        else return super.mul(other); //2)невозможность деления вектор на вектор || матрицу
     }
 
     Vector(double[] value) {
@@ -89,8 +93,7 @@ class Vector extends Var {
     }
 
     Vector(String strVector) {
-        strVector = strVector.replaceAll("\\{|\\}|", "").replaceAll(" ", "");
-        ;
+        strVector = strVector.replaceAll("\\{|}|", "").replaceAll(" ", "");
         String[] v = strVector.split(",");
         value = new double[v.length];
         for (int i = 0; i < v.length; i++) {
@@ -98,6 +101,9 @@ class Vector extends Var {
             System.out.println(value[i]);
         }
     }
+
+
+    //переопределение метода для вывода вектора
 
     @Override
     public String toString() {

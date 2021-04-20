@@ -36,13 +36,15 @@ import java.util.Scanner;
 class TaskC3 {
 
     public static void main(String[] args) {
-        System.out.println("Введите вес:");
-        Scanner sc = new Scanner(System.in);
-        double i = sc.nextInt();
-        double m = 3.86;
-        double z = 9.81;
-        double j =i/z*m;
+        Scanner sc=new Scanner(System.in);
+        int a = sc.nextInt();
+        double mars_final = getWeight(a);
+        System.out.println(mars_final);
+    }
 
-        System.out.printf("%.2f", j);
+    static double getWeight(int weight){
+        double mars_weight=weight/9.81*3.86;
+        double mars_final = Math.round(mars_weight*100.0)/100.0;
+        return mars_final;
     }
 }

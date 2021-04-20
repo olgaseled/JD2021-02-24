@@ -18,17 +18,17 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) throws CalcException{
+    public Var add(Var other) throws CalcException {
         throw new CalcException(String.format("Operation %s + %s is not possible\n", this, other));
     }
 
     @Override
-    public Var sub(Var other)  throws CalcException{
+    public Var sub(Var other)  throws CalcException {
         throw new CalcException(String.format("Operation %s - %s is not possible\n", this, other));
     }
 
     @Override
-    public Var mul(Var other)  throws CalcException{
+    public Var mul(Var other)  throws CalcException {
         throw new CalcException(String.format("Operation %s * %s is not possible\n", this, other));
     }
 

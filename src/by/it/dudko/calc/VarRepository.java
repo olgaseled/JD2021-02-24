@@ -6,7 +6,7 @@ import java.util.Map;
 public class VarRepository {
 
     private static final String VARS_FILE_NAME =
-            FileNameHelper.getFullPath("vars.txt", VarRepository.class);
+            FileNameHelper.getFullPath(Config.VAR_REPO_FILE_NAME, VarRepository.class);
 
     public static void load() {
         try (
@@ -14,7 +14,7 @@ public class VarRepository {
                         new FileReader(VARS_FILE_NAME)
                 )
         ) {
-            Parser parser = new Parser();
+            Parser parser = new Parser(new VarCreator());
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 parser.evaluate(line);
@@ -32,7 +32,7 @@ public class VarRepository {
                 printWriter.printf("%s=%s\n", nameValue.getKey(), nameValue.getValue());
             }
         } catch (FileNotFoundException e) {
-            throw new CalcException("saving failed", e);
+            throw new CalcException(Language.INSTANCE.get(Messages.REPO_SAVE_FAILED), e);
         }
 
     }
