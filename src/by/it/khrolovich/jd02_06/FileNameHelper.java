@@ -6,13 +6,12 @@ public class FileNameHelper {
     private static final String SRC = "src";
     private static final String USER_DIR = "user.dir";
 
-    private FileNameHelper(){
+    private FileNameHelper() {
 
     }
 
     //уберем приватность
     static String getFilePath(String fileName, Class<?> currentStructure) {
-        //private static String getFilePath(String fileName, Class<TaskA> currentStructure) {
         String rootProject = System.getProperty(USER_DIR);//здесь в IDE это корень проекта
         String src = rootProject + File.separator + SRC + File.separator;
         String relatedDir = currentStructure
