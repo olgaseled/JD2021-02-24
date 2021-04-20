@@ -13,7 +13,7 @@ public class ConsoleRunner {
         Language lang = Language.INSTANCE;
         for (; ; ) {
             String expression = scanner.nextLine();
-            Logger.get().log(expression);
+            Logger.INSTANCE.log(expression);
 
             if (!expression.equals("end")) {
                 switch (expression) {

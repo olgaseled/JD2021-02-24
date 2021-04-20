@@ -4,33 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 
-public class Logger {
+public enum Logger {
+    INSTANCE;
 
-    private static volatile Logger logger;
-
-    //нельзя будет создать извне
-    private Logger() {
-
-    }
-
-    static Logger get() {
-        Logger localLogger = logger;
-        if (localLogger == null) {
-            synchronized (Logger.class) {
-                localLogger = logger;
-                if (localLogger == null) {
-                    localLogger = new Logger();
-                    logger = localLogger;
-                }
-            }
-        }
-        return localLogger;
-    }
+    //private static Logger logger;
 
     //объкт один - this
     synchronized void log(String message) {

@@ -16,7 +16,7 @@ public class VarRepository {
             for (Map.Entry<String, Var> pair : vars.entrySet()) {
                 out.printf("%s=%s\n", pair.getKey(), pair.getValue());
                 //можно сделать сложнее, чтобы не перезаписывать
-                Logger.get().log(Language.INSTANCE.get(Message.SAVE_TO_FILE)+" "+pair.getKey()+"="+pair.getValue());
+                Logger.INSTANCE.log(Language.INSTANCE.get(Message.SAVE_TO_FILE)+" "+pair.getKey()+"="+pair.getValue());
             }
 
         } catch (FileNotFoundException e) {
@@ -34,11 +34,11 @@ public class VarRepository {
                     parser.evaluate(line);
                 } catch (CalcException e) {
                     e.printStackTrace();
-                    Logger.get().log(e.getMessage());
+                    Logger.INSTANCE.log(e.getMessage());
                 }
             });
         } catch (IOException e) {
-            Logger.get().log(e.getMessage());
+            Logger.INSTANCE.log(e.getMessage());
             throw new RuntimeException(e);
         }
 
