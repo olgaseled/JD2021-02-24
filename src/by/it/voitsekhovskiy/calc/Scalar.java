@@ -33,14 +33,14 @@ class Scalar extends Var {
             if (((Scalar) other).value != 0) {
                 return new Scalar(this.value / ((Scalar) other).value);
             } else {
-                throw new CalcException("division by zero!");
+                throw new CalcException(ConsoleRunner.logger.log("division by zero!"));
             }
         }
         if (other instanceof Vector) {
-            throw new CalcException("can't division scalar on vector");
+            throw new CalcException(ConsoleRunner.logger.log("can't division scalar on vector"));
         }
         if( other instanceof Matrix) {
-            throw new CalcException("can't division scalar on matrix");
+            throw new CalcException(ConsoleRunner.logger.log("can't division scalar on matrix"));
         }
         return other.div(this);
     }

@@ -1,11 +1,17 @@
 package by.it.voitsekhovskiy.calc;
 
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
+    static Language language = Language.INSTANCE;
+    static Logger logger = Logger.INSTANCE;
+    static VarCreator varCreator = new VarCreator();
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Parser calc = new Parser();
+        Parser calc = new Parser(varCreator);
         Printer print = new Printer();
         for (; ; ) {
             String expression = sc.nextLine();

@@ -26,7 +26,7 @@ public class Vector extends Var {
                 }
                 return new Vector(resultVector);
             } else {
-                throw new CalcException("Incorrect size");
+                throw new CalcException(ConsoleRunner.logger.log("Incorrect size"));
             }
         }
         return super.add(other);
@@ -80,7 +80,7 @@ public class Vector extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             if (((Scalar) other).getValue() == 0) {
-                throw new CalcException("division by zero!");
+                throw new CalcException(ConsoleRunner.logger.log("division by zero!"));
             }
             double[] resultVector = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < this.value.length; i++) {

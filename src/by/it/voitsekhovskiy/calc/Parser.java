@@ -6,7 +6,13 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    private final VarCreator varCreator;
+
+    Parser(VarCreator varCreator) {
+        this.varCreator = varCreator;
+    }
     Var calc(String expression) throws CalcException {
+        ConsoleRunner.logger.log(expression);
         return checkingBrackets(expression);
     }
 
@@ -39,7 +45,8 @@ public class Parser {
             Var result = oneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
-        return Var.createVar(operands.get(0));
+        ConsoleRunner.logger.log(operands.get(0));
+        return varCreator.createVar(operands.get(0));
     }
 
     Map<String, Integer> priorityOfOperation = new HashMap<>() {{
@@ -64,12 +71,12 @@ public class Parser {
     }
 
     Var oneOperation(String left, String operation, String right) throws CalcException {
-        operation = operation.replace(" ", "");
+//        operation = operation.replace(" ", "");
         if (operation.equals("=")) {
-            return Var.save(left, Var.createVar(right));
+            return Var.save(left, varCreator.createVar(right));
         }
-        Var firstOperand = Var.createVar(left);
-        Var secondOperand = Var.createVar(right);
+        Var firstOperand = varCreator.createVar(left);
+        Var secondOperand = varCreator.createVar(right);
         switch (operation) {
             case ("+"):
                 return firstOperand.add(secondOperand);
