@@ -5,7 +5,13 @@ import java.util.StringJoiner;
 
 public class Vector extends Var {
 
+
+    public double[] getValue() {
+        return value;
+    }
+
     public final double[] value;
+
 
     public Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
@@ -14,9 +20,7 @@ public class Vector extends Var {
     public Vector(Vector vector) {
         this(vector.value);
     }
-    public double[] getValue() {
-        return value;
-    }
+
 
     public Vector(String strVector) {
         //1.0,2.343,987.0
@@ -32,7 +36,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -53,7 +57,7 @@ public class Vector extends Var {
         return super.add(other);
     }
 
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);
@@ -74,7 +78,7 @@ public class Vector extends Var {
         return super.sub(other);
     }
 
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -92,7 +96,7 @@ public class Vector extends Var {
         return super.sub(other);
     }
 
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).getValue();
             double[] resultVector = Arrays.copyOf(value, value.length);

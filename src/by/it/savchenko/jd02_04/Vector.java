@@ -5,7 +5,13 @@ import java.util.StringJoiner;
 
 public class Vector extends by.it.savchenko.jd02_04.Var {
 
+
+    public double[] getValue() {
+        return value;
+    }
+
     public final double[] value;
+
 
     public Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
@@ -14,9 +20,7 @@ public class Vector extends by.it.savchenko.jd02_04.Var {
     public Vector(Vector vector) {
         this(vector.value);
     }
-    public double[] getValue() {
-        return value;
-    }
+
 
     public Vector(String strVector) {
         //1.0,2.343,987.0
