@@ -12,7 +12,7 @@ public enum LoggerCalc {LOGGING;
         this.logFile = logFile;
     }
 
-    synchronized void log(String logLine) {
+    synchronized void log(String logLine,boolean in) {
         try (
                 PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true))) {
             logWriter.println(logLine);
