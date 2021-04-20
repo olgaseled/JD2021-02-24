@@ -31,38 +31,26 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s + %s is impossible\n", this, other));
+        throw new CalcException(ConsoleRunner.logger.log(
+                String.format("Operation %s + %s is impossible\n", this, other)));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s - %s is impossible\n", this, other));
+        throw new CalcException(ConsoleRunner.logger.log(
+                String.format("Operation %s - %s is impossible\n", this, other)));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s * %s is impossible\n", this, other));
+        throw new CalcException(ConsoleRunner.logger.log(
+                String.format("Operation %s * %s is impossible\n", this, other)));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s / %s is impossible\n", this, other));
+        throw new CalcException(ConsoleRunner.logger.log(
+                String.format("Operation %s / %s is impossible\n", this, other)));
     }
 
-    static Var createVar(String strExp) throws CalcException {
-        strExp = strExp.replace(" ", "");
-        if (strExp.matches(Patterns.SCALAR)) {
-            return new Scalar(strExp);
-        } else if (strExp.matches(Patterns.VECTOR)) {
-            return new Vector(strExp);
-        } else if (strExp.matches(Patterns.MATRIX)) {
-            return new Matrix(strExp);
-        } else {
-            Var var = Var.load(strExp);
-            if(Objects.nonNull(var)) {
-                return var;
-            }
-        }
-        throw new CalcException("Can't define as Var!");
-    }
 }

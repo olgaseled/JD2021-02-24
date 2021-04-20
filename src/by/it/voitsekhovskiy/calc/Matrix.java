@@ -20,8 +20,8 @@ public class Matrix extends Var {
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).value;
             if (matrixLeft.length != matrixRight.length || matrixLeft[0].length != matrixRight[0].length) {
-//                throw new CalcException("not same size of matrix!");
-                throw new CalcException(ConsoleRunner.language.get("exception.notSameSizeMatrix"));
+                throw new CalcException(ConsoleRunner.logger.log(
+                        ConsoleRunner.language.get("exception.notSameSizeMatrix")));
             }
             double[][] resultMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < this.value.length; i++) {
@@ -49,7 +49,8 @@ public class Matrix extends Var {
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).value;
             if (matrixLeft.length != matrixRight.length || matrixLeft[0].length != matrixRight[0].length) {
-                throw new CalcException(ConsoleRunner.language.get("exception.notSameSizeMatrix"));
+                throw new CalcException(ConsoleRunner.logger.log(
+                        ConsoleRunner.language.get("exception.notSameSizeMatrix")));
             }
             double[][] resultMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < this.value.length; i++) {
@@ -77,7 +78,8 @@ public class Matrix extends Var {
             double[] resultVector = new double[this.value.length];
             double[] entryVector = ((Vector) other).getValue();
             if (this.value.length != entryVector.length) {
-                throw new CalcException(ConsoleRunner.language.get("exception.notSameSizeMatrix"));
+                throw new CalcException(ConsoleRunner.logger.log(
+                        ConsoleRunner.language.get("exception.notSameSizeMatrix")));
             }
             for (int i = 0; i < this.value.length; i++) {
                 for (int j = 0; j < this.value[i].length; j++) {
@@ -91,7 +93,8 @@ public class Matrix extends Var {
             double[][] matrixLeft = this.value;
             double[][] matrixRight = ((Matrix) other).value;
             if (matrixLeft[0].length != matrixRight.length) {
-                throw new CalcException(ConsoleRunner.language.get("exception.notSameSizeMatrix"));
+                throw new CalcException(ConsoleRunner.logger.log(
+                        ConsoleRunner.language.get("exception.notSameSizeMatrix")));
             }
             double[][] resultMatrix = new double[matrixLeft.length][matrixRight[0].length];
             for (int i = 0; i < matrixLeft.length; i++) {
@@ -112,7 +115,8 @@ public class Matrix extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             if (((Scalar) other).getValue() == 0) {
-                throw new CalcException(ConsoleRunner.language.get("exception.divisionByZero"));
+                throw new CalcException(ConsoleRunner.logger.log(
+                        ConsoleRunner.language.get("exception.divisionByZero")));
             }
             double[][] resultMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < resultMatrix.length; i++) {
