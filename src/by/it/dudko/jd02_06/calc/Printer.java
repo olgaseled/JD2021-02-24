@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.util.Objects;
 
@@ -8,10 +8,6 @@ class Printer {
             System.out.println(result);
             LoggerEnum.INSTANCE.log(String.valueOf(result));
         }
-    }
-
-    void print(String line) {
-        System.out.println(line);
     }
 
     void print(CalcException e) {

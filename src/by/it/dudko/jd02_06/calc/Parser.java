@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ class Parser {
         StringBuilder matchedGroup = new StringBuilder(statement);
         while (
                 (matcher = Pattern.compile(Patterns.PRIORITY_GROUP).matcher(matchedGroup))
-                        .find()
+                .find()
         ) {
             int start = matcher.start();
             int end = matcher.end();
@@ -27,7 +27,7 @@ class Parser {
             matchedGroup.replace(start, end, groupResult.toString());
         }
 
-        String singleStatement = matchedGroup.toString().replaceAll(Patterns.SAFE_SPACES, "");
+        String singleStatement = matchedGroup.toString().replaceAll(Patterns.SAFE_SPACES,"");
         ArrayList<String> operands =
                 new ArrayList<>(Arrays.asList(singleStatement.split(Patterns.OPERATION)));
         ArrayList<String> operators = new ArrayList<>();
@@ -85,7 +85,7 @@ class Parser {
             case "/":
                 return leftVar.div(rightVar);
         }
-        throw new CalcException(Language.INSTANCE.get(Messages.UNKNOWN_OPERATION));
+        throw new CalcException("Unknown operation");
     }
 }
 

@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 public class Scalar extends Var {
 
@@ -54,7 +54,7 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             double secondScalar = ((Scalar) other).value;
             if (secondScalar == 0) {
-                throw new CalcException(Language.INSTANCE.get(Messages.DIV_BY_ZERO));
+                throw new CalcException("division by zero");
             }
             return new Scalar(value / secondScalar);
         }

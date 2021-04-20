@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,27 +22,27 @@ abstract class Var implements Operation {
 
     @Override
     public String toString() {
-        return Language.INSTANCE.get(Messages.ABSTRACT_VAR);
+        return "abstract Var";
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
+        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
+        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
+        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(Language.INSTANCE.get(Messages.UNSUPPORTED));
+        throw new CalcException(String.format("Operation %s + %s isn't supported\n", this, other));
     }
 
 }

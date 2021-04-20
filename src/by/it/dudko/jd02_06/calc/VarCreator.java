@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.util.Objects;
 
@@ -22,6 +22,6 @@ public class VarCreator {
                 return savedVar;
             }
         }
-        throw new CalcException(Language.INSTANCE.get(Messages.UNKNOWN_VAR_OR_EXPRESSION));
+        throw new CalcException("Unknown variable or expression: " + strVar);
     }
 }

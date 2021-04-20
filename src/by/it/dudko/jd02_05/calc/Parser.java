@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_05.calc;
 
 import java.util.ArrayList;
 import java.util.Arrays;

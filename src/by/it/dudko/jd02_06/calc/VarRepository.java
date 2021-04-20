@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.io.*;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class VarRepository {
 
     private static final String VARS_FILE_NAME =
-            FileNameHelper.getFullPath(Config.VAR_REPO_FILE_NAME, VarRepository.class);
+            FileNameHelper.getFullPath("vars.txt", VarRepository.class);
 
     public static void load() {
         try (
@@ -32,7 +32,7 @@ public class VarRepository {
                 printWriter.printf("%s=%s\n", nameValue.getKey(), nameValue.getValue());
             }
         } catch (FileNotFoundException e) {
-            throw new CalcException(Language.INSTANCE.get(Messages.REPO_SAVE_FAILED), e);
+            throw new CalcException("saving failed", e);
         }
 
     }

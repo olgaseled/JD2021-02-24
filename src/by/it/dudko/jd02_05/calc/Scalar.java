@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_05.calc;
 
 public class Scalar extends Var {
 

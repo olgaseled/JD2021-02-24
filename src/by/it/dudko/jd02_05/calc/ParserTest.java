@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_05.calc;
 
 import org.junit.After;
 import org.junit.Before;

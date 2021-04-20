@@ -1,4 +1,6 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
+
+import by.it.dudko.jd02_06.FileNameHelper;
 
 import java.io.File;
 import java.util.Scanner;
@@ -18,24 +20,11 @@ public class ConsoleRunner {
                 )
         );
         VarRepository.load();
-        Language lang = Language.INSTANCE;
-        printer.print(lang.get(Messages.WELCOME));
         for (; ; ) {
             String expression = scanner.nextLine();
             // log expression to calculate or exit command
             logger.log(expression);
-            if (!expression.equalsIgnoreCase(Config.STOP_WORD)) {
-                try {
-                    Languages.valueOf(expression.trim().toUpperCase());
-                    // switch language command
-                    String localeAlias = expression.trim();
-                    lang.setLocale(localeAlias);
-                    printer.print(lang.get(Messages.LANG_CHANGED) +
-                            " " + Languages.getLongName(localeAlias));
-                    continue;
-                } catch (IllegalArgumentException ignored) {
-                    // calculator command
-                }
+            if (!expression.equals("end")) {
                 try {
                     Var resultVar = parser.evaluate(expression);
                     printer.print(resultVar);
@@ -48,7 +37,6 @@ public class ConsoleRunner {
                 } catch (CalcException e) {
                     printer.print(e);
                 }
-                printer.print(lang.get(Messages.BYE));
                 break;
             }
         }

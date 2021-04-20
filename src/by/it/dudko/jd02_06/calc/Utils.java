@@ -1,4 +1,4 @@
-package by.it.dudko.calc;
+package by.it.dudko.jd02_06.calc;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
@@ -32,7 +32,7 @@ class Utils {
         return copyMatrix;
     }
 
-    static double[][] castAsMatrixOfDoubles(String strMatrix) throws CalcException {
+    static double[][] castAsMatrixOfDoubles(String strMatrix) {
         final int m, n;
         strMatrix = trimBraces(strMatrix);
         String[] strMatrixRows = splitToMatrixRows(strMatrix);
@@ -44,7 +44,8 @@ class Utils {
             String strMatrixRow = trimBraces(strMatrixRows[i]);
             String[] matrixRow = splitToRowItems(strMatrixRow);
             if (n != matrixRow.length) {
-                throw new CalcException(Language.INSTANCE.get(Messages.BAD_MATRIX));
+                System.out.println("Provided matrix has various row length");
+                continue;
             }
             for (int j = 0; j < n; j++) {
                 matrix[i][j] = Double.parseDouble(matrixRow[j]);
