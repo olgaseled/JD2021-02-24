@@ -6,6 +6,10 @@ import java.util.StringJoiner;
 public class Matrix extends Var {
     private final double[][] value;
 
+    public double[][] getValue() {
+        return value;
+    }
+
     //копируем, а не просто ссылка. Так лучше!
     public Matrix(double[][] value) {
         double[][] resultMatrix = new double[value.length][0];
