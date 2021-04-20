@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_06_calc;
+package by.it.papruga.jd02_06.task_b;
 
 import java.io.File;
 import java.io.FileNotFoundException;

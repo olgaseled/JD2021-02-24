@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_06_calc;
+package by.it.papruga.jd02_06.task_c;
 
 import org.junit.After;
 import org.junit.Before;

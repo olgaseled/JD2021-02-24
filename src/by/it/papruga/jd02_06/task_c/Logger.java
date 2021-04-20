@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_06_calc;
+package by.it.papruga.jd02_06.task_c;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +7,10 @@ import java.io.PrintWriter;
 
 public class Logger {
 
-    private static volatile Logger logger;
+    public static class LoggerHolder{
+
+        public static final Logger HOLDER_INSTANCE = new Logger();
+    }
 
     private final String logName = "log.txt";
 
@@ -16,18 +19,7 @@ public class Logger {
 
     static Logger getLogger(){
 
-        Logger local = logger;
-
-        if (local==null){
-            synchronized (Logger.class){
-                local = logger;
-                if (local == null){
-                    local = logger = new Logger();
-                }
-            }
-        }
-        return local;
-
+        return LoggerHolder.HOLDER_INSTANCE;
     }
 
     void log(String message){

@@ -1,4 +1,4 @@
-package by.it.papruga.jd02_06;
+package by.it.papruga.jd02_06.task_a;
 
 public class Runner {
 
@@ -9,7 +9,6 @@ public class Runner {
                 Logger.getLogger().log("Test");
             }).start();
         }
-        
 
     }
 }

@@ -1,33 +1,19 @@
-package by.it.papruga.jd02_06;
+package by.it.papruga.jd02_06.task_b;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Logger {
+public enum Logger {
 
-    private static volatile Logger logger;
+    LOGGER;
 
     private final String logName = "log.txt";
 
-    private Logger(){
-    }
-
     static Logger getLogger(){
 
-        Logger local = logger;
-
-        if (local==null){
-            synchronized (Logger.class){
-                local = logger;
-                if (local == null){
-                    local = logger = new Logger();
-                }
-            }
-        }
-        return local;
-
+        return LOGGER;
     }
 
     void log(String message){
@@ -39,8 +25,6 @@ public class Logger {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     @SuppressWarnings("SameParameterValue")
