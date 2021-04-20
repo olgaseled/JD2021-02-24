@@ -3,38 +3,49 @@ package by.it.levchuk.levchuk.jd02_03;
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private final Object MONITOR;
+    public boolean waiting = false;
+    Basket basket=new Basket();
+    private static Semaphore semaphore = new Semaphore(20);
+    private final Conditions conditions;
 
-    public Object getMONITOR() {
+    Object getMONITOR() {
         return MONITOR;
     }
-
-    public boolean waiting = false;
 
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
     }
 
-    public Buyer(int number) {
+
+    public Buyer(int number, Conditions conditions) {
         super("Покупатель №" + number + " ");
         MONITOR = this;
-        SeniorCashier.newBuyer();
+        this.conditions = conditions;
+        conditions.getSeniorCashier().newBuyer();
     }
 
     @Override
     public void run() {
+        try {
         enterToMarket();
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
+        semaphore.acquire();
+    }catch(InterruptedException e) {
+        e.printStackTrace();
+    }finally {
+        semaphore.release();
+    }
         goToQueue();
-        SeniorCashier.lastBuyer();
         goOut();
+        conditions.getSeniorCashier().lastBuyer();
+
     }
 
     @Override
@@ -57,14 +68,17 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
-        List<String> listProducts = new ArrayList<>();
+        int goodsAmount = Tools.getRandom(1, 4);
+        basket.putGoodsToBasket(this, goodsAmount);
         System.out.println(this + "Положил товары в корзину");
     }
+
 
     @Override
     public void goToQueue() {
         synchronized (MONITOR) {
-            QueueBuyers.add(this);
+            conditions.getQueueBuyers().add(this);
+            System.out.println(this + "Стал в очередь");
             waiting = true;
             while (waiting) {
                 try {
