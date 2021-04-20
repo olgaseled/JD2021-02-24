@@ -1,6 +1,7 @@
 messages.welcome = Приятного пользования калькулятором
 messages.bye = До новых встреч
 messages.var = абстрактная Var
+messages.language_changed = Перевод изменён на
 errors.division_by_zero = деление на ноль
 errors.unsupported_operation = операция не поддерживается
 errors.unknown_operation = неизвестная операция

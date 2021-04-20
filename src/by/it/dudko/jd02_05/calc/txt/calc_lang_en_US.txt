@@ -1,6 +1,7 @@
 messages.welcome = Enjoy using the calculator
 messages.bye = See you again
 messages.var = abstract Var
+messages.language_changed = Translation switched to
 errors.division_by_zero = division by zero
 errors.unsupported_operation = unsupported operation
 errors.unknown_operation = unknown operation

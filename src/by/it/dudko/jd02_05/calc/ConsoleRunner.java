@@ -27,8 +27,14 @@ public class ConsoleRunner {
             if (!expression.equalsIgnoreCase(Config.STOP_WORD)) {
                 try {
                     Languages.valueOf(expression.trim().toUpperCase());
-                    lang.setLocale(expression.trim().toLowerCase());
+                    // switch language command
+                    String localeAlias = expression.trim();
+                    lang.setLocale(localeAlias);
+                    printer.print(lang.get(Messages.LANG_CHANGED) +
+                            " " + Languages.getLongName(localeAlias));
+                    continue;
                 } catch (IllegalArgumentException ignored) {
+                    // calculator command
                 }
                 try {
                     Var resultVar = parser.evaluate(expression);

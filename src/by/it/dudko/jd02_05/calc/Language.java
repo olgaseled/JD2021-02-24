@@ -23,15 +23,15 @@ public enum Language {
     }
 
     final void setLocale(String userLang) {
-        switch (userLang) {
+        switch (userLang.toLowerCase()) {
             case "ru":
-                INSTANCE.setLocale(new Locale("ru", "RU"));
+                setLocale(new Locale("ru", "RU"));
                 break;
             case "be":
-                INSTANCE.setLocale(new Locale("be", "BY"));
+                setLocale(new Locale("be", "BY"));
                 break;
             case "en":
-                INSTANCE.setLocale(new Locale("en", "US"));
+                setLocale(new Locale("en", "US"));
                 break;
         }
     }
