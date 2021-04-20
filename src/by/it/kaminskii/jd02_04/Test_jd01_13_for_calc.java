@@ -1,10 +1,9 @@
-package by.it.voitsekhovskiy.calc;
+package by.it.kaminskii.jd02_04;
 
 
 import by.it.HomeWork;
 import org.junit.Test;
 
-@SuppressWarnings("all")
 
 //поставьте курсор на следующую строку и нажмите Ctrl+Shift+F10
 public class Test_jd01_13_for_calc extends HomeWork {

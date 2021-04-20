@@ -13,7 +13,7 @@ public class Parser {
         return priorityMap;
     }
 
-    private static final Map<String, Integer> priorityMap = new HashMap<>() {
+    private static final Map<String, Integer> priorityMap = new HashMap<String,Integer>() {
         {
             this.put("=", 0);
             this.put("+", 1);
@@ -62,7 +62,7 @@ public class Parser {
             operands.add(index, result.toString());
         }
 //        return operands.get(0);
-        return Var.creatVar(operands.get(0));
+        return Var.createVar(operands.get(0));
     }
 
     private int getIndex(List<String> operations) {
@@ -79,11 +79,11 @@ public class Parser {
     }
 
     private Var calcOneOperation(String leftStr, String operationStr, String rightStr) throws CalcExeption {
-        Var right = Var.creatVar(rightStr);
+        Var right = Var.createVar(rightStr);
         if (operationStr.equals("=")) {
             return Var.saveVar(leftStr, right);
         }
-        Var left = Var.creatVar(leftStr);
+        Var left = Var.createVar(leftStr);
         switch (operationStr) {
             case "+":
                 return left.add(right);

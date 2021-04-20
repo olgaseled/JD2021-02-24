@@ -1,4 +1,4 @@
-package by.it.voitsekhovskiy.calc;
+package by.it.kishkar.jd02_04;
 
 
 import by.it.HomeWork;

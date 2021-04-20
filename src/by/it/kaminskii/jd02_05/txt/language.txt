@@ -1,5 +1,5 @@
-message.welcome="Welcome?"
-message.question="How are you?"
-message.info="My name is: "
-user.first_name="Ivan"
-user0.last_name="Kaminskii"
+message.welcome=Hello!!!
+message.question=How are you?
+message.info=My name is:
+user.first_name=Ivan
+user.last_name=Kaminskii

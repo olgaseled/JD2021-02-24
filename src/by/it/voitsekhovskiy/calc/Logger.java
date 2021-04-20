@@ -10,7 +10,7 @@ enum Logger {
 
     public static final String USER_DIR = "user.dir";
     public static final String SRC = "src";
-    private final String logName = "log.txt";
+    static private final String logName = "log.txt";
 
     Logger() {
     }
@@ -27,7 +27,7 @@ enum Logger {
     }
 
 
-    private synchronized String dir() {
+    static private synchronized String dir() {
         String path = System.getProperty(USER_DIR) + File.separator + SRC + File.separator;
         String clDir = Logger.class.getName()
                 .replace(Logger.class.getSimpleName(), "")

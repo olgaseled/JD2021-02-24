@@ -7,7 +7,7 @@ enum Language {
     INSTANCE;
 
     private final String BASE = "by/it/voitsekhovskiy/calc/resources/language";
-    ResourceBundle bundle;
+    static ResourceBundle bundle;
 
     Language() {
         setLocale(Locale.getDefault());
@@ -17,7 +17,7 @@ enum Language {
         bundle = ResourceBundle.getBundle(BASE, locale);
     }
 
-    String get(String key) {
+    static String get(String key) {
         return bundle.getString(key);
     }
 }
