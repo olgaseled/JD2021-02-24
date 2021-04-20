@@ -1,15 +1,19 @@
 package by.it.khrolovich.jd02_06;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Logger {
 
-    private volatile Logger logger;
+    private static volatile Logger logger;
 
     //нельзя будет создать извне
     private Logger() {
 
     }
 
-    Logger get(){
+    static Logger get() {
         Logger localLogger = logger;
         if (localLogger == null) {
             synchronized (Logger.class) {
@@ -20,12 +24,20 @@ public class Logger {
                 }
             }
         }
-        return logger;
+        return localLogger;
     }
 
     //объкт один - this
-    synchronized void log () {
+    synchronized void log(String message) {
+
         String filePath = FileNameHelper.getFilePath("log.txt", Logger.class);
+
+        try(PrintWriter printWriter = new PrintWriter(new FileWriter(filePath, true))) {
+            printWriter.println(message);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
