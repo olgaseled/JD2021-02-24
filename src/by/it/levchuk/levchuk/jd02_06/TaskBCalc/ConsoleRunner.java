@@ -11,7 +11,6 @@ public class ConsoleRunner {
         VarRepository.loading();
         LoggerCalc logger = LoggerCalc.LOGGING;
         logger.setLogFile(new File(FileNameHelper.getFilePath(Settings.LOG_FILE, LoggerCalc.class)));
-        logger.log("Программа запущена",true);
         for (; ; ) {
             String exspression = scanner.nextLine();
             if (!exspression.equals("end")) {
@@ -32,7 +31,7 @@ public class ConsoleRunner {
                 } catch (CalcException e) {
                     printer.print(e);
                 }
-                logger.log("Программа завершена.\n",true);
+                LoggerCalc.LOGGING.log("Программа завершена.\n");
                 break;
             }
         }

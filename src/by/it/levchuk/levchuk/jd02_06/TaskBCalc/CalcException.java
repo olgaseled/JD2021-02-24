@@ -7,21 +7,21 @@ public class CalcException extends Exception {
 
     public CalcException() {
         super();
-        loggerCalc.log("CalcException",true);
+        LoggerCalc.LOGGING.log("CalcException");
     }
 
     public CalcException(String message) {
         super("ERROR: " + message);
-        loggerCalc.log("ERROR: " + message,true);
+        LoggerCalc.LOGGING.log("ERROR: " + message);
     }
 
     public CalcException(String message, Throwable cause) {
         super("ERROR: " + message, cause);
-        loggerCalc.log("ERROR: " + message,true);
+        LoggerCalc.LOGGING.log("ERROR: " + message);
     }
 
     public CalcException(Throwable cause) {
         super(cause);
-        loggerCalc.log("ERROR: " + cause,true);
+        LoggerCalc.LOGGING.log("ERROR: " + cause);
     }
 }
