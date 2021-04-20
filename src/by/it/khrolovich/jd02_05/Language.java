@@ -18,6 +18,10 @@ public enum Language {
         bundle = ResourceBundle.getBundle(BASE, locale);
     }
 
+    final Locale getLocale( ){
+       return bundle.getLocale();
+    }
+
     String get(String key){
         return bundle.getString(key);
     }
