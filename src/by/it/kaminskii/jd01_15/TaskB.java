@@ -1,9 +1,13 @@
 package by.it.kaminskii.jd01_15;/* created by Kaminskii Ivan
  */
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static by.it.kaminskii.jd01_15.Helper.dir;
 
 // test to comment
 
@@ -41,7 +45,9 @@ public class TaskB {
     }
 
     private static void createdStringFromFile(String filePath, StringBuilder stringBuilder) {
-        try {
+        try(PrintWriter out2 = new PrintWriter(
+                new FileWriter(
+                        dir(TaskB.class) + "TaskB.txt"))) {
             Files.lines(Paths.get(filePath)).forEach(stringBuilder::append);
         } catch (IOException e) {
             throw new RuntimeException(e);

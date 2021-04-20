@@ -89,7 +89,7 @@ public class Test_jd01_14 extends HomeWork {
         }
     }
 
-    static String dir(Class cl) {
+    public static String dir(Class cl) {
         return System.getProperty("user.dir") + "/src/" +
                 cl.getName().replace(cl.getSimpleName(), "").replace('.', '/');
     }
