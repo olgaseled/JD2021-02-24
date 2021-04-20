@@ -1,0 +1,11 @@
+messages.welcome = Приятного пользования калькулятором
+messages.bye = До новых встреч
+messages.var = абстрактная Var
+errors.division_by_zero = деление на ноль
+errors.unsupported_operation = операция не поддерживается
+errors.unknown_operation = неизвестная операция
+errors.unknown_variable_expression = неизвестная переменная или выражение для вычисления
+errors.incompatible_vectors = несовместимые векторы
+errors.incoherent_matrices = несовместимые матрицы
+errors.bad_matrix = матрица не может иметь ряды разной длины
+errors.repo_save_failed = ошибка записи переменных на диск
