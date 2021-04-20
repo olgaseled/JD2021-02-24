@@ -14,8 +14,9 @@ public enum Logger {
 
     private final String fileName = "log.txt";
 
-    private Logger() {
+    Logger() {
     }
+
     static Logger getLogger() {
 
         if (logger == null) {
