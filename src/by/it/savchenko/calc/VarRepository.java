@@ -29,7 +29,13 @@ class VarRepository {
             try {
                 Parser parser = new Parser();
                 Files.lines(Paths.get(VARS_FILE_NAME))
-                        .forEach(parser::evaluate);
+                        .forEach(line -> {
+                            try {
+                                parser.calc(line);
+                            } catch (CalcException e) {
+                                //stub
+                            }
+                        });
             } catch (IOException e) {
                 //stub
             }
