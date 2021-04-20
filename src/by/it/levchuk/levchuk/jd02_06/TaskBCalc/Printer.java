@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd02_04;
+package by.it.levchuk.levchuk.jd02_06.TaskBCalc;
 
 import java.util.Objects;
 
@@ -12,6 +12,6 @@ public class Printer {
 
     void print(CalcException e) {
         System.out.println(e.getMessage());
-        LoggerCalc.LOGGING.log(e.getMessage());
+        LoggerCalc.LOGGING.log("ERRORS: " + e.getMessage());
     }
 }

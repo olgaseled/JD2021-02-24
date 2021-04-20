@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd02_04;
+package by.it.levchuk.levchuk.jd02_06.TaskBCalc;
 
 import java.io.File;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         VarRepository.loading();
         LoggerCalc logger = LoggerCalc.LOGGING;
-        logger.setLogFile(new File(FileNameHelper.getFilePath(Settings.LOG_FILE,LoggerCalc.class)));
+        logger.setLogFile(new File(FileNameHelper.getFilePath(Settings.LOG_FILE, LoggerCalc.class)));
         for (; ; ) {
             String exspression = scanner.nextLine();
             if (!exspression.equals("end")) {
