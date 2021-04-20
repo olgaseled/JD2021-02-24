@@ -16,10 +16,6 @@ public class Scalar extends Var {
         value = Double.parseDouble(strValue);
     }
 
-    Scalar(Scalar otherScalar) {
-        value = otherScalar.getValue();
-    }
-
     @Override
     public String toString() {
         return Double.toString(value);
