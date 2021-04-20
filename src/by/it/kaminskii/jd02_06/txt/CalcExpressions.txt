@@ -1,0 +1,8 @@
+error.div = ERROR: Unable to complete the operation. Attempted division by zero.
+error.length = ERROR: Unable to complete the operation. Different lengths of objects.
+error.error = ERROR: The operation could not be performed. Unknown expression.
+error.error2 = ERROR: Unable to create
+operation.add = Add Operation
+operation.sub = Operation Subtraction
+operation.mul = Operation of multiplication
+operation.div = Operation of division

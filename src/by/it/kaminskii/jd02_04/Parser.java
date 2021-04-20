@@ -1,4 +1,4 @@
-package by.it.kaminskii.calc;
+package by.it.kaminskii.jd02_04;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -62,7 +62,7 @@ public class Parser {
             operands.add(index, result.toString());
         }
 //        return operands.get(0);
-        return Var.createVar(operands.get(0));
+        return Var.creatVar(operands.get(0));
     }
 
     private int getIndex(List<String> operations) {
@@ -79,11 +79,11 @@ public class Parser {
     }
 
     private Var calcOneOperation(String leftStr, String operationStr, String rightStr) throws CalcExeption {
-        Var right = Var.createVar(rightStr);
+        Var right = Var.creatVar(rightStr);
         if (operationStr.equals("=")) {
             return Var.saveVar(leftStr, right);
         }
-        Var left = Var.createVar(leftStr);
+        Var left = Var.creatVar(leftStr);
         switch (operationStr) {
             case "+":
                 return left.add(right);

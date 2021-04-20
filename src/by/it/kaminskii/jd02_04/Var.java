@@ -1,4 +1,4 @@
-package by.it.kaminskii.calc;
+package by.it.kaminskii.jd02_04;
 
 
 import java.util.HashMap;
@@ -14,8 +14,9 @@ abstract class Var implements Operation {
     }
 
 
-    static Var createVar(String operand) throws CalcExeption {
+    static Var creatVar(String operand) throws CalcExeption {
         operand = operand.trim().replaceAll("\\s", "");
+//        try {
         if (operand.matches(Patterns.SCALAR))
             return new Scalar(operand);
         else if (operand.matches(Patterns.VECTOR))
@@ -24,6 +25,9 @@ abstract class Var implements Operation {
             return new Matrix(operand);
         else if (vars.containsKey(operand))
             return vars.get(operand);
+        else if (operand.matches(Patterns.PRIORITY)){
+            return null;
+        }
         throw new CalcExeption("Невозможно создать " + operand);
     }
 

@@ -1,4 +1,4 @@
-package by.it.kaminskii.calc;
+package by.it.kaminskii.jd02_06;
 
 
 import java.util.HashMap;
