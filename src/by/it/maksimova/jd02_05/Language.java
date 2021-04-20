@@ -13,11 +13,11 @@ public enum Language {
         setLocale(Locale.getDefault());
     }
 
-   public final void setLocale(Locale locale){
-        bundle=ResourceBundle.getBundle(BASE_NAME,locale);
+    public final void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle(BASE_NAME, locale);
     }
 
-    public String get(String key){
-       return bundle.getString(key);
+    public String get(String key) {
+        return bundle.getString(key);
     }
 }
