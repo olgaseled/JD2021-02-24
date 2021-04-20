@@ -26,5 +26,11 @@ public class ConsoleRunner {
                 break;
             }
         }
+        for (int i = 0; i < 20; i++) {
+            new Thread(() -> {
+                Logger logger = Logger.getLogger();
+                logger.log("Hi");
+            }).start();
+        }
     }
 }
