@@ -1,4 +1,4 @@
-package by.it.levchuk.levchuk.jd02_06;
+package by.it.levchuk.levchuk.jd02_06.TaskA;
 
 /*crash-noobik
 Liauchuk Aliaksandr*/
