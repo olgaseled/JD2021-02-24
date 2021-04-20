@@ -1,4 +1,4 @@
-package by.it.seledtsova.jd02_06;
+package by.it.seledtsova.jd02_06.TaskA;
 
 public class Runner {
     public static void main(String[] args) {
