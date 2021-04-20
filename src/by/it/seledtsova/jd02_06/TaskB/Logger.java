@@ -8,25 +8,28 @@ import java.io.PrintWriter;
 public enum Logger {
     INSTANCE;
 
-    File loggerFile;
+    private  File loggerFile;
 
     public void setLoggerFile(File loggerFile) {
         this.loggerFile = loggerFile;
     }
 
     synchronized void log(String loggerLine) {
-        for (int i = 0; i < 20; i++) {
-            try (
+           try (
                     PrintWriter printWriter = new PrintWriter(new FileWriter(loggerFile, true)) // чем будем писать в файл (append true,чтобы НЕ переписывалось , а записывалось
             ) {
-                printWriter.println(loggerFile + " и еще что-нибудь запишу");
+                printWriter.println(loggerLine);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-}
+
+
+
+
+
 
 
 
