@@ -5,7 +5,7 @@ import java.util.Objects;
 
 class VarCreator {
 
-    private VarCreator() {
+    public VarCreator() {
     }
     //задание jd0_09
     static Var calc(String strVar) throws CaltExeption { //// принимает не вход строку внутри оперант

@@ -9,19 +9,30 @@ public class ConsoleRunner {
         String line; // будем читать строку
         Logger logger = Logger.INSTANCE;
         logger.setLoggerFile(new File(FilePath.getFilePath(Configuration.LOG_NAME, Logger.class)));
-
+        VarStore.load();
         Parser parser = new Parser(); // будем передавать вычисления
         Printer printer = new Printer(); // будем передавать их результат
-
-        while (!(line = scanner.nextLine()).equals("end")) { // до тех пор, пока это выражение НЕ равняется end , мы их будм читать
-            try {
-                Var result = parser.calc(line); //передадим вычисления в parser
-                printer.print(result); // печатаем , то что посчитали
-            } catch (CaltExeption e) {
-                System.out.println(e.getMessage());
+       while (true ) {
+            String expression = scanner.nextLine();
+            logger.log(expression);
+            if (!expression.equals("end")) { //до тех пор, пока это выражение НЕ равняется end , мы их будм читать
+                try {
+                    Var result = parser.calc(expression); //передадим вычисления в parser
+                    printer.print(result);
+                } catch (CaltExeption e) {
+                    printer.print(e);
+                }
+            } else {
+                try {
+                    VarStore.save(Var.getVars());
+                } catch (CaltExeption e) {
+                    printer.print(e);
+                }
+                break;
             }
         }
-
     }
-
 }
+
+
+

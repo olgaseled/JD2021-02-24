@@ -16,6 +16,8 @@ public class Parser { // принемает на вход некое значе�
         }
     };
 
+
+
     public Var calc(String expression) throws CaltExeption {
         //A=2+2*2-9
         expression = expression.replaceAll("\\s+", "");

@@ -12,6 +12,10 @@ abstract class Var implements Operation { // cлово abstract (модифик�
 
     private static Map<String, Var> vars = new HashMap<>();
 
+
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
     static Var saveVar(String name, Var var) {
         vars.put(name, var);
         return var;
