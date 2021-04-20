@@ -1,4 +1,4 @@
-package by.it.kaminskii.jd01_07;
+package by.it.kaminskii.new_project_jd_02;
 
 import java.util.Arrays;
 
@@ -33,6 +33,42 @@ class Vector extends Var {
         }
         sb.append("}");
         return sb.toString();
+    }
+
+    //КОНЕЦ ПЕРВОГО БЛОКА
+
+
+    //Начало калькулятора
+
+    @Override
+    public Var add(Var other) {
+        double[] res = Arrays.copyOf(value, value.length);
+        if (other instanceof Scalar) {
+            for (int i = 0; i < res.length; i++) {
+                res[i]=res[i]+ ((Scalar) other).getValue();
+            }
+            return new Vector(res);
+        }
+//        else if(other instanceof Vector){
+//            double
+//            if()
+//        }
+        return null;
+    }
+
+    @Override
+    public Var sub(Var other) {
+        return null;
+    }
+
+    @Override
+    public Var mul(Var other) {
+        return null;
+    }
+
+    @Override
+    public Var div(Var other) {
+        return null;
     }
 }
 

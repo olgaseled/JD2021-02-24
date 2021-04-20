@@ -3,37 +3,37 @@ package by.it.kaminskii.calc;
 import java.util.Arrays;
 
 class Matrix extends Var {
-    private double[][] value;
+    private final double[][] value;
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
                 res[i] = Arrays.copyOf(value[i], value[i].length);
-
             }
-
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
                     res[i][j] = res[i][j] + ((Scalar) other).getValue();
                 }
             }
             return new Matrix(res);
-        } else if (other instanceof Matrix)
+        }
+
+        else if (other instanceof Matrix)
             if (value.length == ((Matrix) other).value.length && value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
                 }
-
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
                         res[i][j] = res[i][j] + ((Matrix) other).value[i][j];
                     }
                 }
                 return new Matrix(res);
-            } else return super.add(other);
+            }
+        else throw new CalcExeption("Размеры матрицы не совпадают");
 
         else if (other instanceof Vector) {
             return super.mul(other);
@@ -42,7 +42,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
@@ -69,33 +69,30 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(res);
-            } else return super.sub(other);
+            } else throw new CalcExeption("Размеры матрицы не совпадают");
         } else return super.sub(other);
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             double[][] res = new double[value.length][0];
             for (int i = 0; i < res.length; i++) {
                 res[i] = Arrays.copyOf(value[i], value[i].length);
-
             }
-
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
                     res[i][j] = res[i][j] * ((Scalar) other).getValue();
                 }
             }
-
             return new Matrix(res);
         } else if (other instanceof Vector) {
-            if (value[0].length == ((Vector) other).getValue().length || value.length == ((Vector) other).getValue().length) {
+            if (value[0].length == ((Vector) other).getVector().length || value.length == ((Vector) other).getVector().length) {
                 double[][] res = new double[value.length][0];
                 for (int i = 0; i < res.length; i++) {
                     res[i] = Arrays.copyOf(value[i], value[i].length);
                 }
-                double vector[] = ((Vector) other).getValue();
+                double[] vector = ((Vector) other).getVector();
                 double[] matrixSize = new double[res.length];
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < vector.length; j++) {
@@ -103,7 +100,7 @@ class Matrix extends Var {
                     }
                 }
                 return new Vector(matrixSize);
-            } else return super.mul(other);
+            } else throw new CalcExeption("Размеры матрицы и вектора не совпадают");
         } else if (other instanceof Matrix) {
             if (value.length == ((Matrix) other).value.length && value[0].length == ((Matrix) other).value[0].length) {
                 double[][] res = new double[value.length][0];
@@ -119,12 +116,12 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(last);
-            } else return super.mul(other);
+            } else throw new CalcExeption("Размеры матрицы и вектора не совпадают");
         } else return super.mul(other);
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcExeption {
         if (other instanceof Scalar) {
             if (((Scalar) other).getValue() != 0) {
                 double[][] res = new double[value.length][0];
@@ -139,7 +136,7 @@ class Matrix extends Var {
                     }
                 }
                 return new Matrix(res);
-            } else return super.div(other);
+            } else throw new CalcExeption("Деление на ноль");
         }
         return super.div(other);
     }
@@ -159,14 +156,14 @@ class Matrix extends Var {
         String one = "";
         String two = "";
         strMatrix = strMatrix.replaceAll(" ", "");
-        String[] matr = strMatrix.split("\\},\\{");
+        String[] matr = strMatrix.split("},\\{");
         for (int i = 0; i < matr.length; i++) {
             if (i < (matr.length - 1)) one = matr[i];
             else two = matr[i];
         }
-        one = one.replaceAll("\\{|\\}", "");
+        one = one.replaceAll("[{}]", "");
         String[] oneArray = one.split(",");
-        two = two.replaceAll("\\{|\\}", "");
+        two = two.replaceAll("[{}]", "");
         String[] twoArray = two.split(",");
         String[] both = new String[(oneArray.length + twoArray.length)];
         for (int i = 0; i < oneArray.length; i++) {
@@ -186,7 +183,7 @@ class Matrix extends Var {
     public String toString() {
         StringBuilder sb2 = new StringBuilder("{");
         String delim2 = "";
-        int j = 0;
+        int j=0;
         for (int i = 0; i < value.length; i++) {
             sb2.append(delim2).append("{");
             for (j = 0; j < value[0].length; j++) {
