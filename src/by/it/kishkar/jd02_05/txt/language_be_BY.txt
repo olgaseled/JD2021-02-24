@@ -1,0 +1,4 @@
+messages.welcome=Прывiтаю!
+messages.question=Як жыццё?
+user.firstname=Аляксандр
+user.lastname=Кiшкар
