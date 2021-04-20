@@ -4,6 +4,11 @@ public class Printer { // создали класс принтер, которы
     void print (Var var) {
         if (var!=null)
             System.out.println(var);
+        Logger.INSTANCE.log(String.valueOf(var));
     }
-}
-// далее будем собирать наше прилодение. Будем создавать класс ConcoleRunner
+    void print (CaltExeption e) {
+        System.out.println(e.getMessage());
+        Logger.INSTANCE.log(e.getMessage());
+    }
+    }
+// далее будем собирать наше приложение. Будем создавать класс ConcoleRunner
