@@ -2,24 +2,25 @@ package by.it.levchuk.levchuk.jd02_02;
 /*crash-noobik
 Liauchuk Aliaksandr*/
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueueBuyers {
 
-    private static final Object MONITOR_QUEUE = new Object();
+    private final BlockingDeque<Buyer> buyers =
+            new LinkedBlockingDeque<>(Сoefficients.QUEUE_LENGTH);
 
-    private static final Deque<Buyer> buyers = new LinkedList<>();
-
-    static void add(Buyer buyer){
-        synchronized (MONITOR_QUEUE){
-            buyers.addLast(buyer);
+    void add(Buyer buyer){
+        try {
+            buyers.putLast(buyer);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    static Buyer poll(){
-        synchronized (MONITOR_QUEUE){
-            return buyers.pollFirst();
-        }
+    Buyer pull(){ return buyers.pollFirst(); }
+
+    public int getCustomersSize() {
+        return buyers.size();
     }
 }
