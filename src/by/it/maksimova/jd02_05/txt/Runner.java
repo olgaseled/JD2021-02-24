@@ -7,6 +7,7 @@ import by.it.maksimova.jd02_05.User;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -46,8 +47,6 @@ public class Runner {
         System.out.println(language.get(Messages.QUESTION));
         System.out.println(language.get(User.NAME));
         System.out.println(language.get(User.LAST_NAME));
-        //сделать так, чтобы выводилась текущая дата в том же языковом стандарте, что и приветствие
-
-        System.out.println(dateToday.format(new Date()));
+        System.out.println(Objects.requireNonNull(dateToday).format(new Date()));
     }
 }
