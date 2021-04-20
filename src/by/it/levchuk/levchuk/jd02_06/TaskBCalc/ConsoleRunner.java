@@ -31,6 +31,7 @@ public class ConsoleRunner {
                 } catch (CalcException e) {
                     printer.print(e);
                 }
+                LoggerCalc.LOGGING.log("Программа завершена.\n");
                 break;
             }
         }
