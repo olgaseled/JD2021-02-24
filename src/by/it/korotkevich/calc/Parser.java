@@ -7,8 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-
+    Logger logger = Logger.INSTANCE;
     Var evaluate(String expression) throws CalcException {
+        if (!expression.equals("printVar")){
+            logger.log(expression+"=", false);
+        } else {
+            logger.log("printVar:", true);
+        }
 
         Matcher bracketsMatcher = Pattern.compile(Patterns.BRACKETS).matcher(expression);
         while (bracketsMatcher.find()) {
