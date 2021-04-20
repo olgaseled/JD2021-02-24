@@ -1,10 +1,18 @@
 package by.it.kaminskii.jd02_06;/* created by Kaminskii Ivan
  */
 
-class Logger {
+import java.io.*;
+
+enum Logger {
+    INSTANCE;
+
+    FindPath findPath=new FindPath();
+
     private static volatile Logger logger;
 
-    private Logger() {
+    Serializable getPathLogger() {
+        File loggerPath = findPath.getFilePath(Logger.class, "log.txt");
+        return loggerPath;
     }
 
     static Logger getLogger() {
@@ -13,14 +21,23 @@ class Logger {
             synchronized (Logger.class) {
                 local = logger;
                 if (local == null) {
-                    logger = new Logger();
+                    local = INSTANCE;
+                    logger=local;
                 }
             }
         }
-        return logger;
+        return local;
     }
 
     void log(String massage) {
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter((File) getPathLogger(), true))){
+            printWriter.println(massage);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
+
 }
