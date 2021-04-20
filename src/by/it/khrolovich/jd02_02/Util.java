@@ -20,4 +20,16 @@ public class Util {
 
     }
 
+    static void Sleep(int timeSleep, boolean isPensioneer) {
+        try {
+            if (isPensioneer) {
+                Thread.sleep((long) (timeSleep * 1.5 / Config.K_SPEED));
+            } else {
+                Thread.sleep(timeSleep / Config.K_SPEED);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -3,10 +3,12 @@ package by.it.voitsekhovskiy.jd02_03;
 public class Cashier implements Runnable {
     Integer num;
     static int cashierInWork = 0;
-    private final static Object CASHIER_MONITOR = new Object();
+    private static final Object CASHIER_MONITOR = new Object();
+    private final Context context;
 
-    Cashier(Integer num) {
+    Cashier(Integer num, Context context) {
         this.num = num;
+        this.context = context;
     }
 
     public static Object getCashierMonitor() {
@@ -23,15 +25,15 @@ public class Cashier implements Runnable {
             }
         }
 
-        if (!Manager.isClosedStore()) {
+        if (!context.getManager().isClosedStore()) {
             System.out.printf("\tCashier #%d start work\n", num);
         }
 
-        while (!Manager.isClosedStore()) {
-            Buyer firstBuyerInQueue = CheckoutQueue.getFirstBuyerInQueue();
+        while (!context.getManager().isClosedStore()) {
+            Buyer firstBuyerInQueue = context.getQueueBuyers().getFirstBuyerInQueue();
             if (firstBuyerInQueue != null) {
                 synchronized (firstBuyerInQueue.getMONITOR()) {
-                    int buyerNum = firstBuyerInQueue.getNum();
+                    int buyerNum = firstBuyerInQueue.getNumBuyer();
                     System.out.printf("\tCashier #%d started service the buyer #%d\n", num, buyerNum);
                     Integer timeout = Util.getRandom(2500, 5000);
                     Util.sleep(timeout);
@@ -51,16 +53,16 @@ public class Cashier implements Runnable {
 
     static void wakeUpCashier() {
         synchronized (getCashierMonitor()) {
-            if (CheckoutQueue.queueOfBuyers.size() % 5 == 0
-                    && CheckoutQueue.queueOfBuyers.size() / 5 >= cashierInWork) {
+            if (QueueBuyer.queueOfBuyers.size() % 5 == 0
+                    && QueueBuyer.queueOfBuyers.size() / 5 >= cashierInWork) {
                 cashierInWork++;
                 getCashierMonitor().notify();
             }
         }
     }
 
-    public static void wakeUpAllCashier() {
-        synchronized (Cashier.getCashierMonitor()) {
+    static void wakeUpAllCashier() {
+        synchronized (getCashierMonitor()) {
             getCashierMonitor().notifyAll();
         }
     }
