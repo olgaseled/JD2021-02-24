@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Logger {
@@ -35,8 +36,9 @@ public class Logger {
         try (
             PrintWriter logWrite = new PrintWriter(new FileWriter(logFile, true))
         ) {
+            Date date = new Date();
             DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale("EN"));
-            logWrite.println(logTxt + " Date: " + df.toString());
+            logWrite.println(logTxt + " Date: " + date.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
