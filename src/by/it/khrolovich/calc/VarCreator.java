@@ -19,7 +19,7 @@ public class VarCreator {
             if(Objects.nonNull(var)){
                 return var;
             }
-            throw new CalcException("Unknown variable");
+            throw new CalcException(Language.INSTANCE.get(Message.UNKNOWN_VARIABLE));
        }
     }
 }

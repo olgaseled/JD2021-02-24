@@ -1,0 +1,9 @@
+Message.operation = Операция
+Message.isImpossible = не возможна
+Message.divisionByZero = деление на ноль
+Message.ERROR = ОШИБКА
+Message.noSave = не сохранилось
+Message.UnknownOperation = неизвестная операция
+Message.UnknownVariable = неизвестная переменная
+Message.IncorrectSize = некорректный размер
+Message.SaveToFile = сохранение в файл

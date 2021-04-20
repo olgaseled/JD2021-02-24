@@ -8,6 +8,8 @@ abstract class Var implements Operation {
 
     static Map<String, Var> vars = new HashMap<>();
 
+    Language lang = Language.INSTANCE;
+
     public static Var save(String key, Var value) {
         vars.put(key, value);
         VarRepository.save(key, value);
@@ -22,22 +24,26 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s+%s is impossible\n", this, other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s+%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s-%s is impossible\n", this, other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s-%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s*%s is impossible\n", this, other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION) + " %s*%s "
+                + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Operation %s/%s is impossible\n", this, other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s/%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override

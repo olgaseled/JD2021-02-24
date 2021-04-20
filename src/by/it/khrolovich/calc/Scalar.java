@@ -60,7 +60,7 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             double secondOperand = ((Scalar) other).value;//other.value
             if (secondOperand == 0) {
-                throw new CalcException("division by zero");
+                throw new CalcException(Language.INSTANCE.get(Message.DIVISION_BY_ZERO));
              }
 
             return new Scalar(this.value / secondOperand);

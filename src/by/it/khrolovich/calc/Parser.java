@@ -58,7 +58,7 @@ public class Parser {
                 return leftVar.div(rightVar);
         }
 
-        throw new CalcException("Unknown operation");
+        throw new CalcException(Language.INSTANCE.get(Message.UNKNOWN_OPERATION));
     }
 
     private int getIndex(ArrayList<String> operations) {
