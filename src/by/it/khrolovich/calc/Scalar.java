@@ -34,9 +34,8 @@ public class Scalar extends Var {
             return new Scalar(result);//если это скаляр, значит возвращаем скаляр
             //или одной строкой
         }
-        var result2 = other.add(this);//other -точно не скаляр, this - точно скаляр
         //other - или вектор,или матрица
-        return result2;//его же и вернем
+        return other.add(this);//его же и вернем
     }
 
     @Override
@@ -61,11 +60,8 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             double secondOperand = ((Scalar) other).value;//other.value
             if (secondOperand == 0) {
-                //return null;//TODO div be zero
-               // return super.div(other);
                 throw new CalcException("division by zero");
-                // throws CalcException добавляется везде
-            }
+             }
 
             return new Scalar(this.value / secondOperand);
         }

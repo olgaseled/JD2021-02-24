@@ -3,28 +3,29 @@ package by.it.khrolovich.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) throws CalcException {
+    public static void main(String[] args) {
 
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
-        for(;;){
+        for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
-                Var resultVar = null;
                 try {
-                    resultVar = parser.evaluate(expression);
+                    Var resultVar = parser.evaluate(expression);
+                    printer.print(resultVar);
                 } catch (CalcException e) {
-                    printer.printCalcException(e);
+                    printer.print(e);
                 }
-                printer.print(resultVar);
             } else {
-                //VarRepository.save(key,value);//TODO вырезаем из Var
+                //сохранение из Var
+                try {
+                    VarRepository.save(Var.vars);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
                 break;
             }
-
         }
-        Var var = VarCreator.build("{123, -45.6}");
-        printer.print(var);
     }
 }

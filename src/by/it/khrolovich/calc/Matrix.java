@@ -6,6 +6,10 @@ import java.util.StringJoiner;
 public class Matrix extends Var {
     private final double[][] value;
 
+    public double[][] getValue() {
+        return value;
+    }
+
     //копируем, а не просто ссылка. Так лучше!
     public Matrix(double[][] value) {
         double[][] resultMatrix = new double[value.length][0];
@@ -23,7 +27,7 @@ public class Matrix extends Var {
     public Matrix(String s) {
         s = s.trim().replaceAll("\\s+", "");//нет пробелов
         s = s.replace("{{", "").replace("}}", "");
-        String[] Rows = s.split("\\}\\,\\{");
+        String[] Rows = s.split("},\\{");
 
         double[][] MatrisOfS = new double[Rows.length][];
         int i = 0;
@@ -82,7 +86,7 @@ public class Matrix extends Var {
         if (other instanceof Scalar) {
             //double[][] resultMatrix = new double[value.length][value[0].length];
             //две проблемы: матрица не квадратная и пустую матрицу передали
-            
+
             double[][] resultMatrix = new double[value.length][0];
 
             for (int i = 0; i < value.length; i++) {

@@ -1,5 +1,6 @@
 package by.it.khrolovich.calc;
 
+@SuppressWarnings("unused")
 public class CalcException extends  Exception{
     public CalcException() {
         super();

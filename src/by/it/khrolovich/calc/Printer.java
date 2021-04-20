@@ -9,7 +9,7 @@ public class Printer {
         }
     }
 
-    void printCalcException(Exception e) {
+    void print(CalcException e) {
         System.out.println(e.getMessage());
     }
 }

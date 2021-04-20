@@ -1,42 +1,76 @@
 package by.it.khrolovich.calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    @SuppressWarnings("ConstantConditions")
+    private static final Map<String, Integer> priorityMap = Map.of(
+            "=", 0,
+            "+", 1,
+            "-", 1,
+            "*", 2,
+            "/", 2
+    );
+
+
     Var evaluate(String expression) throws CalcException {
-        expression = expression.replaceAll("\\s+","");//ту да же положим, теперь переменная на новое значение указывает
-        String[] parts = expression.split(Patterns.OPERATION,2);//пока только две части
-        //можно так
-        /*Pattern p = Pattern.compile(Patterns.OPERATION);
-        String[] parts1 = p.split(p.toString());*/
-        //A=2
-        if(parts.length<2){
-            //return leftVar;
-            return VarCreator.build(expression);//если одна часть, то возвращаем переменную
+        expression = expression.replaceAll("\\s+", "");
+        ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        ArrayList<String> operations = new ArrayList<>();
+        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
+        while (matcher.find()) {
+            operations.add(matcher.group());
         }
-        //если 2 части
-        if(expression.contains("=")){
-            return Var.save(parts[0],VarCreator.build(parts[1]));
+        while (operations.size() > 0) {
+            int index = getIndex(operations);
+            String operation = operations.remove(index);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            Var result = oneOperation(left, operation, right);
+            operands.add(index, result.toString());
+
         }
-        Var leftVar  = VarCreator.build(parts[0]);
-        Var rightVar  = VarCreator.build(parts[1]);
+
+        return VarCreator.build(operands.get(0));
+    }
+
+    private Var oneOperation(String left, String operation, String right) throws CalcException {
+        Var rightVar = VarCreator.build(right);
+
+        if (operation.equals("=")) {
+            return Var.save(left, rightVar);
+        }
+        Var leftVar = VarCreator.build(left);
 
 
-        Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
-        Matcher matcherOperation = patternOperation.matcher(expression);
-        if(matcherOperation.find()){
-            String operation = matcherOperation.group();
-            switch (operation){
-                case "+": return leftVar.add(rightVar);
-                case "-": return leftVar.sub(rightVar);
-                case "*": return leftVar.mul(rightVar);
-                case "/": return leftVar.div(rightVar);
+        switch (operation) {
+            case "+":
+                return leftVar.add(rightVar);
+            case "-":
+                return leftVar.sub(rightVar);
+            case "*":
+                return leftVar.mul(rightVar);
+            case "/":
+                return leftVar.div(rightVar);
+        }
 
+        throw new CalcException("Unknown operation");
+    }
+
+    private int getIndex(ArrayList<String> operations) {
+        int index = -1;
+        int best = -1;
+        for (int i = 0; i < operations.size(); i++) {
+            int currentPriority = priorityMap.get(operations.get(i));
+            if (currentPriority > best) {
+                index = i;
+                best = currentPriority;
             }
         }
-        return null;//stub
+        return index;
     }
 }
