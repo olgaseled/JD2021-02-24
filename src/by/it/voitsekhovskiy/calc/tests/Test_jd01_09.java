@@ -1,4 +1,4 @@
-package by.it.voitsekhovskiy.calc;
+package by.it.voitsekhovskiy.calc.tests;
 
 
 import by.it.HomeWork;
