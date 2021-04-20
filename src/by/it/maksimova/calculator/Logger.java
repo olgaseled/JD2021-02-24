@@ -10,25 +10,33 @@ public enum Logger {
     public static final String USER_DIR = "user.dir";
     public static final String SRC = "src";
 
-    private static volatile Logger logger;
+    private static Logger logger;
 
     private final String fileName = "log.txt";
 
     private Logger() {
     }
-
     static Logger getLogger() {
-        Logger localLogger = logger;
-        if (localLogger == null) {
-            synchronized (Logger.class) {
-                localLogger = logger;
-                if (localLogger == null) {
-                    localLogger = logger = Logger.INSTANCE;
-                }
+
+        if (logger == null) {
+
+                    logger = Logger.INSTANCE;
+                }return logger;
             }
-        }
-        return localLogger;
-    }
+
+
+//    static Logger getLogger() {
+//        Logger localLogger = logger;
+//        if (localLogger == null) {
+//            synchronized (Logger.class) {
+//                localLogger = logger;
+//                if (localLogger == null) {
+//                    localLogger = logger = Logger.INSTANCE;
+//                }
+//            }
+//        }
+//        return localLogger;
+//    }
 
 
     void log(String message) {
