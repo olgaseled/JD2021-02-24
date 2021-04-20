@@ -8,12 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-enum states {
+/*enum states {
     one(),//просто текст, значит идем до слэш
     two(),//после слэш текст, значит опять ищем слэш
     tree(),//после слэш ещё один слэш значит ищем перевод коретки
-    four();//после слэш *, значит идем до */
-    //five();//после * опять *, значит идем до */
+    four();//после слэш *, значит идем до
+    //five();//после * опять *, значит идем до
     private String currentState;
 
     private String gerCurrentState() {
@@ -23,7 +23,7 @@ enum states {
     private void setCurrentState(String state) {
         this.currentState = state;
     }
-}
+}*/
 
 public class TaskB {
     //delete this comment 1
