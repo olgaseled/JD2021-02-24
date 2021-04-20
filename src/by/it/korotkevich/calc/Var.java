@@ -7,6 +7,8 @@ import java.util.Set;
 
 abstract class Var implements Operation {
 
+    private static Logger logger = Logger.INSTANCE;
+
     static Map<String, Var> vars = new HashMap<>();
 
     static Var saveVar(String name, Var var) {
@@ -20,6 +22,7 @@ abstract class Var implements Operation {
         while (i.hasNext()) {
             Map.Entry<String, Var> mapEntry = i.next();
             System.out.println(mapEntry.getKey() + "=" + mapEntry.getValue());
+            logger.log(mapEntry.getKey() + "=" + mapEntry.getValue(), true);
         }
     } //TODO sortVar делается при помощи TreeMap
 
