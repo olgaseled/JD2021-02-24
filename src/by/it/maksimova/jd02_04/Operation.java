@@ -1,4 +1,4 @@
-package by.it.maksimova.calculator;
+package by.it.maksimova.jd02_04;
 
 interface Operation {
     Var add(Var other) throws CalcException;

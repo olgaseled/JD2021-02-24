@@ -1,4 +1,4 @@
-package by.it.maksimova.calculator;
+package by.it.maksimova.jd02_04;
 
 class Scalar extends Var {
 

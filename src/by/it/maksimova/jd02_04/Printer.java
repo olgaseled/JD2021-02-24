@@ -1,4 +1,4 @@
-package by.it.maksimova.calculator;
+package by.it.maksimova.jd02_04;
 
 import java.util.Objects;
 
@@ -11,6 +11,5 @@ public class Printer {
 
     void print(CalcException e) {
         System.out.println(e.getMessage());
-        Logger.getLogger().log(e.getMessage());
     }
 }

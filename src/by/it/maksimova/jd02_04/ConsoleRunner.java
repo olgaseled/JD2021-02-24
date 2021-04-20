@@ -1,4 +1,4 @@
-package by.it.maksimova.calculator;
+package by.it.maksimova.jd02_04;
 
 import java.util.Scanner;
 
@@ -9,11 +9,10 @@ public class ConsoleRunner {
         Scanner scanner = new Scanner(System.in);
         VarRepository.load();
         for (; ; ) {
-            Var resultVar = null;
             String expression = scanner.nextLine();
             if (!expression.equals("end")) {
                 try {
-                    resultVar = parser.evaluate(expression);
+                    Var resultVar = parser.evaluate(expression);
                     printer.print(resultVar);
                 } catch (CalcException e) {
                     printer.print(e);
@@ -25,14 +24,6 @@ public class ConsoleRunner {
                     printer.print(e);
                 }
                 break;
-            }
-
-            for (int i = 0; i < 2; i++) {
-                Var finalResultVar = resultVar;
-                new Thread(() -> {
-                    Logger logger = Logger.getLogger();
-                    logger.log(finalResultVar.toString());
-                }).start();
             }
         }
     }

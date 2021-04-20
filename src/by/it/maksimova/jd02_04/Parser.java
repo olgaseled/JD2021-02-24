@@ -1,4 +1,4 @@
-package by.it.maksimova.calculator;
+package by.it.maksimova.jd02_04;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,16 @@ import java.util.regex.Pattern;
 class Parser {
 
     Var evaluate(String expression) throws CalcException {
+
+        Matcher brackets = Pattern.compile(Patterns.EXPRESSION_IN_BRACKETS).matcher(expression);
+        while (brackets.find()) {
+            String group = brackets.group();
+            String resultWithoutBrackets = String.valueOf(evaluate(group.substring(1, group.length() - 1)));
+            expression = brackets.replaceFirst(resultWithoutBrackets);
+            brackets.reset();
+            brackets = Pattern.compile(Patterns.EXPRESSION_IN_BRACKETS).matcher(expression);
+        }
+
         ArrayList<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         ArrayList<String> operations = new ArrayList<>();
