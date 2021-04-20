@@ -15,8 +15,17 @@ public class Runner {
     public static void main(String[] args) {
         Language language = Language.INSTANCE;
         Locale.setDefault(Locale.ENGLISH);
+        DateFormat dateToday = getDateToday(args, language);
+        System.out.println(language.get(Messages.WELCOME));
+        System.out.println(language.get(Messages.QUESTION));
+        System.out.println(language.get(User.NAME));
+        System.out.println(language.get(User.LAST_NAME));
+        System.out.println(Objects.requireNonNull(dateToday).format(new Date()));
+    }
 
-//Язык можно было переключать с клавиатуры командами ru be en.
+
+    //Язык можно было переключать с клавиатуры командами ru be en.
+    private static DateFormat getDateToday(String[] args, Language language) {
         Scanner scanner = new Scanner(System.in);
         DateFormat dateToday = null;
         switch (scanner.nextLine()) {
@@ -42,11 +51,6 @@ public class Runner {
                     dateToday = DateFormat.getDateInstance(DateFormat.MEDIUM, new Locale(args[0], args[1]));
                 }
         }
-
-        System.out.println(language.get(Messages.WELCOME));
-        System.out.println(language.get(Messages.QUESTION));
-        System.out.println(language.get(User.NAME));
-        System.out.println(language.get(User.LAST_NAME));
-        System.out.println(Objects.requireNonNull(dateToday).format(new Date()));
+        return dateToday;
     }
 }
