@@ -33,9 +33,9 @@ comment
 
 public class TaskB {
     public static void main(String[] args) {
-        final String filePathJava = FindPath.getFilePath("TaskB.java", TaskB.class);
-        final String resultFilePathTxt = FindPath.getFilePath("TaskB.txt", TaskB.class);
-        final StringBuilder stringBuilder = new StringBuilder();
+        String filePathJava = FindPath.getFilePath("TaskB.java", TaskB.class);
+        String filePathTxt = FindPath.getFilePath("TaskB.txt", TaskB.class);
+        StringBuilder stringBuilder = new StringBuilder();
         createdStringFromFile(filePathJava, stringBuilder);
         System.out.println(stringBuilder);
     }
