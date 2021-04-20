@@ -1,10 +1,10 @@
 package by.it.kaminskii.jd02_06;
 
 public interface CalcLogOut {
-    String DIV_ERROR_ZERRO="Деление на ноль ";
-    String DIV = "Операция деления ";
-    String MUL = "Операция умножения ";
-    String ADD = "Операция сложения ";
-    String SUB= "Операция вычитания ";
-    String THE_END="Завершение работы калькулятора";
+    String DIV_ERROR_ZERRO="error.div";
+    String DIV = "operation.div";
+    String MUL = "operation.mul";
+    String ADD = "operation.add";
+    String SUB= "operation.sub";
+    String THE_END="operation.end";
 }
