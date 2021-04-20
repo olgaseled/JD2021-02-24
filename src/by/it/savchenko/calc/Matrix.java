@@ -6,7 +6,7 @@ public class Matrix extends Var {
     private final double[][] value;
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resMatrix = new double[value.length][0];
             for (int i = 0; i < resMatrix.length; i++) {
@@ -36,7 +36,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resMatrix = new double[value.length][0];
             for (int i = 0; i < resMatrix.length; i++) {
@@ -66,7 +66,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double s = ((Scalar) other).getValue();
             double[][] resMatrix = new double[value.length][0];
@@ -79,20 +79,6 @@ public class Matrix extends Var {
                 }
             }
             return new Matrix(resMatrix);
-        }
-        if (other instanceof Vector) {
-            double[] s = ((Vector) other).getValue();
-            double[][] resMatrix = new double[value.length][0];
-            for (int i = 0; i < resMatrix.length; i++) {
-                resMatrix[i] = Arrays.copyOf(value[i], value[i].length);
-            }
-            double[] resArray = new double[resMatrix.length];
-            for (int i = 0; i < resMatrix.length; i++) {
-                for (int j = 0; j < s.length; j++) {
-                    resArray[i] += resMatrix[i][j] * s[j];
-                }
-            }
-            return new Vector(resArray);
         }
         if (other instanceof Matrix) {
             double[][] secondArray = ((Matrix) other).getValue();
@@ -115,7 +101,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < resultMatrix.length; i++) {
