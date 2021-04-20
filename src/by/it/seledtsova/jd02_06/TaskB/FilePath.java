@@ -20,5 +20,10 @@ public class FilePath {
         //узнаю полный путь к классу. TaskA сотрется, а "." заменится "\"
         return path + clDir + filename; // возвращаем путь и инфу из клааса
     }
-}
+
+
+
+    }
+
+
 
