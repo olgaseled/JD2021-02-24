@@ -1,0 +1,12 @@
+messages.welcome = Прыемнага карыстання калькулятарам
+messages.bye = Да новых сустрэч
+messages.var = абстрактная Var
+messages.language_changed = Перавод змянён на
+errors.division_by_zero = дзяленне на нуль
+errors.unsupported_operation = аперацыя не падтрымлiваецца
+errors.unknown_operation = невядомая аперацыя
+errors.unknown_variable_expression = невядомая пераменная або выраз для вылічэння
+errors.incompatible_vectors = несумяшчальныя вектары
+errors.incoherent_matrices = несумяшчальныя матрыцы
+errors.bad_matrix = матрыца не можа мець шэрагі рознай даўжыні
+errors.repo_save_failed = памылка запісу зменных на дыск

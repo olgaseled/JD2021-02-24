@@ -4,13 +4,10 @@ import java.util.Objects;
 
 public class VarCreator {
 
-
-
-    private VarCreator() {
+    public VarCreator() {
     }
 
-    public static Var createVar(String strVar) throws CalcException {
-        // strVar = strVar.replaceAll(Patterns.SAFE_SPACES, "");
+    public Var createVar(String strVar) throws CalcException {
         if (strVar.matches(Patterns.SCALAR)) {
             return new Scalar(strVar);
         } else if (strVar.matches(Patterns.VECTOR)) {
@@ -25,6 +22,6 @@ public class VarCreator {
                 return savedVar;
             }
         }
-        throw new CalcException("Unknown variable or expression: " + strVar);
+        throw new CalcException(Language.INSTANCE.get(Messages.UNKNOWN_VAR_OR_EXPRESSION));
     }
 }
