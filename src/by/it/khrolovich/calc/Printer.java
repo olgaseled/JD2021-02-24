@@ -6,10 +6,12 @@ public class Printer {
     void print(Var var) {
         if (Objects.nonNull(var)) {
             System.out.println(var);
+            Logger.INSTANCE.log(var.toString());
         }
     }
 
-    void printCalcException(Exception e) {
+    void print(CalcException e) {
         System.out.println(e.getMessage());
+        Logger.INSTANCE.log(e.getMessage());
     }
 }

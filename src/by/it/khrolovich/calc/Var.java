@@ -5,12 +5,14 @@ import java.util.Map;
 
 //здесь уже нет абстрактных методов, оставляем абстрактным, чтобы нельзя было создать объект var
 abstract class Var implements Operation {
-    //private static Map<String,Var> vars = new HashMap<>();
-    static Map<String,Var> vars = new HashMap<>();//TODO
+
+    static Map<String, Var> vars = new HashMap<>();
+
+    Language lang = Language.INSTANCE;
 
     public static Var save(String key, Var value) {
-        vars.put(key,value);
-        VarRepository.save(key,value);//TODO вырезаем
+        vars.put(key, value);
+        VarRepository.save(key, value);
         //сохраняет по ключу
         return value;
     }
@@ -21,40 +23,31 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) throws  CalcException {
-        //System.out.printf("Operation %s+%s is impossible", this, other);//мысленно это toString
-        //this - то, чей объект
-        //return null;//TODO replace throw exception
-
-        throw new CalcException(String.format("Operation %s+%s is impossible\n",this,other));
-
-
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s+%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        //System.out.printf("Operation %s-%s is impossible", this, other);
-        //return null;
-        throw new CalcException(String.format("Operation %s-%s is impossible\n",this,other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s-%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
-    public Var mul(Var other) throws CalcException{
-        //System.out.printf("Operation %s*%s is impossible", this, other);
-        //return null;
-        throw new CalcException(String.format("Operation %s*%s is impossible\n",this,other));
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format(lang.get(Message.OPERATION) + " %s*%s "
+                + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-       // System.out.printf("Operation %s/%s is impossible", this, other);
-        //return null;
-        throw new CalcException(String.format("Operation %s/%s is impossible\n",this,other));
+        throw new CalcException(String.format(lang.get(Message.OPERATION)
+                + " %s/%s " + lang.get(Message.IS_IMPOSSIBLE) + "\n", this, other));
     }
 
     @Override
     public String toString() {
-        //return super.toString();//вызываем стандартный метод, вывод пути
         return "abstract Var{}";
     }
 }

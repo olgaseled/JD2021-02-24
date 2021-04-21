@@ -1,30 +1,49 @@
 package by.it.khrolovich.calc;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) throws CalcException {
+    public static void main(String[] args) {
 
+        Locale.setDefault(Locale.ENGLISH);
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
-        for(;;){
+        Language lang = Language.INSTANCE;
+        for (; ; ) {
             String expression = scanner.nextLine();
+            Logger.INSTANCE.log(expression);
+
             if (!expression.equals("end")) {
-                Var resultVar = null;
-                try {
-                    resultVar = parser.evaluate(expression);
-                } catch (CalcException e) {
-                    printer.printCalcException(e);
+                switch (expression) {
+                    case "be":
+                        lang.setLocale(new Locale("be", "BY"));
+                        break;
+                    case "ru":
+                        lang.setLocale(new Locale("ru", "RU"));
+                        break;
+                    case "en":
+                        lang.setLocale(Locale.ENGLISH);
+                        break;
+                    default:
+                        try {
+                            Var resultVar = parser.evaluate(expression);
+                            printer.print(resultVar);
+                        } catch (CalcException e) {
+                            printer.print(e);
+                        }
                 }
-                printer.print(resultVar);
+
             } else {
-                //VarRepository.save(key,value);//TODO вырезаем из Var
+                //сохранение из Var
+                try {
+                    VarRepository.save(Var.vars);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
                 break;
             }
-
         }
-        Var var = VarCreator.build("{123, -45.6}");
-        printer.print(var);
     }
 }

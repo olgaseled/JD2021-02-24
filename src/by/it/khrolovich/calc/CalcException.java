@@ -1,16 +1,17 @@
 package by.it.khrolovich.calc;
 
+@SuppressWarnings("unused")
 public class CalcException extends  Exception{
     public CalcException() {
         super();
     }
 
     public CalcException(String message) {
-        super("ERROR: "+message);
+        super(Language.INSTANCE.get(Message.ERROR)+": "+message);
     }
 
     public CalcException(String message, Throwable cause) {
-        super("ERROR: "+message, cause);
+        super(Language.INSTANCE.get(Message.ERROR)+": "+message, cause);
     }
 
     public CalcException(Throwable cause) {

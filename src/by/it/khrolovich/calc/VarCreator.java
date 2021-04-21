@@ -15,13 +15,11 @@ public class VarCreator {
         } else if (strVar.matches(Patterns.MATRIX)){
             return  new Matrix(strVar);
         } else {
-            //return null;//TODO stub - generate ERROR
             Var var = Var.load(strVar);
             if(Objects.nonNull(var)){
                 return var;
             }
-            throw new CalcException("unknow variable");
-            //return Var.load(strVar);
-        }
+            throw new CalcException(Language.INSTANCE.get(Message.UNKNOWN_VARIABLE));
+       }
     }
 }

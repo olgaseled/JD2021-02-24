@@ -1,0 +1,9 @@
+Message.operation = Operation
+Message.isImpossible = is impossible
+Message.divisionByZero = division by zero
+Message.ERROR = ERROR
+Message.noSave = no save
+Message.UnknownOperation = Unknown operation
+Message.UnknownVariable = Unknown variable
+Message.IncorrectSize = Incorrect size
+Message.SaveToFile = Save to file

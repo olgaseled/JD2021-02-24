@@ -61,7 +61,7 @@ public class Vector extends Var {
             double[] resultVector = Arrays.copyOf(value, value.length);
             if (resultVector.length != secondVector.length){
                 //return super.add(other);
-                throw new CalcException("Incorrect size");
+                throw new CalcException(Language.INSTANCE.get(Message.INCORRECT_SIZE));
             }
             for (int i = 0; i < resultVector.length; i++) {
                 resultVector[i] += secondVector[i];
