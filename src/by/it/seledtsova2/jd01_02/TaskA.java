@@ -1,28 +1,24 @@
 package by.it.seledtsova2.jd01_02;
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class TaskA {
 
 
     public static void main(String[] args) {
- //       int[] array = {11, 12, 11, 13, 14, 15, 16, 16, 8, 9};
-
-//     /*
     Scanner scanner = new Scanner(System.in);
        int[] array = new int[10];
         for (int i = 0; i < array.length; i++) {
           array[i] = scanner.nextInt();
         }
 
- //     */
         step1(array);
         step2(array);
         step3(array);
     }
 
-    // 1 2 3 4 5 -1 -2 -3 -4 -5
+
     private static void step1(int[] array) {
         int min = array[0];
         int max = array[0];
